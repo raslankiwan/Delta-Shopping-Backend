@@ -1,10 +1,11 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Text, TouchableWithoutFeedback } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Button, Spinner, Card, CardSection, Input, Header } from '../components/common';
-
+import { Spinner} from '../components/common';
+import {Button, Input, Divider, Avatar} from 'react-native-elements'
+import COLOR from '../constants/Colors'
 
 class LoginScreen extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -64,110 +65,173 @@ class LoginScreen extends React.Component {
             return <Spinner size="large" />;
         } else {
             return (
-            <CardSection>
-                <Button  onPress={this.onButtonPress.bind(this)}>
-                    Login
-                </Button>
-            </CardSection>
+            <Button
+            raised
+            title='Login'
+            titleStyle={styles.btnText}
+            buttonStyle={styles.btnStyle}
+            containerStyle={styles.btnContainer}
+          
+           />
             );
         }
     
     } else if (!(emailError === '' &&
         passwordError === '')) {
         return (
-            <CardSection style={{flexDirection: 'column'}}>
-                <Text style={styles.errorTextStyle}>Please fill the required fields</Text>
-                <Button >
-                    Login
-                </Button>
-            </CardSection>
+              <Button
+              raised
+              title='Login'
+              titleStyle={styles.btnText}
+              buttonStyle={styles.btnStyle}
+              containerStyle={styles.btnContainer}
+            
+          />
+                   
         );
     } else {
         return (
-          <CardSection>
-              <Button >
-                 Login
-              </Button>
-          </CardSection>
+          <Button
+              raised
+              title='Login'
+              titleStyle={styles.btnText}
+              buttonStyle={styles.btnStyle}
+              containerStyle={styles.btnContainer}
+            />
         );
     }
   }
 
-  renderEmailError() {
-    if(this.state.emailError !== '') {
-      return (
-        <CardSection>
-          <Text style={styles.errorTextStyle}>{this.state.emailError}</Text>
-        </CardSection>
-      );
-    }
-  }
 
-  renderPasswordError() {
-    if (this.state.passwordError !== '') {
-      return (
-        <CardSection>
-          <Text style={styles.errorTextStyle}>{this.state.passwordError}</Text>
-        </CardSection>
-      ); 
-    }
-  }
  
   render() {
     return (
      
-      <Card>
-        <CardSection>
-          <Header headerText="Login"></Header>
-        </CardSection>
-        
-        <CardSection>
-          <Input
-            placeholder="user@gmail.com"
-            label="Email"
-            onChangeText={this.onEmailChange.bind(this)}
-            value= { this.props.email }
-          />
-        </CardSection>
-
-        {this.renderEmailError()}
-
-        
-        <CardSection>
-          <Input
-            placeholder = "Password"
-            label = "Password"
-            secureTextEntry = {true}
-            onChangeText= {this.onPasswordChange.bind(this) }
-            value = {this.props.password}
-          />
-        </CardSection>
-
-        {this.renderPasswordError()}
-
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
-
-        {this.renderButton()}
-
-        <CardSection>
+      <View style={styles.Wrapper}>
+        <View style={styles.headerStyle}>
+         <Image source={require('../assets/images/header.png')} />
+        </View>
+        <View style={styles.formContainer}>
+          <View style={styles.formStyle}>
+            <Input
+              placeholder="user@gmail.com"
+              onChangeText={this.onEmailChange.bind(this)}
+              value= { this.props.email }
+              inputContainerStyle={{borderBottomWidth: 0}}
+              rightIcon={{ type: 'material-community', name:'account', color:'#ceb7b7' }}
+            />
+          </View>
+          <View style={styles.formStyle}>
+            <Input
+              placeholder = "Password"
+              secureTextEntry = {true}
+              inputContainerStyle={{borderBottomWidth: 0}}
+              onChangeText= {this.onPasswordChange.bind(this) }
+              value = {this.props.password}
+              rightIcon={{ type: 'material-community', name:'lock', color:'#ceb7b7' }}
+            
+              />
+          </View>
+         {this.state.passwordError !== ''?
+            (<View>
+                <Text style={styles.errorTextStyle}>
+                {this.state.passwordError}
+                </Text>
+            </View>):null 
+          }
+           {this.state.emailError !== ''?
+            (<View>
+                <Text style={styles.errorTextStyle}>
+                {this.state.emailError}
+                </Text>
+            </View>):null 
+          }
+         {this.renderButton()}
           <TouchableWithoutFeedback onPress={this.onRegisterPress.bind(this)}>
-            <Text>Create account?</Text>
+            <Text style={{color:'#f1e4e4', margin:20, fontSize:14, }}>Create account?</Text>
           </TouchableWithoutFeedback>
-        </CardSection>
+        </View>
+        {/* <Divider style={{width:'80%', height:1, backgroundColor:'#35234b'}} /> */}
+        <View style={styles.SignUp}>
+          
+          <View style={{flexDirection:'column', justifyContent:'center'}}>
+            <Text style={{color:'#f1e4e4', fontSize:14, margin:8}}>OR Login with: </Text>
+            <Avatar
+            rounded
+            size='medium'
+            icon={{type: 'material-community', name:'facebook', color:COLOR.primary}}
+            overlayContainerStyle={{backgroundColor:'#f1e4e4', margin:8}}
+            />
+           </View>
+        </View>
 
-      </Card>
+
+      </View>
     );
   }
 }
 
 const styles = {
+  Wrapper:{
+    justifyContent:'center', 
+    alignItems:'center', 
+    felx:1, 
+    height:'100%', 
+    backgroundColor:COLOR.primary
+  },
   errorTextStyle: {
-      fontSize: 20,
+      fontSize: 15,
       alignSelf: 'center',
-      color: 'red'
+      color: '#ff8484'
+  }, 
+  headerStyle:{
+    height:'30%', 
+    justifyContent:'flex-start', 
+    alignItems:'center', 
+    paddingTop:30,
+    marginTop:30
+  },
+  formStyle:{
+    flexDirection: 'row-reverse',
+    backgroundColor:'#f1e4e4',
+    marginBottom: 5,
+    marginHorizontal: 16,
+    padding:5, 
+    width:'80%', 
+    borderRadius:8
+  }, 
+  formContainer:{
+    marginTop:0, 
+    height:'25%', 
+  }, 
+  btnStyle:{
+    backgroundColor:COLOR.secondary,
+    width:'100%',
+    borderRadius:10,
+    borderColor:COLOR.secondary,
+    borderWidth:1 
+  }, 
+  btnContainer:{
+    backgroundColor:COLOR.secondary,
+    marginHorizontal:15,
+    borderRadius:10,
+    borderColor:COLOR.secondary,
+    borderWidth:1
+  }, 
+  btnText:{
+    textAlign:'center', 
+    fontSize:20, 
+    fontWeight:'500', 
+    color:'#f1e4e4'
+  }, 
+  SignUp:{
+    marginTop:0, 
+    height:'30%', 
+    alignItems:'flex-start', 
+    width:'90%', 
+    padding:20
   }
+
 };
 
 
