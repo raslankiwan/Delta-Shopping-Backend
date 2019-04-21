@@ -6,53 +6,153 @@ import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
-
-
+import COLOR from '../constants/Colors';
+import {Icon} from 'react-native-elements';
+import MenuScreen from '../screens/MenuScreen';
+const HeaderLeft = (navigation) => (
+    
+  <Icon
+      name='menu'
+      size={30}
+      onPress={()=>{navigation.navigate('MenuScreen')}}
+      containerStyle={styles.headerIconsStyle}
+      color='#fff'
+    />
+)
+const HeaderRight = (navigation) => (
+    
+  <Icon
+      name='settings'
+      size={30}
+      onPress={()=>{navigation.navigate('SettingsScreen')}}
+      containerStyle={styles.headerIconsStyle}
+      color='#fff'
+    />
+)
+styles = {
+  headerIconsStyle:{
+    marginLeft:15,
+    marginRight:15, 
+ 
+  }
+}
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home:{
+    screen:HomeScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Home'), 
+  } 
+ 
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
 
 const CartStack = createStackNavigator({
-  Cart: CartScreen,
+  Cart: {
+    screen:CartScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Cart')
+  },
 });
 
-CartStack.navigationOptions = {
-  tabBarLabel: 'Cart',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
-};
+
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+  Settings:{
+    screen: SettingsScreen,
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Settings')
+  }
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
+menuNavicationOptions = (navigation, headerName) => {
+  return {
+    title: headerName ,
+    headerLeft: HeaderLeft(navigation) ,
+    headerRight: HeaderRight(navigation),
+    headerTitleStyle :{textAlign: 'center', flex: 1},
+    headerStyle:{
+      backgroundColor:COLOR.primary
+    }, 
+    headerTintColor: '#fff',
+    // headerBackTitle:null, 
+  }
+}
+singleNavicationOptions = (navigation, headerName) => {
+  return {
+       
+       title:headerName,
+       headerBackTitle: null,
+    
+       headerStyle:{
+         backgroundColor:COLOR.primary
+       },
+       headerTintColor: '#fff',
+      
+       
+       
+     } 
+}
+const MenuStack = createStackNavigator({
+  Home:{screen:HomeStack},
+},
+{
+  headerMode:'none',
+  navigationOptions:{
+    headerVisible:false,
+    // headerBackTitle:null
+  }
+});
+const integrateTabs = createBottomTabNavigator ({
+  MainHome:{screen: HomeStack},
+  Menu:{screen: MenuStack},
+  MenuScreen:MenuScreen, 
+  SettingsScreen:SettingsStack
+},
+{
+  defaultNavigationOptions:{
+    tabBarVisible: false,
+    headerStyle:{
+      backgroundColor:COLOR.primary
+    }
+  }
+});
+
+const Tabs = createBottomTabNavigator ({
+  Home: integrateTabs,
+  cart:CartStack,
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused }) => {
+      const { routeName } = navigation.state;
+     
+      if (routeName === 'Home') {
+        return  <TabBarIcon 
+                 focused={focused} 
+                 name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                 />;
+      }else if(routeName === 'cart'){
+        return    <TabBarIcon
+                    focused={focused}
+                    name={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'}
+                  />;
+      }
+
+    },
+    tabBarOnPress:({navigation}) => {
+      const { routeName } = navigation.state;
+      if (routeName === 'Home') {
+        navigation.navigate('Home');
+      }else if(routeName === 'cart'){
+        navigation.navigate('Cart');
+      }
+    }
+  }),
+  tabBarOptions: {
+    inactiveTintColor: 'gray',
+    showLabel:false
+  },
+
+}
+);
+
 
 
 const LoginStack = createStackNavigator({
@@ -73,8 +173,22 @@ LoginStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  CartStack,
-  SettingsStack,
-});
+const Root = createBottomTabNavigator({
+  LoginForm:{screen: LoginStack},
+  MainNavigation:{screen: Tabs},
+
+},
+{
+ defaultNavigationOptions: {
+     tabBarVisible: false, 
+     headerBackTitle: null,
+  },
+   
+}
+);
+export default Root;
+// export default createBottomTabNavigator({
+//   HomeStack,
+//   CartStack,
+//   SettingsStack,
+// });

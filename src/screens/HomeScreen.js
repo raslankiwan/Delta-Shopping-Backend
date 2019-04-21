@@ -16,9 +16,7 @@ import { Card, CardSection, Header, Button } from '../components/common';
 // import console = require('console');
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+ 
   state = {
     products: [],
     
@@ -69,9 +67,9 @@ class HomeScreen extends React.Component {
     this.createDataSource(this.props.products);
     return (
       <Card>
-        <CardSection>
+        {/* <CardSection>
           <Header headerText="Home"></Header>
-        </CardSection>
+        </CardSection> */}
 
         <CardSection>
           <ListView

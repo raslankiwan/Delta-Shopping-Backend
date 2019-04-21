@@ -3,9 +3,7 @@ import { ScrollView, StyleSheet, Text } from 'react-native';
 import { Card, CardSection, Button } from '../components/common';
 
 export default class CartScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Cart',
-  };
+
 
   render() {
     return (

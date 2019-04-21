@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Text, TouchableWithoutFeedback, View, Image } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, Image, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Spinner} from '../components/common';
@@ -10,7 +10,7 @@ import COLOR from '../constants/Colors'
 class LoginScreen extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.shouldRedirect) {
-      this.props.navigation.navigate('Main');  
+      this.props.navigation.navigate('MainNavigation');  
     }
   }
 
@@ -62,7 +62,9 @@ class LoginScreen extends React.Component {
         passwordError === '' ) {
 
         if(this.props.loading) {
-            return <Spinner size="large" />;
+            return (
+              <ActivityIndicator size="large" />
+            );
         } else {
             return (
             <Button
@@ -70,7 +72,8 @@ class LoginScreen extends React.Component {
             title='Login'
             titleStyle={styles.btnText}
             buttonStyle={styles.btnStyle}
-            containerStyle={styles.btnContainer}
+            // containerStyle={styles.btnContainer}
+            onPress={()=>{this.onButtonPress()}}
           
            />
             );
@@ -84,7 +87,6 @@ class LoginScreen extends React.Component {
               title='Login'
               titleStyle={styles.btnText}
               buttonStyle={styles.btnStyle}
-              containerStyle={styles.btnContainer}
             
           />
                    
@@ -96,7 +98,6 @@ class LoginScreen extends React.Component {
               title='Login'
               titleStyle={styles.btnText}
               buttonStyle={styles.btnStyle}
-              containerStyle={styles.btnContainer}
             />
         );
     }
@@ -146,7 +147,10 @@ class LoginScreen extends React.Component {
                 </Text>
             </View>):null 
           }
-         {this.renderButton()}
+          <View style={styles.btnContainer}>
+             {this.renderButton()}
+          </View>
+        
           <TouchableWithoutFeedback onPress={this.onRegisterPress.bind(this)}>
             <Text style={{color:'#f1e4e4', margin:20, fontSize:14, }}>Create account?</Text>
           </TouchableWithoutFeedback>
