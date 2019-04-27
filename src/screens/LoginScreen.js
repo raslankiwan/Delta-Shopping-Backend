@@ -55,6 +55,19 @@ class LoginScreen extends React.Component {
 
   }
 
+  renderFacebookButton(){
+    return (
+      <Button
+      raised
+      title='Login with Facebook'
+      titleStyle={styles.btnText}
+      buttonStyle={styles.btnStyle}
+      // containerStyle={styles.btnContainer}
+      // onPress={()=>{this.onButtonPress()}}
+    
+     />
+      );
+  }
   renderButton() {
     const { emailError, passwordError, submit} = this.state;
 
@@ -150,13 +163,16 @@ class LoginScreen extends React.Component {
           <View style={styles.btnContainer}>
              {this.renderButton()}
           </View>
+          <View style={styles.faceBtnContainer}>
+             {this.renderFacebookButton()}
+          </View>
         
-          <TouchableWithoutFeedback onPress={this.onRegisterPress.bind(this)}>
+          <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('RegisterScreen')}>
             <Text style={{color:'#f1e4e4', margin:20, fontSize:14, }}>Create account?</Text>
           </TouchableWithoutFeedback>
         </View>
         {/* <Divider style={{width:'80%', height:1, backgroundColor:'#35234b'}} /> */}
-        <View style={styles.SignUp}>
+        {/* <View style={styles.SignUp}>
           
           <View style={{flexDirection:'column', justifyContent:'center'}}>
             <Text style={{color:'#f1e4e4', fontSize:14, margin:8}}>OR Login with: </Text>
@@ -167,7 +183,7 @@ class LoginScreen extends React.Component {
             overlayContainerStyle={{backgroundColor:'#f1e4e4', margin:8}}
             />
            </View>
-        </View>
+        </View> */}
 
 
       </View>
@@ -189,7 +205,7 @@ const styles = {
       color: '#ff8484'
   }, 
   headerStyle:{
-    height:'30%', 
+    height:'25%', 
     justifyContent:'flex-start', 
     alignItems:'center', 
     paddingTop:30,
@@ -206,7 +222,7 @@ const styles = {
   }, 
   formContainer:{
     marginTop:0, 
-    height:'25%', 
+    height:'50%', 
   }, 
   btnStyle:{
     backgroundColor:COLOR.secondary,
@@ -215,6 +231,14 @@ const styles = {
     borderColor:COLOR.secondary,
     borderWidth:1 
   }, 
+  faceBtnContainer:{
+    backgroundColor:COLOR.secondary,
+    marginHorizontal:15,
+    borderRadius:10,
+    borderColor:COLOR.secondary,
+    borderWidth:1, 
+    marginTop:5
+  },
   btnContainer:{
     backgroundColor:COLOR.secondary,
     marginHorizontal:15,
@@ -228,14 +252,6 @@ const styles = {
     fontWeight:'500', 
     color:'#f1e4e4'
   }, 
-  SignUp:{
-    marginTop:0, 
-    height:'30%', 
-    alignItems:'flex-start', 
-    width:'90%', 
-    padding:20
-  }
-
 };
 
 
