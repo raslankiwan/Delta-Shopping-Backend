@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import CountryPicker, {
     getAllCountries
@@ -15,8 +14,12 @@ import {
     countryChanged,
     signUpUser 
 } from '../actions';
-import { Button, Spinner, Card, CardSection, Input, Header } from '../components/common';
+import {  Spinner, CardSection,  Header } from '../components/common';
+import {View, Text,ScrollView} from 'react-native';
+import {Card, Button , Input} from 'react-native-elements';
+import COLOR from '../constants/Colors';
 
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class Register extends React.Component {
   state = {
@@ -147,34 +150,35 @@ class Register extends React.Component {
             return <Spinner size="large" />;
         } else {
             return (
-            <CardSection>
-                <Button  onPress={this.onButtonPress.bind(this)}>
-                    Sign Up
-                </Button>
-            </CardSection>
+                <Button 
+                title='Sign Up' 
+                raised
+                titleStyle={styles.btnText}
+                buttonStyle={styles.btnStyle}
+                onPress={this.onButtonPress.bind(this)}
+                />
+                
             );
         }
-    
-    } else {
+   
+      } else {
         return (
-            <CardSection style={{flexDirection: 'column'}}>
-                <Text style={styles.errorTextStyle}>Please fill the required fields</Text>
-                <Button >
-                    Sign Up
-                </Button>
-            </CardSection>
+          <Button 
+            title='Sign Up' 
+            raised
+            titleStyle={styles.btnText}
+            buttonStyle={styles.btnStyle}
+            onPress={this.onButtonPress.bind(this)}
+            />
         );
     }
-
-    
   }
-
   renderEmailError() {
     if(this.state.emailError !== '') {
       return (
-        <CardSection>
+      
           <Text style={styles.errorTextStyle}>{this.state.emailError}</Text>
-        </CardSection>
+       
       );
     }
   }
@@ -182,9 +186,8 @@ class Register extends React.Component {
   renderNameError() {
     if(this.state.nameError !== '') {
         return(
-            <CardSection>
                 <Text style={styles.errorTextStyle}>{this.state.nameError}</Text>
-            </CardSection>
+        
         );
     }
   }
@@ -192,9 +195,9 @@ class Register extends React.Component {
   renderPasswordError() {
       if(this.state.passwordError !== '' ) {
         return(
-            <CardSection>
+            
                 <Text style={styles.errorTextStyle}>{this.state.passwordError}</Text>
-            </CardSection>
+           
         );
       }
   }
@@ -202,9 +205,8 @@ class Register extends React.Component {
   renderStreetError() {
       if(this.state.streetError !== '') {
         return(
-            <CardSection>
                 <Text style={styles.errorTextStyle}>{this.state.streetError}</Text>
-            </CardSection>
+         
         );
       }
   }
@@ -212,9 +214,8 @@ class Register extends React.Component {
   renderCityError() {
     if(this.state.cityError !== '') {
         return(
-            <CardSection>
                 <Text style={styles.errorTextStyle}>{this.state.cityError}</Text>
-            </CardSection>
+        
         );
       }
   }
@@ -222,9 +223,8 @@ class Register extends React.Component {
   renderZipError() {
     if(this.state.zipError !== '') {
         return(
-            <CardSection>
                 <Text style={styles.errorTextStyle}>{this.state.zipError}</Text>
-            </CardSection>
+          
         );
       }
   }
@@ -232,110 +232,114 @@ class Register extends React.Component {
   renderPhoneError() {
     if(this.state.phoneError !== '') {
         return(
-            <CardSection>
                 <Text style={styles.errorTextStyle}>{this.state.phoneError}</Text>
-            </CardSection>
+            
         );
       }
   }
 
   render() {
     return (
-     
-      <Card>
-        <CardSection>
-          <Header headerText="Register"></Header>
-        </CardSection>
-        
-        <CardSection>
+      <View style={styles.Wrapper}>
+     <ScrollView >
+     <View style={styles.formContainer}>
+        <View style={styles.formStyle}>
             <Input
-                label="Name"
-                placeholder="FirstName LastName"
+                placeholder="FullName"
                 onChangeText={this.onNameChange.bind(this)}
                 value= { this.props.name }
+                inputContainerStyle={{borderBottomWidth: 0}}
             />
-        </CardSection>
+        </View>
 
         {this.renderNameError()}
 
-        <CardSection>
+        <View style={styles.formStyle}>
           <Input
             placeholder="user@gmail.com"
-            label="Email"
             onChangeText={this.onEmailChange.bind(this)}
             value= { this.props.email }
+            inputContainerStyle={{borderBottomWidth: 0}}
           />
-        </CardSection>
+        </View>
         
         {this.renderEmailError()}
 
-        <CardSection>
+        <View style={styles.formStyle}>
           <Input
             placeholder = "Password"
-            label = "Password"
             secureTextEntry = {true}
             onChangeText= {this.onPasswordChange.bind(this) }
             value = {this.props.password}
+            inputContainerStyle={{borderBottomWidth: 0}}
           />
-        </CardSection>
+        </View>
 
         {this.renderPasswordError()}
 
-        <CardSection>
+        <View style={styles.contryStyle}>
             <Text style={styles.selectCountryStyle}>Select Country</Text>
             <CountryPicker 
                 onChange={(val) => this.selectCountryChange(val)}
                 cca2= {this.state.cca2}
             />
-        </CardSection>    
+        </View>    
 
-        <CardSection>
+        <View style={styles.formStyle}>
             <Input
-                label="Street"
+                placeholder="Street"
                 onChangeText={this.onStreetChange.bind(this)}
                 value= { this.props.street }
+                inputContainerStyle={{borderBottomWidth: 0}}
             />
-        </CardSection>
+        </View>
 
         {this.renderStreetError()}
 
-        <CardSection>
+        <View style={styles.formStyle}>
             <Input
                 onChangeText={this.onCityChange.bind(this)}
                 value= { this.props.city }
-                label="City"
+                placeholder="City"
+                inputContainerStyle={{borderBottomWidth: 0}}
             />
-        </CardSection>
+        </View>
 
         {this.renderCityError()}
 
-        <CardSection>
+        <View style={styles.formStyle}>
             <Input
-                label="Zip Code"
+                placeholder="Zip Code"
                 onChangeText={this.onZipChange.bind(this)}
                 value= { this.props.zip }
+                inputContainerStyle={{borderBottomWidth: 0}}
             />
-        </CardSection>
+        </View>
 
         {this.renderZipError()}
 
-        <CardSection>
+        <View style={styles.formStyle}>
             <Input
-                label="Phone"
+                placeholder="Phone"
                 onChangeText={this.onPhoneChange.bind(this)}
                 value= { this.props.phone }
+                inputContainerStyle={{borderBottomWidth: 0}}
             />
-        </CardSection>
+        </View>
 
         {this.renderPhoneError()}
         
-        <Text style={styles.errorTextStyle}>
+        {/* <Text style={styles.errorTextStyle}>
           {this.props.error}
-        </Text>
+        </Text> */}
 
-        {this.renderButton()}
-
-      </Card>
+          <View style={styles.btnContainer}>
+             {this.renderButton()}
+          </View>
+        </View>
+        <KeyboardSpacer />
+        </ScrollView>
+        </View>
     );
   }
 }
@@ -344,12 +348,61 @@ const styles = {
   errorTextStyle: {
       fontSize: 20,
       alignSelf: 'center',
-      color: 'red'
+      color: '#ff8484'
   }, 
   selectCountryStyle: {
       fontSize: 18,
       alignSelf: 'center',
       paddingRight: 25,
+  }, 
+  formStyle:{
+    flexDirection: 'row-reverse',
+    backgroundColor:'#f1e4e4',
+    marginBottom: 5,
+    marginHorizontal: 16,
+    padding:5, 
+    width:'90%', 
+    borderRadius:8
+  }, 
+  Wrapper:{
+    justifyContent:'center', 
+    alignItems:'center', 
+    felx:1, 
+    height:'100%', 
+    backgroundColor:COLOR.primary, 
+  
+  },
+  formContainer:{
+    marginTop:20, 
+  }, 
+  btnStyle:{
+    backgroundColor:COLOR.secondary,
+    width:'100%',
+    borderRadius:10,
+    borderColor:COLOR.secondary,
+    borderWidth:1 
+  }, 
+  btnContainer:{
+    backgroundColor:COLOR.secondary,
+    marginHorizontal:15,
+    borderRadius:10,
+    borderColor:COLOR.secondary,
+    borderWidth:1
+  }, 
+  btnText:{
+    textAlign:'center', 
+    fontSize:20, 
+    fontWeight:'500', 
+    color:'#f1e4e4'
+  }, 
+  contryStyle:{
+    backgroundColor:'#f1e4e4',
+    marginBottom: 5,
+    marginHorizontal: 16,
+    padding:5, 
+    width:'90%', 
+    borderRadius:8, 
+    flexDirection:'row', 
   }
 };
 

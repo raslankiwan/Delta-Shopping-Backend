@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
+import {Icon} from 'react-native-elements';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -7,7 +8,7 @@ import CartScreen from '../screens/CartScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
 import COLOR from '../constants/Colors';
-import {Icon} from 'react-native-elements';
+import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
 import PDP from '../screens/PDP';
 const HeaderLeft = (navigation) => (
@@ -161,22 +162,20 @@ const Tabs = createBottomTabNavigator ({
 
 
 const LoginStack = createStackNavigator({
-  Login: LoginScreen,
+  Login:{
+    screen:LoginScreen, 
+    navigationOptions:{
+      header:null, 
+      headerBackTitle:null, 
+    }
+  }, 
+  RegisterScreen:{
+    screen:RegisterScreen, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Register')
+  }
 });
 
-LoginStack.navigationOptions = {
-  tabBarLabel: 'Login',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+
 
 const Root = createBottomTabNavigator({
   LoginForm:{screen: LoginStack},
