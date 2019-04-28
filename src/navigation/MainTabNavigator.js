@@ -9,6 +9,7 @@ import LoginScreen from '../screens/LoginScreen';
 import COLOR from '../constants/Colors';
 import {Icon} from 'react-native-elements';
 import MenuScreen from '../screens/MenuScreen';
+import PDP from '../screens/PDP';
 const HeaderLeft = (navigation) => (
     
   <Icon
@@ -40,6 +41,10 @@ const HomeStack = createStackNavigator({
   Home:{
     screen:HomeScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Home'), 
+  },
+  PDP:{
+    screen:PDP, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
   } 
  
 });

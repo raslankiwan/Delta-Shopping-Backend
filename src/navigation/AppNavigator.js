@@ -14,7 +14,6 @@ export default createAppContainer(createSwitchNavigator({
     Main: MainTabNavigator,
     Login: LoginScreen,
     Register: Register,
-    PDP: PDP
   }, 
   {
     initialRouteName: 'Login'
