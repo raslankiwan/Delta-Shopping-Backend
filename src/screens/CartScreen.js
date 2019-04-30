@@ -1,9 +1,15 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { Card, CardSection, Button } from '../components/common';
+import { cartFetch } from '../actions';
 
-export default class CartScreen extends React.Component {
+class CartScreen extends React.Component {
 
+  componentWillMount() {
+    this.props.cartFetch();
+    
+  }
 
   render() {
     return (
@@ -26,3 +32,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default connect(null, { cartFetch})(CartScreen);

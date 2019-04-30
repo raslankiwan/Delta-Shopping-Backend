@@ -1,13 +1,27 @@
 import React from 'react';
+import firebase from 'firebase';
 import { Text, Image } from 'react-native';
 import { Card, CardSection, Header, Button } from '../components/common';
+
 class PDP extends React.Component {
+
+    addToCart(productId) {
+        const { currentUser } = firebase.auth();
+        console.log(currentUser.uid);
+        firebase.database().ref(`/users/${currentUser.uid}/cart`)
+        .push({productId});
+
+    }
+
+
 
     render() {
     
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
-        const { Title, Company, Info, Price, Currency } = product;
+        const { Title, Company, Info, Price, Currency, productId } = product;
+
+
         return (
             <Card>
                 <CardSection>
@@ -30,7 +44,7 @@ class PDP extends React.Component {
                 </CardSection>
            
                 <CardSection>
-                    <Button onPress={()=>{}}>
+                    <Button onPress={this.addToCart(productId)}>
                         Add to Cart
                     </Button>
                 </CardSection>

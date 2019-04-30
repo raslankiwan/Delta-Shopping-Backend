@@ -1,7 +1,14 @@
 import React from 'react';
+import firebase from 'firebase';
 import {ScrollView, View, Text, Image, AsyncStorage} from 'react-native';
 import {Avatar,ListItem,Divider } from 'react-native-elements'
  class SettingsScreen extends React.Component {
+  
+  Logout() {
+    firebase.auth().signOut();
+    this.props.navigation.navigate('Login');
+  }
+  
   render() {
     return(
 
@@ -21,7 +28,7 @@ import {Avatar,ListItem,Divider } from 'react-native-elements'
               leftIcon={{type:'material-community', name:'logout'}} 
               key={2}
               title='Logout'
-              // onPress={() => this.Logout()} 
+              onPress={() => this.Logout()} 
               containerStyle={styles.listStyle}
               titleStyle={{textAlign:'left'}}
             />

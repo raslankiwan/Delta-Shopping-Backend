@@ -1,19 +1,14 @@
 import React from 'react';
 import {
   ListView,
-  Platform,
-  StyleSheet,
   Text,
   Image,
   TouchableHighlight
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
-import { ListItem } from '../components/ListItem';
 import { productFetch, viewItem } from '../actions';
-import { Card, CardSection, Header, Button } from '../components/common';
-// import console = require('console');
+import { Card, CardSection, Button } from '../components/common';
 
 class HomeScreen extends React.Component {
  

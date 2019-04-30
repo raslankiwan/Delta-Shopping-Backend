@@ -26,6 +26,19 @@ export const productFetch = () =>  {
     };
 };
 
+export const cartFetch = () => {
+    const { currentUser } = firebase.auth();
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/cart`)
+        .on('value', snapshot => {
+            snapshot.forEach(child => {
+                console.log(child.val().productId);
+                
+            });
+        }); 
+    };
+};
+
 export const viewItem = (product) => {
     return (dispatch) => {
         dispatch({ type: PRODUCT_VIEW, payload: product});
