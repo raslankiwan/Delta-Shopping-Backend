@@ -4,5 +4,6 @@ import ProductFetchReducer from './ProductFetchReducers'
 
 export default combineReducers({
   auth: AuthReducer,
-  productFetch: ProductFetchReducer
+  productFetch: ProductFetchReducer,
+  cartFetch: ProductFetchReducer
 });

@@ -11,6 +11,7 @@ import COLOR from '../constants/Colors';
 import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
 import PDP from '../screens/PDP';
+import ElectronicsPage from '../screens/ElectronicsPage';
 const HeaderLeft = (navigation) => (
     
   <Icon
@@ -42,6 +43,14 @@ const HomeStack = createStackNavigator({
   Home:{
     screen:HomeScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Home'), 
+  },
+ 
+});
+
+const ElectronicsStack = createStackNavigator({
+  Electronics:{
+    screen:ElectronicsPage, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Electronics Page'), 
   },
   PDP:{
     screen:PDP, 
@@ -97,6 +106,7 @@ singleNavicationOptions = (navigation, headerName) => {
 }
 const MenuStack = createStackNavigator({
   Home:{screen:HomeStack},
+  ElectronicsScreen: {screen:ElectronicsStack}
 },
 {
   headerMode:'none',
@@ -109,7 +119,8 @@ const integrateTabs = createBottomTabNavigator ({
   MainHome:{screen: HomeStack},
   Menu:{screen: MenuStack},
   MenuScreen:MenuScreen, 
-  SettingsScreen:SettingsStack
+  SettingsScreen:SettingsStack,
+
 },
 {
   defaultNavigationOptions:{
