@@ -13,6 +13,8 @@ import {
   SIGN_UP_USER_SUCCESS,
   SIGN_UP_USER_FAIL,
   SIGN_UP_USER,
+  SET_LOADING_LOGIN_FORM, 
+  USER_LOGOUT
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -24,7 +26,8 @@ const INITIAL_STATE = {
   user: null,
   error: '',
   loading: false,
-  shouldRedirect: false
+  shouldRedirect: false, 
+  loadingLogInForm:true, 
 };
 
 export default (state=INITIAL_STATE, action) => {
@@ -57,6 +60,10 @@ export default (state=INITIAL_STATE, action) => {
       return {...state, ...INITIAL_STATE, user: action.payload, shouldRedirect: true };
     case SIGN_UP_USER_FAIL:
       return { ...state, error: 'Registration Failed.', password: '', loading: false, shouldRedirect: false };
+    case SET_LOADING_LOGIN_FORM:
+      return {...state, loadingLogInForm:action.payload};
+    case USER_LOGOUT:
+      return { ...state, user:null, currentStudent:{}, students:[], loading:false, loadingLogInForm:false, shouldRedirect:false}
     default:
       return state;
   }

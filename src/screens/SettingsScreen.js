@@ -2,11 +2,18 @@ import React from 'react';
 import firebase from 'firebase';
 import {ScrollView, View, Text, Image, AsyncStorage} from 'react-native';
 import {Avatar,ListItem,Divider } from 'react-native-elements'
+import {logOutUser} from '../actions/AuthActions';
+import { connect } from 'react-redux';
+import I18n from '../language/i18n';
  class SettingsScreen extends React.Component {
   
-  Logout() {
+  Logout= async()=> {
     firebase.auth().signOut();
+    
+    let logOut = await AsyncStorage.removeItem('userInfo');
     this.props.navigation.navigate('Login');
+    let xxx = await this.props.logOutUser();
+  
   }
   
   render() {
@@ -19,15 +26,15 @@ import {Avatar,ListItem,Divider } from 'react-native-elements'
             <ListItem
               leftIcon={{ name:'language'}} 
               key={1}
-              title='ChangeLanguage'
-              // onPress={  ()=>{this.props.navigation.navigate('ChangeLanguage');}  } 
+              title={I18n.t('Language.ChangeLanguage')}
+              onPress={  ()=>{this.props.navigation.navigate('changeLang');}  } 
               containerStyle={styles.listStyle}
               titleStyle={{textAlign:'left'}}
             />
            <ListItem
               leftIcon={{type:'material-community', name:'logout'}} 
               key={2}
-              title='Logout'
+              title={I18n.t('Logout')}
               onPress={() => this.Logout()} 
               containerStyle={styles.listStyle}
               titleStyle={{textAlign:'left'}}
@@ -65,5 +72,10 @@ const styles={
     backgroundColor:'#fff'
   }
 }
+const mapStateToProps = ({ productFetch }) => {
+  const  {products, loading} = productFetch;
+  
+  return  {products, loading};
+};
 
-export default SettingsScreen;
+export default connect(mapStateToProps, {logOutUser })(SettingsScreen);

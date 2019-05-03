@@ -18,6 +18,5 @@ export const PRODUCT_FETCH_SUCCESS = 'data_fetch_success';
 export const CART_FETCH_SUCCESS = 'cart_fetch_success';
 export const PRODUCT_VIEW = 'product_view';
 export const ADD_TO_CART_SUCCESS = 'add_to_cart_success';
-
-
-
+export const SET_LOADING_LOGIN_FORM='set_loading_login_form';
+export const USER_LOGOUT='user_logout';

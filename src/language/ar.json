@@ -1,0 +1,23 @@
+
+{
+    "Login":"تسجيل الدخول", 
+    "Logout":"تسجيل الخروج", 
+    "SignUp":"تسجيل", 
+    "CreateAccount":"انشاء حساب", 
+   
+       
+    "Language":{
+        "Save":"حفظ", 
+        "English":"انجليزي", 
+        "Arabic":"عربي", 
+        "ChangeLanguage":"تغيير اللغة"
+    }, 
+    "Screens":{
+        "Home":"الرئيسية", 
+        "Settings":"الاعدادات", 
+        "Category":"كاتيجوري", 
+        "Cart":"الحقيبة", 
+        "Register":"تسجيل", 
+        "ElectronicsPage":"Electronics Page"
+    }
+}

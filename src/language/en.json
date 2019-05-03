@@ -1,0 +1,22 @@
+
+{
+    "Login":"Login", 
+    "Logout":"LogOut", 
+    "SignUp":"Sign Up", 
+    "CreateAccount":"Create Account", 
+   
+    "Language":{
+        "Save":"Save", 
+        "English":"English", 
+        "Arabic":"Arabic", 
+        "ChangeLanguage":"Change Language"
+    }, 
+    "Screens":{
+        "Home":"Home", 
+        "Settings":"Settings", 
+        "Category":"Category", 
+        "Cart":"Cart", 
+        "Register":"Register", 
+        "ElectronicsPage":"Electronics Page"
+    }
+}

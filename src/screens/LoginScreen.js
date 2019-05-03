@@ -1,27 +1,63 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Text, TouchableWithoutFeedback, View, Image, ActivityIndicator } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, Image, ActivityIndicator,AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser,setLoadingLogInForm } from '../actions';
 import { Spinner} from '../components/common';
 import {Button, Input, Divider, Avatar} from 'react-native-elements'
 import COLOR from '../constants/Colors'
+// import console = require('console');
 
 class LoginScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      form:{
+        email: '',
+        password: '',
+        userLoginningIn:false
+      },
+      loading:true,
+      error:null, 
+      emailError: '',
+      passwordError: '',
+    };
+  }
+  componentDidMount(){
+    this.checkUserCredentialsExisting();
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.shouldRedirect) {
       this.props.navigation.navigate('MainNavigation');  
     }
   }
+  shouldComponentUpdate(nextProps, nextState) {
+     return true;
+  }
+    
 
-  state = { 
-    emailError: '',
-    passwordError: '',
-  };
+  checkUserCredentialsExisting = async () =>{
+    let user = await AsyncStorage.getItem('userInfo');
 
-  static navigationOptions = {
-    title: 'Login',
-  };
+    
+    if (!user) {
+      this.props.setLoadingLogInForm(false); 
+    }else{
+      user = JSON.parse(user);
+      // this.props.setLoadingLogInForm(true); 
+      console.log('login user', user);
+      this.props.navigation.navigate('MainNavigation'); 
+    }
+  }
+  toggleUserLoginningIn = (initialBoolean=null) =>{
+    if (!initialBoolean) {
+      initialBoolean=this.state.form.userLoginningIn;
+    }
+    let form = {...this.state.form};
+    form.userLoginningIn = !initialBoolean;                   
+    this.setState({form});
+  }
+
   onEmailChange(text) {
     
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
@@ -46,7 +82,6 @@ class LoginScreen extends React.Component {
   }
 
   onButtonPress() {
-    
     this.props.loginUser(this.props);
   }
 
@@ -262,4 +297,4 @@ const mapStateToProps = ({auth}) => {
   return { email, password, error, loading, shouldRedirect };
 };
 
-export default connect(mapStateToProps, {emailChanged, passwordChanged, loginUser})(LoginScreen);
+export default connect(mapStateToProps, {emailChanged, passwordChanged, loginUser,setLoadingLogInForm})(LoginScreen);

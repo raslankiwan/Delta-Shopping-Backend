@@ -11,6 +11,8 @@ import COLOR from '../constants/Colors';
 import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
 import PDP from '../screens/PDP';
+import ChangeLanguageScreen from '../screens/ChangeLanguageScreen';
+import i18n from '../language/i18n'
 import Category from '../screens/Category';
 
 const HeaderLeft = (navigation) => (
@@ -71,12 +73,16 @@ const SettingsStack = createStackNavigator({
   Settings:{
     screen: SettingsScreen,
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Settings')
+  }, 
+  changeLang:{
+    screen:ChangeLanguageScreen, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Language'), 
   }
 });
 
 menuNavicationOptions = (navigation, headerName) => {
   return {
-    title: headerName ,
+    title: i18n.t('Screens.'+headerName)  ,
     headerLeft: HeaderLeft(navigation) ,
     headerRight: HeaderRight(navigation),
     headerTitleStyle :{textAlign: 'center', flex: 1},
