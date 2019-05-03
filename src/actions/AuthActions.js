@@ -16,7 +16,7 @@ import {
   SIGN_UP_USER,
   USER_CREATE
 } from './types';
-
+import {AsyncStorage} from 'react-native';
 export const emailChanged = (text) => {
   return {
     type: EMAIL_CHANGED,
@@ -80,13 +80,15 @@ export const loginUser = ({ email, password }) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
       if(firebase.auth().currentUser.emailVerified) {
-        loginUserSuccess(dispatch, user);
+       UserLogin(dispatch, user);
       } else {
         loginUserFail(dispatch, 'Email not verified');
       }
     })
     .catch(()=>loginUserFail(dispatch, 'Authentication Failed'));
   };
+
+
 };
 
 export const createUser = (props) => {
@@ -122,7 +124,13 @@ export const signUpUser = (props) => {
   };
 };
 
+const UserLogin=(dispatch, user)=>{
+  loginUserSuccess(dispatch, user);
+  setUserCredintialInAsyncStorage(user);
+}
+
 const loginUserFail = (dispatch, error) => {
+  
   dispatch({ type: LOGIN_USER_FAIL, error });
 };
 
@@ -132,7 +140,14 @@ const loginUserSuccess = (dispatch, user ) => {
     payload: user
   });
 };
-
+const  setUserCredintialInAsyncStorage= async (user)=>{
+  // console.log('user AsyncStorage', user);
+  const userInfo =  {
+    uid:user.user.uid, 
+    email:user.user.email
+  };
+  const res2 = await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+}
 const signUpUserSuccess = (dispatch, user ) => {
   dispatch({
     type: SIGN_UP_USER_SUCCESS,
@@ -143,3 +158,21 @@ const signUpUserSuccess = (dispatch, user ) => {
 const signUpUserFail = (dispatch) => {
   dispatch({ type: SIGN_UP_USER_FAIL});
 };
+
+export const setLoadingLogInForm = (boolean = false) => {
+  return {
+    type:SET_LOADING_LOGIN_FORM,
+    payload:boolean
+  }
+}
+export const logOutUser = () => {
+
+  return async (dispatch) => {
+
+    let logOut = await AsyncStorage.removeItem('userInfo');
+
+    dispatch({
+      type:USER_LOGOUT
+    })
+  }
+}
