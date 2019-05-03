@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import AuthReducer from './AuthReducer';
-import ProductFetchReducer from './ProductFetchReducers'
+import ProductReducers from './ProductReducers';
 
 export default combineReducers({
   auth: AuthReducer,
-  productFetch: ProductFetchReducer,
-  cartFetch: ProductFetchReducer
+  productFetch: ProductReducers,
+  cartFetch: ProductReducers,
+  addToCart: ProductReducers
 });

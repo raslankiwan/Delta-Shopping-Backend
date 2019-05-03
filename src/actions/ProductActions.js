@@ -2,7 +2,8 @@ import firebase from 'firebase';
 import {
     PRODUCT_FETCH_SUCCESS,
     CART_FETCH_SUCCESS,
-    PRODUCT_VIEW
+    PRODUCT_VIEW,
+    ADD_TO_CART_SUCCESS
 } from './types';
 
 export const productFetch = (path) =>  {
@@ -53,6 +54,19 @@ export const cartFetch = () => {
             dispatch({ type: CART_FETCH_SUCCESS, payload: products});
         }); 
     };
+};
+
+export const addToCart = (productId) => {
+    const { currentUser } = firebase.auth();
+    return(dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/cart`)
+        .push({productId});
+    
+        //add logic to increase the cart total 
+
+        dispatch({ type: ADD_TO_CART_SUCCESS});
+    };
+
 };
 
 export const viewItem = (product) => {

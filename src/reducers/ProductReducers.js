@@ -1,11 +1,13 @@
 import {
     PRODUCT_FETCH_SUCCESS,
     CART_FETCH_SUCCESS,
-    PRODUCT_VIEW
+    PRODUCT_VIEW,
+    ADD_TO_CART_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
     products: [],
+    addedToCart: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, products: action.payload};
         case PRODUCT_VIEW:
             return {INITIAL_STATE, product: action.payload};
+        case ADD_TO_CART_SUCCESS:
+            return {...state, addedToCart: true};
         default: 
             return state;
     }

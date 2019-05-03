@@ -7,8 +7,7 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
-import { productFetch, viewItem } from '../actions';
+import { productFetch, viewItem, addToCart } from '../actions';
 import { Card, CardSection, Button } from '../components/common';
 
 class Category extends React.Component {
@@ -35,33 +34,30 @@ class Category extends React.Component {
   renderRow(product) {
     const { Title, Price, Currency, productId } = product;
     return(   
-      <TouchableHighlight onPress={()=>{this.viewItem(product)}}>
-        <CardSection style={{flexDirection: 'column',}}>
-          <Text>{Title}</Text>
-          <Image
-            style={{width: 150, height: 150}}
-            source={{uri: product.Image }}
-          />
-          <Text>Price: {Price} {Currency}</Text>
-          <Button onPress={()=>{this.addToCart(productId)}}>
+      <CardSection style={{flexDirection: 'column',}}>
+        <TouchableHighlight onPress={()=>{this.viewItem(product)}}>
+          <CardSection>
+            <Text>{Title}</Text>
+            <Image
+              style={{width: 150, height: 150}}
+              source={{uri: product.Image }}
+            />
+            <Text>Price: {Price} {Currency}</Text>
+            </CardSection>
+          </TouchableHighlight>
+          <Button onPress={()=>{this.props.addToCart(productId)}}>
             Add to Cart
           </Button>
         </CardSection>
-      </TouchableHighlight>
+    
     );
   }
 
   viewItem(product) {
    
     this.setState({product: product});
+
     this.props.navigation.navigate('PDP',{product: product});
-  }
-
-  addToCart(productId) {
-    const { currentUser } = firebase.auth();
-    firebase.database().ref(`/users/${currentUser.uid}/cart`)
-    .push({productId});
-
   }
 
   render() {
@@ -70,7 +66,7 @@ class Category extends React.Component {
       <Card>
         <CardSection>
           <ListView
-            enableEmptySections={true}
+            enableEmptySections={true} 
             renderRow={(item) => this.renderRow(item)}
             dataSource={this.dataSource}
           />       
@@ -80,10 +76,12 @@ class Category extends React.Component {
   }
 }
 
-const mapStateToProps = ({ productFetch }) => {
+const mapStateToProps = ({ productFetch, addToCart }) => {
   const  {products, loading} = productFetch;
-  
-  return  {products, loading};
+  const { addedToCart } = addToCart;
+  console.log(addedToCart);
+
+  return  {products, loading, addedToCart};
 };
 
-export default connect(mapStateToProps, { productFetch, viewItem })(Category);
+export default connect(mapStateToProps, { productFetch, viewItem, addToCart })(Category);

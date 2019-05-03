@@ -11,13 +11,27 @@ import { Card, CardSection, Button } from '../components/common';
 import { cartFetch } from '../actions';
 
 class CartScreen extends React.Component {
-
+  
+  
   state = {
     products: [],
+    total: ''
   };
   
   componentWillMount() {
     this.props.cartFetch();
+
+    this.findTotal(this.props.products);
+  }
+
+  findTotal(products) {
+    let total=0;
+    products.map((item)=>{
+      let curr = parseInt(item.Price);
+      total += curr;
+    });
+    console.log('total', total);
+    this.setState({total});
   }
 
   createDataSource( _data ) {
@@ -29,6 +43,8 @@ class CartScreen extends React.Component {
    
   renderRow(product) {
     const { Title, Price, Currency } = product;
+   
+
     return(   
      
         <CardSection style={{flexDirection: 'column',}}>
@@ -56,7 +72,7 @@ class CartScreen extends React.Component {
         </CardSection>
 
         <CardSection style={{flexDirection: 'column',}}>
-          <Text>Cart subtotal: </Text>
+          <Text>Cart subtotal: { this.state.total } </Text>
           <Button> Proceed to checkout</Button>
         </CardSection>
       </Card>

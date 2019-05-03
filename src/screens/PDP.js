@@ -1,16 +1,17 @@
 import React from 'react';
-import firebase from 'firebase';
 import { Text, Image } from 'react-native';
+import { connect } from 'react-redux';
 import { Card, CardSection, Header, Button } from '../components/common';
+import { addToCart } from '../actions';
 
 class PDP extends React.Component {
 
-    addToCart(productId) {
-        const { currentUser } = firebase.auth();
-        firebase.database().ref(`/users/${currentUser.uid}/cart`)
-        .push({productId});
+    // addToCart(productId) {
+    //     const { currentUser } = firebase.auth();
+    //     firebase.database().ref(`/users/${currentUser.uid}/cart`)
+    //     .push({productId});
 
-    }
+    // }
 
     render() {
         const { navigation } = this.props;
@@ -39,7 +40,7 @@ class PDP extends React.Component {
                 </CardSection>
            
                 <CardSection>
-                    <Button onPress={this.addToCart(productId)}>
+                    <Button onPress={this.props.addToCart(productId)}>
                         Add to Cart
                     </Button>
                 </CardSection>
@@ -49,4 +50,11 @@ class PDP extends React.Component {
     }
 }
 
-export default PDP;
+const mapStateToProps = ({ addToCart }) => {
+    
+    const { addedToCart } = addToCart;
+  
+    return  {addedToCart};
+  };
+
+export default connect(mapStateToProps, {addToCart})(PDP);
