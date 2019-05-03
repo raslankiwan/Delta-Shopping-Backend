@@ -4,7 +4,6 @@ import {
   ListView,
   Text,
   Image,
-  TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';

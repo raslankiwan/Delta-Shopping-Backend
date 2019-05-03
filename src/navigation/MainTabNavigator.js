@@ -11,9 +11,10 @@ import COLOR from '../constants/Colors';
 import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
 import PDP from '../screens/PDP';
-import ElectronicsPage from '../screens/ElectronicsPage';
 import ChangeLanguageScreen from '../screens/ChangeLanguageScreen';
 import i18n from '../language/i18n'
+import Category from '../screens/Category';
+
 const HeaderLeft = (navigation) => (
     
   <Icon
@@ -49,10 +50,10 @@ const HomeStack = createStackNavigator({
  
 });
 
-const ElectronicsStack = createStackNavigator({
-  Electronics:{
-    screen:ElectronicsPage, 
-    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'ElectronicsPage'), 
+const CategoryStack = createStackNavigator({
+  Category:{
+    screen:Category, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Category'), 
   },
   PDP:{
     screen:PDP, 
@@ -61,15 +62,12 @@ const ElectronicsStack = createStackNavigator({
  
 });
 
-
 const CartStack = createStackNavigator({
   Cart: {
     screen:CartScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Cart')
   },
 });
-
-
 
 const SettingsStack = createStackNavigator({
   Settings:{
@@ -95,6 +93,7 @@ menuNavicationOptions = (navigation, headerName) => {
     // headerBackTitle:null, 
   }
 }
+
 singleNavicationOptions = (navigation, headerName) => {
   return {
        
@@ -112,7 +111,7 @@ singleNavicationOptions = (navigation, headerName) => {
 }
 const MenuStack = createStackNavigator({
   Home:{screen:HomeStack},
-  ElectronicsScreen: {screen:ElectronicsStack}
+  Category: {screen:CategoryStack}
 },
 {
   headerMode:'none',
@@ -157,7 +156,6 @@ const Tabs = createBottomTabNavigator ({
                     name={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'}
                   />;
       }
-
     },
     tabBarOnPress:({navigation}) => {
       const { routeName } = navigation.state;
@@ -176,8 +174,6 @@ const Tabs = createBottomTabNavigator ({
 }
 );
 
-
-
 const LoginStack = createStackNavigator({
   Login:{
     screen:LoginScreen, 
@@ -192,8 +188,6 @@ const LoginStack = createStackNavigator({
   }
 });
 
-
-
 const Root = createBottomTabNavigator({
   LoginForm:{screen: LoginStack},
   MainNavigation:{screen: Tabs},
@@ -204,7 +198,6 @@ const Root = createBottomTabNavigator({
      tabBarVisible: false, 
      headerBackTitle: null,
   },
-   
 }
 );
 export default Root;

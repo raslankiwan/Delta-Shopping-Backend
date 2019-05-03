@@ -7,11 +7,11 @@ import {
   View, 
   ScrollView
 } from 'react-native';
+import { Card } from 'react-native-elements';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { productFetch, viewItem } from '../actions';
 import {  CardSection, Button } from '../components/common';
-import {Card, Avatar} from 'react-native-elements';
 import Colors from '../constants/Colors';
 
 class HomeScreen extends React.Component {
@@ -29,13 +29,12 @@ class HomeScreen extends React.Component {
     const ds = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2
       });
-
     this.dataSource = ds.cloneWithRows(_data);
-
   }
    
   renderRow(product) {
     const { Title, Price, Currency } = product;
+    
     return(   
       <TouchableHighlight onPress={()=>{this.viewItem(product)}}>
         <CardSection style={{flexDirection: 'column',}}>
@@ -54,30 +53,48 @@ class HomeScreen extends React.Component {
   }
 
   viewItem(product) {
-   
     this.setState({product: product});
     this.props.navigation.navigate('PDP',{product: product});
   }
 
-  viewElectronics() {
-    this.props.navigation.navigate('Electronics');
+  viewCategory(CatName) {
+    this.props.navigation.navigate('Category' ,{CatName});
   }
-
 
   render() {
     return(
       <ScrollView>
         <View style={styles.Wrapper}>
-          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewElectronics()}} style={{margin:5, width:'45%',}}>
+          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/electronics/mobiles')}} style={{margin:5, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}>
-              
                 <Image 
                 resizeMode="cover"
                 source={require('../assets/images/cat1.jpg')}
                 style={{width:'100%'}}
                 />
                 <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Electronics</Text>
-            
+            </Card>
+          </TouchableHighlight>
+
+          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/clothes')}} style={{margin:5, width:'45%',}}>
+            <Card containerStyle={styles.CardStyle}> 
+                <Image 
+                resizeMode="cover"
+                source={require('../assets/images/cat2.jpg')}
+                style={{width:'100%'}}
+                />
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Clothes</Text>
+            </Card>
+          </TouchableHighlight>
+
+          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/Music')}} style={{margin:5, width:'45%',}}>
+            <Card containerStyle={styles.CardStyle}>
+                <Image 
+                resizeMode="cover"
+                source={require('../assets/images/cat3.jpg')}
+                style={{width:'100%'}}
+                />
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Music</Text>
             </Card>
           </TouchableHighlight>
         </View>
@@ -86,12 +103,12 @@ class HomeScreen extends React.Component {
   }
 }
 
-
 const mapStateToProps = ({ productFetch }) => {
   const  {products, loading} = productFetch;
   
   return  {products, loading};
 };
+
 const styles={
   Wrapper:{
     flexDirection:'row', 
@@ -104,8 +121,7 @@ const styles={
     shadowOpacity: 0.5,
     shadowRadius: 6, 
     elevation:5, 
-    width:'100%'
-    
+    width:'100%'  
   }
 }
 
