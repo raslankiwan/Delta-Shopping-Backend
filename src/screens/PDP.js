@@ -1,17 +1,20 @@
 import React from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Header, Button } from '../components/common';
 import { addToCart } from '../actions';
 
 class PDP extends React.Component {
 
-    // addToCart(productId) {
-    //     const { currentUser } = firebase.auth();
-    //     firebase.database().ref(`/users/${currentUser.uid}/cart`)
-    //     .push({productId});
+    state = {
+        user: ''
+    };
 
-    // }
+    async componentWillMount() {
+        let user = await AsyncStorage.getItem('userInfo');
+        this.setState({user});
+    }
+    
 
     render() {
         const { navigation } = this.props;
@@ -40,7 +43,7 @@ class PDP extends React.Component {
                 </CardSection>
            
                 <CardSection>
-                    <Button onPress={this.props.addToCart(productId)}>
+                    <Button onPress={this.props.addToCart(productId, this.state.user)}>
                         Add to Cart
                     </Button>
                 </CardSection>

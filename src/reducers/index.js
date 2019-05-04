@@ -6,5 +6,6 @@ export default combineReducers({
   auth: AuthReducer,
   productFetch: ProductReducers,
   cartFetch: ProductReducers,
-  addToCart: ProductReducers
+  addToCart: ProductReducers,
+  removeFromCart: ProductReducers
 });

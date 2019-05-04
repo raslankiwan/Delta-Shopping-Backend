@@ -3,7 +3,8 @@ import {
   ListView,
   Text,
   Image,
-  TouchableHighlight
+  TouchableHighlight, 
+  AsyncStorage
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -14,13 +15,15 @@ class Category extends React.Component {
  
   state = {
     products: [],
-    
+    user:''
   };
 
-  componentWillMount() {
+  async componentWillMount() {
+    let user = await AsyncStorage.getItem('userInfo');
+    this.setState({user});
     const { navigation } = this.props;
     const catName = navigation.getParam('CatName','there is no details ');
-    //console.log('CatName', catName);
+
     this.props.productFetch(catName);
   }
 
@@ -43,18 +46,17 @@ class Category extends React.Component {
               source={{uri: product.Image }}
             />
             <Text>Price: {Price} {Currency}</Text>
-            </CardSection>
-          </TouchableHighlight>
-          <Button onPress={()=>{this.props.addToCart(productId)}}>
-            Add to Cart
-          </Button>
-        </CardSection>
-    
+          </CardSection>
+        </TouchableHighlight>
+
+        <Button onPress={()=>{this.props.addToCart(productId, this.state.user)}}>
+          Add to Cart
+        </Button>
+      </CardSection>
     );
   }
 
   viewItem(product) {
-   
     this.setState({product: product});
 
     this.props.navigation.navigate('PDP',{product: product});
@@ -74,12 +76,12 @@ class Category extends React.Component {
       </Card>
     );
   }
+
 }
 
 const mapStateToProps = ({ productFetch, addToCart }) => {
   const  {products, loading} = productFetch;
   const { addedToCart } = addToCart;
-  console.log(addedToCart);
 
   return  {products, loading, addedToCart};
 };

@@ -3,8 +3,10 @@ import {
     PRODUCT_FETCH_SUCCESS,
     CART_FETCH_SUCCESS,
     PRODUCT_VIEW,
-    ADD_TO_CART_SUCCESS
+    ADD_TO_CART_SUCCESS,
+    REMOVE_FORM_CART_SUCCESS
 } from './types';
+//import console = require('console');
 
 export const productFetch = (path) =>  {
     return (dispatch) => {
@@ -28,11 +30,12 @@ export const productFetch = (path) =>  {
     };
 };
 
-export const cartFetch = () => {
-    const { currentUser } = firebase.auth();
+export const cartFetch = (user) => {
+    const uu= JSON.parse(user);
+
     return (dispatch) => {
 
-        firebase.database().ref(`/users/${currentUser.uid}/cart`)
+        firebase.database().ref(`/users/${uu.uid}/cart`)
         .on('value', snapshot => {
             var products = [];
             snapshot.forEach(child => {
@@ -56,17 +59,38 @@ export const cartFetch = () => {
     };
 };
 
-export const addToCart = (productId) => {
-    const { currentUser } = firebase.auth();
-    return(dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/cart`)
-        .push({productId});
+export const addToCart = (productId, user) => {
+    const uu= JSON.parse(user);
     
-        //add logic to increase the cart total 
-
-        dispatch({ type: ADD_TO_CART_SUCCESS});
+    return(dispatch) => {
+        firebase.database().ref(`/users/${uu.uid}/cart`)
+        .push({productId})
+        .then(()=> {
+            dispatch({ type: ADD_TO_CART_SUCCESS});
+        });        
     };
 
+};
+
+export const removeFromCart = (productId, user) => {
+    const uu= JSON.parse(user);
+    
+    return () => {
+        firebase.database().ref(`/users/${uu.uid}/cart`)
+        .on('value', snapshot=>{
+            snapshot.forEach( child=>{
+               if (child.val().productId  === productId) {
+                firebase.database().ref(`/users/${uu.uid}/cart/${child.key}`)
+                .remove()
+                .then( () => {
+                    console.log('removed ');
+                    dispatch({ type: REMOVE_FORM_CART_SUCCESS});
+                });
+               }
+            })
+        })
+       
+    };
 };
 
 export const viewItem = (product) => {

@@ -4,22 +4,24 @@ import {
   ListView,
   Text,
   Image,
+  AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Card, CardSection, Button } from '../components/common';
-import { cartFetch } from '../actions';
+import { cartFetch, removeFromCart } from '../actions';
 
 class CartScreen extends React.Component {
   
   
   state = {
-    products: [],
-    total: ''
+    products: []
   };
   
-  componentWillMount() {
-    this.props.cartFetch();
+ async componentWillMount() {
+    let user = await AsyncStorage.getItem('userInfo');
+    this.setState({user});
+    this.props.cartFetch(user);
 
     this.findTotal(this.props.products);
   }
@@ -30,8 +32,7 @@ class CartScreen extends React.Component {
       let curr = parseInt(item.Price);
       total += curr;
     });
-    console.log('total', total);
-    this.setState({total});
+    return total;
   }
 
   createDataSource( _data ) {
@@ -42,11 +43,9 @@ class CartScreen extends React.Component {
   }
    
   renderRow(product) {
-    const { Title, Price, Currency } = product;
-   
+    const { Title, Price, Currency, productId } = product;
 
-    return(   
-     
+    return(
         <CardSection style={{flexDirection: 'column',}}>
           <Text>{Title}</Text>
           <Image
@@ -54,7 +53,9 @@ class CartScreen extends React.Component {
             source={{uri: product.Image }}
           />
           <Text>Price: {Price} {Currency}</Text>
-          
+          <Button onPress={() => {this.props.removeFromCart(productId, this.state.user)}}>
+            Remove
+          </Button>
         </CardSection>
     );
   }
@@ -72,7 +73,7 @@ class CartScreen extends React.Component {
         </CardSection>
 
         <CardSection style={{flexDirection: 'column',}}>
-          <Text>Cart subtotal: { this.state.total } </Text>
+          <Text>Cart subtotal: { this.findTotal(this.props.products) } </Text>
           <Button> Proceed to checkout</Button>
         </CardSection>
       </Card>
@@ -88,11 +89,11 @@ const styles = StyleSheet.create({
   },
 });
 
-
-const mapStateToProps = ({ cartFetch }) => {
+const mapStateToProps = ({ cartFetch, removeFromCart }) => {
   const  { products } = cartFetch;
-  //console.log('map:',products);
-  return  { products };
+  const { removedFromCart } = removeFromCart;
+
+  return  { products, removedFromCart };
 };
 
-export default connect(mapStateToProps, { cartFetch })(CartScreen);
+export default connect(mapStateToProps, { cartFetch, removeFromCart })(CartScreen);

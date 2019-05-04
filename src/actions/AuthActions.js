@@ -115,7 +115,7 @@ export const signUpUser = (props) => {
       firebase.auth().currentUser.sendEmailVerification()
       .then(() => {
         firebase.database().ref(`users/`)
-        .push({ name: 'raslan', phone, email, zip, country, street, city })
+        .push({ name, phone, email, zip, country, street, city, cartTotal: 0 })
         .then(() =>   signUpUserSuccess(dispatch, user));
       
       })    
@@ -125,8 +125,9 @@ export const signUpUser = (props) => {
 };
 
 const UserLogin=(dispatch, user)=>{
-  loginUserSuccess(dispatch, user);
   setUserCredintialInAsyncStorage(user);
+  loginUserSuccess(dispatch, user);
+
 }
 
 const loginUserFail = (dispatch, error) => {
