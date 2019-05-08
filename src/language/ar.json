@@ -15,8 +15,9 @@
     "Screens":{
         "Home":"الرئيسية", 
         "Settings":"الاعدادات", 
-        "Category":"كاتيجوري", 
+        "Category":"الفئات", 
         "Cart":"الحقيبة", 
+        "Wishlist": "المفضلة",
         "Register":"تسجيل", 
         "ElectronicsPage":"Electronics Page"
     }

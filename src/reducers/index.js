@@ -7,5 +7,12 @@ export default combineReducers({
   productFetch: ProductReducers,
   cartFetch: ProductReducers,
   addToCart: ProductReducers,
-  removeFromCart: ProductReducers
+  removeFromCart: ProductReducers,
+  wishlistFetch: ProductReducers,
+  addToWishlist: ProductReducers,
+  removeFromWishlist: ProductReducers,
+  incrementViews: ProductReducers,
+  reviewChanged: ProductReducers,
+  addReview: ProductReducers,
+  reviewFetch: ProductReducers
 });

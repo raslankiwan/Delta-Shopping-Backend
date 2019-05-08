@@ -14,6 +14,8 @@ import {
   SIGN_UP_USER_SUCCESS,
   SIGN_UP_USER_FAIL,
   SIGN_UP_USER,
+  SET_LOADING_LOGIN_FORM,
+  USER_LOGOUT,
   USER_CREATE
 } from './types';
 import {AsyncStorage} from 'react-native';

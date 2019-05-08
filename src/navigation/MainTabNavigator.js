@@ -5,6 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
+import WishlistScreen from '../screens/WishlistScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
 import COLOR from '../constants/Colors';
@@ -66,6 +67,13 @@ const CartStack = createStackNavigator({
   Cart: {
     screen:CartScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Cart')
+  },
+});
+
+const WishlistStack = createStackNavigator({
+  Wishlist: {
+    screen: WishlistScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Wishlist')
   },
 });
 
@@ -138,7 +146,8 @@ const integrateTabs = createBottomTabNavigator ({
 
 const Tabs = createBottomTabNavigator ({
   Home: integrateTabs,
-  cart:CartStack,
+  cart: CartStack,
+  wishlist: WishlistStack
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({
@@ -146,23 +155,33 @@ const Tabs = createBottomTabNavigator ({
       const { routeName } = navigation.state;
      
       if (routeName === 'Home') {
-        return  <TabBarIcon 
-                 focused={focused} 
-                 name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-                 />;
-      }else if(routeName === 'cart'){
-        return    <TabBarIcon
+        return  (<TabBarIcon 
+                    focused={focused} 
+                    name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                 />
+                 );
+      } else if (routeName === 'cart') {
+          return (<TabBarIcon
                     focused={focused}
                     name={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'}
-                  />;
+                  />
+                  );
+      } else if (routeName === 'wishlist') {
+        return (<TabBarIcon
+                  focused={focused}
+                  name={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'}
+                />
+                );
       }
     },
     tabBarOnPress:({navigation}) => {
       const { routeName } = navigation.state;
       if (routeName === 'Home') {
         navigation.navigate('Home');
-      }else if(routeName === 'cart'){
+      } else if (routeName === 'cart') {
         navigation.navigate('Cart');
+      } else if (routeName === 'wishlist') {
+        navigation.navigate('Wishlist');
       }
     }
   }),
