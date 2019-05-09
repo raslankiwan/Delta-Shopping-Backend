@@ -17,7 +17,8 @@
         "Category":"Category", 
         "Cart":"Cart", 
         "Wishlist":"Wishlist", 
-        "Register":"Register", 
-        "ElectronicsPage":"Electronics Page"
+        "Register":"Register",
+        "Sell":"Sell",
+        "SearchResult": "Search Result" 
     }
 }

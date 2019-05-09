@@ -19,6 +19,7 @@
         "Cart":"الحقيبة", 
         "Wishlist": "المفضلة",
         "Register":"تسجيل", 
-        "ElectronicsPage":"Electronics Page"
+        "Sell":"اعرض للبيع",
+        "SearchResult": "نتائج البحث"
     }
 }

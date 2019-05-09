@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import {
+    ALL_PRODUCT_FETCH_SUCCESS,
     PRODUCT_FETCH_SUCCESS,
     CART_FETCH_SUCCESS,
     ADD_TO_CART_SUCCESS,
@@ -34,6 +35,36 @@ export const productFetch = (path) =>  {
                 });
             });
             dispatch({ type: PRODUCT_FETCH_SUCCESS, payload: products});
+        });
+    };
+};
+
+export const fetchAllProducts = () =>  {
+    return (dispatch) => {
+        firebase.database().ref('/categories')
+        .on('value', snapshot => {
+            var allProducts = [];
+           // console.log('snapshot: ',snapshot.val());
+            snapshot.forEach(child => {
+                //console.log('child: ', child.val())
+                child.forEach(ch => {
+                    //console.log('ch: ', ch.val())
+                    allProducts.push({
+                        Title: ch.val().Title,
+                        Amount: ch.val().Amount,
+                        Price: ch.val().Price,
+                        Company: ch.val().Company,
+                        Info: ch.val().Info,
+                        Currency: ch.val().Currency,
+                        Image: ch.val().Image,
+                        Viewed: ch.val().Viewed,
+                        productId: '/' + snapshot.key + '/' + child.key + '/' + ch.key                   
+                    });
+                })
+                //console.log('allProducts: ', allProducts);
+                dispatch({ type: ALL_PRODUCT_FETCH_SUCCESS, payload: allProducts});     
+            });
+           
         });
     };
 };

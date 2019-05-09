@@ -5,7 +5,8 @@ import {
     AsyncStorage,
     FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { Input } from 'react-native-elements';
+import { Input, Rating, AirbnbRating } from 'react-native-elements';
+import firebase from 'firebase';
 import { Card, CardSection, Header, Button } from '../components/common';
 import { addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch } from '../actions';
 // import console = require('console');
@@ -26,24 +27,39 @@ class PDP extends React.Component {
         const product = navigation.getParam('product','there is no details ');
         const { productId } = product;
 
+       // this.incrementViews(productId);
         this.props.reviewFetch(productId);
     }
 
-       
-    renderRow(item) {
-    console.log( 'render row',item);
-    const { review, userId } = item.item;
-    return(   
-        <CardSection style={{flexDirection:'column'}}>
-                <CardSection>
-                    <Text>{userId}</Text>
-            </CardSection>
+    incrementViews =(productId) => {
+        firebase.database().ref(productId)
+        .on('value', snapshot => {
+            console.log(snapshot.val());
+            let viewed = parseInt(snapshot.val().Viewed);
+            viewed += 1;
+            // console.log('viewed', viewed);
+            firebase.database().ref(`${productId}/`).update({Viewed: viewed});
+        });
+    }
 
-            <CardSection>
-                <Text>{review}</Text>
-            </CardSection>
-        </CardSection>    
-    );
+    ratingCompleted(rating) {
+        console.log("Rating is: " + rating)
+    }
+
+    renderRow(item) {
+        console.log( 'render row',item);
+        const { review, userId } = item.item;
+        return(   
+            <CardSection style={{flexDirection:'column'}}>
+                    <CardSection>
+                        <Text>{userId}</Text>
+                </CardSection>
+
+                <CardSection>
+                    <Text>{review}</Text>
+                </CardSection>
+            </CardSection>    
+        );
     }
     
     onReviewChanged(text) {
@@ -90,13 +106,23 @@ class PDP extends React.Component {
                 <CardSection>
                     <Text>Price: {Price} {Currency}</Text>
                 </CardSection>
+
+                <CardSection>
+                    <Text>Rate this product: </Text>
+                    <Rating
+                        type='star'
+                        ratingCount={5}
+                        imageSize={25}
+                        onFinishRating={this.ratingCompleted}
+                    />
+                </CardSection>
            
                 <CardSection>
                     <Button onPress={()=>{this.props.addToCart(productId, this.state.user)}}>
                         Add to Cart
                     </Button>
                 </CardSection>
-
+               
                 <CardSection>
                     <Button onPress={()=>{this.props.addToWishlist(productId, this.state.user)}}>
                         Add to Wishlist

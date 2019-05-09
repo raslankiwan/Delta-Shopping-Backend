@@ -8,6 +8,8 @@ import CartScreen from '../screens/CartScreen';
 import WishlistScreen from '../screens/WishlistScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SellScreen from '../screens/SellScreen';
+import SearchResultScreen from '../screens/SearchResultScreen';
 import COLOR from '../constants/Colors';
 import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
@@ -48,13 +50,36 @@ const HomeStack = createStackNavigator({
     screen:HomeScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Home'), 
   },
- 
+  Category:{
+    screen:Category, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Category'), 
+  },
+  SearchResult:{
+    screen:SearchResultScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'SearchResult'), 
+  },
+  PDP:{
+    screen:PDP, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
+  } 
 });
 
 const CategoryStack = createStackNavigator({
   Category:{
     screen:Category, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Category'), 
+  },
+  PDP:{
+    screen:PDP, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
+  } 
+ 
+});
+
+const SearchResultStack = createStackNavigator({
+  SearchResult:{
+    screen:SearchResultScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'SearchResult'), 
   },
   PDP:{
     screen:PDP, 
@@ -74,6 +99,13 @@ const WishlistStack = createStackNavigator({
   Wishlist: {
     screen: WishlistScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Wishlist')
+  },
+});
+
+const SellStack = createStackNavigator({
+  Sell: {
+    screen: SellScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Sell')
   },
 });
 
@@ -119,7 +151,7 @@ singleNavicationOptions = (navigation, headerName) => {
 }
 const MenuStack = createStackNavigator({
   Home:{screen:HomeStack},
-  Category: {screen:CategoryStack}
+  Sell: {screen:SellStack}
 },
 {
   headerMode:'none',
@@ -169,7 +201,7 @@ const Tabs = createBottomTabNavigator ({
       } else if (routeName === 'wishlist') {
         return (<TabBarIcon
                   focused={focused}
-                  name={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'}
+                  name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
                 />
                 );
       }

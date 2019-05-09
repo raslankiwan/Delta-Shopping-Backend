@@ -1,100 +1,74 @@
 import React from 'react';
 import {
-  ListView,
   Text,
   Image,
   TouchableHighlight, 
   View, 
   ScrollView
 } from 'react-native';
-import { Card } from 'react-native-elements';
-import _ from 'lodash';
-import { connect } from 'react-redux';
-import { productFetch, viewItem } from '../actions';
-import {  CardSection, Button } from '../components/common';
-import Colors from '../constants/Colors';
+import { Card, Input, Button, SearchBar } from 'react-native-elements';
+import COLOR from '../constants/Colors';
 
 class HomeScreen extends React.Component {
  
   state = {
-    products: [],
-    
+    search:''
   };
-
-  componentWillMount() {
-    this.props.productFetch('/categories/electronics/mobiles');
-  }
-
-  createDataSource( _data ) {
-    const ds = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      });
-    this.dataSource = ds.cloneWithRows(_data);
-  }
-   
-  renderRow(product) {
-    const { Title, Price, Currency } = product;
-    
-    return(   
-      <TouchableHighlight onPress={()=>{this.viewItem(product)}}>
-        <CardSection style={{flexDirection: 'column',}}>
-          <Text>{Title}</Text>
-          <Image
-            style={{width: 150, height: 150}}
-            source={{uri: product.Image }}
-          />
-          <Text>Price: {Price} {Currency}</Text>
-          <Button onPress={()=>{this.viewItem(product)}}>
-            Add to Cart
-          </Button>
-        </CardSection>
-      </TouchableHighlight>
-    );
-  }
-
-  viewItem(product) {
-    this.setState({product: product});
-    this.props.navigation.navigate('PDP',{product: product});
-  }
 
   viewCategory(CatName) {
     this.props.navigation.navigate('Category' ,{CatName});
   }
 
+  updateSearch = search => {
+    this.setState({search});
+  };
+
   render() {
+    const { search } = this.state;
     return(
       <ScrollView>
+        <View>
+          <SearchBar
+            placeholder="Search product"        
+            lightTheme        
+            round        
+            onChangeText={ this.updateSearch }
+            value={search}
+            autoCorrect={false} 
+            onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search})}}        
+          />
+        </View>
         <View style={styles.Wrapper}>
-          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/electronics/mobiles')}} style={{margin:5, width:'45%',}}>
+          <TouchableHighlight underlayColor={COLOR.lightGray} onPress={()=>{this.viewCategory('/categories/mobiles')}} style={{margin:5, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}>
                 <Image 
                 resizeMode="cover"
                 source={require('../assets/images/cat1.jpg')}
                 style={{width:'100%'}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Electronics</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:COLOR.primary}}>Mobiles</Text>
             </Card>
           </TouchableHighlight>
 
-          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/clothes')}} style={{margin:5, width:'45%',}}>
+          <TouchableHighlight underlayColor={COLOR.lightGray} onPress={()=>{this.viewCategory('/categories/laptops')}} style={{margin:5, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}> 
                 <Image 
                 resizeMode="cover"
                 source={require('../assets/images/cat2.jpg')}
                 style={{width:'100%'}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Clothes</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:COLOR.primary}}>Laptops</Text>
             </Card>
           </TouchableHighlight>
 
-          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/Music')}} style={{margin:5, width:'45%',}}>
+          <TouchableHighlight underlayColor={COLOR.lightGray} onPress={()=>{this.viewCategory('/categories/Music')}} style={{margin:5, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}>
                 <Image 
                 resizeMode="cover"
                 source={require('../assets/images/cat3.jpg')}
                 style={{width:'100%'}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Music</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:COLOR.primary}}>Music</Text>
             </Card>
           </TouchableHighlight>
         </View>
@@ -102,12 +76,6 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
-const mapStateToProps = ({ productFetch }) => {
-  const  {products, loading} = productFetch;
-  
-  return  {products, loading};
-};
 
 const styles={
   Wrapper:{
@@ -122,7 +90,20 @@ const styles={
     shadowRadius: 6, 
     elevation:5, 
     width:'100%'  
-  }
+  },
+  btnStyle:{
+    backgroundColor:COLOR.secondary,
+    width:'100%',
+    borderRadius:10,
+    borderColor:COLOR.secondary,
+    borderWidth:1 
+  }, 
+  btnText:{
+    textAlign:'center', 
+    fontSize:20, 
+    fontWeight:'500', 
+    color:'#f1e4e4'
+  }, 
 }
 
-export default connect(mapStateToProps, { productFetch, viewItem })(HomeScreen);
+export default HomeScreen;

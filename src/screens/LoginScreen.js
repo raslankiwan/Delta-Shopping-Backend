@@ -90,19 +90,19 @@ class LoginScreen extends React.Component {
 
   }
 
-  renderFacebookButton(){
+  renderFacebookButton() {
     return (
       <Button
-      raised
-      title='Login with Facebook'
-      titleStyle={styles.btnText}
-      buttonStyle={styles.btnStyle}
-      // containerStyle={styles.btnContainer}
-      // onPress={()=>{this.onButtonPress()}}
-    
+        raised
+        title='Login with Facebook'
+        titleStyle={styles.btnText}
+        buttonStyle={styles.btnStyle}
+        // containerStyle={styles.btnContainer}
+        // onPress={()=>{this.onButtonPress()}}
      />
-      );
+    );
   }
+
   renderButton() {
     const { emailError, passwordError, submit} = this.state;
 
@@ -115,27 +115,25 @@ class LoginScreen extends React.Component {
             );
         } else {
             return (
-            <Button
-            raised
-            title='Login'
-            titleStyle={styles.btnText}
-            buttonStyle={styles.btnStyle}
-            // containerStyle={styles.btnContainer}
-            onPress={()=>{this.onButtonPress()}}
-          
-           />
+              <Button
+                raised
+                title='Login'
+                titleStyle={styles.btnText}
+                buttonStyle={styles.btnStyle}
+                // containerStyle={styles.btnContainer}
+                onPress={()=>{this.onButtonPress()}}
+              />
             );
         }
     
     } else if (!(emailError === '' &&
         passwordError === '')) {
         return (
-              <Button
-              raised
-              title='Login'
-              titleStyle={styles.btnText}
-              buttonStyle={styles.btnStyle}
-            
+          <Button
+            raised
+            title='Login'
+            titleStyle={styles.btnText}
+            buttonStyle={styles.btnStyle}
           />
                    
         );

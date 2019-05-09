@@ -4,6 +4,7 @@ import ProductReducers from './ProductReducers';
 
 export default combineReducers({
   auth: AuthReducer,
+  fetchAllProducts: ProductReducers,
   productFetch: ProductReducers,
   cartFetch: ProductReducers,
   addToCart: ProductReducers,

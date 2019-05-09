@@ -1,4 +1,5 @@
 import {
+    ALL_PRODUCT_FETCH_SUCCESS,
     PRODUCT_FETCH_SUCCESS,
     CART_FETCH_SUCCESS,
     ADD_TO_CART_SUCCESS,
@@ -12,8 +13,10 @@ import {
     REVIEW_CHANGED,
     REVIEW_ADDED
 } from '../actions/types';
+// import console = require('console');
 
 const INITIAL_STATE = {
+    allProducts: [],
     products: [],
     addedToCart: false,
     removedFromCart: false,
@@ -28,6 +31,9 @@ export default (state = INITIAL_STATE, action) => {
         case PRODUCT_FETCH_SUCCESS:
             //console.log('Home' ,action.payload);
             return {...state, products: action.payload};
+        case ALL_PRODUCT_FETCH_SUCCESS:
+            //console.log('allProducts, reducer', action.payload)
+            return {...state, allProducts: action.payload};
         case CART_FETCH_SUCCESS:
             //console.log('cart', action.payload);
             return {...state, products: action.payload};
