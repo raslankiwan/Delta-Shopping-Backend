@@ -21,6 +21,7 @@ class LoginScreen extends React.Component {
       error:null, 
       emailError: '',
       passwordError: '',
+      pageLoading:true
     };
   }
   componentDidMount(){
@@ -46,7 +47,9 @@ class LoginScreen extends React.Component {
       user = JSON.parse(user);
       // this.props.setLoadingLogInForm(true); 
       console.log('login user', user);
+     this.setState({pageLoading:false})
       this.props.navigation.navigate('MainNavigation'); 
+    
     }
   }
   toggleUserLoginningIn = (initialBoolean=null) =>{
@@ -152,6 +155,13 @@ class LoginScreen extends React.Component {
 
  
   render() {
+    if(this.state.pageLoading){
+      return  (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+         <ActivityIndicator size="large" />
+      </View>
+      );
+    }
     return (
      
       <View style={styles.Wrapper}>
