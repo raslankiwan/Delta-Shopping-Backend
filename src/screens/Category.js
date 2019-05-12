@@ -87,7 +87,7 @@ class Category extends React.Component {
   render() {
     this.createDataSource(this.props.products);
     return (
-      <View>
+      <View style={{flex:1}}>
           <ListView
             enableEmptySections={true} 
             renderRow={(item) => this.renderRow(item)}
@@ -108,16 +108,23 @@ const mapStateToProps = ({ productFetch, addToCart }) => {
 const styles={
   productContainer:{
     flexDirection:'row', 
-    width:'100%',
+    width:'90%',
     padding:5, 
-    marginTop:8, 
     backgroundColor:'white', 
-    // justifyContent:'space-evenly', 
-
+    shadowColor: '#e5e6e8',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 6, 
+    elevation:5, 
+    margin:8, 
+    borderColor:'#e5e6e8', 
+    borderWidth:1, 
+    borderRadius:5, 
   } ,
   btnWrapper:{
     flexDirection:'row', 
-    justifyContent:'space-around'
+    justifyContent:'space-around', 
+    marginTop:5
   }, 
   imageWrapper:{
     width:'30%', 
@@ -139,9 +146,8 @@ const styles={
   }, 
   btnStyle:{
     backgroundColor:Colors.primary, 
-    width:100, 
+    width:70, 
     padding:5, 
-    marginTop:5,
   }
 
 }
