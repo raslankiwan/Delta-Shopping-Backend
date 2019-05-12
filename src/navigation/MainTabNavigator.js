@@ -17,7 +17,8 @@ import PDP from '../screens/PDP';
 import ChangeLanguageScreen from '../screens/ChangeLanguageScreen';
 import i18n from '../language/i18n'
 import Category from '../screens/Category';
-
+import SellingForm from '../screens/SellingForm';
+import NotificationList from '../screens/NotificationList'
 const HeaderLeft = (navigation) => (
     
   <Icon
@@ -50,18 +51,18 @@ const HomeStack = createStackNavigator({
     screen:HomeScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Home'), 
   },
-  Category:{
-    screen:Category, 
-    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Category'), 
-  },
-  SearchResult:{
-    screen:SearchResultScreen, 
-    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'SearchResult'), 
-  },
-  PDP:{
-    screen:PDP, 
-    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
-  } 
+  // Category:{
+  //   screen:Category, 
+  //   navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Category'), 
+  // },
+  // SearchResult:{
+  //   screen:SearchResultScreen, 
+  //   navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'SearchResult'), 
+  // },
+  // PDP:{
+  //   screen:PDP, 
+  //   navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
+  // } 
 });
 
 const CategoryStack = createStackNavigator({
@@ -81,10 +82,10 @@ const SearchResultStack = createStackNavigator({
     screen:SearchResultScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'SearchResult'), 
   },
-  PDP:{
-    screen:PDP, 
-    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
-  } 
+  // PDP:{
+  //   screen:PDP, 
+  //   navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
+  // } 
  
 });
 
@@ -107,6 +108,10 @@ const SellStack = createStackNavigator({
     screen: SellScreen, 
     navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Sell')
   },
+  SellForm:{
+    screen:SellingForm, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'SellingFrom'), 
+  }
 });
 
 const SettingsStack = createStackNavigator({
@@ -137,7 +142,7 @@ menuNavicationOptions = (navigation, headerName) => {
 singleNavicationOptions = (navigation, headerName) => {
   return {
        
-       title:headerName,
+      title: i18n.t('Screens.'+headerName)  ,
        headerBackTitle: null,
     
        headerStyle:{
@@ -151,7 +156,9 @@ singleNavicationOptions = (navigation, headerName) => {
 }
 const MenuStack = createStackNavigator({
   Home:{screen:HomeStack},
-  Sell: {screen:SellStack}
+  Sell: {screen:SellStack}, 
+  Category:{screen:CategoryStack}, 
+  searchResult:{screen:SearchResultStack}
 },
 {
   headerMode:'none',
@@ -159,6 +166,7 @@ const MenuStack = createStackNavigator({
     headerVisible:false,
     // headerBackTitle:null
   }
+
 });
 const integrateTabs = createBottomTabNavigator ({
   MainHome:{screen: HomeStack},
@@ -179,7 +187,8 @@ const integrateTabs = createBottomTabNavigator ({
 const Tabs = createBottomTabNavigator ({
   Home: integrateTabs,
   cart: CartStack,
-  wishlist: WishlistStack
+  wishlist: WishlistStack, 
+  Notification:NotificationList
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({
@@ -204,7 +213,14 @@ const Tabs = createBottomTabNavigator ({
                   name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'}
                 />
                 );
+      }else if (routeName === 'Notification') {
+        return (<TabBarIcon
+                  focused={focused}
+                  name={Platform.OS === 'ios' ? 'ios-notifications' : 'md-notifications'}
+                />
+                );
       }
+      
     },
     tabBarOnPress:({navigation}) => {
       const { routeName } = navigation.state;
@@ -214,6 +230,8 @@ const Tabs = createBottomTabNavigator ({
         navigation.navigate('Cart');
       } else if (routeName === 'wishlist') {
         navigation.navigate('Wishlist');
+      }else if (routeName === 'Notification') {
+        navigation.navigate('Notification');
       }
     }
   }),

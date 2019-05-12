@@ -81,8 +81,26 @@ export const loginUser = ({ email, password }) => {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
+      // console.log(user)
       if(firebase.auth().currentUser.emailVerified) {
-       UserLogin(dispatch, user);
+        firebase.database().ref(`/users/${user.user.uid}`)
+        .on('value', snapshot => {
+          // console.log('snapshot',snapshot.val());
+       
+          user={...user, userInfo:{
+            name:snapshot.val().name, 
+            city:snapshot.val().city, 
+            country:snapshot.val().country,
+            email: snapshot.val().email,
+            phone: snapshot.val().phone,
+            street:snapshot.val().street,
+            zip:snapshot.val().zip,
+            uid:user.user.uid
+          }}
+          console.log('userInfo', user);
+
+        });
+        UserLogin(dispatch, user);
       } else {
         loginUserFail(dispatch, 'Email not verified');
       }
@@ -144,7 +162,7 @@ const loginUserSuccess = (dispatch, user ) => {
   });
 };
 const  setUserCredintialInAsyncStorage= async (user)=>{
-  // console.log('user AsyncStorage', user);
+  console.log('user AsyncStorage', user);
   const userInfo =  {
     uid:user.user.uid, 
     email:user.user.email

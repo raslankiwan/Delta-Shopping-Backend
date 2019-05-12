@@ -4,6 +4,7 @@
     "Logout":"تسجيل الخروج", 
     "SignUp":"تسجيل", 
     "CreateAccount":"انشاء حساب", 
+    "AccountSettings":"اعدادات الحساب",
    
        
     "Language":{
@@ -20,6 +21,26 @@
         "Wishlist": "المفضلة",
         "Register":"تسجيل", 
         "Sell":"اعرض للبيع",
-        "SearchResult": "نتائج البحث"
+        "SearchResult": "نتائج البحث", 
+        "SellingFrom":"إضافة"
+    }, 
+    "Home":{
+        "Categories":"الفئات"
+    },
+    "SellScreen":{
+        "add":"عرض سلعة جديدة"
+    }, 
+    "SellingForm":{
+        "Title":"العنوان", 
+        "Amount":"الكمية", 
+        "Price":"السعر", 
+        "Company":"الشركة", 
+        "Info":"المعلومات", 
+        "Image":"الصورة", 
+        "Currency":"العملة" 
+    }, 
+    "Category":{
+        "addToCart":"إضافة", 
+        "ViewProduct":"عرض"
     }
 }

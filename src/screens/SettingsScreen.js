@@ -11,9 +11,11 @@ import I18n from '../language/i18n';
     firebase.auth().signOut();
     
     let logOut = await AsyncStorage.removeItem('userInfo');
-    this.props.navigation.navigate('Login');
     let xxx = await this.props.logOutUser();
-  
+
+    this.props.navigation.navigate('Login');
+   
+    // Expo.Updates.reload();
   }
   
   render() {
@@ -36,6 +38,14 @@ import I18n from '../language/i18n';
               key={2}
               title={I18n.t('Logout')}
               onPress={() => this.Logout()} 
+              containerStyle={styles.listStyle}
+              titleStyle={{textAlign:'left'}}
+            />
+               <ListItem
+              leftIcon={{type:'material-community', name:'account-settings'}} 
+              key={2}
+              title={I18n.t('AccountSettings')}
+              // onPress={() => this.Logout()} 
               containerStyle={styles.listStyle}
               titleStyle={{textAlign:'left'}}
             />

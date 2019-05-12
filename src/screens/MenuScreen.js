@@ -1,18 +1,34 @@
 import React from 'react';
-import { View, Image} from 'react-native';
+import { View, Image, Text} from 'react-native';
 import {ListItem,Divider } from 'react-native-elements'
 import COLOR from '../constants/Colors'
 const Menu=[
     {
       id:0,
-      name:'Home',
-      menuUrl:'Home', 
-      icon: 'home' ,
+      name:'Profile',
+      menuUrl:'account', 
+      icon: 'account' ,
+      type:'material-community',
+      color:'#B47EB3'
+    },
+    // {
+    //   id:0,
+    //   name:'Home',
+    //   menuUrl:'Home', 
+    //   icon: 'home' ,
+    //   type:'material-community',
+    //   color:'#B47EB3'
+    // },
+    {
+      id:1,
+      name:'Users',
+      menuUrl:'account', 
+      icon: 'account-group' ,
       type:'material-community',
       color:'#B47EB3'
     },
     {
-      id:1,
+      id:2,
       name:'Wishlist',
       menuUrl:'Wishlist', 
       icon: 'heart' ,
@@ -20,13 +36,15 @@ const Menu=[
       color:'#B47EB3'
     },
     {
-      id:2,
+      id:3,
       name:'Sell',
       menuUrl:'Sell', 
-      icon: 'heart' ,
+      icon: 'store' ,
       type:'material-community',
       color:'#B47EB3'
     },
+ 
+ 
 ];
 
 class MenuScreen extends React.Component {
@@ -46,7 +64,7 @@ class MenuScreen extends React.Component {
                     return(
                           <ListItem
                             leftIcon={{type:item.type ,name:item.icon, color:COLOR.primary}} 
-                            key={5}
+                            key={item.id}
                             title={item.name}
                             titleStyle={{color:COLOR.primary, textAlign:'left'}}
                             containerStyle={styles.listStyle}

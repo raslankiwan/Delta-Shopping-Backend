@@ -4,6 +4,7 @@
     "Logout":"LogOut", 
     "SignUp":"Sign Up", 
     "CreateAccount":"Create Account", 
+    "AccountSettings":"Account Settings",
    
     "Language":{
         "Save":"Save", 
@@ -19,6 +20,26 @@
         "Wishlist":"Wishlist", 
         "Register":"Register",
         "Sell":"Sell",
-        "SearchResult": "Search Result" 
+        "SearchResult": "Search Result" , 
+        "SellingFrom":"Add"
+    },
+    "Home":{
+        "Categories":"Categories"
+    }, 
+    "SellScreen":{
+        "add":"Sell New Item"
+    }, 
+    "SellingForm":{
+        "Title":"Title", 
+        "Amount":"Amount", 
+        "Price":"Price", 
+        "Company":"Company", 
+        "Info":"Information", 
+        "Image":"Image", 
+        "Currency":"Currency" 
+    },
+    "Category":{
+        "addToCart":"Add",
+        "ViewProduct":"View"
     }
 }

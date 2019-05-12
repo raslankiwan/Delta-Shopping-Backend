@@ -4,11 +4,13 @@ import {
   Image,
   TouchableHighlight, 
   View, 
-  ScrollView
+  ScrollView, 
+  I18nManager
 } from 'react-native';
-import { Card, Input, Button, SearchBar } from 'react-native-elements';
-import COLOR from '../constants/Colors';
-
+import { Card, Input, Button, SearchBar , Divider} from 'react-native-elements';
+import Swiper from 'react-native-swiper';
+import I18n from '../language/i18n';
+import Colors from '../constants/Colors';
 class HomeScreen extends React.Component {
  
   state = {
@@ -26,7 +28,8 @@ class HomeScreen extends React.Component {
   render() {
     const { search } = this.state;
     return(
-      <ScrollView>
+      <ScrollView contentContainerStyle={{paddingBottom:200}}>
+      
         <View>
           <SearchBar
             placeholder="Search product"        
@@ -38,37 +41,78 @@ class HomeScreen extends React.Component {
             onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search})}}        
           />
         </View>
+        <View style={{height:'30%'}}>
+          <Swiper 
+            autoplay={true} 
+            style={{ height:'100%',padding:5}} 
+            containerStyle={{  width:'100%',height:'100%', padding:5}} 
+            // showsButtons={true} 
+            showsPagination={true} 
+            activeDotColor='white'
+            // nextButton={<Text style={styles.buttonText}>{I18nManager.isRTL ?'‹':'›'}</Text>} 
+            // prevButton={<Text style={styles.buttonText}>{I18nManager.isRTL ?'›':'‹'}</Text>} 
+            > 
+            
+              <Image 
+              source={require('../assets/images/sale2.png')} 
+              style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
+              />
+              <Image 
+              source={require('../assets/images/sale1.png')} 
+              style={{width:'98%', height:'100%',borderRadius:15,margin:2}}
+              />
+                <Image 
+              source={require('../assets/images/sale3.png')} 
+              style={{width:'98%', height:'100%',borderRadius:15,margin:2}}
+              />
+            </Swiper>
+        </View>
+        <View style={{justifyContent:'center'}}>
+          <Text style={styles.TitleStyle}>{I18n.t('Home.Categories')}</Text>
+          {/* <Divider style={{backgroundColor:Colors.lightGray, width:'90%', height:1, margin:5}} /> */}
+         </View>
         <View style={styles.Wrapper}>
-          <TouchableHighlight underlayColor={COLOR.lightGray} onPress={()=>{this.viewCategory('/categories/mobiles')}} style={{margin:5, width:'45%',}}>
+    
+          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/mobiles')}} style={{margin:3, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}>
                 <Image 
                 resizeMode="cover"
-                source={require('../assets/images/cat1.jpg')}
-                style={{width:'100%'}}
+                source={require('../assets/images/cat6.jpg')}
+                style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:COLOR.primary}}>Mobiles</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Mobiles</Text>
             </Card>
           </TouchableHighlight>
 
-          <TouchableHighlight underlayColor={COLOR.lightGray} onPress={()=>{this.viewCategory('/categories/laptops')}} style={{margin:5, width:'45%',}}>
+          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/laptops')}} style={{margin:3, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}> 
                 <Image 
                 resizeMode="cover"
-                source={require('../assets/images/cat2.jpg')}
-                style={{width:'100%'}}
+                source={require('../assets/images/cat7.jpg')}
+                style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:COLOR.primary}}>Laptops</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Laptops</Text>
             </Card>
           </TouchableHighlight>
 
-          <TouchableHighlight underlayColor={COLOR.lightGray} onPress={()=>{this.viewCategory('/categories/Music')}} style={{margin:5, width:'45%',}}>
+          <TouchableHighlight underlayColor={Colors.lightGray} onPress={()=>{this.viewCategory('/categories/Music')}} style={{margin:3, width:'45%',}}>
             <Card containerStyle={styles.CardStyle}>
                 <Image 
                 resizeMode="cover"
                 source={require('../assets/images/cat3.jpg')}
-                style={{width:'100%'}}
+                style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:COLOR.primary}}>Music</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Music</Text>
+            </Card>
+          </TouchableHighlight>
+          <TouchableHighlight underlayColor={Colors.lightGray}  style={{margin:3, width:'45%',}}>
+            <Card containerStyle={styles.CardStyle}>
+                <Image 
+                resizeMode="cover"
+                source={require('../assets/images/cat2.jpg')}
+                style={{width:'100%', height:150}}
+                />
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Cars</Text>
             </Card>
           </TouchableHighlight>
         </View>
@@ -89,13 +133,14 @@ const styles={
     shadowOpacity: 0.5,
     shadowRadius: 6, 
     elevation:5, 
-    width:'100%'  
+    width:'100%'  , 
+    padding:7
   },
   btnStyle:{
-    backgroundColor:COLOR.secondary,
+    backgroundColor:Colors.secondary,
     width:'100%',
     borderRadius:10,
-    borderColor:COLOR.secondary,
+    borderColor:Colors.secondary,
     borderWidth:1 
   }, 
   btnText:{
@@ -104,6 +149,13 @@ const styles={
     fontWeight:'500', 
     color:'#f1e4e4'
   }, 
+  TitleStyle:{
+    color:Colors.primary, 
+    fontSize:20, 
+    fontWeight:'600', 
+    margin:10, 
+    textAlign:'center'
+  }
 }
 
 export default HomeScreen;

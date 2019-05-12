@@ -24,8 +24,9 @@ class LoginScreen extends React.Component {
       pageLoading:true
     };
   }
-  componentDidMount(){
+  componentWillMount(){
     this.checkUserCredentialsExisting();
+   
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.shouldRedirect) {
@@ -42,9 +43,11 @@ class LoginScreen extends React.Component {
 
     
     if (!user) {
-      this.props.setLoadingLogInForm(false); 
+      this.props.setLoadingLogInForm(true); 
+      this.setState({pageLoading:false})
     }else{
       user = JSON.parse(user);
+      this.props.setLoadingLogInForm(false); 
       // this.props.setLoadingLogInForm(true); 
       console.log('login user', user);
      this.setState({pageLoading:false})
@@ -155,12 +158,13 @@ class LoginScreen extends React.Component {
 
  
   render() {
+    console.log(this.props);
     if(this.state.pageLoading){
-      return  (
-      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-         <ActivityIndicator size="large" />
-      </View>
-      );
+      return(
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+          <ActivityIndicator size='large' />
+        </View>
+      )
     }
     return (
      

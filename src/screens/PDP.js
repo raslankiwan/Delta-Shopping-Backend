@@ -17,7 +17,8 @@ class PDP extends React.Component {
     state = {
         user: '',
         review: '',
-        reviews:[]
+        reviews:[], 
+        Viewed:''
     };
 
     async componentWillMount() {
@@ -25,21 +26,24 @@ class PDP extends React.Component {
         this.setState({user});
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
-        const { productId } = product;
-
-       // this.incrementViews(productId);
+        const { productId, Viewed } = product;
+        this.setState({Viewed})
+       this.incrementViews(productId);
         this.props.reviewFetch(productId);
     }
 
+
     incrementViews =(productId) => {
-        firebase.database().ref(productId)
-        .on('value', snapshot => {
-            console.log(snapshot.val());
-            let viewed = parseInt(snapshot.val().Viewed);
-            viewed += 1;
-            // console.log('viewed', viewed);
-            firebase.database().ref(`${productId}/`).update({Viewed: viewed});
-        });
+        let incremented=parseInt(this.state.Viewed)+1;
+        firebase.database().ref(productId).update({Viewed: incremented})
+        
+        // .on('value', snapshot => {
+        //     console.log(snapshot.val());
+        //     // let viewed = parseInt(snapshot.val().Viewed);
+        //     // viewed += 1;
+        //     // console.log('viewed', viewed);
+        //     // firebase.database().ref(`${productId}/`).update({Viewed: viewed});
+        // });
     }
 
     ratingCompleted(rating) {
