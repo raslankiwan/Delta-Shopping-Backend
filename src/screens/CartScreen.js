@@ -2,15 +2,17 @@ import React from 'react';
 import {  
   StyleSheet,
   ListView,
+  View,
   Text,
   Image,
   AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Card, CardSection, Button } from '../components/common';
+import I18n from '../language/i18n';
+import {Button, Icon, Card} from 'react-native-elements'
 import { cartFetch, removeFromCart } from '../actions';
-
+import { CardSection } from '../components/common';
 class CartScreen extends React.Component {
   
   
@@ -42,21 +44,57 @@ class CartScreen extends React.Component {
     this.dataSource = ds.cloneWithRows(_data);
   }
    
+  // renderRow(product) {
+  //   const { Title, Price, Currency, productId } = product;
+
+  //   return(
+  //       <CardSection style={{flexDirection: 'column',}}>
+  //         <Text>{Title}</Text>
+  //         <Image
+  //           style={{width: 150, height: 150}}
+  //           source={{uri: product.Image }}
+  //         />
+  //         <Text>Price: {Price} {Currency}</Text>
+  //         <Button onPress={() => {this.props.removeFromCart(productId, this.state.user)}}>
+  //           Remove
+  //         </Button>
+  //       </CardSection>
+  //   );
+  // }
+
   renderRow(product) {
     const { Title, Price, Currency, productId } = product;
+    return(   
+      <View style={styles.productContainer} id={productId}>
+       
+          <View style={styles.imageWrapper}>
+              <Image
+                  style={{width: '100%', height: 100}}
+                  source={{uri: product.Image }}
+                />
+          </View>
 
-    return(
-        <CardSection style={{flexDirection: 'column',}}>
-          <Text>{Title}</Text>
-          <Image
-            style={{width: 150, height: 150}}
-            source={{uri: product.Image }}
-          />
-          <Text>Price: {Price} {Currency}</Text>
-          <Button onPress={() => {this.props.removeFromCart(productId, this.state.user)}}>
-            Remove
-          </Button>
-        </CardSection>
+        <View style={styles.descWrapper}>
+            <Text style={styles.titleStyle}>{Title}</Text>
+            <Text style={styles.priceStyle}>Price: {Price} {Currency}</Text>
+            <View style={styles.btnWrapper}>
+                <Button 
+                raised
+                title={I18n.t('Category.removeFromCart')}
+                onPress={()=>{this.props.removeFromCart(productId, this.state.user)}}  
+                buttonStyle={styles.btnStyle}
+                icon={
+                  <Icon
+                    type
+                   />
+                }
+                />
+            </View>
+        </View>
+
+      
+         
+      </View>
     );
   }
 

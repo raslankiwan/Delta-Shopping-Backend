@@ -24,7 +24,12 @@
         "SellingFrom":"Add"
     },
     "Home":{
-        "Categories":"Categories"
+        "Categories":"Categories",
+        "Mobiles": "Mobiles",
+        "Laptops": "Laptops",
+        "Music": "Music",
+        "Cars": "Cars",
+        "Search": "Search for product"
     }, 
     "SellScreen":{
         "add":"Sell New Item"
@@ -40,6 +45,8 @@
     },
     "Category":{
         "addToCart":"Add",
-        "ViewProduct":"View"
+        "ViewProduct":"View",
+        "removeFromCart":"Remove",
+        "Price": "Price"
     }
 }

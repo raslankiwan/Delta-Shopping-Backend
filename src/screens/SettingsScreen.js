@@ -26,8 +26,16 @@ import I18n from '../language/i18n';
         <View style={styles.headerList}>
            
             <ListItem
-              leftIcon={{ name:'language'}} 
+              leftIcon={{type:'material-community', name:'account-settings'}} 
               key={1}
+              title={I18n.t('AccountSettings')}
+              // onPress={() => this.Logout()} 
+              containerStyle={styles.listStyle}
+              titleStyle={{textAlign:'left'}}
+            />
+            <ListItem
+              leftIcon={{ name:'language'}} 
+              key={2}
               title={I18n.t('Language.ChangeLanguage')}
               onPress={  ()=>{this.props.navigation.navigate('changeLang');}  } 
               containerStyle={styles.listStyle}
@@ -35,20 +43,13 @@ import I18n from '../language/i18n';
             />
            <ListItem
               leftIcon={{type:'material-community', name:'logout'}} 
-              key={2}
+              key={3}
               title={I18n.t('Logout')}
               onPress={() => this.Logout()} 
               containerStyle={styles.listStyle}
               titleStyle={{textAlign:'left'}}
             />
-               <ListItem
-              leftIcon={{type:'material-community', name:'account-settings'}} 
-              key={2}
-              title={I18n.t('AccountSettings')}
-              // onPress={() => this.Logout()} 
-              containerStyle={styles.listStyle}
-              titleStyle={{textAlign:'left'}}
-            />
+            
         </View>
 
       </View>

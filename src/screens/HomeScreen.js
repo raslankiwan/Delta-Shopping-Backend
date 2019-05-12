@@ -32,7 +32,7 @@ class HomeScreen extends React.Component {
       
         <View>
           <SearchBar
-            placeholder="Search product"        
+            placeholder={I18n.t('Home.Search')}        
             lightTheme        
             round        
             onChangeText={ this.updateSearch }
@@ -80,7 +80,7 @@ class HomeScreen extends React.Component {
                 source={require('../assets/images/cat6.jpg')}
                 style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Mobiles</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>{I18n.t('Home.Mobiles')}</Text>
             </Card>
           </TouchableHighlight>
 
@@ -91,7 +91,7 @@ class HomeScreen extends React.Component {
                 source={require('../assets/images/cat7.jpg')}
                 style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Laptops</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>{I18n.t('Home.Laptops')}</Text>
             </Card>
           </TouchableHighlight>
 
@@ -102,7 +102,7 @@ class HomeScreen extends React.Component {
                 source={require('../assets/images/cat3.jpg')}
                 style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Music</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>{I18n.t('Home.Music')}</Text>
             </Card>
           </TouchableHighlight>
           <TouchableHighlight underlayColor={Colors.lightGray}  style={{margin:3, width:'45%',}}>
@@ -112,7 +112,7 @@ class HomeScreen extends React.Component {
                 source={require('../assets/images/cat2.jpg')}
                 style={{width:'100%', height:150}}
                 />
-                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>Cars</Text>
+                <Text style={{fontSize:20, fontWeight:'700', color:Colors.primary}}>{I18n.t('Home.Cars')}</Text>
             </Card>
           </TouchableHighlight>
         </View>

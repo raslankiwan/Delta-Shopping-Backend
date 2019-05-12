@@ -25,7 +25,12 @@
         "SellingFrom":"إضافة"
     }, 
     "Home":{
-        "Categories":"الفئات"
+        "Categories":"الفئات",
+        "Mobiles": "الهواتف",
+        "Laptops": "حواسيب",
+        "Music": "موسيقى",
+        "Cars": "سيارات",
+        "Search": "ابحث عن سلعة"
     },
     "SellScreen":{
         "add":"عرض سلعة جديدة"
@@ -41,6 +46,8 @@
     }, 
     "Category":{
         "addToCart":"إضافة", 
-        "ViewProduct":"عرض"
+        "ViewProduct":"عرض",
+        "removeFromCart":"حذف",
+        "Price": "السعر"
     }
 }
