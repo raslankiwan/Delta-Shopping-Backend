@@ -3,12 +3,13 @@ import {
     Text, 
     Image, 
     AsyncStorage,
-    FlatList } from 'react-native';
+    FlatList, View} from 'react-native';
 import { connect } from 'react-redux';
-import { Input, Rating, AirbnbRating } from 'react-native-elements';
+import { Input, Rating, Avatar , Button, ListItem} from 'react-native-elements';
 import firebase from 'firebase';
-import { Card, CardSection, Header, Button } from '../components/common';
+import { Card, CardSection, Header } from '../components/common';
 import { addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch } from '../actions';
+import Colors from '../constants/Colors'
 // import console = require('console');
 
 var data=[];
@@ -54,15 +55,20 @@ class PDP extends React.Component {
         console.log( 'render row',item);
         const { review, userId } = item.item;
         return(   
-            <CardSection style={{flexDirection:'column'}}>
-                    <CardSection>
-                        <Text>{userId}</Text>
-                </CardSection>
-
-                <CardSection>
-                    <Text>{review}</Text>
-                </CardSection>
-            </CardSection>    
+           <ListItem
+           
+           leftAvatar={
+               <Avatar 
+               rounded
+                size='small'
+                title='A'
+               />
+           }
+           title={userId}
+           subtitle={review}
+           key={userId}
+           containerStyle={{borderBottomColor:'#ddd', borderBottomWidth:1}}
+           />
         );
     }
     
@@ -89,7 +95,7 @@ class PDP extends React.Component {
         return (
             <Card>
                 <CardSection>
-                    <Header headerText={Title + ' of ' + Company}></Header>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{Title + ' of ' + Company}</Text>
                 </CardSection>
 
                 <CardSection>
@@ -122,44 +128,58 @@ class PDP extends React.Component {
                 </CardSection>
            
                 <CardSection>
-                    <Button onPress={()=>{this.props.addToCart(productId, this.state.user)}}>
-                        Add to Cart
-                    </Button>
+                    <Button 
+                    title='Add to Cart'
+                    onPress={()=>{this.props.addToCart(productId, this.state.user)}}
+                    buttonStyle={{backgroundColor:Colors.primary, width:'93%'}}
+                    />
+                        
                 </CardSection>
                
                 <CardSection>
-                    <Button onPress={()=>{this.props.addToWishlist(productId, this.state.user)}}>
-                        Add to Wishlist
-                    </Button>
+                    <Button 
+                    title='Add to Wishlist'
+                    onPress={()=>{this.props.addToWishlist(productId, this.state.user)}}
+                    buttonStyle={{backgroundColor:Colors.secondary, width:'90%'}}
+                    />
                 </CardSection>
                     
-                <CardSection>
-                    <Text>Reviews:</Text>
-                </CardSection>
+                <View style={{marginTop:5, width:'100%', justifyContent:'center', padding:8}}>
+                {/* <Divider style={{backgroundColor:Colors.lightGray, width:'100%', marginHorizontal:5, height:1}} /> */}
+                    <Text style={{textAlign:'center', color:Colors.secondary, fontSize:18, fontWeight:'500'}}>Reviews:</Text>
+                </View>
 
                 
-                <CardSection style={styles.FlatListStyle}>
+                <View style={styles.FlatListStyle}>
                     <FlatList 
                         data={data}
                         renderItem={this.renderRow.bind(this)}   
                     />      
-                </CardSection>
+                </View>
 
-                <CardSection>
+                <View style={{marginTop:10}}>
+                {/* <Text style={{textAlign:'center', color:Colors.secondary, fontSize:16, fontWeight:'500'}}>write your review:</Text> */}
                     <Input
-                        placeholder = ""
-                        inputContainerStyle={{borderBottomWidth: 0}}
+                        label = "write your review:"
+                        inputContainerStyle={styles.inputContainerStyle}
                         onChangeText= {this.onReviewChanged.bind(this) }
                         value = {this.props.review}
-                    />
-                </CardSection>
+                        multiline
+                        numberOfLines={3}
+                        labelStyle={{color:Colors.primary, fontSize:16, fontWeight:'500'}}
+                        // containerStyle={{backgroundColor}}
 
-                <CardSection>
-                    <Text>Write a review</Text>
-                    <Button onPress={()=>{this.props.addReview(productId, this.props.review, this.state.user)}}>
-                        Add Review
-                    </Button>
-                </CardSection>
+                    />
+                </View>
+
+                <View style={styles.reviewBtnContainer}>
+                    {/* <Text>Write a review</Text> */}
+                    <Button 
+                    title='Add Review'
+                    onPress={()=>{this.props.addReview(productId, this.props.review, this.state.user)}}
+                    buttonStyle={{backgroundColor:Colors.primary}}/>
+
+                </View>
             </Card>    
           
         );
@@ -170,9 +190,25 @@ const styles = {
     FlatListStyle:{
         borderTopWidth: 0,
         borderBottomWidth: 0,
-        marginBottom:150, 
-         flex:1
-    } 
+        // marginBottom:150, 
+        flex:1
+    }, 
+    reviewBtnContainer:{
+        borderBottomWidth: 1,
+        padding: 5,
+        backgroundColor: '#fff',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        borderColor: '#ddd',
+        position: 'relative'
+    }, 
+    inputContainerStyle:{
+        borderBottomWidth: 0, 
+        backgroundColor:'#f1e4e4',
+        marginBottom: 5,
+        padding:5, 
+        
+    }, 
 };
 
 const mapStateToProps = ({ addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch }) => {
