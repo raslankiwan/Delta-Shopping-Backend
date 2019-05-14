@@ -30,5 +30,7 @@ export const WISHLIST_FETCH_SUCCESS = 'wishlist_fetch_success';
 export const ADD_TO_WISHLIST_SUCCESS = 'add_to_wishlist_success';
 export const REMOVE_FORM_WISHLIST_SUCCESS = 'remove_from_wishlist';
 
+export const USERS_FETCH_SUCCESS = 'users_fetch_success';
+
 export const SET_LOADING_LOGIN_FORM='set_loading_login_form';
 export const USER_LOGOUT='user_logout';

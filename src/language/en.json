@@ -5,7 +5,11 @@
     "SignUp":"Sign Up", 
     "CreateAccount":"Create Account", 
     "AccountSettings":"Account Settings",
-   
+    "Wishlist": "Wishlist",
+    "Profile": "Profile",
+    "Users": "Users",
+    "Sell": "Sell",
+
     "Language":{
         "Save":"Save", 
         "English":"English", 
@@ -21,7 +25,10 @@
         "Register":"Register",
         "Sell":"Sell",
         "SearchResult": "Search Result" , 
-        "SellingFrom":"Add"
+        "SellingFrom":"Add",
+        "Product": "Product Info",
+        "Language": "Language",
+        "Users":"Users"
     },
     "Home":{
         "Categories":"Categories",
@@ -48,5 +55,14 @@
         "ViewProduct":"View",
         "removeFromCart":"Remove",
         "Price": "Price"
+    },
+    "PDP": {
+        "Views": "Views",
+        "AddToCart": "Add To Cart",
+        "AddToWishlist": "Add To Wishlist",
+        "WriteReview": "Write a Review",
+        "Rate":"Rate",
+        "AddReview": "Add Review",
+        "Reviews": "Reviews"
     }
 }

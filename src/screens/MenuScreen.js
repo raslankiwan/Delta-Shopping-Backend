@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Image, Text} from 'react-native';
-import {ListItem,Divider } from 'react-native-elements'
-import COLOR from '../constants/Colors'
+import {ListItem,Divider } from 'react-native-elements';
+import COLOR from '../constants/Colors';
+import I18n from '../language/i18n';
 const Menu=[
     {
       id:0,
-      name:'Profile',
+      name:`${I18n.t('Profile')}`,
       menuUrl:'account', 
       icon: 'account' ,
       type:'material-community',
@@ -21,15 +22,15 @@ const Menu=[
     // },
     {
       id:1,
-      name:'Users',
-      menuUrl:'account', 
+      name:`${I18n.t('Users')}`,
+      menuUrl:'Users', 
       icon: 'account-group' ,
       type:'material-community',
       color:'#B47EB3'
     },
     {
       id:2,
-      name:'Wishlist',
+      name:`${I18n.t('Wishlist')}`,
       menuUrl:'Wishlist', 
       icon: 'heart' ,
       type:'material-community',
@@ -37,7 +38,7 @@ const Menu=[
     },
     {
       id:3,
-      name:'Sell',
+      name:`${I18n.t('Sell')}`,
       menuUrl:'Sell', 
       icon: 'store' ,
       type:'material-community',

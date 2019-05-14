@@ -13,12 +13,14 @@ import SearchResultScreen from '../screens/SearchResultScreen';
 import COLOR from '../constants/Colors';
 import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
+import UsersScreen from '../screens/UsersScreen';
 import PDP from '../screens/PDP';
 import ChangeLanguageScreen from '../screens/ChangeLanguageScreen';
 import i18n from '../language/i18n'
 import Category from '../screens/Category';
 import SellingForm from '../screens/SellingForm';
 import NotificationList from '../screens/NotificationList'
+import ChatScreen from '../screens/ChatScreen';
 const HeaderLeft = (navigation) => (
     
   <Icon
@@ -103,6 +105,18 @@ const WishlistStack = createStackNavigator({
   },
 });
 
+const UsersStack = createStackNavigator({
+  Users: {
+    screen: UsersScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Users')
+  },
+  Chat: {
+    screen:ChatScreen, 
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Chat')
+  }
+});
+
+
 const SellStack = createStackNavigator({
   Sell: {
     screen: SellScreen, 
@@ -157,6 +171,7 @@ singleNavicationOptions = (navigation, headerName) => {
 const MenuStack = createStackNavigator({
   Home:{screen:HomeStack},
   Sell: {screen:SellStack}, 
+  Users: {screen:UsersStack},
   Category:{screen:CategoryStack}, 
   searchResult:{screen:SearchResultStack}
 },

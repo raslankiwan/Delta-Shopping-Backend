@@ -118,7 +118,9 @@ export const createUser = (props) => {
     
     return(dispatch) => {
         firebase.database().ref(`users/${currentUser.uid}/`)
-        .push({ name, phone, email, zip, country, street, city })
+        .push({ name, phone, email, zip, country, street, city, 
+          photo:"https://firebasestorage.googleapis.com/v0/b/shopping-bfcfb.appspot.com/o/user.jpg?alt=media&token=36cb2651-3224-4c39-8608-abf282c2009f" 
+        })
         .then(() => {
           signUpUserSuccess(dispatch, user);
         });     
@@ -135,7 +137,9 @@ export const signUpUser = (props) => {
       firebase.auth().currentUser.sendEmailVerification()
       .then(() => {
         firebase.database().ref(`users/`)
-        .push({ name, phone, email, zip, country, street, city, cartTotal: 0 })
+        .push({ name, phone, email, zip, country, street, city, 
+          photo: "https://firebasestorage.googleapis.com/v0/b/shopping-bfcfb.appspot.com/o/user.jpg?alt=media&token=36cb2651-3224-4c39-8608-abf282c2009f"
+        })
         .then(() =>   signUpUserSuccess(dispatch, user));
       
       })    

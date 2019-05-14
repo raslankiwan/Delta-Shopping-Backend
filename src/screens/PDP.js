@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Input, Rating, Avatar , Button, ListItem} from 'react-native-elements';
 import firebase from 'firebase';
 import { Card, CardSection, Header } from '../components/common';
+import I18n from '../language/i18n';
 import { addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch } from '../actions';
 import Colors from '../constants/Colors'
 // import console = require('console');
@@ -28,8 +29,9 @@ class PDP extends React.Component {
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { productId, Viewed } = product;
+        
         this.setState({Viewed})
-       this.incrementViews(productId);
+        this.incrementViews(productId);
         this.props.reviewFetch(productId);
     }
 
@@ -110,15 +112,15 @@ class PDP extends React.Component {
                 </CardSection>
 
                 <CardSection>
-                    <Text>Views: {Viewed}</Text>
+                    <Text>{I18n.t('PDP.Views')}: {Viewed}</Text>
                 </CardSection>
 
                 <CardSection>
-                    <Text>Price: {Price} {Currency}</Text>
+                    <Text>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
                 </CardSection>
 
                 <CardSection>
-                    <Text>Rate this product: </Text>
+                    <Text>{I18n.t('PDP.Rate')}: </Text>
                     <Rating
                         type='star'
                         ratingCount={5}
@@ -129,7 +131,7 @@ class PDP extends React.Component {
            
                 <CardSection>
                     <Button 
-                    title='Add to Cart'
+                    title={I18n.t('PDP.AddToCart')}
                     onPress={()=>{this.props.addToCart(productId, this.state.user)}}
                     buttonStyle={{backgroundColor:Colors.primary, width:'93%'}}
                     />
@@ -138,7 +140,7 @@ class PDP extends React.Component {
                
                 <CardSection>
                     <Button 
-                    title='Add to Wishlist'
+                    title={I18n.t('PDP.AddToWishlist')}
                     onPress={()=>{this.props.addToWishlist(productId, this.state.user)}}
                     buttonStyle={{backgroundColor:Colors.secondary, width:'90%'}}
                     />
@@ -146,7 +148,7 @@ class PDP extends React.Component {
                     
                 <View style={{marginTop:5, width:'100%', justifyContent:'center', padding:8}}>
                 {/* <Divider style={{backgroundColor:Colors.lightGray, width:'100%', marginHorizontal:5, height:1}} /> */}
-                    <Text style={{textAlign:'center', color:Colors.secondary, fontSize:18, fontWeight:'500'}}>Reviews:</Text>
+                    <Text style={{textAlign:'center', color:Colors.secondary, fontSize:18, fontWeight:'500'}}>{I18n.t('PDP.Reviews')}:</Text>
                 </View>
 
                 
@@ -160,7 +162,7 @@ class PDP extends React.Component {
                 <View style={{marginTop:10}}>
                 {/* <Text style={{textAlign:'center', color:Colors.secondary, fontSize:16, fontWeight:'500'}}>write your review:</Text> */}
                     <Input
-                        label = "write your review:"
+                        label = {I18n.t('PDP.WriteReview')}
                         inputContainerStyle={styles.inputContainerStyle}
                         onChangeText= {this.onReviewChanged.bind(this) }
                         value = {this.props.review}
@@ -175,7 +177,7 @@ class PDP extends React.Component {
                 <View style={styles.reviewBtnContainer}>
                     {/* <Text>Write a review</Text> */}
                     <Button 
-                    title='Add Review'
+                    title={I18n.t('PDP.AddReview')}
                     onPress={()=>{this.props.addReview(productId, this.props.review, this.state.user)}}
                     buttonStyle={{backgroundColor:Colors.primary}}/>
 

@@ -76,7 +76,7 @@ class CartScreen extends React.Component {
 
         <View style={styles.descWrapper}>
             <Text style={styles.titleStyle}>{Title}</Text>
-            <Text style={styles.priceStyle}>Price: {Price} {Currency}</Text>
+            <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
             <View style={styles.btnWrapper}>
                 <Button 
                 raised

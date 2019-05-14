@@ -227,7 +227,7 @@ export const reviewChanged = (text) => {
 
 export const addReview = (productId, review, user ) => {
     const uu= JSON.parse(user);
-
+    console.log('uu', uu);
     return () => {
         firebase.database().ref(`${productId}/reviews`)
         .push({review:review, userId:uu.uid})
