@@ -13,7 +13,7 @@ import { productFetch, viewItem, addToCart } from '../actions';
 import {Button, Icon} from 'react-native-elements'
 import I18n from '../language/i18n';
 import Colors from '../constants/Colors'
-
+import { GiftedChat } from 'react-native-gifted-chat';
 class ChatScreen extends React.Component {
  
   state = {

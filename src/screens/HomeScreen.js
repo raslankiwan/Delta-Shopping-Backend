@@ -5,7 +5,7 @@ import {
   TouchableHighlight, 
   View, 
   ScrollView, 
-  I18nManager
+  AsyncStorage
 } from 'react-native';
 import { Card, Input, Button, SearchBar , Divider} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
@@ -17,6 +17,10 @@ class HomeScreen extends React.Component {
     search:''
   };
 
+  async componentWillMount() {
+    let user = await AsyncStorage.getItem('userInfo');
+    console.log('user Info', user)
+  }
   viewCategory(CatName) {
     this.props.navigation.navigate('Category' ,{CatName});
   }

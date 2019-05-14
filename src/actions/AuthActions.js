@@ -19,6 +19,7 @@ import {
   USER_CREATE
 } from './types';
 import {AsyncStorage} from 'react-native';
+const userInfo={}
 export const emailChanged = (text) => {
   return {
     type: EMAIL_CHANGED,
@@ -97,10 +98,12 @@ export const loginUser = ({ email, password }) => {
             zip:snapshot.val().zip,
             uid:user.user.uid
           }}
-          console.log('userInfo', user);
-
+          userInfo['info']=user;
+          // console.log('uuuu', userInfo);
+          UserLogin(dispatch, userInfo);
         });
-        UserLogin(dispatch, user);
+        // console.log('after set user ', userInfo)
+      
       } else {
         loginUserFail(dispatch, 'Email not verified');
       }
@@ -113,7 +116,7 @@ export const loginUser = ({ email, password }) => {
 
 export const createUser = (props) => {
   const { email, name, zip, phone, country, street, city  } = props;
-  console.log(name);
+
   const { currentUser } = firebase.auth();
     
     return(dispatch) => {
@@ -166,11 +169,18 @@ const loginUserSuccess = (dispatch, user ) => {
   });
 };
 const  setUserCredintialInAsyncStorage= async (user)=>{
-  console.log('user AsyncStorage', user);
+  // console.log('user AsyncStorage', user);
   const userInfo =  {
-    uid:user.user.uid, 
-    email:user.user.email
+    uid:user.info.userInfo.uid, 
+    email:user.info.userInfo.email, 
+    name:user.info.userInfo.name, 
+    city:user.info.userInfo.city, 
+    country:user.info.userInfo.country,
+    phone: user.info.userInfo.phone,
+    street:user.info.userInfo.street,
+    zip:user.info.userInfo.zip,
   };
+  // console.log('set in async storage', userInfo)
   const res2 = await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
 }
 const signUpUserSuccess = (dispatch, user ) => {
