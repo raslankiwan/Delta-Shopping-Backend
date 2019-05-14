@@ -31,6 +31,7 @@ export const productFetch = (path) =>  {
                     Currency: child.val().Currency,
                     Image: child.val().Image,
                     Viewed: child.val().Viewed,
+                    Rate: child.val().Rate,
                     productId: path + '/' + child.key                   
                 });
             });
@@ -58,6 +59,7 @@ export const fetchAllProducts = () =>  {
                         Currency: ch.val().Currency,
                         Image: ch.val().Image,
                         Viewed: ch.val().Viewed,
+                        Rate: ch.val().Rate,
                         productId: '/' + snapshot.key + '/' + child.key + '/' + ch.key                   
                     });
                 })

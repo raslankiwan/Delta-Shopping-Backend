@@ -5,6 +5,7 @@ import {
     AsyncStorage,
     FlatList, View} from 'react-native';
 import { connect } from 'react-redux';
+import StarRating from 'react-native-star-rating';
 import { Input, Rating, Avatar , Button, ListItem} from 'react-native-elements';
 import firebase from 'firebase';
 import { Card, CardSection, Header } from '../components/common';
@@ -20,17 +21,19 @@ class PDP extends React.Component {
         user: '',
         review: '',
         reviews:[], 
-        Viewed:''
+        Viewed:'',
+        product: null
     };
 
     async componentWillMount() {
         let user = await AsyncStorage.getItem('userInfo');
         this.setState({user});
+        
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { productId, Viewed } = product;
         
-        this.setState({Viewed})
+        this.setState({Viewed, productId, product})
         this.incrementViews(productId);
         this.props.reviewFetch(productId);
     }
@@ -51,6 +54,32 @@ class PDP extends React.Component {
 
     ratingCompleted(rating) {
         console.log("Rating is: " + rating)
+    }
+
+    onStarRatingPress(rating) {
+        const uu= JSON.parse(this.state.user);
+
+        this.setState({
+          starCount: rating
+        });
+        console.log('rating', rating);
+        firebase.database().ref(`${this.state.productId}/rating/${uu.uid}`)
+        .update({rating});
+        
+        let Rate = 0.0;
+        let count = 0;
+        firebase.database().ref(`${this.state.productId}/rating/`)
+        .on('value', snapshot => {
+            snapshot.forEach(child => {
+                Rate += parseFloat(child.val().rating);
+                count++;
+            });
+            Rate /= count;
+            firebase.database().ref(`${this.state.productId}/`)
+            .update({Rate});
+        });
+
+        
     }
 
     renderRow(item) {
@@ -121,11 +150,11 @@ class PDP extends React.Component {
 
                 <CardSection>
                     <Text>{I18n.t('PDP.Rate')}: </Text>
-                    <Rating
-                        type='star'
-                        ratingCount={5}
-                        imageSize={25}
-                        onFinishRating={this.ratingCompleted}
+                    <StarRating
+                        disabled={false}
+                        maxStars={5}
+                        rating={this.state.starCount}
+                        selectedStar={(rating) => this.onStarRatingPress(rating)}
                     />
                 </CardSection>
            
