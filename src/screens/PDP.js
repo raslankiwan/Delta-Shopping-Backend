@@ -29,11 +29,14 @@ class PDP extends React.Component {
         let user = await AsyncStorage.getItem('userInfo');
         this.setState({user});
         
+        console.log('user in pdp screen', user);
+
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { productId, Viewed } = product;
         
-        this.setState({Viewed, productId, product})
+        this.setState({Viewed, productId, product});
+        this.setState({starCount: product.Rate})
         this.incrementViews(productId);
         this.props.reviewFetch(productId);
     }
@@ -52,9 +55,6 @@ class PDP extends React.Component {
         // });
     }
 
-    ratingCompleted(rating) {
-        console.log("Rating is: " + rating)
-    }
 
     onStarRatingPress(rating) {
         const uu= JSON.parse(this.state.user);
@@ -84,7 +84,7 @@ class PDP extends React.Component {
 
     renderRow(item) {
         console.log( 'render row',item);
-        const { review, userId } = item.item;
+        const { review, userId, username } = item.item;
         return(   
            <ListItem
            
@@ -95,7 +95,7 @@ class PDP extends React.Component {
                 title='A'
                />
            }
-           title={userId}
+           title={username}
            subtitle={review}
            key={userId}
            containerStyle={{borderBottomColor:'#ddd', borderBottomWidth:1}}

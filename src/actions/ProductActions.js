@@ -232,7 +232,7 @@ export const addReview = (productId, review, user ) => {
     console.log('uu', uu);
     return () => {
         firebase.database().ref(`${productId}/reviews`)
-        .push({review:review, userId:uu.uid})
+        .push({review:review, userId:uu.uid, username: uu.name})
         .then(()=>{
             dispatch({ type: REVIEW_ADDED});
         });
@@ -247,7 +247,8 @@ export const reviewFetch = (productId) => {
             snapshot.forEach(child => {
                 reviews.push({
                     userId: child.val().userId,
-                    review: child.val().review                   
+                    review: child.val().review,
+                    username: child.val().username
                 });
             });
             dispatch({ type: REVIEW_FETCH_SUCCESS, payload: reviews});
