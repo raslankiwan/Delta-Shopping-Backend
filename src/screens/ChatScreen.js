@@ -8,38 +8,122 @@ import {
   View
 } from 'react-native';
 import _ from 'lodash';
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { productFetch, viewItem, addToCart } from '../actions';
 import {Button, Icon} from 'react-native-elements'
 import I18n from '../language/i18n';
 import Colors from '../constants/Colors'
 import { GiftedChat } from 'react-native-gifted-chat';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 class ChatScreen extends React.Component {
  
-  state = {
-    products: [],
-    user:''
-  };
 
-  async componentWillMount() {
-    let user = await AsyncStorage.getItem('userInfo');
-    this.setState({user});
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      name:'', 
+      uid:'', 
+      email:'',
+      token:''
+    };
+    this.user = firebase.auth().currentUser;
+
+    user = this.user;
+    console.log('user from firebase', user)
     const { navigation } = this.props;
-    const dstUser = navigation.getParam('dstUser','there is no details ');
-    console.log('dstUser, char screen', dstUser);
-    this.setState({dstUser});
+    const info = navigation.getParam('dstUser','there is no chat ');
+    console.log('user from Users page', info)
+    uid = info.userId;
+
+    this.chatRef = this.getRef().child('chat/' + this.generateChatId());
+    // this.notificationRef = this.getRef().child('notification/' + uid);
+    this.chatRefData = this.chatRef.orderByChild('order');
+    this.onSend = this.onSend.bind(this);
+  }
+  generateChatId() {
+    if (this.user.uid > uid) return `${this.user.uid}-${uid}`;
+    else return `${uid}-${this.user.uid}`;
+  }
+
+  getRef() {
+    return firebase.database().ref();
+  }
+ 
+  async componentWillMount(){
+ 
+    this.listenForItems(this.chatRefData);
+    // const { navigation } = this.props;
+    // const info = navigation.getParam('post','there is no chat ');
+    // navigation.setParams({ headerChatTitle: info.name });
+    // let user = await AsyncStorage.getItem('userInfo');
+    // this.setState({user});
+
+  
+  } 
+  componentWillUnmount() {
+    this.chatRefData.off();
   }
 
 
+  listenForItems(chatRef) {
+    chatRef.on('value', snap => {
+      // get children as an array
+      var items = [];
+      snap.forEach(child => {
+        items.push({
+          _id: child.val().createdAt,
+          text: child.val().text,
+          createdAt: new Date(child.val().createdAt),
+          user: {
+            _id: child.val().uid,
+          },
+        });
+      });
+      this.setState({
+        loading: false,
+        messages: items,
+      });
+    });
+  }
+  onSend(messages = []) {
+    const component=this;
+    messages.forEach(message => {
+      var now = new Date().getTime();
+      this.chatRef.push({
+        _id: now,
+        text: 'hi',
+        createdAt: now,
+        uid: user.uid,
+        fuid: uid,
+        order: -1 * now,
+      },function (result) {
+          // console.log('result of push chat', result);
+          // component.notifyRecipient(message.text)
+      });
+    });
+  }
 
   render() {
     const { navigation } = this.props;
     const dstUser = navigation.getParam('dstUser','there is no details ');
     console.log('dstUser, char screen', dstUser);
     return (
-      <View style={{flex:1}}>
-         <Text>{dstUser.Name}</Text>
-      </View>
+      <View style={{flex: 1}}>
+        <GiftedChat
+              messages={this.state.messages}
+              onSend={this.onSend.bind(this)}
+              user={{
+                _id: this.user.uid,
+              }}
+              scrollToBottom={true}
+              alwaysShowSend={true}
+              loadEarlier={true}
+            />
+      <KeyboardSpacer />
+    </View>
     );
   }
 

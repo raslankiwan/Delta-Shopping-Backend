@@ -63,7 +63,7 @@ export default (state=INITIAL_STATE, action) => {
     case SET_LOADING_LOGIN_FORM:
       return {...state, loadingLogInForm:action.payload};
     case USER_LOGOUT:
-      return { ...state, user:null, currentStudent:{}, students:[], loading:false, loadingLogInForm:false, shouldRedirect:false}
+      return { ...state, user:null,  loading:false, loadingLogInForm:false, shouldRedirect:false}
     default:
       return state;
   }

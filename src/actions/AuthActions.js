@@ -163,6 +163,7 @@ const loginUserFail = (dispatch, error) => {
 };
 
 const loginUserSuccess = (dispatch, user ) => {
+  console.log('loginUserSuccess', user)
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user

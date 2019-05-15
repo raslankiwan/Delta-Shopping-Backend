@@ -42,7 +42,6 @@ class UsersScreen extends React.Component {
   }
 
   renderRow(dstUser) {
-    console.log('user: renderRow', dstUser);
     const {  Name, userId, Photo } = dstUser;
     return(   
       <TouchableHighlight onPress={()=>this.openChat(dstUser)}>
@@ -65,7 +64,8 @@ class UsersScreen extends React.Component {
 
   render() {
     
-      console.log('created',this.props.users);
+      console.log('created',this.props);
+      console.log('render user',this.state.user);
       this.createDataSource(this.props.users);
       return (
         <View>
@@ -91,10 +91,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ userFetch }) => {
+const mapStateToProps = ({ userFetch , auth}) => {
   const  { users } = userFetch;
-  console.log('map to props', users)
-  return  { users };
+  const {user} = auth;
+  console.log('map to props', user)
+  return  { users, user };
 };
 
 export default connect(mapStateToProps, { usersFetch })(UsersScreen);
