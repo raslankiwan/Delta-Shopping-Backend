@@ -82,11 +82,11 @@ export const loginUser = ({ email, password }) => {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
-      // console.log(user)
+      console.log('user at authaction',user)
       if(firebase.auth().currentUser.emailVerified) {
         firebase.database().ref(`/users/${user.user.uid}`)
         .on('value', snapshot => {
-          // console.log('snapshot',snapshot.val());
+            console.log('snapshot at authaction',snapshot.val());
        
           user={...user, userInfo:{
             name:snapshot.val().name, 
@@ -114,21 +114,22 @@ export const loginUser = ({ email, password }) => {
 
 };
 
-export const createUser = (props) => {
-  const { email, name, zip, phone, country, street, city  } = props;
+// export const createUser = (props) => {
+//   const { email, name, zip, phone, country, street, city  } = props;
 
-  const { currentUser } = firebase.auth();
+//   const { currentUser } = firebase.auth();
     
-    return(dispatch) => {
-        firebase.database().ref(`users/${currentUser.uid}/`)
-        .push({ name, phone, email, zip, country, street, city, 
-          photo:"https://firebasestorage.googleapis.com/v0/b/shopping-bfcfb.appspot.com/o/user.jpg?alt=media&token=36cb2651-3224-4c39-8608-abf282c2009f" 
-        })
-        .then(() => {
-          signUpUserSuccess(dispatch, user);
-        });     
-    };
-};
+//     return(dispatch) => {
+
+//         firebase.database().ref(`users/${currentUser.uid}/`)
+//         .push({ name, phone, email, zip, country, street, city, 
+//           photo:"https://firebasestorage.googleapis.com/v0/b/shopping-bfcfb.appspot.com/o/user.jpg?alt=media&token=36cb2651-3224-4c39-8608-abf282c2009f" 
+//         })
+//         .then(() => {
+//           signUpUserSuccess(dispatch, user);
+//         });     
+//     };
+// };
 
 export const signUpUser = (props) => {
   const { email, password, name, zip, phone, country, street, city  } = props;
@@ -139,7 +140,11 @@ export const signUpUser = (props) => {
     .then(user => {
       firebase.auth().currentUser.sendEmailVerification()
       .then(() => {
-        firebase.database().ref(`users/`)
+        // const { uid } = admin.auth().getUserByEmail(email);
+        // console.log('register user', uid);
+        // console.log('register user id', uid.uid);
+        //firebase.auth().
+        firebase.database().ref(`users/${firebase.auth().currentUser.uid}`)
         .push({ name, phone, email, zip, country, street, city, 
           photo: "https://firebasestorage.googleapis.com/v0/b/shopping-bfcfb.appspot.com/o/user.jpg?alt=media&token=36cb2651-3224-4c39-8608-abf282c2009f"
         })

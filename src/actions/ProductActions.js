@@ -32,6 +32,9 @@ export const productFetch = (path) =>  {
                     Image: child.val().Image,
                     Viewed: child.val().Viewed,
                     Rate: child.val().Rate,
+                    SellerId: child.val().SellerId,
+                    SellerName: child.val().SellerName,
+                    Sold: child.val().Sold,
                     productId: path + '/' + child.key                   
                 });
             });
@@ -39,6 +42,7 @@ export const productFetch = (path) =>  {
         });
     };
 };
+
 
 export const fetchAllProducts = () =>  {
     return (dispatch) => {
@@ -59,6 +63,9 @@ export const fetchAllProducts = () =>  {
                         Currency: ch.val().Currency,
                         Image: ch.val().Image,
                         Viewed: ch.val().Viewed,
+                        SellerId: ch.val().SellerId,
+                        SellerName: ch.val().SellerName,
+                        Sold: ch.val().Sold,
                         Rate: ch.val().Rate,
                         productId: '/' + snapshot.key + '/' + child.key + '/' + ch.key                   
                     });
@@ -91,6 +98,9 @@ export const cartFetch = (user) => {
                         Info: snap.val().Info,
                         Currency: snap.val().Currency,
                         Image: snap.val().Image,
+                        SellerId: snap.val().SellerId,
+                        SellerName: snap.val().SellerName,
+                        Sold: snap.val().Sold,
                         productId: productId                   
                     });
                 });
@@ -154,6 +164,9 @@ export const wishlistFetch = (user) => {
                         Info: snap.val().Info,
                         Currency: snap.val().Currency,
                         Image: snap.val().Image,
+                        SellerId: snap.val().SellerId,
+                        SellerName: snap.val().SellerName,
+                        Sold: snap.val().Sold,
                         productId: productId                   
                     });
                 });
@@ -227,13 +240,23 @@ export const reviewChanged = (text) => {
     };
 };
 
-export const addReview = (productId, review, user ) => {
+export const addReview = (productId,  SellerId, SellerName, review, user ) => {
     const uu= JSON.parse(user);
     console.log('uu', uu);
     return () => {
         firebase.database().ref(`${productId}/reviews`)
         .push({review:review, userId:uu.uid, username: uu.name})
         .then(()=>{
+            var now = new Date().getTime();
+            firebase.database().ref('/notification')
+            .push({
+                UserId: SellerId,
+                Username: SellerName,
+                Title:`${uu.name} added a review to your product`,
+                productId,
+                ScreenName: 'PDP',
+                createdAt: now
+            });
             dispatch({ type: REVIEW_ADDED});
         });
     };

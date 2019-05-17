@@ -158,7 +158,7 @@ class LoginScreen extends React.Component {
 
  
   render() {
-    console.log(this.props);
+    console.log('login this.props',this.props);
     if(this.state.pageLoading){
       return(
         <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>

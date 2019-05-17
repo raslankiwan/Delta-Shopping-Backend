@@ -104,18 +104,40 @@ class PDP extends React.Component {
     }
     
     onReviewChanged(text) {
-        if (text.length !== 0){
-            this.setState({ inputError: '' });
-          } else {
-            this.setState({ inputError: 'Please enter text here !!'})
-          }
-          this.props.reviewChanged(text);
+        this.setState({review:text});
+        // if (text.length !== 0){
+        //     this.setState({ inputError: '' });
+        //   } else {
+        //     this.setState({ inputError: 'Please enter text here !!'})
+        //   }
+        //   this.props.reviewChanged(text);
+    }
+
+    clearReview() {
+        this.setState({review:''});
+    }
+
+    checkIfSold(Sold) {
+        if (Sold) {
+            return (
+                <CardSection>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>This Product is sold</Text>
+                </CardSection>
+            );
+        } else {
+            return (
+                <CardSection>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>This Product is not sold</Text>
+                </CardSection>
+            );
+        }
+        
     }
 
     render() {
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
-        const { Title, Company, Info, Price, Currency, productId, Viewed } = product;
+        const { Title, Company, Info, Price, Currency, productId, Viewed, SellerId, SellerName, Sold } = product;
 
         if(this.props.reviews){
             console.log('array length', this.props.reviews);
@@ -128,6 +150,16 @@ class PDP extends React.Component {
                 <CardSection>
                     <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{Title + ' of ' + Company}</Text>
                 </CardSection>
+
+                <CardSection>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{SellerName}</Text>
+                </CardSection>
+
+                <CardSection>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{SellerId}</Text>
+                </CardSection>
+
+                {this.checkIfSold(Sold)}
 
                 <CardSection>
                     <Image
@@ -194,7 +226,7 @@ class PDP extends React.Component {
                         label = {I18n.t('PDP.WriteReview')}
                         inputContainerStyle={styles.inputContainerStyle}
                         onChangeText= {this.onReviewChanged.bind(this) }
-                        value = {this.props.review}
+                        value = {this.state.review}
                         multiline
                         numberOfLines={3}
                         labelStyle={{color:Colors.primary, fontSize:16, fontWeight:'500'}}
@@ -206,9 +238,13 @@ class PDP extends React.Component {
                 <View style={styles.reviewBtnContainer}>
                     {/* <Text>Write a review</Text> */}
                     <Button 
-                    title={I18n.t('PDP.AddReview')}
-                    onPress={()=>{this.props.addReview(productId, this.props.review, this.state.user)}}
-                    buttonStyle={{backgroundColor:Colors.primary}}/>
+                        title={I18n.t('PDP.AddReview')}
+                        onPress={()=>{
+                            this.props.addReview(productId, SellerId, SellerName, this.state.review, this.state.user);
+                            this.clearReview();
+                        }}
+                        buttonStyle={{backgroundColor:Colors.primary}}
+                    />
 
                 </View>
             </Card>    

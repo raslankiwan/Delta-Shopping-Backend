@@ -28,7 +28,8 @@
         "SellingFrom":"Add",
         "Product": "Product Info",
         "Language": "Language",
-        "Users":"Users"
+        "Users":"Users",
+        "Product": "Product"
     },
     "Home":{
         "Categories":"Categories",
@@ -64,5 +65,9 @@
         "Rate":"Rate",
         "AddReview": "Add Review",
         "Reviews": "Reviews"
+    },
+    "Product": {
+        "MarkSold": "Mark as sold",
+        "Delete": "Delete"
     }
 }

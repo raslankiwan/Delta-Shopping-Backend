@@ -11,15 +11,21 @@ import { Card, Input, Button, SearchBar , Divider} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import I18n from '../language/i18n';
 import Colors from '../constants/Colors';
+import { connect } from 'react-redux';
+import { fetchAllProducts } from '../actions';
+
 class HomeScreen extends React.Component {
  
   state = {
-    search:''
+    search:'',
+    allProducts: [],
   };
 
   async componentWillMount() {
     let user = await AsyncStorage.getItem('userInfo');
-    console.log('user Info', user)
+    //console.log('user Info', user);
+
+    this.props.allProducts = this.props.fetchAllProducts();
   }
   viewCategory(CatName) {
     this.props.navigation.navigate('Category' ,{CatName});
@@ -42,7 +48,7 @@ class HomeScreen extends React.Component {
             onChangeText={ this.updateSearch }
             value={search}
             autoCorrect={false} 
-            onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search})}}        
+            onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search, allProducts})}}        
           />
         </View>
         <View style={{height:'30%'}}>
@@ -162,4 +168,10 @@ const styles={
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = ({ fetchAllProducts }) => {
+  const  { allProducts} = fetchAllProducts;
+ 
+  return  {allProducts};
+};
+
+export default connect(mapStateToProps, { fetchAllProducts})(HomeScreen);

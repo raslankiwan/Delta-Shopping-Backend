@@ -15,11 +15,12 @@ import RegisterScreen from '../screens/Register'
 import MenuScreen from '../screens/MenuScreen';
 import UsersScreen from '../screens/UsersScreen';
 import PDP from '../screens/PDP';
+import ProductScreen from '../screens/ProductScreen';
 import ChangeLanguageScreen from '../screens/ChangeLanguageScreen';
 import i18n from '../language/i18n'
 import Category from '../screens/Category';
 import SellingForm from '../screens/SellingForm';
-import NotificationList from '../screens/NotificationList'
+import NotificationScreen from '../screens/NotificationScreen'
 import ChatScreen from '../screens/ChatScreen';
 const HeaderLeft = (navigation) => (
     
@@ -125,6 +126,10 @@ const SellStack = createStackNavigator({
   SellForm:{
     screen:SellingForm, 
     navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'SellingFrom'), 
+  },
+  Product: {
+    screen: ProductScreen,
+    navigationOptions: ({navigation}) => singleNavicationOptions(navigation, 'Product'), 
   }
 });
 
@@ -203,7 +208,7 @@ const Tabs = createBottomTabNavigator ({
   Home: integrateTabs,
   cart: CartStack,
   wishlist: WishlistStack, 
-  Notification:NotificationList
+  Notification:NotificationScreen
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({

@@ -1,41 +1,37 @@
 import React from 'react';
-import {View, Text , ScrollView, Image} from 'react-native';
+import {View, Text , ScrollView, TouchableHighlight, AsyncStorage} from 'react-native';
 import {Icon, Avatar} from 'react-native-elements';
 import Colors from '../constants/Colors'
 import I18n from '../language/i18n';
+import { connect } from 'react-redux';
+import { fetchAllProducts } from '../actions';
+// import console = require('console');
 
-items=[
-    {
-        id:1, 
-        name:'item1', 
-        desc:'desc1', 
-        img:'https://images-na.ssl-images-amazon.com/images/I/81b5agEMpUL._SY679_.jpg'
-    },
-    {
-        id:2, 
-        name:'item2', 
-        desc:'desc2', 
-        img:'https://images-na.ssl-images-amazon.com/images/I/81b5agEMpUL._SY679_.jpg'
-    },
-    {
-        id:3, 
-        name:'item3', 
-        desc:'desc3', 
-        img:'https://images-na.ssl-images-amazon.com/images/I/81b5agEMpUL._SY679_.jpg'
-    },
-    {
-        id:4, 
-        name:'item4', 
-        desc:'desc4', 
-        img:'https://images-na.ssl-images-amazon.com/images/I/81b5agEMpUL._SY679_.jpg'
-    },
-]
 class SellScreen extends React.Component {
 
-    componentWillMount() {
+    state={
+        myProducts: [], 
+        user:''
+    };
+
+    async componentWillMount() {
         //fetch all products selled by this user and put them in items array
+       // this.props.fetchAllProducts();
+        let user = await AsyncStorage.getItem('userInfo');
+        
+        user= JSON.parse(user);
+        this.setState({user});
+        let myProducts = [];
+        this.props.allProducts.map((item)=>{
+            if(item.SellerId === this.state.user.uid ) {
+                myProducts.push(item);
+            }
+        });
+        this.setState({myProducts});
     }
+
     render() {
+        //console.log('props, sell screen', this.state.allProducts);
         return(
             <View style={styles.mainContainer}>
                 <View style={styles.topContainer}>
@@ -54,17 +50,23 @@ class SellScreen extends React.Component {
                 <ScrollView>
                     <View style={styles.productsContainer}>
                         {
-                            items.map((item)=>{
+                            this.state.myProducts.map((item)=>{
                                 return(
-                                    <View key={item.id} style={styles.AvatarContainer}>
-                                        <Avatar
-                                            rounded
-                                            size='xlarge'
-                                            source={{uri:item.img}}
-                                            
-                                        />
-                                        <Text style={styles.productTitle}>{item.name}</Text>
-                                    </View>
+                                    <TouchableHighlight 
+                                        key={item.productId} 
+                                        style={styles.AvatarContainer} 
+                                        onPress={()=> { this.props.navigation.navigate('Product' ,{product: item}); }}
+                                    >
+                                        <View>
+                                            <Avatar
+                                                rounded
+                                                size='xlarge'
+                                                source={{uri:item.Image}}
+                                                
+                                            />
+                                            <Text style={styles.productTitle}>{item.Title}</Text>
+                                        </View>
+                                    </TouchableHighlight>
                                 )
                             })
                         }
@@ -114,4 +116,11 @@ const styles={
         color:Colors.secondary
     }
 }
-export default SellScreen;
+
+const mapStateToProps = ({ fetchAllProducts }) => {
+    const  { allProducts} = fetchAllProducts;
+   
+    return  {allProducts};
+};
+
+export default connect(mapStateToProps, { fetchAllProducts })(SellScreen);

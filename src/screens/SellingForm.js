@@ -27,7 +27,7 @@ class SellingForm extends React.Component {
     async componentWillMount() {
         let user = await AsyncStorage.getItem('userInfo');
         const uu= JSON.parse(user);
-        this.setState({userId: uu.uid});
+        this.setState({userId: uu.uid, username: uu.name});
     }
 
     async _pickImage (handleChange) {
@@ -43,12 +43,23 @@ class SellingForm extends React.Component {
 
     onSubmit(values) {
         //List of form values
-        let { Image, Title, Price, Amount, Company, Info, Currency, userId, Category } = this.state;
+        let { Image, Title, Price, Amount, Company, Info, Currency, userId, Category, username } = this.state;
         console.log(Title, Price, Amount, Company, Info, Currency, userId, Category);
         Keyboard.dismiss();
         console.log('values', JSON.stringify(values))
         firebase.database().ref(`/categories/${Category}`)
-        .push({Amount, Company, Currency, Info, Price, Title, SellerId:userId, Viewed: 0, Image})
+        .push({
+            Amount, 
+            Company, 
+            Currency, 
+            Info, 
+            Price, 
+            Title, 
+            SellerName: username ,
+            SellerId:userId, 
+            Viewed: 0, 
+            Sold: false,
+            Image})
         .then(()=>{
             console.log('success');
         })

@@ -82,6 +82,7 @@ class ChatScreen extends React.Component {
           },
         });
       });
+      console.log('items', items);
       this.setState({
         loading: false,
         messages: items,
@@ -94,7 +95,7 @@ class ChatScreen extends React.Component {
       var now = new Date().getTime();
       this.chatRef.push({
         _id: now,
-        text: 'hi',
+        text: message.text,
         createdAt: now,
         uid: user.uid,
         fuid: uid,

@@ -29,7 +29,8 @@
         "SellingFrom":"إضافة",
         "Product": "تفاصيل السلعة",
         "Language": "اللغة",
-        "Users": "أشخاص"
+        "Users": "أشخاص",
+        "Product": "السلعة"
     }, 
     "Home":{
         "Categories":"الفئات",
@@ -65,5 +66,10 @@
         "Rate":"قيّم",
         "AddReview": "علّق",
         "Reviews": "التعليقات"
+    },
+    "Product": {
+        "MarkSold": "تم بيع السلعة",
+        "Delete": "حذف"
     }
+
 }
