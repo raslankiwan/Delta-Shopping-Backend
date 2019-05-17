@@ -32,7 +32,7 @@ class ProductScreen extends React.Component {
     deleteProduct(productId) {
         firebase.database().ref(productId)
         .remove();
-        this.props.allProducts = this.props.fetchAllProducts();
+        this.props.fetchAllProducts();
         this.props.navigation.navigate('Home');
     }
 
@@ -115,9 +115,7 @@ const styles = {
     }, 
 };
 
-const mapStateToProps = ({ fetchAllProducts }) => {
-    const  { allProducts} = fetchAllProducts;
-   
+const mapStateToProps = ({ allProducts }) => {
     return  {allProducts};
 };
 

@@ -16,8 +16,15 @@ export const SIGN_UP_USER_FAIL = 'sign_up_user_fail';
 
 export const PRODUCT_VIEW = 'product_view';
 export const VIEW_INCREMENT = 'view_increment';
+
+export const ALL_PRODUCT_FETCH = 'all_product_fetch';
 export const ALL_PRODUCT_FETCH_SUCCESS = 'all_product_fetch_success';
+export const ALL_PRODUCT_FETCH_FAILED='all_product_fetch_failed'
+
+export const PRODUCT_FETCH = 'data_fetch';
 export const PRODUCT_FETCH_SUCCESS = 'data_fetch_success';
+export const PRODUCT_FETCH_FAILED = 'data_fetch_failed';
+
 export const REVIEW_FETCH_SUCCESS = 'review_fetch_success';
 export const REVIEW_CHANGED = 'review_changed';
 export const REVIEW_ADDED = 'review_added';

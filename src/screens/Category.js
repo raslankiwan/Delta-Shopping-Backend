@@ -5,7 +5,8 @@ import {
   Image,
   TouchableHighlight, 
   AsyncStorage, 
-  View
+  View,
+  ActivityIndicator
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -16,7 +17,6 @@ import Colors from '../constants/Colors'
 class Category extends React.Component {
  
   state = {
-    products: [],
     user:''
   };
 
@@ -63,11 +63,7 @@ class Category extends React.Component {
                 title={I18n.t('Category.addToCart')}
                 onPress={()=>{this.props.addToCart(productId, this.state.user)}}  
                 buttonStyle={styles.btnStyle}
-                icon={
-                  <Icon
-                    type
-                   />
-                }
+               
                 />
             </View>
         </View>
@@ -85,7 +81,16 @@ class Category extends React.Component {
   }
 
   render() {
-    this.createDataSource(this.props.products);
+    const { productLoading}=this.props.product
+    
+    if(productLoading){
+      return (
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+            <ActivityIndicator size='large' />
+        </View>
+      )
+    }else{
+    this.createDataSource(this.props.product.products);
     return (
       <View style={{flex:1}}>
           <ListView
@@ -94,16 +99,16 @@ class Category extends React.Component {
             dataSource={this.dataSource}
           />       
       </View>
-    );
+  );
+    }
+  
   }
 
 }
 
-const mapStateToProps = ({ productFetch, addToCart }) => {
-  const  {products, loading} = productFetch;
+const mapStateToProps = ({ product, addToCart }) => {
   const { addedToCart } = addToCart;
-
-  return  {products, loading, addedToCart};
+  return  {product, addedToCart};
 };
 const styles={
   productContainer:{
