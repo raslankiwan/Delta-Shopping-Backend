@@ -21,12 +21,36 @@ class ProductScreen extends React.Component {
 
     async componentWillMount() {
         let user = await AsyncStorage.getItem('userInfo');
+        user = JSON.parse(user);
         this.setState({user});
     }
 
     markSold(productId) {
         firebase.database().ref(productId)
         .update({Sold:true});
+
+        firebase.database().ref(`${productId}/buyers/`)
+        .on('value', snapshot => {
+            console.log('snap', snapshot);
+            snapshot.forEach(child => {
+                console.log('child', child.val().id);
+                //if (child.val().id === this.state.user.uid) {
+                    var now = new Date().getTime();
+                    firebase.database().ref('/notification')
+                    .push({
+                        UserId: child.val().id,
+                        //Username: child.val().Username,
+                        Title:`${this.state.user.name} sold a product you added to your cart`,
+                        productId,
+                        ScreenName: 'PDP',
+                        createdAt: now
+                    });
+                //}
+            })
+        });
+
+
+
     }
 
     deleteProduct(productId) {

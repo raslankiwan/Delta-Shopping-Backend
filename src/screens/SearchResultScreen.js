@@ -8,31 +8,30 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { fetchAllProducts, viewItem, addToCart } from '../actions';
+import { viewItem, addToCart } from '../actions';
 import { Card, CardSection, Button } from '../components/common';
-// import console = require('console');
 
 class SearchResultScreen extends React.Component {
  
   state = {
-    allProducts: [],
     searchResult:[],
+    allProducts: [],
     user:''
   };
 
   async componentWillMount() {
     let user = await AsyncStorage.getItem('userInfo');
     this.setState({user});
-
     const { navigation } = this.props;
     const search = navigation.getParam('search','there is no details ');
-
-    this.props.fetchAllProducts();
+    const allProducts = navigation.getParam('allProducts','there is no details ');
+    
+    this.setState({allProducts});
     this.performSearch(search)
   }
 
   performSearch(search) {
-    const newData = this.props.allProducts.filter(item => {    
+    const newData = this.state.allProducts.filter(item => {    
         const itemData = `${String(item.Title).toUpperCase()}   
         ${String(item.Company).toUpperCase()} ${String(item.Info).toUpperCase()}`;
         const textData = search.toUpperCase();
@@ -96,13 +95,10 @@ class SearchResultScreen extends React.Component {
 
 }
 
-const mapStateToProps = ({ fetchAllProducts, addToCart }) => {
-  const  { allProducts, loading} = fetchAllProducts;
+const mapStateToProps = ({ addToCart, viewItem }) => {
   const { addedToCart } = addToCart;
-  
-  //console.log('all, searchScr', allProducts);
 
-  return  {allProducts, loading, addedToCart};
+  return  {addedToCart};
 };
 
-export default connect(mapStateToProps, { fetchAllProducts, viewItem, addToCart })(SearchResultScreen);
+export default connect(mapStateToProps, { viewItem, addToCart })(SearchResultScreen);

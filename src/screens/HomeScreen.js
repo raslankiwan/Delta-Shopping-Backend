@@ -7,7 +7,7 @@ import {
   ScrollView, 
   AsyncStorage
 } from 'react-native';
-import { Card, Input, Button, SearchBar , Divider} from 'react-native-elements';
+import { Card, SearchBar } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import I18n from '../language/i18n';
 import Colors from '../constants/Colors';
@@ -25,7 +25,14 @@ class HomeScreen extends React.Component {
     let user = await AsyncStorage.getItem('userInfo');
     //console.log('user Info', user);
 
+    this.props.fetchAllProducts();
     this.props.allProducts = this.props.fetchAllProducts();
+   // console.log('all', this.state.allProducts)
+    //this.setState({allProducts: this.props.allProducts})
+    //console.log('before',this.state.allProducts );
+    
+    //this.state.allProducts.sort((a,b) => (a.Rate> b.Rate ? 1 :-1));
+ //   console.log('after',this.state.allProducts );
   }
   viewCategory(CatName) {
     this.props.navigation.navigate('Category' ,{CatName});
@@ -36,7 +43,7 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    const { search } = this.state;
+    const { search, allProducts } = this.state;
     return(
       <ScrollView contentContainerStyle={{paddingBottom:200}}>
       
@@ -48,7 +55,9 @@ class HomeScreen extends React.Component {
             onChangeText={ this.updateSearch }
             value={search}
             autoCorrect={false} 
-            onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search, allProducts})}}        
+            onEndEditing={()=> { 
+              let allProducts = this.props.allProducts;
+              this.props.navigation.navigate('SearchResult', {search, allProducts})}}        
           />
         </View>
         <View style={{height:'30%'}}>
