@@ -1,5 +1,6 @@
 import {Permissions, Notifications} from 'expo';
 import {AsyncStorage} from 'react-native';
+import * as firebase from 'firebase';
 
 export default async () => {
  

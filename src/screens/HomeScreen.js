@@ -7,6 +7,7 @@ import {
   ScrollView, 
   AsyncStorage
 } from 'react-native';
+import firebase from 'firebase';
 import { Card, SearchBar } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import I18n from '../language/i18n';
@@ -15,17 +16,23 @@ import { connect } from 'react-redux';
 import { fetchAllProducts } from '../actions';
 import { ActivityIndicator } from 'react-native-paper';
 // import console = require('console');
-
+import {Permissions, Notifications} from 'expo';
 class HomeScreen extends React.Component {
  
-  state = {
-    search:'',
-    allProducts: [],
-  };
-
-  async componentWillMount() {
-    let user = await AsyncStorage.getItem('userInfo');
+  constructor(props){
+    super(props)
+    this.state = {
+      search:'',
+      allProducts: [],
+      user:firebase.auth().currentUser
+    };
+    this.user = firebase.auth().currentUser;
+   
+  }
+ 
+   componentWillMount() {
     this.props.fetchAllProducts();
+    this.registerForPushNotificationsAsync()
   }
   viewCategory(CatName) {
     this.props.navigation.navigate('Category' ,{CatName});
@@ -34,7 +41,37 @@ class HomeScreen extends React.Component {
   updateSearch = search => {
     this.setState({search});
   };
+  registerForPushNotificationsAsync = async () => {
+    let previousToken = await AsyncStorage.getItem('pushtoken');
+    console.log('previousToken',previousToken); 
 
+    if (previousToken != null) {
+      return;
+    } else {
+      console.log('previous Token is null');
+        // isNotToken="0";
+        // const TokenNotExist=await AsyncStorage.setItem('isToken', isNotToken);
+        let {status} = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        console.log(status);
+        if (status !== 'granted') {
+            console.log('Hey! You might want to enable notifications for my app, they are good.');
+            return;
+        }
+        console.log('continue');
+        let token =await Notifications.getExpoPushTokenAsync();
+        console.log('token',token);
+        // await axios.post(PUSH_ENDPOINT, {token : {token}});
+ 
+        const savedToken = await AsyncStorage.setItem('pushtoken',token);
+    }
+
+
+    // // POST the token to our backend so we can use it to send pushes from there
+    // var updates = {}
+    // updates['/expoToken'] = token
+    // await firebase.database().ref('/users/' + currentUser.uid).update(updates)
+    // //call the push notification 
+}
   render() {
     const { search } = this.state;
     const {data, loading, dataCount} = this.props.allProducts
