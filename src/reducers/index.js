@@ -6,7 +6,7 @@ import NotificationReducer from './NotificationReducer';
 import AllProductsReducer from './AllProductsReducer'
 export default combineReducers({
   auth: AuthReducer,
-  userFetch: UsersReducers,
+  users: UsersReducers,
   fetchNotifications: NotificationReducer,
   allProducts: AllProductsReducer,
 

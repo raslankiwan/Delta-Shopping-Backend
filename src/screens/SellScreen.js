@@ -68,7 +68,7 @@ class SellScreen extends React.Component {
                                         >
                                             <View>
                                                 <Avatar
-                                                    rounded
+                                                    
                                                     size='xlarge'
                                                     source={{uri:item.Image}}
                                                     
