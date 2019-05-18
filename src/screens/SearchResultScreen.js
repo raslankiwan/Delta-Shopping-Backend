@@ -3,7 +3,7 @@ import {
   ListView,
   Text,
   AsyncStorage, 
-  View
+  View, Alert
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
