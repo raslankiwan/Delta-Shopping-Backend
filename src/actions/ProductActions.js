@@ -44,6 +44,7 @@ export const productFetch = (path) =>  {
                         SellerId: child.val().SellerId,
                         SellerName: child.val().SellerName,
                         Sold: child.val().Sold,
+                        buyers: child.val().buyers,
                         productId: path + '/' + child.key                   
                     });
                 });
@@ -59,7 +60,7 @@ export const productFetch = (path) =>  {
               
            
            
-        }catch(error){
+        } catch (error){
             console.log(error)
           
         }
@@ -92,6 +93,7 @@ export const fetchAllProducts = () =>  {
                             SellerId: ch.val().SellerId,
                             SellerName: ch.val().SellerName,
                             Sold: ch.val().Sold,
+                            buyers: ch.val().buyers,
                             Rate: ch.val().Rate,
                             productId: '/' + snapshot.key + '/' + child.key + '/' + ch.key                   
                         });
@@ -148,6 +150,7 @@ export const cartFetch = (user) => {
                         SellerId: snap.val().SellerId,
                         SellerName: snap.val().SellerName,
                         Sold: snap.val().Sold,
+                        buyers: snap.val().buyers,
                         productId: productId                   
                     });
                 });
@@ -164,6 +167,8 @@ export const addToCart = (productId, user) => {
         firebase.database().ref(`/users/${uu.uid}/cart`)
         .push({productId})
         .then(()=> {
+            firebase.database().ref(`${productId}/buyers/`)
+            .push({id:uu.uid, Username: uu.name});
             dispatch({ type: ADD_TO_CART_SUCCESS});
         });        
     };

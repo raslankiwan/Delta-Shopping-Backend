@@ -5,24 +5,24 @@ import Colors from '../constants/Colors'
 import I18n from '../language/i18n';
 import { connect } from 'react-redux';
 import { fetchAllProducts } from '../actions';
-// import console = require('console');
+import { ActivityIndicator } from 'react-native-paper';
 
 class SellScreen extends React.Component {
 
     state={
+        allProducts: [],
         myProducts: [], 
         user:''
     };
 
     async componentWillMount() {
-        //fetch all products selled by this user and put them in items array
-       // this.props.fetchAllProducts();
         let user = await AsyncStorage.getItem('userInfo');
         
         user= JSON.parse(user);
         this.setState({user});
         let myProducts = [];
-        this.props.allProducts.map((item)=>{
+        const {data} = this.props.allProducts;
+        data.map((item)=>{
             if(item.SellerId === this.state.user.uid ) {
                 myProducts.push(item);
             }
@@ -31,50 +31,60 @@ class SellScreen extends React.Component {
     }
 
     render() {
-        //console.log('props, sell screen', this.state.allProducts);
-        return(
-            <View style={styles.mainContainer}>
-                <View style={styles.topContainer}>
-                    <Icon
-                        type='material-community'
-                        name='plus-circle'
-                        size={35}
-                        color={Colors.primary}
-                        style={styles.IconStyle}
-                        onPress={()=>{this.props.navigation.navigate('SellForm')}}
-                    />
-                    <Text style={styles.AddTitle}>
-                        {I18n.t('SellScreen.add')}
-                    </Text>
-                </View>
-                <ScrollView>
-                    <View style={styles.productsContainer}>
-                        {
-                            this.state.myProducts.map((item)=>{
-                                return(
-                                    <TouchableHighlight 
-                                        key={item.productId} 
-                                        style={styles.AvatarContainer} 
-                                        onPress={()=> { this.props.navigation.navigate('Product' ,{product: item}); }}
-                                    >
-                                        <View>
-                                            <Avatar
-                                                rounded
-                                                size='xlarge'
-                                                source={{uri:item.Image}}
-                                                
-                                            />
-                                            <Text style={styles.productTitle}>{item.Title}</Text>
-                                        </View>
-                                    </TouchableHighlight>
-                                )
-                            })
-                        }
-                    </View>
+        const {data, loading, dataCount} = this.props.allProducts
 
-                 </ScrollView>
+        if (loading) {
+          return (
+            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator size='large' />
             </View>
-        );
+          )
+        } else {
+                
+            return(
+                <View style={styles.mainContainer}>
+                    <View style={styles.topContainer}>
+                        <Icon
+                            type='material-community'
+                            name='plus-circle'
+                            size={35}
+                            color={Colors.primary}
+                            style={styles.IconStyle}
+                            onPress={()=>{this.props.navigation.navigate('SellForm')}}
+                        />
+                        <Text style={styles.AddTitle}>
+                            {I18n.t('SellScreen.add')}
+                        </Text>
+                    </View>
+                    <ScrollView>
+                        <View style={styles.productsContainer}>
+                            {
+                                this.state.myProducts.map((item)=>{
+                                    return(
+                                        <TouchableHighlight 
+                                            key={item.productId} 
+                                            style={styles.AvatarContainer} 
+                                            onPress={()=> { this.props.navigation.navigate('Product' ,{product: item}); }}
+                                        >
+                                            <View>
+                                                <Avatar
+                                                    rounded
+                                                    size='xlarge'
+                                                    source={{uri:item.Image}}
+                                                    
+                                                />
+                                                <Text style={styles.productTitle}>{item.Title}</Text>
+                                            </View>
+                                        </TouchableHighlight>
+                                    )
+                                })
+                            }
+                        </View>
+
+                    </ScrollView>
+                </View>
+            );
+        }
     }
 }
 const styles={
@@ -117,9 +127,7 @@ const styles={
     }
 }
 
-const mapStateToProps = ({ fetchAllProducts }) => {
-    const  { allProducts} = fetchAllProducts;
-   
+const mapStateToProps = ({ allProducts }) => {
     return  {allProducts};
 };
 

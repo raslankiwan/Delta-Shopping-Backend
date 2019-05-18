@@ -51,7 +51,21 @@
         "Company":"الشركة", 
         "Info":"المعلومات", 
         "Image":"الصورة", 
-        "Currency":"العملة" 
+        "Currency":"العملة" ,
+        "Category":"الفئات",
+        "titleError": "أدخل اسم !!",
+        "catError": "أدخل اسم الفئة !!",
+        "infoError": "أدخل الوصف !!",
+        "companyError": "أدخل اسم الشركة !!",
+        "priceError": "أدخل سعر صحيح !!",
+        "Laptops":"حواسيب",
+        "Mobiles":"هواتف",
+        "Cars":"سيارات",
+        "Clothes":"ملابس",
+        "Other":"أخرى",
+        "USD":"دولار",
+        "JOD":"دينار",
+        "NIS": "شيكل"
     }, 
     "Category":{
         "addToCart":"إضافة", 

@@ -50,7 +50,21 @@
         "Company":"Company", 
         "Info":"Information", 
         "Image":"Image", 
-        "Currency":"Currency" 
+        "Category":"Category",
+        "Currency":"Currency", 
+        "titleError": "Enter a Title !!",
+        "catError": "Enter a Name !!",
+        "infoError": "Enter Info !!",
+        "companyError": "Enter company name !!",
+        "priceError": "Enter a valid price",
+        "Laptops":"Laptops",
+        "Mobiles":"Mobiles",
+        "Cars":"Cars",
+        "Clothes":"Clothes",
+        "Other":"Other",
+        "USD":"USD",
+        "JOD":"JOD",
+        "NIS": "NIS"
     },
     "Category":{
         "addToCart":"Add",
