@@ -19,6 +19,8 @@ import {
 
 const INITIAL_STATE = {
     products: [],
+    cartProducts: [],
+    wishlistProducts: [],
     addedToCart: false,
     removedFromCart: false,
     addedToWishlist: false,
@@ -37,7 +39,7 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, productLoading: false, products: action.payload};
 
         case CART_FETCH_SUCCESS:
-            return {...state, products: action.payload};
+            return {...state, cartProducts: action.payload};
 
         case ADD_TO_CART_SUCCESS:
             return {INITIAL_STATE, addedToCart: true};
@@ -45,7 +47,7 @@ export default (state = INITIAL_STATE, action) => {
             return{INITIAL_STATE, removedFromCart: true};
         
         case WISHLIST_FETCH_SUCCESS:
-            return {...state, products: action.payload};
+            return {...state, wishlistProducts: action.payload};
         case ADD_TO_WISHLIST_SUCCESS:
             return{INITIAL_STATE, addedToWishlist: true};
         case REMOVE_FORM_WISHLIST_SUCCESS:

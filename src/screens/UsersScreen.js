@@ -38,7 +38,7 @@ class UsersScreen extends React.Component {
   }
 
   openChat(dstUser) {
-    this.props.navigation.navigate('Chat', {dstUser})
+    this.props.navigation.navigate('Chat', {dstUserId: dstUser.userId})
   }
 
   renderRow(dstUser) {

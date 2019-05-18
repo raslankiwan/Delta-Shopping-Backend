@@ -134,12 +134,12 @@ export const cartFetch = (user) => {
 
         firebase.database().ref(`/users/${uu.uid}/cart`)
         .on('value', snapshot => {
-            var products = [];
+            var cartProducts = [];
             snapshot.forEach(child => {
                 const productId = child.val().productId;
                 firebase.database().ref(productId).
                 on('value', snap => {
-                    products.push({
+                    cartProducts.push({
                         Title: snap.val().Title,
                         Amount: snap.val().Amount,
                         Price: snap.val().Price,
@@ -155,7 +155,7 @@ export const cartFetch = (user) => {
                     });
                 });
             });
-            dispatch({ type: CART_FETCH_SUCCESS, payload: products});
+            dispatch({ type: CART_FETCH_SUCCESS, payload: cartProducts});
         }); 
     };
 };
@@ -164,13 +164,19 @@ export const addToCart = (productId, user) => {
     const uu= JSON.parse(user);
 
     return() => {
-        firebase.database().ref(`/users/${uu.uid}/cart`)
-        .push({productId})
-        .then(()=> {
-            firebase.database().ref(`${productId}/buyers/`)
-            .push({id:uu.uid, Username: uu.name});
-            dispatch({ type: ADD_TO_CART_SUCCESS});
-        });        
+        firebase.database().ref(productId)
+        .on('value', snap => {
+            if (snap.val().SellerId !== uu.uid) {
+                firebase.database().ref(`/users/${uu.uid}/cart`)
+                .push({productId})
+                .then(()=> {
+                    firebase.database().ref(`${productId}/buyers/`)
+                    .push({id:uu.uid, Username: uu.name});
+                    dispatch({ type: ADD_TO_CART_SUCCESS});
+                });        
+            }
+        })
+       
     };
 
 };
@@ -203,12 +209,12 @@ export const wishlistFetch = (user) => {
 
         firebase.database().ref(`/users/${uu.uid}/wishlist`)
         .on('value', snapshot => {
-            var products = [];
+            var wishlistProducts = [];
             snapshot.forEach(child => {
                 const productId = child.val().productId;
                 firebase.database().ref(productId).
                 on('value', snap => {
-                    products.push({
+                    wishlistProducts.push({
                         Title: snap.val().Title,
                         Amount: snap.val().Amount,
                         Price: snap.val().Price,
@@ -223,7 +229,7 @@ export const wishlistFetch = (user) => {
                     });
                 });
             });
-            dispatch({ type: WISHLIST_FETCH_SUCCESS, payload: products});
+            dispatch({ type: WISHLIST_FETCH_SUCCESS, payload: wishlistProducts});
         }); 
     };
 };
@@ -232,11 +238,16 @@ export const addToWishlist = (productId, user) => {
     const uu= JSON.parse(user);
 
     return() => {
-        firebase.database().ref(`/users/${uu.uid}/wishlist`)
-        .push({productId})
-        .then(()=> {
-            dispatch({ type: ADD_TO_WISHLIST_SUCCESS});
-        });        
+        firebase.database().ref(productId)
+        .on('value', snap => {
+            if (snap.val().SellerId !== uu.uid) {
+                firebase.database().ref(`/users/${uu.uid}/wishlist`)
+                .push({productId})
+                .then(()=> {
+                    dispatch({ type: ADD_TO_WISHLIST_SUCCESS});
+                });    
+            }  
+        })  
     };
 
 };
@@ -293,11 +304,11 @@ export const reviewChanged = (text) => {
 };
 
 export const addReview = (productId,  SellerId, SellerName, review, user ) => {
-    const uu= JSON.parse(user);
-    console.log('uu', uu);
+    //const uu= JSON.parse(user);
+    //console.log('uu', uu);
     return () => {
         firebase.database().ref(`${productId}/reviews`)
-        .push({review:review, userId:uu.uid, username: uu.name})
+        .push({review:review, userId:user.uid, username: user.name})
         .then(()=>{
             var now = moment().format();
             firebase.database().ref('/notification')

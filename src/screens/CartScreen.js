@@ -17,7 +17,7 @@ class CartScreen extends React.Component {
   
   
   state = {
-    products: []
+    cartProducts: []
   };
   
  async componentWillMount() {
@@ -25,7 +25,7 @@ class CartScreen extends React.Component {
     this.setState({user});
     this.props.cartFetch(user);
 
-    this.findTotal(this.props.products);
+    this.findTotal(this.props.cartProducts);
   }
 
   findTotal(products) {
@@ -46,33 +46,42 @@ class CartScreen extends React.Component {
    
 
   renderRow(product) {
-    const { Title, Price, Currency, productId } = product;
+    const { Title, Price, Currency, productId, SellerId } = product;
     return(   
       <ListItem
-      key={productId}
-      title={Title}
-      titleStyle={styles.titleStyle}
-      subtitle={
-        <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
-      }
-      rightElement={
-        <Button
-        raised
-        title={I18n.t('Category.removeFromCart')}
-        onPress={()=>{this.props.removeFromCart(productId, this.state.user)}} 
-        buttonStyle={styles.btnStyle}
-        containerStyle={{marginVertical:10}}
-         />
-      }
-      leftAvatar={
-        <Avatar
-        size='large'
-        source={{uri: product.Image }}
-        overlayContainerStyle={styles.AvatarStyle}
-        />
-      }
-      containerStyle={styles.ListItemStyle}
-      
+          key={productId}
+          title={Title}
+          titleStyle={styles.titleStyle}
+          subtitle={
+            <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
+          }
+          rightElement={
+            <View>
+              <Button
+                raised
+                title={I18n.t('Category.removeFromCart')}
+                onPress={()=>{this.props.removeFromCart(productId, this.state.user)}} 
+                buttonStyle={styles.btnStyle}
+                containerStyle={{marginVertical:10}}
+              />
+              <Button
+                raised
+                title={I18n.t('Cart.Seller')}
+                onPress={()=>this.props.navigation.navigate('Chat', {dstUserId:SellerId})} 
+                buttonStyle={styles.btnStyle}
+                containerStyle={{marginVertical:10}}
+              />
+            </View>
+          }
+          leftAvatar={
+            <Avatar
+              size='large'
+              source={{uri: product.Image }}
+              overlayContainerStyle={styles.AvatarStyle}
+            />
+          }
+          containerStyle={styles.ListItemStyle}
+          
       />
       
     );
@@ -81,17 +90,18 @@ class CartScreen extends React.Component {
   renderFooter (){
     return(
       <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>Cart subtotal: { this.findTotal(this.props.products) } </Text>
-        <Button
+        <Text style={styles.footerText}>{I18n.t('Cart.Total')}: { this.findTotal(this.props.cartProducts) } </Text>
+        
+      </View>
+    );
+    <Button
           title='Proceed to checkout'
           buttonStyle={styles.footerBtn}
          />
-      </View>
-    )
   }
 
   render() {
-    this.createDataSource(this.props.products);
+    this.createDataSource(this.props.cartProducts);
     return (
       <View>
           <ListView
@@ -156,10 +166,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ cartFetch, removeFromCart }) => {
-  const  { products } = cartFetch;
+  const  { cartProducts } = cartFetch;
   const { removedFromCart } = removeFromCart;
 
-  return  { products, removedFromCart };
+  return  { cartProducts, removedFromCart };
 };
 
 export default connect(mapStateToProps, { cartFetch, removeFromCart })(CartScreen);

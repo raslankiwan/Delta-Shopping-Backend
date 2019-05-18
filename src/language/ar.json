@@ -80,11 +80,21 @@
         "WriteReview": "اكتب تعليق",
         "Rate":"قيّم",
         "AddReview": "علّق",
-        "Reviews": "التعليقات"
+        "Reviews": "التعليقات",
+        "Title":"الاسم",
+        "Company":"الشركة",
+        "SellerName":"البائع",
+        "Info":"المعلومات",
+        "Sold":"هذا العنصر غير متوفر"
     },
     "Product": {
         "MarkSold": "تم بيع السلعة",
         "Delete": "حذف"
+    },
+    "Cart": {
+        "Total":"المجموع",
+        "Seller": "تحدث مع البائع",
+        "Checkout": ""
     }
 
 }

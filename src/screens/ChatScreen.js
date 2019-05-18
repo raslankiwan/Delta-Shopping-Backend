@@ -34,9 +34,9 @@ class ChatScreen extends React.Component {
     user = this.user;
     console.log('user from firebase', user)
     const { navigation } = this.props;
-    const info = navigation.getParam('dstUser','there is no chat ');
-    console.log('user from Users page', info)
-    uid = info.userId;
+    uid = navigation.getParam('dstUserId','there is no chat ');
+    //console.log('user from Users page', info)
+  //  uid = info.userId;
 
     this.chatRef = this.getRef().child('chat/' + this.generateChatId());
     // this.notificationRef = this.getRef().child('notification/' + uid);

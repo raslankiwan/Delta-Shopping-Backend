@@ -79,10 +79,19 @@
         "WriteReview": "Write a Review",
         "Rate":"Rate",
         "AddReview": "Add Review",
-        "Reviews": "Reviews"
+        "Reviews": "Reviews",
+        "Title":"Title",
+        "Company":"Company",
+        "SellerName":"Seller",
+        "Info":"Information",
+        "Sold": "This item is not available"
     },
     "Product": {
         "MarkSold": "Mark as sold",
         "Delete": "Delete"
+    },
+    "Cart": {
+        "Total":"Total",
+        "Seller": "Talk to Seller"
     }
 }

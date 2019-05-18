@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import AppNavigator from './src/navigation/AppNavigator';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import registerForNotifications from './src/services/push_notifications';
+import {Notifications} from 'expo';
 import { Provider } from 'react-redux';
 import reducers from './src/reducers';
 console.disableYellowBox = true;
@@ -24,7 +26,38 @@ export default class App extends React.Component {
   
   state = {
     isLoadingComplete: false,
+    notification: {},
   };
+
+
+  componentDidMount(){
+    this.NotificationsRegister();
+  }
+
+  NotificationsRegister = () =>{
+      registerForNotifications();
+      Notifications.addListener((notification) => {
+      console.log('notif:', notification);
+      this.setState({notification: notification});
+
+      const origin=this.state.notification.origin;
+      // const text=JSON.stringify(this.state.notification.data.body);
+      console.log('notification:', notification);
+
+      if(origin === 'received'){
+        // console.log(this);
+        //       Alert.alert(
+        //   I18n.t('NewNotification'), 
+        //   text, 
+        //   [{text: 'Ok.', onPress: () => console.log('OK Pressed')}]
+        // );
+      }
+      if(origin==='selected'){
+          // console.log(this);
+      }
+    });
+  }
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {

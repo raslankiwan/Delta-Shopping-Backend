@@ -17,7 +17,7 @@ class WishlistScreen extends React.Component {
   
   
   state = {
-    products: []
+    wishlistProducts: []
   };
   
  async componentWillMount() {
@@ -79,7 +79,7 @@ class WishlistScreen extends React.Component {
   }
 
   render() {
-    this.createDataSource(this.props.products);
+    this.createDataSource(this.props.wishlistProducts);
     return (
       <View>
           <ListView
@@ -141,11 +141,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ wishlistFetch, removeFromWishlist, addToCart }) => {
-  const { products } = wishlistFetch;
+  const { wishlistProducts } = wishlistFetch;
   const { removedFromWishlist } = removeFromWishlist;
   const { addedToCart } = addToCart;
   
-  return  { products, removedFromWishlist, addedToCart };
+  return  { wishlistProducts, removedFromWishlist, addedToCart };
 };
 
 export default connect(mapStateToProps, { wishlistFetch, removeFromWishlist, addToCart })(WishlistScreen);

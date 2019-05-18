@@ -6,9 +6,9 @@ import {
     FlatList, View} from 'react-native';
 import { connect } from 'react-redux';
 import StarRating from 'react-native-star-rating';
-import { Input, Rating, Avatar , Button, ListItem} from 'react-native-elements';
+import { Input, Avatar , Button, ListItem} from 'react-native-elements';
 import firebase from 'firebase';
-import { Card, CardSection, Header } from '../components/common';
+import { Card, CardSection } from '../components/common';
 import I18n from '../language/i18n';
 import { addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch } from '../actions';
 import Colors from '../constants/Colors'
@@ -27,10 +27,9 @@ class PDP extends React.Component {
 
     async componentWillMount() {
         let user = await AsyncStorage.getItem('userInfo');
-        this.setState({user});
+        user = JSON.parse(user);
+        this.setState({user, uid:user.uid});
         
-        console.log('user in pdp screen', user);
-
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { productId, Viewed } = product;
@@ -45,25 +44,17 @@ class PDP extends React.Component {
     incrementViews =(productId) => {
         let incremented=parseInt(this.state.Viewed)+1;
         firebase.database().ref(productId).update({Viewed: incremented})
-        
-        // .on('value', snapshot => {
-        //     console.log(snapshot.val());
-        //     // let viewed = parseInt(snapshot.val().Viewed);
-        //     // viewed += 1;
-        //     // console.log('viewed', viewed);
-        //     // firebase.database().ref(`${productId}/`).update({Viewed: viewed});
-        // });
+    
     }
 
 
     onStarRatingPress(rating) {
-        const uu= JSON.parse(this.state.user);
+        const uid= this.state;
 
         this.setState({
           starCount: rating
         });
-        console.log('rating', rating);
-        firebase.database().ref(`${this.state.productId}/rating/${uu.uid}`)
+        firebase.database().ref(`${this.state.productId}/rating/${this.uid}`)
         .update({rating});
         
         let Rate = 0.0;
@@ -78,8 +69,6 @@ class PDP extends React.Component {
             firebase.database().ref(`${this.state.productId}/`)
             .update({Rate});
         });
-
-        
     }
 
     renderRow(item) {
@@ -105,12 +94,6 @@ class PDP extends React.Component {
     
     onReviewChanged(text) {
         this.setState({review:text});
-        // if (text.length !== 0){
-        //     this.setState({ inputError: '' });
-        //   } else {
-        //     this.setState({ inputError: 'Please enter text here !!'})
-        //   }
-        //   this.props.reviewChanged(text);
     }
 
     clearReview() {
@@ -138,28 +121,25 @@ class PDP extends React.Component {
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { Title, Company, Info, Price, Currency, productId, Viewed, SellerId, SellerName, Sold } = product;
-
-        if(this.props.reviews){
-            console.log('array length', this.props.reviews);
+        const { uid } = this.state;
+        
+        if (this.props.reviews) {
             data=this.props.reviews;
         }
-       // this.props.incrementViews(productId);
-        
+
         return (
             <Card>
                 <CardSection>
-                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{Title + ' of ' + Company}</Text>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{I18n.t('PDP.Title')}:{Title}</Text>
                 </CardSection>
 
                 <CardSection>
-                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{SellerName}</Text>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{I18n.t('PDP.Company')}:{Company}</Text>
                 </CardSection>
 
                 <CardSection>
-                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{SellerId}</Text>
+                    <Text style={{ color:Colors.primary, fontSize:20, fontWeight:'600'}}>{I18n.t('PDP.SellerName')}:{SellerName}</Text>
                 </CardSection>
-
-                {this.checkIfSold(Sold)}
 
                 <CardSection>
                     <Image
@@ -169,7 +149,7 @@ class PDP extends React.Component {
                 </CardSection>
                     
                 <CardSection>
-                    <Text>{Info}</Text>
+                    <Text>{I18n.t('PDP.Info')}: {Info}</Text>
                 </CardSection>
 
                 <CardSection>
@@ -191,25 +171,34 @@ class PDP extends React.Component {
                     />
                 </CardSection>
            
-                <CardSection>
-                    <Button 
-                    title={I18n.t('PDP.AddToCart')}
-                    onPress={()=>{this.props.addToCart(productId, this.state.user)}}
-                    buttonStyle={{backgroundColor:Colors.primary, width:'93%'}}
-                    />
-                        
-                </CardSection>
-               
-                <CardSection>
-                    <Button 
-                    title={I18n.t('PDP.AddToWishlist')}
-                    onPress={()=>{this.props.addToWishlist(productId, this.state.user)}}
-                    buttonStyle={{backgroundColor:Colors.secondary, width:'90%'}}
-                    />
-                </CardSection>
-                    
+                {
+                    !Sold && (SellerId !== uid) &&
+                        <CardSection>
+                            <Button 
+                            title={I18n.t('PDP.AddToCart')}
+                            onPress={()=>{this.props.addToCart(productId, this.state.user)}}
+                            buttonStyle={{backgroundColor:Colors.primary, width:'93%'}}
+                            />
+                        </CardSection>
+                } 
+                {
+                    !Sold && (SellerId !== uid) &&
+                        <CardSection>
+                            <Button 
+                            title={I18n.t('PDP.AddToWishlist')}
+                            onPress={()=>{this.props.addToWishlist(productId, this.state.user)}}
+                            buttonStyle={{backgroundColor:Colors.secondary, width:'90%'}}
+                            />
+                        </CardSection>
+                } 
+                {
+                    Sold && 
+                        <CardSection>
+                            <Text>{I18n.t('PDP.Sold')}</Text>
+                        </CardSection>  
+                }
+
                 <View style={{marginTop:5, width:'100%', justifyContent:'center', padding:8}}>
-                {/* <Divider style={{backgroundColor:Colors.lightGray, width:'100%', marginHorizontal:5, height:1}} /> */}
                     <Text style={{textAlign:'center', color:Colors.secondary, fontSize:18, fontWeight:'500'}}>{I18n.t('PDP.Reviews')}:</Text>
                 </View>
 
@@ -222,7 +211,6 @@ class PDP extends React.Component {
                 </View>
 
                 <View style={{marginTop:10}}>
-                {/* <Text style={{textAlign:'center', color:Colors.secondary, fontSize:16, fontWeight:'500'}}>write your review:</Text> */}
                     <Input
                         label = {I18n.t('PDP.WriteReview')}
                         inputContainerStyle={styles.inputContainerStyle}
@@ -237,7 +225,6 @@ class PDP extends React.Component {
                 </View>
 
                 <View style={styles.reviewBtnContainer}>
-                    {/* <Text>Write a review</Text> */}
                     <Button 
                         title={I18n.t('PDP.AddReview')}
                         onPress={()=>{
@@ -246,7 +233,6 @@ class PDP extends React.Component {
                         }}
                         buttonStyle={{backgroundColor:Colors.primary}}
                     />
-
                 </View>
             </Card>    
           
@@ -290,6 +276,6 @@ const mapStateToProps = ({ addToCart, addToWishlist, incrementViews, reviewChang
     console.log('reviews, PDP:', reviews);
   
     return  {addedToCart, addedToWishlist, viewAdded, review, reviewAdded, reviews };
-  };
+};
 
 export default connect(mapStateToProps, {addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch})(PDP);
