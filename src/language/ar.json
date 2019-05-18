@@ -31,7 +31,8 @@
         "Language": "اللغة",
         "Users": "أشخاص",
         "Product": "السلعة", 
-        "Notification":"الاشعارات"
+        "Notification":"الاشعارات", 
+        "Chat":"المحادثة"
     }, 
     "Home":{
         "Categories":"الفئات",
@@ -39,7 +40,8 @@
         "Laptops": "حواسيب",
         "Music": "موسيقى",
         "Cars": "سيارات",
-        "Search": "ابحث عن سلعة"
+        "Search": "ابحث عن سلعة", 
+        "Top":"أهم المنتجات"
     },
     "SellScreen":{
         "add":"عرض سلعة جديدة"

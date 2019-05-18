@@ -92,11 +92,16 @@ class ProductScreen extends React.Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button 
+                    {!Sold &&<Button 
                     title={I18n.t('Product.MarkSold')}
                     onPress={()=>{this.markSold(productId)}}
-                    buttonStyle={{backgroundColor:Colors.primary, width:'93%'}}
-                    />
+                    buttonStyle={{backgroundColor:Colors.primary, width:'83%'}}
+                    />}
+                  {Sold &&<Button 
+                    title={I18n.t('Product.MarkSold')}
+                    onPress={()=>{this.markSold(productId)}}
+                    buttonStyle={{backgroundColor:Colors.lightGray, width:'83%'}}
+                    />}
                         
                 </CardSection>
                

@@ -3,18 +3,16 @@ import {
   StyleSheet,
   ListView,
   View,
-  Text,
-  Image,
-  TouchableHighlight,
-  AsyncStorage
+  AsyncStorage, 
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import I18n from '../language/i18n';
-import {Button, Icon, Card} from 'react-native-elements'
+import {Button, Avatar, ListItem} from 'react-native-elements'
 import { usersFetch } from '../actions/UsersActions';
 import { CardSection, Spinner } from '../components/common';
-// import console = require('console');
+import Colors from '../constants/Colors'
 
 class UsersScreen extends React.Component {
   
@@ -43,39 +41,44 @@ class UsersScreen extends React.Component {
 
   renderRow(dstUser) {
     const {  Name, userId, Photo } = dstUser;
-    return(   
-      <TouchableHighlight onPress={()=>this.openChat(dstUser)}>
-        <View style={styles.productContainer} id={userId}>
-          <View style={styles.imageWrapper}>
-              <Image
-                  style={{width: '25%', height: 100}}
-                  source={{uri: Photo }}
-                />
-          </View>
-
-          <View style={styles.descWrapper}>
-              <Text style={styles.titleStyle}>{Name}</Text>
-              <Text style={styles.titleStyle}>{userId}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
+    return(  
+      <ListItem
+      key={userId}
+      leftAvatar={
+        <Avatar
+          size='medium'
+          rounded
+          source={{uri:Photo}}
+        />
+      }
+      title={Name}
+      titleStyle={styles.titleStyle}
+      containerStyle={styles.ListItemStyle}
+      onPress={()=>this.openChat(dstUser)}
+      /> 
+    
     );
   }
 
   render() {
-    
-      console.log('created',this.props);
-      console.log('render user',this.state.user);
-      this.createDataSource(this.props.users);
+    console.log('props users', this.props)
+    const {loading , users, dataCount} = this.props.users
+    if(loading){
+      return (
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+            <ActivityIndicator size='large' />
+        </View>
+      )
+    }
+      this.createDataSource(users);
       return (
         <View>
-  
             <ListView
               enableEmptySections={true}
               renderRow={(item) => this.renderRow(item)}
               dataSource={this.dataSource}
+              contentContainerStyle={{marginTop:8}}
             />       
-  
   
         </View>
       );
@@ -89,12 +92,26 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  titleStyle:{
+    color:Colors.primary, 
+    fontSize:15, 
+    fontWeight:'400'
+  },
+  btnStyle:{
+    backgroundColor:Colors.primary, 
+    width:70, 
+    padding:5, 
+  }, 
+  ListItemStyle:{
+    borderBottomColor:Colors.lightGray, 
+    borderBottomWidth:1, 
+    padding:5, 
+    alignItems:'flex-start'
+  }, 
 });
 
-const mapStateToProps = ({ userFetch , auth}) => {
-  const  { users } = userFetch;
+const mapStateToProps = ({ users , auth}) => {
   const {user} = auth;
-  console.log('map to props', user)
   return  { users, user };
 };
 

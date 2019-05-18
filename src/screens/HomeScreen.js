@@ -62,6 +62,10 @@ class HomeScreen extends React.Component {
               onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search, data})}}        
             />
           </View>
+          <View style={{justifyContent:'center'}}>
+            <Text style={styles.TitleStyle}>{I18n.t('Home.Top')}</Text>
+            {/* <Divider style={{backgroundColor:Colors.lightGray, width:'90%', height:1, margin:5}} /> */}
+          </View>
           <View style={{height:'30%'}}>
             { data.length > 0 &&
               <Swiper 
@@ -86,12 +90,12 @@ class HomeScreen extends React.Component {
                     style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
                   />
                 </TouchableHighlight>
-                <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[2]})}>
+                {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[2]})}>
                 <Image 
                   source={{uri: data[2].Image}} 
                   style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
                 />
-              </TouchableHighlight>
+              </TouchableHighlight> */}
               </Swiper>
             }
           </View>

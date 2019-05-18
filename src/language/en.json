@@ -30,7 +30,8 @@
         "Language": "Language",
         "Users":"Users",
         "Product": "Product", 
-        "Notification":"Notification"
+        "Notification":"Notification", 
+        "Chat":"Chat"
     },
     "Home":{
         "Categories":"Categories",
@@ -38,7 +39,8 @@
         "Laptops": "Laptops",
         "Music": "Music",
         "Cars": "Cars",
-        "Search": "Search for product"
+        "Search": "Search for product", 
+        "Top":"Top Products"
     }, 
     "SellScreen":{
         "add":"Sell New Item"
