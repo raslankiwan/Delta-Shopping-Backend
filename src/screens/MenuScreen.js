@@ -4,14 +4,14 @@ import {ListItem,Divider } from 'react-native-elements';
 import COLOR from '../constants/Colors';
 import I18n from '../language/i18n';
 const Menu=[
-    {
-      id:0,
-      name:`${I18n.t('Profile')}`,
-      menuUrl:'account', 
-      icon: 'account' ,
-      type:'material-community',
-      color:'#B47EB3'
-    },
+    // {
+    //   id:0,
+    //   name:`${I18n.t('Profile')}`,
+    //   menuUrl:'account', 
+    //   icon: 'account' ,
+    //   type:'material-community',
+    //   color:'#B47EB3'
+    // },
     // {
     //   id:0,
     //   name:'Home',

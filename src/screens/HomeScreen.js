@@ -90,12 +90,12 @@ class HomeScreen extends React.Component {
                     style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
                   />
                 </TouchableHighlight>
-                <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[2]})}>
+                {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[2]})}>
                 <Image 
                   source={{uri: data[2].Image}} 
                   style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
                 />
-              </TouchableHighlight>
+              </TouchableHighlight> */}
               </Swiper>
             }
           </View>

@@ -24,7 +24,7 @@ import I18n from '../language/i18n';
       <View style={{flex:1}}>
         <Divider style={{ backgroundColor: 'gray', width:'100%' }} />
         <View style={styles.headerList}>
-           
+{/*            
             <ListItem
               leftIcon={{type:'material-community', name:'account-settings'}} 
               key={1}
@@ -32,7 +32,7 @@ import I18n from '../language/i18n';
               // onPress={() => this.Logout()} 
               containerStyle={styles.listStyle}
               titleStyle={{textAlign:'left'}}
-            />
+            /> */}
             <ListItem
               leftIcon={{ name:'language'}} 
               key={2}
