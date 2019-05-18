@@ -24,7 +24,7 @@ class SearchResultScreen extends React.Component {
     this.setState({user});
     const { navigation } = this.props;
     const search = navigation.getParam('search','there is no details ');
-    const allProducts = navigation.getParam('allProducts','there is no details ');
+    const allProducts = navigation.getParam('data','there is no details ');
     
     this.setState({allProducts});
     this.performSearch(search)

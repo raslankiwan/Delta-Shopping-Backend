@@ -160,42 +160,57 @@ class SellingForm extends React.Component {
     }
 
     onPressPost(){
-        console.log('onPressPost', this)
-        this.setState({ loading: true})
-        const _this = this
-        let post = {}
-        post["id"] = firebase.database.ServerValue.TIMESTAMP
-        post["text"] = this.state.text
-        console.log('post id', post['id'])
-        if (this.state.photo) {
-          const uri = this.state.photo
-          const ext = uri.substr(uri.lastIndexOf('.') + 1);
-          const name = Math.round(+new Date()/1000);
-          let file = {
-            name: name+"."+ext,
-            type: "image/"+ext,
-            uri
-          }
-     console.log('state.photo', this.state.photo)
-          RNS3.put(file, options).then(response => {
-              console.log('RNS3 response',response )
-              if (response.status === 400) {
-                post["photo"] = response.body.postResponse.location;
-                console.log('response status', post["photo"]);
-                firebase.database().ref('/imgs').push(post)
-                _this.setState({ text: '', photo: null, loading: false})
-              }
+        const photo = this.state;
+        const imageRef = firebase.storage().ref('images').child('filename.jpg');
+
+        return imageRef.put(photo, { contentType: 'application/octet-stream' })
+          .then(() => {
+            return imageRef.getDownloadURL();
+          })
+          .then(url => {
+            resolve(url);
+          })
+          .catch(error => {
+            reject(error);
+            console.log('Error uploading image: ', error);
           });
+
+    //     console.log('onPressPost', this)
+    //     this.setState({ loading: true})
+    //     const _this = this
+    //     let post = {}
+    //     post["id"] = firebase.database.ServerValue.TIMESTAMP
+    //     post["text"] = this.state.text
+    //     console.log('post id', post['id'])
+    //     if (this.state.photo) {
+    //       const uri = this.state.photo
+    //       const ext = uri.substr(uri.lastIndexOf('.') + 1);
+    //       const name = Math.round(+new Date()/1000);
+    //       let file = {
+    //         name: name+"."+ext,
+    //         type: "image/"+ext,
+    //         uri
+    //       }
+    //  console.log('state.photo', this.state.photo)
+    //       RNS3.put(file, options).then(response => {
+    //           console.log('RNS3 response',response )
+    //           if (response.status === 400) {
+    //             post["photo"] = response.body.postResponse.location;
+    //             console.log('response status', post["photo"]);
+    //             firebase.database().ref('/imgs').push(post)
+    //             _this.setState({ text: '', photo: null, loading: false})
+    //           }
+    //       });
      
-        } else {
-          firebase.database().ref('imgs').push(post)
-          _this.setState({ text: '', photo: null, loading: false})
-        }
+    //     } else {
+    //       firebase.database().ref('imgs').push(post)
+    //       _this.setState({ text: '', photo: null, loading: false})
+    //     }
      
     }
 
     render() {
-        let { image, Title, Price, Amount, Company, Info, Currency, Category
+        let { image, Title, Price, Amount, Company, Info, Currency, Category,
             priceError, infoError, titleError, companyError, catError } = this.state;
 
         return(
@@ -264,18 +279,20 @@ class SellingForm extends React.Component {
                             <Picker.Item label={I18n.t('SellingForm.NIS')} value="NIS" />
                         </Picker>
 
-                        <Picker
-                            selectedValue={this.state.Category}
-                            style={{height: 50, width: '80%'}}
-                            onValueChange={(itemValue, itemIndex) => {this.setState({Category: itemValue})}
-                            }>
-                            <Picker.Item label={I18n.t('SellingForm.Laptops')} value="laptops" />
-                            <Picker.Item label={I18n.t('SellingForm.Mobiles')} value="mobiles" />
-                            <Picker.Item label={I18n.t('SellingForm.Clothes')} value="clothes" />
-                            <Picker.Item label={I18n.t('SellingForm.Cars')} value="cars" />
-                            <Picker.Item label={I18n.t('SellingForm.Other')} value="other" />
-                            
-                        </Picker>
+                        { Category !== 'other' && 
+                            <Picker
+                                selectedValue={this.state.Category}
+                                style={{height: 50, width: '80%'}}
+                                onValueChange={(itemValue, itemIndex) => {this.setState({Category: itemValue, catError:''})}
+                                }>
+                                <Picker.Item label={I18n.t('SellingForm.Laptops')} value="laptops" />
+                                <Picker.Item label={I18n.t('SellingForm.Mobiles')} value="mobiles" />
+                                <Picker.Item label={I18n.t('SellingForm.Clothes')} value="clothes" />
+                                <Picker.Item label={I18n.t('SellingForm.Cars')} value="cars" />
+                                <Picker.Item label={I18n.t('SellingForm.Other')} value="other" />
+                                
+                            </Picker>
+                        }
 
                         { Category !== 'laptops' && Category !== 'mobiles' && Category !== 'cars'
                              && Category !== 'clothes' && 
@@ -285,7 +302,7 @@ class SellingForm extends React.Component {
                                 inputContainerStyle={styles.inputContainerStyle}
                                 labelStyle={styles.InputLabel}
                                 onChangeText = { this.updateCat }
-                                value={Info}
+                                value={Category}
                             />
                         }
 
@@ -294,7 +311,7 @@ class SellingForm extends React.Component {
                         <View >
                             <Button
                                 buttonStyle={styles.button}
-                                onPress={() => {this._pickImage(handleChange('Image'))}}
+                                onPress={() => {this.onPressPost()}}
                                 icon={
                                     <Icon
                                         type="material-community"
