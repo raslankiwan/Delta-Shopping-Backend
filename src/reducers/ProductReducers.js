@@ -1,6 +1,8 @@
 import {
-    ALL_PRODUCT_FETCH_SUCCESS,
+    PRODUCT_FETCH, 
     PRODUCT_FETCH_SUCCESS,
+    PRODUCT_FETCH_FAILED, 
+
     CART_FETCH_SUCCESS,
     ADD_TO_CART_SUCCESS,
     REMOVE_FORM_CART_SUCCESS,
@@ -16,26 +18,25 @@ import {
 // import console = require('console');
 
 const INITIAL_STATE = {
-    allProducts: [],
     products: [],
     addedToCart: false,
     removedFromCart: false,
     addedToWishlist: false,
     removedFromWishlist: false,
     viewAdded: false,
-    reviewAdded: false 
+    reviewAdded: false , 
+    productLoading:false, 
+  
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
+        case PRODUCT_FETCH:
+            return {...state, productLoading: true}
         case PRODUCT_FETCH_SUCCESS:
-            //console.log('Home' ,action.payload);
-            return {...state, products: action.payload};
-        case ALL_PRODUCT_FETCH_SUCCESS:
-            //console.log('allProducts, reducer', action.payload)
-            return {...state, allProducts: action.payload};
+            return {...state, productLoading: false, products: action.payload};
+
         case CART_FETCH_SUCCESS:
-            //console.log('cart', action.payload);
             return {...state, products: action.payload};
 
         case ADD_TO_CART_SUCCESS:

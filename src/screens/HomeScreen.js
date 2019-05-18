@@ -13,6 +13,7 @@ import I18n from '../language/i18n';
 import Colors from '../constants/Colors';
 import { connect } from 'react-redux';
 import { fetchAllProducts } from '../actions';
+import { ActivityIndicator } from 'react-native-paper';
 
 class HomeScreen extends React.Component {
  
@@ -26,13 +27,6 @@ class HomeScreen extends React.Component {
     //console.log('user Info', user);
 
     this.props.fetchAllProducts();
-    this.props.allProducts = this.props.fetchAllProducts();
-   // console.log('all', this.state.allProducts)
-    //this.setState({allProducts: this.props.allProducts})
-    //console.log('before',this.state.allProducts );
-    
-    //this.state.allProducts.sort((a,b) => (a.Rate> b.Rate ? 1 :-1));
- //   console.log('after',this.state.allProducts );
   }
   viewCategory(CatName) {
     this.props.navigation.navigate('Category' ,{CatName});
@@ -43,7 +37,19 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    const { search, allProducts } = this.state;
+    const { search } = this.state;
+    console.log('home screen props', this.props)
+    const {data, loading, dataCount} = this.props.allProducts
+
+    if(loading){
+      return (
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+            <ActivityIndicator size='large' />
+        </View>
+      )
+    }else{
+
+    
     return(
       <ScrollView contentContainerStyle={{paddingBottom:200}}>
       
@@ -55,9 +61,7 @@ class HomeScreen extends React.Component {
             onChangeText={ this.updateSearch }
             value={search}
             autoCorrect={false} 
-            onEndEditing={()=> { 
-              let allProducts = this.props.allProducts;
-              this.props.navigation.navigate('SearchResult', {search, allProducts})}}        
+            onEndEditing={()=> { this.props.navigation.navigate('SearchResult', {search, data})}}        
           />
         </View>
         <View style={{height:'30%'}}>
@@ -138,6 +142,7 @@ class HomeScreen extends React.Component {
       </ScrollView>
     );
   }
+  }
 }
 
 const styles={
@@ -177,9 +182,7 @@ const styles={
   }
 }
 
-const mapStateToProps = ({ fetchAllProducts }) => {
-  const  { allProducts} = fetchAllProducts;
- 
+const mapStateToProps = ({ allProducts }) => {
   return  {allProducts};
 };
 

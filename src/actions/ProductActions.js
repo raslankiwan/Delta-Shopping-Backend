@@ -1,7 +1,13 @@
 import firebase from 'firebase';
 import {
+    ALL_PRODUCT_FETCH , 
     ALL_PRODUCT_FETCH_SUCCESS,
+    ALL_PRODUCT_FETCH_FAILED, 
+
+    PRODUCT_FETCH, 
     PRODUCT_FETCH_SUCCESS,
+    PRODUCT_FETCH_FAILED, 
+
     CART_FETCH_SUCCESS,
     ADD_TO_CART_SUCCESS,
     REMOVE_FORM_CART_SUCCESS,
@@ -17,66 +23,106 @@ import {
 //import console = require('console');
 
 export const productFetch = (path) =>  {
-    return (dispatch) => {
-        firebase.database().ref(path)
-        .on('value', snapshot => {
-            var products = [];
-            snapshot.forEach(child => {
-                products.push({
-                    Title: child.val().Title,
-                    Amount: child.val().Amount,
-                    Price: child.val().Price,
-                    Company: child.val().Company,
-                    Info: child.val().Info,
-                    Currency: child.val().Currency,
-                    Image: child.val().Image,
-                    Viewed: child.val().Viewed,
-                    Rate: child.val().Rate,
-                    SellerId: child.val().SellerId,
-                    SellerName: child.val().SellerName,
-                    Sold: child.val().Sold,
-                    buyers: child.val().buyers,
-                    productId: path + '/' + child.key                   
+    return async (dispatch) => {
+        dispatch({type:PRODUCT_FETCH});
+        try{
+            firebase.database().ref(path)
+            .on('value', snapshot => {
+                var products = [];
+                snapshot.forEach(child => {
+                    products.push({
+                        Title: child.val().Title,
+                        Amount: child.val().Amount,
+                        Price: child.val().Price,
+                        Company: child.val().Company,
+                        Info: child.val().Info,
+                        Currency: child.val().Currency,
+                        Image: child.val().Image,
+                        Viewed: child.val().Viewed,
+                        Rate: child.val().Rate,
+                        SellerId: child.val().SellerId,
+                        SellerName: child.val().SellerName,
+                        Sold: child.val().Sold,
+                        buyers: child.val().buyers,
+                        productId: path + '/' + child.key                   
+                    });
                 });
+                console.log('in action ', products)
+                dispatch({
+                     type: PRODUCT_FETCH_SUCCESS, 
+                     payload: products, 
+                        
+                    });
             });
-            dispatch({ type: PRODUCT_FETCH_SUCCESS, payload: products});
-        });
+         
+           
+              
+           
+           
+        } catch (error){
+            console.log(error)
+          
+        }
+        
     };
 };
 
 
 export const fetchAllProducts = () =>  {
-    return (dispatch) => {
-        firebase.database().ref('/categories')
-        .on('value', snapshot => {
-            var allProducts = [];
-           // console.log('snapshot: ',snapshot.val());
-            snapshot.forEach(child => {
-                //console.log('child: ', child.val())
-                child.forEach(ch => {
-                    //console.log('ch: ', ch.val())
-                    allProducts.push({
-                        Title: ch.val().Title,
-                        Amount: ch.val().Amount,
-                        Price: ch.val().Price,
-                        Company: ch.val().Company,
-                        Info: ch.val().Info,
-                        Currency: ch.val().Currency,
-                        Image: ch.val().Image,
-                        Viewed: ch.val().Viewed,
-                        SellerId: ch.val().SellerId,
-                        SellerName: ch.val().SellerName,
-                        Sold: ch.val().Sold,
-                        buyers: ch.val().buyers,
-                        Rate: ch.val().Rate,
-                        productId: '/' + snapshot.key + '/' + child.key + '/' + ch.key                   
-                    });
-                })
-                //console.log('allProducts: ', allProducts);
-                dispatch({ type: ALL_PRODUCT_FETCH_SUCCESS, payload: allProducts});     
+    return async (dispatch) => {
+        dispatch({type:ALL_PRODUCT_FETCH});
+        try{
+            firebase.database().ref('/categories')
+            .on('value', snapshot => {
+                var allProducts = [];
+               // console.log('snapshot: ',snapshot.val());
+                snapshot.forEach(child => {
+                    //console.log('child: ', child.val())
+                    child.forEach(ch => {
+                        //console.log('ch: ', ch.val())
+                        allProducts.push({
+                            Title: ch.val().Title,
+                            Amount: ch.val().Amount,
+                            Price: ch.val().Price,
+                            Company: ch.val().Company,
+                            Info: ch.val().Info,
+                            Currency: ch.val().Currency,
+                            Image: ch.val().Image,
+                            Viewed: ch.val().Viewed,
+                            SellerId: ch.val().SellerId,
+                            SellerName: ch.val().SellerName,
+                            Sold: ch.val().Sold,
+                            buyers: ch.val().buyers,
+                            Rate: ch.val().Rate,
+                            productId: '/' + snapshot.key + '/' + child.key + '/' + ch.key                   
+                        });
+                    })
+                    if(allProducts.length>0){
+                        dispatch({
+                             type: ALL_PRODUCT_FETCH_SUCCESS, 
+                             payload: {
+                                 data:allProducts, 
+                                 dataCount:allProducts.length
+                                }
+                            });
+                    }else{
+                        dispatch({ 
+                            type: ALL_PRODUCT_FETCH_FAILED, 
+                            payload: {
+                                error:'firebase error', 
+                                dataCount:0
+                            }
+                        });
+                    }
+                    //console.log('allProducts: ', allProducts);
+                    // dispatch({ type: ALL_PRODUCT_FETCH_SUCCESS, payload: allProducts});     
+                });
+               
             });
-           
-        });
+        }catch(error){
+            console.log(error)
+        }
+       
     };
 };
 
