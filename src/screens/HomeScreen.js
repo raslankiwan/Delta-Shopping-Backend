@@ -26,11 +26,15 @@ class HomeScreen extends React.Component {
       allProducts: [],
       user:firebase.auth().currentUser
     };
-    this.user = firebase.auth().currentUser;
    
   }
  
-   componentWillMount() {
+  async componentWillMount() {
+    let previousToken = await AsyncStorage.removeItem('pushtoken');
+    let user = await AsyncStorage.getItem('userInfo');
+    user = JSON.parse(user);
+    this.setState({user});
+
     this.props.fetchAllProducts();
     this.registerForPushNotificationsAsync()
   }
@@ -63,14 +67,16 @@ class HomeScreen extends React.Component {
         // await axios.post(PUSH_ENDPOINT, {token : {token}});
  
         const savedToken = await AsyncStorage.setItem('pushtoken',token);
+           // // POST the token to our backend so we can use it to send pushes from there
+        var updates = {}
+        updates['expoToken'] = token;
+        console.log('uid in home', this.state.user.uid)
+        await firebase.database().ref(`/users/${this.state.user.uid}`).update({updates})
+        // //call the push notification 
     }
 
 
-    // // POST the token to our backend so we can use it to send pushes from there
-    // var updates = {}
-    // updates['/expoToken'] = token
-    // await firebase.database().ref('/users/' + currentUser.uid).update(updates)
-    // //call the push notification 
+ 
 }
   render() {
     const { search } = this.state;

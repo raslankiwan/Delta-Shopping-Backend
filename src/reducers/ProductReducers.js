@@ -42,16 +42,16 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, cartProducts: action.payload};
 
         case ADD_TO_CART_SUCCESS:
-            return {INITIAL_STATE, addedToCart: true};
+            return {...state, addedToCart: true};
         case REMOVE_FORM_CART_SUCCESS:
-            return{INITIAL_STATE, removedFromCart: true};
+            return{...state, removedFromCart: true};
         
         case WISHLIST_FETCH_SUCCESS:
             return {...state, wishlistProducts: action.payload};
         case ADD_TO_WISHLIST_SUCCESS:
-            return{INITIAL_STATE, addedToWishlist: true};
+            return{...state, addedToWishlist: true};
         case REMOVE_FORM_WISHLIST_SUCCESS:
-            return{INITIAL_STATE, removedFromWishlist: true};
+            return{...state, removedFromWishlist: true};
         
         case PRODUCT_VIEW:
             return {INITIAL_STATE, product: action.payload};

@@ -27,7 +27,7 @@ class PDP extends React.Component {
 
     async componentWillMount() {
         let user = await AsyncStorage.getItem('userInfo');
-        user = JSON.parse(user);
+        // user = JSON.parse(user);
         this.setState({user, uid:user.uid});
         
         const { navigation } = this.props;
@@ -49,12 +49,12 @@ class PDP extends React.Component {
 
 
     onStarRatingPress(rating) {
-        const uid= this.state;
+        const uu= JSON.parse(this.state.user);
 
         this.setState({
           starCount: rating
         });
-        firebase.database().ref(`${this.state.productId}/rating/${this.uid}`)
+        firebase.database().ref(`${this.state.productId}/rating/${uu.uid}`)
         .update({rating});
         
         let Rate = 0.0;
@@ -172,7 +172,7 @@ class PDP extends React.Component {
                 </CardSection>
            
                 {
-                    !Sold && (SellerId !== uid) &&
+                    !Sold && 
                         <CardSection>
                             <Button 
                             title={I18n.t('PDP.AddToCart')}
@@ -182,7 +182,7 @@ class PDP extends React.Component {
                         </CardSection>
                 } 
                 {
-                    !Sold && (SellerId !== uid) &&
+                    !Sold &&
                         <CardSection>
                             <Button 
                             title={I18n.t('PDP.AddToWishlist')}

@@ -163,20 +163,16 @@ export const cartFetch = (user) => {
 export const addToCart = (productId, user) => {
     const uu= JSON.parse(user);
 
-    return() => {
-        firebase.database().ref(productId)
-        .on('value', snap => {
-            if (snap.val().SellerId !== uu.uid) {
-                firebase.database().ref(`/users/${uu.uid}/cart`)
-                .push({productId})
-                .then(()=> {
-                    firebase.database().ref(`${productId}/buyers/`)
-                    .push({id:uu.uid, Username: uu.name});
-                    dispatch({ type: ADD_TO_CART_SUCCESS});
-                });        
-            }
-        })
-       
+    return(dispatch) => {
+        firebase.database().ref(`${productId}/buyers/`)
+        .push({id:uu.uid, Username: uu.name})
+
+        firebase.database().ref(`/users/${uu.uid}/cart`)
+        .push({productId})
+        .then(()=>{
+            dispatch({ type: ADD_TO_CART_SUCCESS});
+        });
+        
     };
 
 };
