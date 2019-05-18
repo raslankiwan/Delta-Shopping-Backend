@@ -187,6 +187,7 @@ class PDP extends React.Component {
                         maxStars={5}
                         rating={this.state.starCount}
                         selectedStar={(rating) => this.onStarRatingPress(rating)}
+                        fullStarColor='gold'
                     />
                 </CardSection>
            

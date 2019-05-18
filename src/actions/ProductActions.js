@@ -20,6 +20,7 @@ import {
     REVIEW_CHANGED,
     REVIEW_ADDED
 } from './types';
+import moment from 'moment'
 //import console = require('console');
 
 export const productFetch = (path) =>  {
@@ -293,7 +294,7 @@ export const addReview = (productId,  SellerId, SellerName, review, user ) => {
         firebase.database().ref(`${productId}/reviews`)
         .push({review:review, userId:uu.uid, username: uu.name})
         .then(()=>{
-            var now = new Date().getTime();
+            var now = moment().format();
             firebase.database().ref('/notification')
             .push({
                 UserId: SellerId,

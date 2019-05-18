@@ -30,7 +30,8 @@
         "Product": "تفاصيل السلعة",
         "Language": "اللغة",
         "Users": "أشخاص",
-        "Product": "السلعة"
+        "Product": "السلعة", 
+        "Notification":"الاشعارات"
     }, 
     "Home":{
         "Categories":"الفئات",

@@ -29,7 +29,8 @@
         "Product": "Product Info",
         "Language": "Language",
         "Users":"Users",
-        "Product": "Product"
+        "Product": "Product", 
+        "Notification":"Notification"
     },
     "Home":{
         "Categories":"Categories",

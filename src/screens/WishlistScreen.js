@@ -4,13 +4,15 @@ import {
   ListView,
   Text,
   Image,
-  AsyncStorage
+  AsyncStorage, 
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Card, CardSection, Button } from '../components/common';
+import {Button, ListItem , Avatar} from 'react-native-elements'
 import { wishlistFetch, removeFromWishlist, addToCart } from '../actions';
-
+import I18n from '../language/i18n';
+import Colors  from '../constants/Colors';
 class WishlistScreen extends React.Component {
   
   
@@ -36,36 +38,57 @@ class WishlistScreen extends React.Component {
     const { Title, Price, Currency, productId } = product;
 
     return(
-        <CardSection style={{flexDirection: 'column',}}>
-          <Text>{Title}</Text>
-          <Image
-            style={{width: 150, height: 150}}
-            source={{uri: product.Image }}
-          />
-          <Text>Price: {Price} {Currency}</Text>
-          <Button onPress={() => {this.props.addToCart(productId, this.state.user)}}>
-            Add to Cart
-          </Button>
-          <Button onPress={() => {this.props.removeFromWishlist(productId, this.state.user)}}>
-            Remove
-          </Button>
-        </CardSection>
+      <ListItem
+      key={productId}
+      title={Title}
+      titleStyle={styles.titleStyle}
+      subtitle={
+        <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
+      }
+      rightElement={
+        <View>
+            <Button
+            raised
+            title='Add to Cart'
+            titleStyle={styles.btnTitle}
+            onPress={() => {this.props.addToCart(productId, this.state.user)}}
+            buttonStyle={styles.btnStyle}
+            containerStyle={{marginBottom:5,}}
+            />
+            <Button
+            raised
+            title='Remove'
+            titleStyle={styles.btnTitle}
+            onPress={() => {this.props.removeFromWishlist(productId, this.state.user)}}
+            buttonStyle={styles.removeBtnStyle}
+            containerStyle={{marginBottom:5}}
+            />
+         </View>
+      }
+      leftAvatar={
+        <Avatar
+        size='large'
+        source={{uri: product.Image }}
+        overlayContainerStyle={styles.AvatarStyle}
+        />
+      }
+      containerStyle={styles.ListItemStyle}
+      />
+       
     );
   }
 
   render() {
     this.createDataSource(this.props.products);
     return (
-      <Card>
-        <CardSection>
+      <View>
           <ListView
             enableEmptySections={true}
             renderRow={(item) => this.renderRow(item)}
             dataSource={this.dataSource}
-          />       
-        </CardSection>
-
-      </Card>
+            contentContainerStyle={{marginTop:8}}
+          />  
+      </View>
     );
   }
 }
@@ -76,6 +99,45 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  btnStyle:{
+    backgroundColor:Colors.primary,
+    borderWidth:1, 
+    borderRadius:10, 
+    padding:5,
+    borderColor:Colors.primary
+  }, 
+  removeBtnStyle:{
+    backgroundColor:Colors.secondary,
+    borderWidth:1, 
+    borderRadius:10, 
+    padding:5,
+    borderColor:Colors.secondary
+  }, 
+  ListItemStyle:{
+    borderBottomColor:Colors.lightGray, 
+    borderBottomWidth:1, 
+    padding:5, 
+  }, 
+  AvatarStyle:{
+    borderColor:Colors.primary, 
+    borderWidth:2, 
+    borderRadius:5
+  }, 
+  priceStyle:{
+    fontSize:16, 
+    color:'#a0a0a0', 
+    fontWeight:'400', 
+    marginTop:7,
+  }, 
+  titleStyle:{
+    fontSize:18, 
+    fontWeight:'500', 
+    color:Colors.primary
+  }, 
+  btnTitle:{
+    fontSize:14, 
+    fontWeight:'500'
+  }
 });
 
 const mapStateToProps = ({ wishlistFetch, removeFromWishlist, addToCart }) => {

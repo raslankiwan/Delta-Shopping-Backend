@@ -2,18 +2,16 @@ import React from 'react';
 import {
   ListView,
   Text,
-  Image,
-  TouchableHighlight, 
   AsyncStorage, 
   View
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { fetchNotifications } from '../actions';
-import {Button, Icon} from 'react-native-elements'
+import {Button, Icon, ListItem, Avatar} from 'react-native-elements'
 import I18n from '../language/i18n';
 import Colors from '../constants/Colors'
-
+import moment from 'moment'
 
 class NotificationScreen extends React.Component {
  
@@ -41,19 +39,23 @@ class NotificationScreen extends React.Component {
   renderRow(item) {
     const { Title, productId, ScreenName, UserName, notificationId, createdAt } = item;
     return(   
-      <View style={styles.productContainer} id={notificationId}>
-       
-
-
-        <View style={styles.descWrapper}>
-            <Text style={styles.titleStyle}>{Title}</Text>
-            <Text style={styles.titleStyle}>{createdAt}</Text>
-           
-        </View>
-
-      
-         
-      </View>
+      <ListItem
+      key={productId}
+      leftAvatar={
+        <Avatar
+          size='medium'
+          rounded
+          icon={{name: 'bell', type: 'font-awesome'}}
+          overlayContainerStyle={{backgroundColor:Colors.secondary}}
+        />
+      }
+      title={Title}
+      subtitle={moment(createdAt).startOf('m').fromNow()}
+      titleStyle={styles.titleStyle}
+      subtitleStyle={styles.subtitleStyle}
+      containerStyle={styles.ListItemStyle}
+      />
+     
     );
   }
 
@@ -80,50 +82,27 @@ const mapStateToProps = ({ fetchNotifications }) => {
   return  {notificationList};
 };
 
-const styles={
-  productContainer:{
-    flexDirection:'row', 
-    width:'90%',
-    padding:5, 
-    backgroundColor:'white', 
-    shadowColor: '#e5e6e8',
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.5,
-    shadowRadius: 6, 
-    elevation:5, 
-    margin:8, 
-    borderColor:'#e5e6e8', 
-    borderWidth:1, 
-    borderRadius:5, 
-  } ,
-  btnWrapper:{
-    flexDirection:'row', 
-    justifyContent:'space-around', 
-    marginTop:5
-  }, 
-  imageWrapper:{
-    width:'30%', 
-    margin:5, 
-  }, 
-  descWrapper:{
-    width:'60%', 
-    margin:5
-  }, 
+const styles={ 
   titleStyle:{
     color:Colors.primary, 
-    fontSize:20, 
-    fontWeight:'600'
-  },
-  priceStyle:{
-    color:Colors.secondary, 
-    fontSize:20, 
+    fontSize:15, 
     fontWeight:'400'
-  }, 
+  },
   btnStyle:{
     backgroundColor:Colors.primary, 
     width:70, 
     padding:5, 
+  }, 
+  ListItemStyle:{
+    borderBottomColor:Colors.lightGray, 
+    borderBottomWidth:1, 
+    padding:5, 
+    alignItems:'flex-start'
+  }, 
+  subtitleStyle:{
+    fontSize:16, 
+    color:'#a0a0a0', 
+    fontWeight:'400', 
   }
-
 }
 export default connect(mapStateToProps, { fetchNotifications })(NotificationScreen);

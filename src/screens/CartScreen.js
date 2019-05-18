@@ -10,9 +10,9 @@ import {
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import I18n from '../language/i18n';
-import {Button, Icon, Card} from 'react-native-elements'
+import {Button, Icon, ListItem, Avatar} from 'react-native-elements'
 import { cartFetch, removeFromCart } from '../actions';
-import { CardSection } from '../components/common';
+import Colors  from '../constants/Colors';
 class CartScreen extends React.Component {
   
   
@@ -44,77 +44,64 @@ class CartScreen extends React.Component {
     this.dataSource = ds.cloneWithRows(_data);
   }
    
-  // renderRow(product) {
-  //   const { Title, Price, Currency, productId } = product;
-
-  //   return(
-  //       <CardSection style={{flexDirection: 'column',}}>
-  //         <Text>{Title}</Text>
-  //         <Image
-  //           style={{width: 150, height: 150}}
-  //           source={{uri: product.Image }}
-  //         />
-  //         <Text>Price: {Price} {Currency}</Text>
-  //         <Button onPress={() => {this.props.removeFromCart(productId, this.state.user)}}>
-  //           Remove
-  //         </Button>
-  //       </CardSection>
-  //   );
-  // }
 
   renderRow(product) {
     const { Title, Price, Currency, productId } = product;
     return(   
-      <View style={styles.productContainer} id={productId}>
-       
-          <View style={styles.imageWrapper}>
-              <Image
-                  style={{width: '100%', height: 100}}
-                  source={{uri: product.Image }}
-                />
-          </View>
-
-        <View style={styles.descWrapper}>
-            <Text style={styles.titleStyle}>{Title}</Text>
-            <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
-            <View style={styles.btnWrapper}>
-                <Button 
-                raised
-                title={I18n.t('Category.removeFromCart')}
-                onPress={()=>{this.props.removeFromCart(productId, this.state.user)}}  
-                buttonStyle={styles.btnStyle}
-                icon={
-                  <Icon
-                    type
-                   />
-                }
-                />
-            </View>
-        </View>
-
+      <ListItem
+      key={productId}
+      title={Title}
+      titleStyle={styles.titleStyle}
+      subtitle={
+        <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
+      }
+      rightElement={
+        <Button
+        raised
+        title={I18n.t('Category.removeFromCart')}
+        onPress={()=>{this.props.removeFromCart(productId, this.state.user)}} 
+        buttonStyle={styles.btnStyle}
+        containerStyle={{marginVertical:10}}
+         />
+      }
+      leftAvatar={
+        <Avatar
+        size='large'
+        source={{uri: product.Image }}
+        overlayContainerStyle={styles.AvatarStyle}
+        />
+      }
+      containerStyle={styles.ListItemStyle}
       
-         
-      </View>
+      />
+      
     );
+  }
+
+  renderFooter (){
+    return(
+      <View style={styles.footerContainer}>
+        <Text style={styles.footerText}>Cart subtotal: { this.findTotal(this.props.products) } </Text>
+        <Button
+          title='Proceed to checkout'
+          buttonStyle={styles.footerBtn}
+         />
+      </View>
+    )
   }
 
   render() {
     this.createDataSource(this.props.products);
     return (
-      <Card>
-        <CardSection>
+      <View>
           <ListView
             enableEmptySections={true}
             renderRow={(item) => this.renderRow(item)}
             dataSource={this.dataSource}
-          />       
-        </CardSection>
-
-        <CardSection style={{flexDirection: 'column',}}>
-          <Text>Cart subtotal: { this.findTotal(this.props.products) } </Text>
-          <Button> Proceed to checkout</Button>
-        </CardSection>
-      </Card>
+            renderFooter={()=>this.renderFooter()}
+            contentContainerStyle={{marginTop:8}}
+          /> 
+      </View>
     );
   }
 }
@@ -125,6 +112,47 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  btnStyle:{
+    backgroundColor:Colors.primary
+  }, 
+  ListItemStyle:{
+    borderBottomColor:Colors.lightGray, 
+    borderBottomWidth:1, 
+    padding:5, 
+    alignItems:'flex-start'
+  }, 
+  AvatarStyle:{
+    borderColor:Colors.primary, 
+    borderWidth:2, 
+    borderRadius:5
+  }, 
+  footerContainer:{
+    marginTop:10, 
+    flexDirection:'column', 
+    justifyContent:'center', 
+    alignItems:'center'
+  }, 
+  footerText:{
+    color:Colors.primary, 
+    fontSize:18, 
+    fontWeight:'700'
+  }, 
+  footerBtn:{
+    backgroundColor:Colors.secondary, 
+    width:'50%', 
+    marginTop:8, 
+  }, 
+  priceStyle:{
+    fontSize:16, 
+    color:'#a0a0a0', 
+    fontWeight:'400', 
+    marginTop:7,
+  }, 
+  titleStyle:{
+    fontSize:18, 
+    fontWeight:'500', 
+    color:Colors.primary
+  }
 });
 
 const mapStateToProps = ({ cartFetch, removeFromCart }) => {

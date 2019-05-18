@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
-import {ScrollView, View, Text, Image, AsyncStorage} from 'react-native';
-import {Avatar,ListItem,Divider } from 'react-native-elements'
+import { View, AsyncStorage} from 'react-native';
+import {ListItem,Divider } from 'react-native-elements'
 import {logOutUser} from '../actions/AuthActions';
 import { connect } from 'react-redux';
 import I18n from '../language/i18n';
@@ -83,10 +83,6 @@ const styles={
     backgroundColor:'#fff'
   }
 }
-const mapStateToProps = ({ productFetch }) => {
-  const  {products, loading} = productFetch;
-  
-  return  {products, loading};
-};
 
-export default connect(mapStateToProps, {logOutUser })(SettingsScreen);
+
+export default connect(null, {logOutUser })(SettingsScreen);

@@ -99,6 +99,13 @@ const CartStack = createStackNavigator({
   },
 });
 
+const NotificationStack = createStackNavigator({
+  Notification: {
+    screen:NotificationScreen, 
+    navigationOptions: ({navigation}) => menuNavicationOptions(navigation, 'Notification')
+  },
+});
+
 const WishlistStack = createStackNavigator({
   Wishlist: {
     screen: WishlistScreen, 
@@ -208,7 +215,7 @@ const Tabs = createBottomTabNavigator ({
   Home: integrateTabs,
   cart: CartStack,
   wishlist: WishlistStack, 
-  Notification:NotificationScreen
+  Notification:NotificationStack
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({
