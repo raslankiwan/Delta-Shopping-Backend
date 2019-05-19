@@ -81,7 +81,7 @@ class HomeScreen extends React.Component {
   render() {
     const { search } = this.state;
     const {data, loading, dataCount} = this.props.allProducts
-
+    console.log('data', data)
     if (loading) {
       return (
         <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
@@ -90,7 +90,8 @@ class HomeScreen extends React.Component {
       )
     } else {
 
-      data.sort((a,b) => (a.Rate < b.Rate) ? 1:-1);
+      data.sort((a,b) => (a.Rate < b.Rate) ? 1:-1); 
+      const sorted=data.slice(0,3)
       return(
         <ScrollView contentContainerStyle={{paddingBottom:200}}>
         
@@ -121,24 +122,19 @@ class HomeScreen extends React.Component {
                 // nextButton={<Text style={styles.buttonText}>{I18nManager.isRTL ?'‹':'›'}</Text>} 
                 // prevButton={<Text style={styles.buttonText}>{I18nManager.isRTL ?'›':'‹'}</Text>} 
               > 
-                <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[0]})}>
+            
+              {sorted.map( (item) => {
+                console.log('item', item)
+                return(
+                  <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product:item})} key={item.productId}>
                   <Image 
-                    source={{uri: data[0].Image}} 
+                    source={{uri: item.Image}} 
                     style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
                   />
                 </TouchableHighlight>
-                <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[1]})}>
-                  <Image 
-                    source={{uri: data[1].Image}} 
-                    style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
-                  />
-                </TouchableHighlight>
-                {/* <TouchableHighlight onPress={()=>this.props.navigation.navigate('PDP' ,{product: data[2]})}>
-                <Image 
-                  source={{uri: data[2].Image}} 
-                  style={{width:'98%',height:'100%', borderRadius:15,margin:2}}
-                />
-              </TouchableHighlight> */}
+                )
+              })}
+              
               </Swiper>
             }
           </View>
