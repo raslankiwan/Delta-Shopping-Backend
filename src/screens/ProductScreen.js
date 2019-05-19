@@ -33,7 +33,7 @@ class ProductScreen extends React.Component {
         .on('value', snapshot => {
             console.log('snap', snapshot);
             snapshot.forEach(child => {
-                console.log('child', child.val().id);
+                console.log('child', child.val());
                 //if (child.val().id === this.state.user.uid) {
                     var now = new Date().getTime();
                     firebase.database().ref('/notification')
