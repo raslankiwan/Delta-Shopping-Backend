@@ -113,7 +113,7 @@ class HomeScreen extends React.Component {
           <View style={{height:'30%'}}>
             { data.length > 0 &&
               <Swiper 
-                autoplay={true} 
+                autoplay={false} 
                 style={{ height:'100%',padding:5}} 
                 containerStyle={{  width:'100%',height:'100%', padding:5}} 
                 // showsButtons={true} 
