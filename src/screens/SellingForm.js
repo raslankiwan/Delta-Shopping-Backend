@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text , ScrollView, Image, Keyboard, AsyncStorage, Picker} from 'react-native';
+import {View, Text , ScrollView, Image, Keyboard, AsyncStorage, Picker, Alert} from 'react-native';
 import {Input, Button,Icon} from 'react-native-elements';
 import firebase from 'firebase';
 import Colors from '../constants/Colors'
@@ -84,7 +84,28 @@ class SellingForm extends React.Component {
                 Sold: false,
                 Image})
             .then(()=>{
-                console.log('success');
+                Alert.alert(I18n.t('SellingForm.ProductAddedHeader'), I18n.t('SellingForm.ProductAdded'), [
+                    {text:  I18n.t('ok'), onPress: () => {
+                        this.setState( {
+                            Image: null,
+                            Title: '',
+                            Price: '',
+                            Amount: '',
+                            Company: '',
+                            Info: '',
+                            Currency: '$', 
+                            userId: '', 
+                            priceError: '',
+                            infoError: '',
+                            titleError: '',
+                            companyError: '',
+                            catError: '',
+                            Category: 'laptops',
+                            submit: false
+                        });
+                        return
+                    }},
+                ])
             })
     
         }
@@ -320,12 +341,12 @@ class SellingForm extends React.Component {
                                         color="white"
                                     />
                                 }
-                                title='Pick'
+                                title={I18n.t('SellingForm.storePhoto')}
                             />
                             <Button
                                 buttonStyle={styles.button}
                                 onPress={this.onAddPhoto.bind(this)}
-                                title="Add Photo"
+                                title={I18n.t('SellingForm.AddPhoto')}
                                 icon={
                                     <Icon
                                         type="material-community"
@@ -341,7 +362,7 @@ class SellingForm extends React.Component {
                         </View>
                     
                         <Button 
-                            title='Submit'
+                            title={I18n.t('SellingForm.Submit')}
                             onPress={this.onSubmit.bind(this)} 
                             buttonStyle={styles.button}
                         />

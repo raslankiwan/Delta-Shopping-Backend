@@ -9,6 +9,8 @@
     "Profile": "حسابي",
     "Users": "أشخاص",
     "Sell": "اعرض سلعة",
+    "ok": "تم",
+    "cancel": "الغاء",
    
        
     "Language":{
@@ -67,7 +69,12 @@
         "Other":"أخرى",
         "USD":"دولار",
         "JOD":"دينار",
-        "NIS": "شيكل"
+        "NIS": "شيكل",
+        "AddPhoto": "اختر صورة",
+        "storePhoto": "تخزين الصورة",
+        "Submit": "تخزين",
+        "ProductAdded": "تمت اضافة العنصر",
+        "ProductAddedHeader": "تمت الاضافة"
     }, 
     "Category":{
         "addToCart":"إضافة", 
@@ -91,12 +98,17 @@
     },
     "Product": {
         "MarkSold": "تم بيع السلعة",
+        "MarkNotSold": "عرض السلعة مرة أخرى",
         "Delete": "حذف"
     },
     "Cart": {
         "Total":"المجموع",
         "Seller": "تحدث مع البائع",
         "Checkout": ""
+    },
+    "WishlistScreen": {
+        "Remove": "حذف",
+        "View": "عرض"
     }
 
 }

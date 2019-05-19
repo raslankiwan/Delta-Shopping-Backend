@@ -41,23 +41,30 @@ class UsersScreen extends React.Component {
 
   renderRow(dstUser) {
     const {  Name, userId, Photo } = dstUser;
-    return(  
-      <ListItem
-      key={userId}
-      leftAvatar={
-        <Avatar
-          size='medium'
-          rounded
-          source={{uri:Photo}}
-        />
-      }
-      title={Name}
-      titleStyle={styles.titleStyle}
-      containerStyle={styles.ListItemStyle}
-      onPress={()=>this.openChat(dstUser)}
-      /> 
+    const uu = JSON.parse(this.state.user);
+    console.log('user ',uu.uid);
+    if (userId !== uu.uid) {
+      return(  
+        <ListItem
+        key={userId}
+        leftAvatar={
+          <Avatar
+            size='medium'
+            rounded
+            source={{uri:Photo}}
+          />
+        }
+        title={Name}
+        titleStyle={styles.titleStyle}
+        containerStyle={styles.ListItemStyle}
+        onPress={()=>this.openChat(dstUser)}
+        /> 
+      
+      );
+    } else {
+      return (null);
+    }
     
-    );
   }
 
   render() {

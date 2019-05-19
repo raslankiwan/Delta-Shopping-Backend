@@ -2,14 +2,17 @@ import React from 'react';
 import {
   ListView,
   Text,
+  Image,
   AsyncStorage, 
-  View, Alert
+  View
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { viewItem, addToCart } from '../actions';
+import { viewItem, productFetch } from '../actions';
 import {Button, ListItem, Avatar} from 'react-native-elements'
-import Colors from '../constants/Colors'
+import Colors from '../constants/Colors';
+import I18n from '../language/i18n';
+
 class SearchResultScreen extends React.Component {
  
   state = {
@@ -51,35 +54,33 @@ class SearchResultScreen extends React.Component {
   renderRow(product) {
     const { Title, Price, Currency, productId } = product;
     return(   
-      <ListItem
-      key={productId}
-      title={Title}
-      subtitle={<Text>Price: {Price} {Currency}</Text>}
-      rightElement={
-        <View>
-            <Button
-            raised
-            title='Add to Cart'
-            titleStyle={styles.btnTitle}
-            onPress={()=>{this.props.addToCart(productId, this.state.user)}}
-            buttonStyle={styles.btnStyle}
-            containerStyle={{marginBottom:5,}}
-            />
-         </View>
-      }
-      leftAvatar={
-        <Avatar
-        size='large'
-        source={{uri: product.Image }}
-        overlayContainerStyle={styles.AvatarStyle}
-        />
-      }
-      containerStyle={styles.ListItemStyle}
-      onPress={()=>{this.viewItem(product)}}
-      />
+      <View style={styles.productContainer} id={productId}>
+          
+          <View style={styles.imageWrapper}>
+              <Image
+                  style={{width: '100%', height: 100}}
+                  source={{uri: product.Image }}
+                />
+          </View>
+
+        <View style={styles.descWrapper}>
+            <Text style={styles.titleStyle}>{Title}</Text>
+            <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
+            <View style={styles.btnWrapper}>
+                <Button
+                  raised
+                  title={I18n.t('Category.ViewProduct')}
+                  onPress={()=>{this.viewItem(product)}}
+                  buttonStyle={styles.btnStyle}
+                />
+                
+            </View>
+        </View>  
+      </View>
 
     );
   }
+
 
   viewItem(product) {
     this.setState({product: product});
@@ -90,63 +91,68 @@ class SearchResultScreen extends React.Component {
   render() {
     this.createDataSource(this.state.searchResult);
     return (
-        <View>
-            <ListView
-                enableEmptySections={true} 
-                renderRow={(item) => this.renderRow(item)}
-                dataSource={this.dataSource}
-                contentContainerStyle={{marginTop:8}}
-            />       
-        </View>
+      <View style={{flex:1}}>
+        <ListView
+          enableEmptySections={true} 
+          renderRow={(item) => this.renderRow(item)}
+          dataSource={this.dataSource}
+        />       
+      </View>
     );
   }
 
 }
 
-const mapStateToProps = ({ addToCart, viewItem }) => {
-  const { addedToCart } = addToCart;
+const mapStateToProps = ({ product, viewItem }) => {
 
-  return  {addedToCart};
+  return  {product};
 };
+
 const styles={
-  btnStyle:{
-    backgroundColor:Colors.primary,
-    borderWidth:1, 
-    borderRadius:10, 
-    padding:5,
-    borderColor:Colors.primary
-  }, 
-  removeBtnStyle:{
-    backgroundColor:Colors.secondary,
-    borderWidth:1, 
-    borderRadius:10, 
-    padding:5,
-    borderColor:Colors.secondary
-  }, 
-  ListItemStyle:{
-    borderBottomColor:Colors.lightGray, 
-    borderBottomWidth:1, 
+  productContainer:{
+    flexDirection:'row', 
+    width:'90%',
     padding:5, 
+    backgroundColor:'white', 
+    shadowColor: '#e5e6e8',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 6, 
+    elevation:5, 
+    margin:8, 
+    borderColor:'#e5e6e8', 
+    borderWidth:1, 
+    borderRadius:5, 
+  } ,
+  btnWrapper:{
+    flexDirection:'row', 
+    justifyContent:'space-around', 
+    marginTop:5
   }, 
-  AvatarStyle:{
-    borderColor:Colors.primary, 
-    borderWidth:2, 
-    borderRadius:5
+  imageWrapper:{
+    width:'30%', 
+    margin:5, 
   }, 
-  priceStyle:{
-    fontSize:16, 
-    color:'#a0a0a0', 
-    fontWeight:'400', 
-    marginTop:7,
+  descWrapper:{
+    width:'60%', 
+    margin:5
   }, 
   titleStyle:{
-    fontSize:18, 
-    fontWeight:'500', 
-    color:Colors.primary
+    color:Colors.primary, 
+    fontSize:20, 
+    fontWeight:'600'
+  },
+  priceStyle:{
+    color:Colors.secondary, 
+    fontSize:20, 
+    fontWeight:'400'
   }, 
-  btnTitle:{
-    fontSize:14, 
-    fontWeight:'500'
+  btnStyle:{
+    backgroundColor:Colors.primary, 
+    width:70, 
+    padding:5, 
   }
-}
-export default connect(mapStateToProps, { viewItem, addToCart })(SearchResultScreen);
+
+};
+
+export default connect(mapStateToProps, { viewItem, productFetch })(SearchResultScreen);

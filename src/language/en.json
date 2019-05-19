@@ -9,6 +9,8 @@
     "Profile": "Profile",
     "Users": "Users",
     "Sell": "Sell",
+    "ok": "Ok",
+    "cancel": "Cancel",
 
     "Language":{
         "Save":"Save", 
@@ -66,7 +68,12 @@
         "Other":"Other",
         "USD":"USD",
         "JOD":"JOD",
-        "NIS": "NIS"
+        "NIS": "NIS",
+        "AddPhoto": "Add Photo",
+        "storePhoto": "Store Photo",
+        "Submit": "Submit",
+        "ProductAdded": "Product Added Successfully",
+        "ProductAddedHeader": "Product Action"
     },
     "Category":{
         "addToCart":"Add",
@@ -90,10 +97,16 @@
     },
     "Product": {
         "MarkSold": "Mark as sold",
+        "MarkNotSold": "Mark not sold",
         "Delete": "Delete"
     },
     "Cart": {
         "Total":"Total",
         "Seller": "Talk to Seller"
+    },
+    "WishlistScreen": {
+        "Remove": "Remove",
+        "View": "View"
     }
+
 }

@@ -27,9 +27,8 @@ class PDP extends React.Component {
 
     async componentWillMount() {
         let user = await AsyncStorage.getItem('userInfo');
-        // user = JSON.parse(user);
-        this.setState({user, uid:user.uid});
-        
+        uu = JSON.parse(user);
+        this.setState({user, uid:uu.uid, uu});
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { productId, Viewed } = product;
@@ -44,9 +43,7 @@ class PDP extends React.Component {
     incrementViews =(productId) => {
         let incremented=parseInt(this.state.Viewed)+1;
         firebase.database().ref(productId).update({Viewed: incremented})
-    
     }
-
 
     onStarRatingPress(rating) {
         const uu= JSON.parse(this.state.user);
@@ -72,22 +69,20 @@ class PDP extends React.Component {
     }
 
     renderRow(item) {
-        console.log( 'render row',item);
         const { review, userId, username } = item.item;
         return(   
            <ListItem
-           
-           leftAvatar={
-               <Avatar 
-               rounded
-                size='small'
-                title='A'
-               />
-           }
-           title={username}
-           subtitle={review}
-           key={userId}
-           containerStyle={{borderBottomColor:'#ddd', borderBottomWidth:1}}
+                leftAvatar={
+                    <Avatar 
+                        rounded
+                        size='small'
+                        title='A'
+                    />
+                }
+                title={username}
+                subtitle={review}
+                key={userId}
+                containerStyle={{borderBottomColor:'#ddd', borderBottomWidth:1}}
            />
         );
     }
@@ -121,8 +116,6 @@ class PDP extends React.Component {
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
         const { Title, Company, Info, Price, Currency, productId, Viewed, SellerId, SellerName, Sold } = product;
-        const { uid } = this.state;
-        
         if (this.props.reviews) {
             data=this.props.reviews;
         }
@@ -172,7 +165,7 @@ class PDP extends React.Component {
                 </CardSection>
            
                 {
-                    !Sold && 
+                    !Sold && (SellerId !== this.state.uid) && 
                         <CardSection>
                             <Button 
                             title={I18n.t('PDP.AddToCart')}
@@ -182,7 +175,7 @@ class PDP extends React.Component {
                         </CardSection>
                 } 
                 {
-                    !Sold &&
+                    (SellerId !== this.state.uid) &&
                         <CardSection>
                             <Button 
                             title={I18n.t('PDP.AddToWishlist')}
@@ -228,8 +221,11 @@ class PDP extends React.Component {
                     <Button 
                         title={I18n.t('PDP.AddReview')}
                         onPress={()=>{
-                            this.props.addReview(productId, SellerId, SellerName, this.state.review, this.state.user);
-                            this.clearReview();
+                            if (this.state.review) {
+                                this.props.addReview(productId, SellerId, SellerName, this.state.review, this.state.user);
+                                this.clearReview();
+                            }
+                           
                         }}
                         buttonStyle={{backgroundColor:Colors.primary}}
                     />
@@ -273,8 +269,6 @@ const mapStateToProps = ({ addToCart, addToWishlist, incrementViews, reviewChang
     const {reviewAdded } = addReview;
     const { reviews } = reviewFetch; 
 
-    console.log('reviews, PDP:', reviews);
-  
     return  {addedToCart, addedToWishlist, viewAdded, review, reviewAdded, reviews };
 };
 

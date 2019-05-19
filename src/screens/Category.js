@@ -3,18 +3,16 @@ import {
   ListView,
   Text,
   Image,
-  TouchableHighlight, 
   AsyncStorage, 
   View,
   ActivityIndicator
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { productFetch, viewItem, addToCart } from '../actions';
-import {Button, Icon} from 'react-native-elements'
+import { productFetch, viewItem } from '../actions';
+import {Button} from 'react-native-elements';
 import I18n from '../language/i18n';
-import Colors from '../constants/Colors'
-// import console = require('console');
+import Colors from '../constants/Colors';
 
 class Category extends React.Component {
  
@@ -55,23 +53,14 @@ class Category extends React.Component {
             <Text style={styles.priceStyle}>{I18n.t('Category.Price')}: {Price} {Currency}</Text>
             <View style={styles.btnWrapper}>
                 <Button
-                raised
-                title={I18n.t('Category.ViewProduct')}
-                onPress={()=>{this.viewItem(product)}}
-                buttonStyle={styles.btnStyle}
+                  raised
+                  title={I18n.t('Category.ViewProduct')}
+                  onPress={()=>{this.viewItem(product)}}
+                  buttonStyle={styles.btnStyle}
                 />
-                <Button 
-                raised
-                title={I18n.t('Category.addToCart')}
-                onPress={()=>{this.props.addToCart(productId, this.state.user)}}  
-                buttonStyle={styles.btnStyle}
-               
-                />
+                
             </View>
-        </View>
-
-      
-         
+        </View>  
       </View>
     );
   }
@@ -83,35 +72,34 @@ class Category extends React.Component {
   }
 
   render() {
-    const { productLoading}=this.props.product
+    const { productLoading}=this.props.product;
     
-    if(productLoading){
+    if (productLoading) {
       return (
         <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
             <ActivityIndicator size='large' />
         </View>
       )
-    }else{
-    this.createDataSource(this.props.product.products);
-    return (
-      <View style={{flex:1}}>
-          <ListView
-            enableEmptySections={true} 
-            renderRow={(item) => this.renderRow(item)}
-            dataSource={this.dataSource}
-          />       
-      </View>
-  );
+    } else {
+        this.createDataSource(this.props.product.products);
+        return (
+          <View style={{flex:1}}>
+              <ListView
+                enableEmptySections={true} 
+                renderRow={(item) => this.renderRow(item)}
+                dataSource={this.dataSource}
+              />       
+          </View>
+        );
     }
   
   }
 
 }
 
-const mapStateToProps = ({ product, addToCart }) => {
-  const { addedToCart } = addToCart;
-  console.log('product in cat', product);
-  return  {product, addedToCart};
+const mapStateToProps = ({ product }) => {
+ 
+  return  {product};
 };
 const styles={
   productContainer:{
@@ -159,4 +147,5 @@ const styles={
   }
 
 }
-export default connect(mapStateToProps, { productFetch, viewItem, addToCart })(Category);
+
+export default connect(mapStateToProps, { productFetch, viewItem })(Category);

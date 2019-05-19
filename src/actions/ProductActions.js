@@ -300,11 +300,11 @@ export const reviewChanged = (text) => {
 };
 
 export const addReview = (productId,  SellerId, SellerName, review, user ) => {
-    //const uu= JSON.parse(user);
+    const uu= JSON.parse(user);
     //console.log('uu', uu);
-    return () => {
+    return (dispatch) => {
         firebase.database().ref(`${productId}/reviews`)
-        .push({review:review, userId:user.uid, username: user.name})
+        .push({review:review, userId: uu.uid, username: uu.name})
         .then(()=>{
             var now = moment().format();
             firebase.database().ref('/notification')
