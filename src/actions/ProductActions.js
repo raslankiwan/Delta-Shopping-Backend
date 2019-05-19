@@ -315,7 +315,8 @@ export const addReview = (productId, SellerId, SellerName, review, user) => {
                         Title: `${uu.name} added a review to your product`,
                         productId,
                         ScreenName: 'PDP',
-                        createdAt: now
+                        createdAt: now, 
+                        isRead:false
                     });
 
 

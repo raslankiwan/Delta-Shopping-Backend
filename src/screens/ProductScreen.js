@@ -43,13 +43,38 @@ class ProductScreen extends React.Component {
                         Title:`${this.state.user.name} sold a product you added to your cart`,
                         productId,
                         ScreenName: 'PDP',
-                        createdAt: now
+                        createdAt: now, 
+                        isRead:false
                     });
                 //}
             })
+
+            
+        firebase.database().ref(`/users/${child.val().id}/updates`)
+        .on('value', snapshot => {
+            console.log('tokenId', snapshot.val().expoToken)
+            let token=snapshot.val().expoToken
+            messages.push({
+                "to": token,
+                "sound": "default",
+                "body": "a product you added to your cart have been solded"
+            });
+            console.log('messages', messages)
+            fetch('https://exp.host/--/api/v2/push/send', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(messages)
+
+            }).then((res)=>{
+                console.log('res', res)
+            });
+        })
         });
 
-
+   
 
     }
 
