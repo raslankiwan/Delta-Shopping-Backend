@@ -33,6 +33,13 @@ class WishlistScreen extends React.Component {
       });
     this.dataSource = ds.cloneWithRows(_data);
   }
+
+  
+  viewItem(product) {
+    this.setState({product: product});
+
+    this.props.navigation.navigate('PDP',{product: product});
+  }
    
   renderRow(product) {
     const { Title, Price, Currency, productId } = product;
@@ -49,15 +56,15 @@ class WishlistScreen extends React.Component {
         <View>
             <Button
             raised
-            title='Add to Cart'
+            title={I18n.t('WishlistScreen.View')}
             titleStyle={styles.btnTitle}
-            onPress={() => {this.props.addToCart(productId, this.state.user)}}
+            onPress={()=>{this.viewItem(product)}}
             buttonStyle={styles.btnStyle}
             containerStyle={{marginBottom:5,}}
             />
             <Button
             raised
-            title='Remove'
+            title={I18n.t('WishlistScreen.Remove')}
             titleStyle={styles.btnTitle}
             onPress={() => {this.props.removeFromWishlist(productId, this.state.user)}}
             buttonStyle={styles.removeBtnStyle}

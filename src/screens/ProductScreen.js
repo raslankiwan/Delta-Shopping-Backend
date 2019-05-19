@@ -23,6 +23,11 @@ class ProductScreen extends React.Component {
         let user = await AsyncStorage.getItem('userInfo');
         user = JSON.parse(user);
         this.setState({user});
+
+        const { navigation } = this.props;
+        const product = navigation.getParam('product','there is no details ');
+        const { Sold } = product;
+        this.setState({Sold});
     }
 
     markSold(productId) {
@@ -78,10 +83,57 @@ class ProductScreen extends React.Component {
 
     }
 
+    markNotSold(productId) {
+        firebase.database().ref(productId)
+        .update({Sold:false});
+
+        firebase.database().ref(`${productId}/buyers/`)
+        .on('value', snapshot => {
+            console.log('snap', snapshot);
+            snapshot.forEach(child => {
+                console.log('child', child.val().id);
+                //if (child.val().id === this.state.user.uid) {
+                    var now = new Date().getTime();
+                    firebase.database().ref('/notification')
+                    .push({
+                        UserId: child.val().id,
+                        //Username: child.val().Username,
+                        Title:`A product in your cart is available again`,
+                        productId,
+                        ScreenName: 'PDP',
+                        createdAt: now
+                    });
+                //}
+            })
+        });
+    }
+
     deleteProduct(productId) {
+
+        firebase.database().ref(`${productId}/buyers/`)
+        .on('value', snapshot => {
+            console.log('snap', snapshot);
+            snapshot.forEach(child => {
+                // console.log('child', child.val().id);
+                // //if (child.val().id === this.state.user.uid) {
+                    // var now = new Date().getTime();
+                    firebase.database().ref(`/users/${child.val().id}/cart`)
+                    .on('value', snap => {
+                        snap.forEach(ch =>{
+                            if (ch.val().productId === productId) {
+                                firebase.database().ref(`/users/${child.val().id}/cart/${ch.key}`)
+                                .remove();
+                            }
+                        })
+                        
+                    });
+                //}
+            })
+        });
+
         firebase.database().ref(productId)
         .remove();
-        this.props.fetchAllProducts();
+      //  this.props.fetchAllProducts();
         this.props.navigation.navigate('Home');
     }
 
@@ -89,8 +141,10 @@ class ProductScreen extends React.Component {
     render() {
         const { navigation } = this.props;
         const product = navigation.getParam('product','there is no details ');
-        const { Title, Company, Info, Price, Currency, productId, Viewed, SellerId, SellerName, Sold } = product;
- 
+        const { Title, Company, Info, Price, Currency, productId, Viewed, SellerId, SellerName } = product;
+
+        let Sold = product.Sold;
+
         return (
             <Card>
                 <CardSection>
@@ -117,15 +171,21 @@ class ProductScreen extends React.Component {
                 </CardSection>
 
                 <CardSection>
-                    {!Sold &&<Button 
+                    {!this.state.Sold &&<Button 
                     title={I18n.t('Product.MarkSold')}
-                    onPress={()=>{this.markSold(productId)}}
+                    onPress={()=>{
+                        this.markSold(productId)
+                        this.setState({Sold :true})
+                    }}
                     buttonStyle={{backgroundColor:Colors.primary, width:'83%'}}
                     />}
-                  {Sold &&<Button 
-                    title={I18n.t('Product.MarkSold')}
-                    onPress={()=>{this.markSold(productId)}}
-                    buttonStyle={{backgroundColor:Colors.lightGray, width:'83%'}}
+                  {this.state.Sold &&<Button 
+                    title={I18n.t('Product.MarkNotSold')}
+                    onPress={()=>{
+                        this.markNotSold(productId)
+                        this.setState({Sold : false})
+                    }}
+                    buttonStyle={{backgroundColor:Colors.secondary, width:'83%'}}
                     />}
                         
                 </CardSection>

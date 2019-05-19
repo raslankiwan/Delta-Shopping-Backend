@@ -54,13 +54,13 @@ export default (state = INITIAL_STATE, action) => {
             return{...state, removedFromWishlist: true};
         
         case PRODUCT_VIEW:
-            return {INITIAL_STATE, product: action.payload};
+            return {...state, product: action.payload};
         case VIEW_INCREMENT: 
-            return {INITIAL_STATE, viewAdded: true};
+            return {...state, viewAdded: true};
         case REVIEW_CHANGED: 
             return {...state, review: action.payload}; 
         case REVIEW_ADDED: 
-            return{ INITIAL_STATE, reviewAdded: true};
+            return{ ...state, reviewAdded: true};
         case REVIEW_FETCH_SUCCESS:
             return {...state, reviews: action.payload};
         default: 
