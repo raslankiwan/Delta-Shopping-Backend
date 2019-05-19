@@ -82,7 +82,8 @@ class SellingForm extends React.Component {
                 SellerId:userId, 
                 Viewed: 0, 
                 Sold: false,
-                Image})
+                Image: 'https://firebasestorage.googleapis.com/v0/b/shopping-bfcfb.appspot.com/o/inspiron.jpg?alt=media&token=4a9e673b-31cf-437f-9411-5f9f7ac22c9f'
+            })
             .then(()=>{
                 Alert.alert(I18n.t('SellingForm.ProductAddedHeader'), I18n.t('SellingForm.ProductAdded'), [
                     {text:  I18n.t('ok'), onPress: () => {
@@ -330,19 +331,7 @@ class SellingForm extends React.Component {
                         {catError!=='' && <Text style={styles.errorTextStyle}>{I18n.t('SellingForm.catError')}</Text>}
 
                         <View >
-                            <Button
-                                buttonStyle={styles.button}
-                                onPress={() => {this.onPressPost()}}
-                                icon={
-                                    <Icon
-                                        type="material-community"
-                                        name="camera-image"
-                                        size={25}
-                                        color="white"
-                                    />
-                                }
-                                title={I18n.t('SellingForm.storePhoto')}
-                            />
+                           
                             <Button
                                 buttonStyle={styles.button}
                                 onPress={this.onAddPhoto.bind(this)}
