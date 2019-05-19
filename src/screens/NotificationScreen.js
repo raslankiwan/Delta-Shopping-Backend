@@ -37,7 +37,7 @@ class NotificationScreen extends React.Component {
   }
    
   renderRow(item) {
-    const { Title, productId, ScreenName, UserName, notificationId, createdAt } = item;
+    const { Title, productId, ScreenName, UserName, notificationId, createdAt, isRead } = item;
     return(   
       <ListItem
       key={productId}
@@ -53,7 +53,7 @@ class NotificationScreen extends React.Component {
       subtitle={moment(createdAt).startOf('m').fromNow()}
       titleStyle={styles.titleStyle}
       subtitleStyle={styles.subtitleStyle}
-      containerStyle={styles.ListItemStyle}
+      containerStyle={isRead?styles.ListItemStyle:styles.NotReadListItemStyle}
       />
      
     );
@@ -99,6 +99,13 @@ const styles={
     padding:5, 
     alignItems:'flex-start'
   }, 
+  NotReadListItemStyle:{
+    borderBottomColor:Colors.lightGray, 
+    borderBottomWidth:1, 
+    padding:5, 
+    alignItems:'flex-start', 
+    backgroundColor:'#f1e4e4'
+  },
   subtitleStyle:{
     fontSize:16, 
     color:'#a0a0a0', 
