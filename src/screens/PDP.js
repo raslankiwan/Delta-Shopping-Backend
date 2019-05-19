@@ -266,10 +266,10 @@ const mapStateToProps = ({ addToCart, addToWishlist, incrementViews, reviewChang
     const { addedToCart } = addToCart;
     const { addedToWishlist } = addToWishlist;
     const { review } = reviewChanged;
-    const {reviewAdded } = addReview;
+   // const {reviewAdded } = addReview;
     const { reviews } = reviewFetch; 
 
-    return  {addedToCart, addedToWishlist, viewAdded, review, reviewAdded, reviews };
+    return  {addedToCart, addedToWishlist, viewAdded, review, addReview, reviews };
 };
 
 export default connect(mapStateToProps, {addToCart, addToWishlist, incrementViews, reviewChanged, addReview, reviewFetch})(PDP);
