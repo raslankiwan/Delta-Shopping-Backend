@@ -1,8 +1,20 @@
 import React from 'react'
-import {Text, View, Button, TextInput, Image} from 'react-native'
+import {Text, View, Button, TextInput, Image, AsyncStorage} from 'react-native'
 import {postRequest} from '../requestFetch'
 
 export default class AddForm extends React.Component {
+
+    static navigationOptions = ({ navigation, navigationOptions }) => {
+        const { params } = navigation.state;
+    
+        return ({
+          title: 'Add',
+          HeaderLeft:   <Button
+                            title ="Back"
+                            onPress={()=>{navigation.navigate('Home')}}
+                        />
+      });
+    }
 
     constructor() {
         super()
@@ -26,51 +38,52 @@ export default class AddForm extends React.Component {
         }
 
         this.onSuccess = this.onSuccess.bind(this)
+        this.onnSuccess = this.onnSuccess.bind(this)
         this.onFail = this.onFail.bind(this)
     }
 
     componentDidMount() {
-        // if(this.props.location && this.props.location.state && this.props.location.state.item) {
-        //     let item = this.props.location.state.item
-        //     if(item.Available==='Yes') {
-        //         this.setState({isChecked:true})
-        //     }
-        //     else if(item.Available==='No') {
-        //         this.setState({isChecked:false})
-        //     }
-
-        //     this.setState({
-        //         name: item.Name,
-        //         id: item.ID,
-        //         desc: item.Description, 
-        //         prod: item.Production, 
-        //         exp: item.Expiration,
-        //         available: item.Available
-        //     })
-        // }
-        
+        if(this.props.navigation) {
+            let item = this.props.navigation.getParam('item', null)
+            if (item !== null) {
+                if(item.Available === 'Yes') {
+                    this.setState({isChecked:true})
+                }
+                else if(item.Available === 'No') {
+                    this.setState({isChecked:false})
+                }
+    
+                this.setState({
+                    name: item.Name,
+                    id: item.ID,
+                    desc: item.Description, 
+                    prod: item.Production, 
+                    exp: item.Expiration,
+                    available: item.Available
+                })
+            }
+        }
     }
 
     onSuccess() {
-        let path = `/home`
         this.props.navigation.navigate('Home');
     }
 
     onnSuccess() {
-        
+        this.props.navigation.navigate('Home');
     }
 
     onFail() {
-        this.setState({addErr: 'Something went wrong'})
+        this.setState({addErr: 'This id is already in use!!'})
     }
  
-    doPut() {
+    doPut = async() => {
         const { name, desc, exp, prod, id, available } = this.state
         console.log(available)
         var jsonObj = {
           name, desc, exp, prod, available
         }
-        let url_g = localStorage.getItem('url_g')
+        let url_g = await AsyncStorage.getItem('url_g')
         var url = `${url_g}/add_item/${id}`;
         postRequest(url, jsonObj, 'PUT', this.onnSuccess, this.onFail)
     }
@@ -135,31 +148,31 @@ export default class AddForm extends React.Component {
         return(
             <View >
                 <Text>Add new item</Text>
-                <Text>ProductID: </Text><TextInput type="number"  value={this.state.id} onChange={(text) => {
+                <Text>ProductID: </Text><TextInput type="number"  value={this.state.id} onChangeText={(text) => {
                     this.setState({id: text, emailErr:''})}
                     }>
                 </TextInput>            
-                <Text>Name: </Text><TextInput type="text" value={this.state.name} onChange={(text) => {
+                <Text>Name: </Text><TextInput type="text" value={this.state.name} onChangeText={(text) => {
                     this.setState({name: text, emailErr:''})}
                     }>
                 </TextInput>
-                <Text>Description: </Text><TextInput type="textarea" value={this.state.desc} onChange={(text) => {
+                <Text>Description: </Text><TextInput type="textarea" value={this.state.desc} onChangeText={(text) => {
                     this.setState({desc: text, emailErr:''})}
                     }>
                 </TextInput>
-                <Text>Production: </Text><TextInput type="date" value={this.state.prod} onChange={(text) => {
+                <Text>Production: </Text><TextInput type="date" value={this.state.prod} onChangeText={(text) => {
                     this.setState({prod: text, emailErr:''})}
                     }>
                 </TextInput>
                 
-                <Text>Expiration: </Text><TextInput type="date" defaultValue={this.state.exp} onChange={(text) => {
+                <Text>Expiration: </Text><TextInput type="date" defaultValue={this.state.exp} onChangeText={(text) => {
                     this.setState({exp: text, emailErr:''})}
                     }>
                 </TextInput>
                 <Text>Available? </Text><TextInput type="checkbox" checked={this.state.isChecked} onPress={this.checkAvailable} >                        
                 </TextInput>
                 
-                {this.state.addErr !== '' && <View>{this.state.addErr}</View>}
+                {this.state.addErr !== '' && <Text>{this.state.addErr}</Text>}
                 <Button onPress={()=> this.doPut()} title="Add Item" ></Button> 
                 <Button onPress={()=> this.update()} title="Update Item" ></Button>
 
