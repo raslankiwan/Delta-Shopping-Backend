@@ -21,7 +21,7 @@ import AppNavigator from './src/navigation/AppNavigator';
 class App extends React.Component {
   
   componentDidMount = async () => {
-    await AsyncStorage.setItem('url_g', 'http://localhost:8080')
+    await AsyncStorage.setItem('url_g', 'http://192.168.1.108:8080')
   }
 
   render() {
