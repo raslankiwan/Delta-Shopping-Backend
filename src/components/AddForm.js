@@ -1,6 +1,8 @@
 import React from 'react'
 import {Text, View, Button, TextInput, Image, AsyncStorage} from 'react-native'
+import { CheckBox } from 'react-native-elements'
 import {postRequest} from '../requestFetch'
+import DatePicker from 'react-native-datepicker'
 
 export default class AddForm extends React.Component {
 
@@ -98,16 +100,9 @@ export default class AddForm extends React.Component {
         postRequest(url, jsonObj, 'POST', this.onSuccess, this.onFail)
     }
 
-    checkAvailable =(event) => {
-        console.log(event.target.checked)
-        if(event.target.checked) {
-            this.setState(prvs => { return {available:'Yes', isChecked:!prvs.isChecked};})
-            console.log(this.state.available)
-        }
-        else {
-            this.setState(prvs => { return {available:'No', isChecked:!prvs.isChecked};})
-            console.log(this.state.available)
-        }
+    checkAvailable = () => {
+        this.setState(prvs => { return {available:'Yes', isChecked:!prvs.isChecked};})
+        console.log(this.state.isChecked)
     }
 
     viewImg(event) {
@@ -160,17 +155,64 @@ export default class AddForm extends React.Component {
                     this.setState({desc: text, emailErr:''})}
                     }>
                 </TextInput>
-                <Text>Production: </Text><TextInput type="date" value={this.state.prod} onChangeText={(text) => {
-                    this.setState({prod: text, emailErr:''})}
-                    }>
-                </TextInput>
+                <Text>Production: </Text>
+                <DatePicker
+                    style={{width: 200}}
+                    date={this.state.prod}
+                    mode="date"
+                    placeholder="select date"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                    // ... You can check the source to find the other keys.
+                    }}
+                    onDateChange={(date) => {this.setState({prod: date})}}
+                />
                 
-                <Text>Expiration: </Text><TextInput type="date" defaultValue={this.state.exp} onChangeText={(text) => {
-                    this.setState({exp: text, emailErr:''})}
-                    }>
-                </TextInput>
-                <Text>Available? </Text><TextInput type="checkbox" checked={this.state.isChecked} onPress={this.checkAvailable} >                        
-                </TextInput>
+                <Text>Expiration: </Text>
+                <DatePicker
+                    style={{width: 200}}
+                    date={this.state.exp}
+                    mode="date"
+                    placeholder="select date"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                    // ... You can check the source to find the other keys.
+                    }}
+                    onDateChange={(date) => {this.setState({exp: date})}}
+                />
+                <Text>Available? </Text>
+                <CheckBox 
+                    title="aaa" 
+                    checked={this.state.isChecked} 
+                    onPress={() => {
+                        this.setState({ isChecked: !this.state.isChecked })
+                        console.log(this.state.isChecked)
+                    }}
+                    
+                    checkedColor='red'
+                />
                 
                 {this.state.addErr !== '' && <Text>{this.state.addErr}</Text>}
                 <Button onPress={()=> this.doPut()} title="Add Item" ></Button> 

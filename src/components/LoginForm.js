@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, TextInput, Text, Image, Button, AsyncStorage } from 'react-native'
+import { View, Text, AsyncStorage } from 'react-native'
+import { Button, Input } from 'react-native-elements'
 // import '../App.css'
 // import logo from '../logo2.png'
 // import { black } from 'ansi-colors';
@@ -63,15 +64,14 @@ export default class LoginForm extends React.Component {
     render() {
         return(
             <View >
-                
                 <View  style={{marginRight:60}}>
                         {this.state.emailErr ? <Text>Please type a valid email</Text> : null }
-                        <TextInput type="email" placeholder="Enter E-mail" value={this.state.email} onChangeText={(text) => {
+                        <Input type="email" placeholder="Enter E-mail" value={this.state.email} onChangeText={(text) => {
                             this.setState({email: text, emailErr:''})}
                         } />
 
                         {this.state.passwordErr ? <Text>Please type a password</Text> : null }
-                        <TextInput secureTextEntry type="password" placeholder="Enter Password" value={this.state.password} onChangeText={(text) => {
+                        <Input secureTextEntry type="password" placeholder="Enter Password" value={this.state.password} onChangeText={(text) => {
                             this.setState({password: text, passwordErr:''})}
                         }/>
 
@@ -83,6 +83,7 @@ export default class LoginForm extends React.Component {
                         <Text>Or: load products from local storage</Text>
                         <Button title="Use local storage"  onPress={()=>this.props.navigation.navigate('LocalData')}/>
                 </View>
+               
             </View>
         );
     }
