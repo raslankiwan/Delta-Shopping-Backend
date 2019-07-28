@@ -1,8 +1,9 @@
 import React from 'react'
-import {Text, View, Button, TextInput, Image, AsyncStorage} from 'react-native'
+import {Text, View, Button, TextInput, Image,ScrollView, AsyncStorage} from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import {postRequest} from '../requestFetch'
 import DatePicker from 'react-native-datepicker'
+import ImagePicker from 'react-native-image-picker'
 
 export default class AddForm extends React.Component {
 
@@ -17,6 +18,14 @@ export default class AddForm extends React.Component {
                         />
       });
     }
+
+    options = {
+        title: 'Select image',
+        storageOptions: {
+          skipBackup: true,
+          path: 'images',
+        },
+      };
 
     constructor() {
         super()
@@ -105,19 +114,28 @@ export default class AddForm extends React.Component {
         console.log(this.state.isChecked)
     }
 
-    viewImg(event) {
-        let file = event.target.files[0]
-        let file_url = URL.createObjectURL(file)
-        this.setState({
-            imageName: file.name,
-            imageSource: file,
-            file_url: file_url,
-             
-        })
+    viewImg() {
+
+        ImagePicker.showImagePicker(this.options, (response) => {
+            console.log('Response = ', response);
+           
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            } else {
+              this.setState({
+                imageSource: response.uri,
+                imageName: response.fileName
+              });
+            }
+        });
     }
 
-    uploadImage() {
-        let url = "http://localhost:8080/upload_image";
+    uploadImage = async () => {
+        let url_g = AsyncStorage.getItem('url_g')
+        let url = `${url_g}/upload_image`
+        console.log(url)
         const data = new FormData(); 
         data.append("file", this.state.imageSource); 
         data.append("imageName", this.state.imageName);
@@ -141,7 +159,7 @@ export default class AddForm extends React.Component {
 
     render() {
         return(
-            <View >
+            <ScrollView >
                 <Text>Add new item</Text>
                 <Text>ProductID: </Text><TextInput type="number"  value={this.state.id} onChangeText={(text) => {
                     this.setState({id: text, emailErr:''})}
@@ -219,13 +237,13 @@ export default class AddForm extends React.Component {
                 <Button onPress={()=> this.update()} title="Update Item" ></Button>
 
             
-                <TextInput type="file" name='file' style={{marginTop:20}} onChange={(event) => this.viewImg(event)}/> 
+                <Button title='Select Image' style={{marginTop:20}} onPress={() => this.viewImg()}/> 
 
-                {this.state.imageName && <Image  style={{width: 100, height:100}} source={{uri:this.state.file_url}} />}
+                {this.state.imageName && <Image  style={{width: 100, height:100}} source={{uri:this.state.imageSource}} />}
 
 
                 <Button onPress={()=> this.uploadImage()} title="Upload Image" ></Button> 
-            </View>
+            </ScrollView>
         );
     }
 }
