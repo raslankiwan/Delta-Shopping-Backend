@@ -32,6 +32,7 @@ class HomeContent extends React.Component {
             exp: '',
             addErr: '',
             available: '',
+            url_g: '',
             products: [],
         }
 
@@ -42,6 +43,7 @@ class HomeContent extends React.Component {
 
     componentDidMount = async () => {
         let url_g = await AsyncStorage.getItem('url_g')
+        this.setState({url_g})
         var url = `${url_g}/get_item`
         postRequest(url, null, 'GET', this.onSuccess, this.onFail)
     }
@@ -95,6 +97,9 @@ class HomeContent extends React.Component {
             <ScrollView>
                 <View>                
                     { this.state.products && this.state.products.map((item) => {
+
+                        console.log(item)
+
                     let currentItem = {
                             id:item.ID,
                             name: item.Name,
@@ -104,7 +109,6 @@ class HomeContent extends React.Component {
                             available: item.Available
                         }
                         return (
-                            
                             <View>
                                 <TouchableOpacity onPress= {() => {this.onItemClicked(item)}}>
                                     <View>
@@ -159,7 +163,7 @@ class HomeContent extends React.Component {
                                         }></TextInput>
                                     </View>
                                     <View onPress= {() => {this.onItemClicked(item)}}>
-                                        <Image style={{width: 200, height:130}} source={{uri:"http://localhost:8080/load_image?src="+item.image}}/>
+                                        <Image style={{width: 200, height:130}} source={{uri:`${this.state.url_g}/load_image?src=${item.image}`}}/>
                                     </View>
                                 </TouchableOpacity>    
                                 <View >                            
