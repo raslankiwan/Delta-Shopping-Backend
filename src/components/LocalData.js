@@ -39,10 +39,11 @@ class LocalData extends React.Component {
 
     componentDidMount = async () => {
        
-        let products =  await AsyncStorage.getItem('products', products)
+        let products =  await AsyncStorage.getItem('products')
         if(products !== null) {
-            this.setState({products})
+            this.setState({products: JSON.parse(products)})
         }
+        console.log('products: ', products)
     }
 
 
@@ -59,7 +60,7 @@ class LocalData extends React.Component {
                         return (
                             
                             <View>
-                                <TouchableOpacity onPress= {() => {this.onItemClicked(item)}}>
+                                <TouchableOpacity >
                                     <View>
                                         <Text>ProductID:</Text>
                                         <Text>Name:</Text> 
@@ -105,14 +106,11 @@ class LocalData extends React.Component {
                                             }
                                         }></TextInput>
                                     </View>
-                                    <View onPress= {() => {this.onItemClicked(item)}}>
-                                        <Image style={{width: 200, height:130}} source={{uri:"http://localhost:8080/load_image?src="+item.image}}/>
+                                    <View>
+                                        <Image style={{width: 200, height:130}} source={{uri:`${this.state.url_g}/load_image?src=${item.image}`}}/>
                                     </View>
                                 </TouchableOpacity>    
-                                <View >                            
-                                    <Button style={{marginRight:10}} onPress={()=> this.delete(item.ID)}  title="Delete" /> 
-                                    <Button onPress={()=> this.update(currentItem)} title="Update"/>
-                                </View> 
+                               
                             </View>                   
                         )
                     })}
