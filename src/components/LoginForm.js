@@ -12,7 +12,7 @@ export default class LoginForm extends React.Component {
         emailErr: false,
         passwordErr: false,
         authErr: false,
-
+        serverURL: 'http://192.168.1.108:8080'
     }
 
     componentDidMount = async () => {
@@ -35,7 +35,6 @@ export default class LoginForm extends React.Component {
             let body = {
                 email, password
             }
-            console.log(email, password)
 
             fetch(url, {
                 method: 'POST',
@@ -46,10 +45,8 @@ export default class LoginForm extends React.Component {
             })
             .then(response => response.json())
             .then(async json => { 
-                console.log(json)
                 if (json.status === 'success') {
                     await AsyncStorage.setItem('user', JSON.stringify({email, password}));
-                    // to clear localStorage.clear()
                     this.props.navigation.navigate('Home')
                 } else {
                     this.setState({authErr: true})
@@ -82,6 +79,15 @@ export default class LoginForm extends React.Component {
                 <View>
                         <Text>Or: load products from local storage</Text>
                         <Button title="Use local storage"  onPress={()=>this.props.navigation.navigate('LocalData')}/>
+                </View>
+
+                <View>
+                    <Text>Server url:</Text>
+                    <Input placeholder="http://192.168.1.108:8080" value={this.state.serverURL} onChangeText={(text) => {
+                        this.setState({serverURL: text})}
+                    } />
+                    <Button title="Store"  onPress={async () => 
+                        await AsyncStorage.setItem('url_g', this.state.serverURL).then(()=> alert('Stored'))}/>
                 </View>
                
             </View>

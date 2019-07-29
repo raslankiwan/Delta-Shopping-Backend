@@ -126,18 +126,19 @@ export default class AddForm extends React.Component {
             } else {
               this.setState({
                 imageSource: response.uri,
-                imageName: response.fileName
+                imageName: response.fileName, 
+                file: response.data
               });
             }
         });
     }
 
     uploadImage = async () => {
-        let url_g = AsyncStorage.getItem('url_g')
+        let url_g = await AsyncStorage.getItem('url_g')
         let url = `${url_g}/upload_image`
         console.log(url)
         const data = new FormData(); 
-        data.append("file", this.state.imageSource); 
+        data.append("file", this.state.file); 
         data.append("imageName", this.state.imageName);
         data.append("id", this.state.id);
         this.setState({ isUploaded: false, isUploading: true })

@@ -50,7 +50,7 @@ class HomeContent extends React.Component {
 
     async onSuccess(json) {
         this.setState({products: json.data})
-        await AsyncStorage.setItem('products', products)
+        await AsyncStorage.setItem('products', JSON.stringify(json.data))
     }
 
     onUpdateSuccess() {
@@ -64,7 +64,7 @@ class HomeContent extends React.Component {
     }
 
     onFail(json) {
-
+        alert('Failed')
     }
 
     delete = async (dID) => {
@@ -97,8 +97,6 @@ class HomeContent extends React.Component {
             <ScrollView>
                 <View>                
                     { this.state.products && this.state.products.map((item) => {
-
-                        console.log(item)
 
                     let currentItem = {
                             id:item.ID,
