@@ -118,7 +118,7 @@ export default class AddForm extends React.Component {
 
         ImagePicker.showImagePicker(this.options, (response) => {
             console.log('Response = ', response);
-           
+            
             if (response.didCancel) {
               console.log('User cancelled image picker');
             } else if (response.error) {
@@ -127,7 +127,8 @@ export default class AddForm extends React.Component {
               this.setState({
                 imageSource: response.uri,
                 imageName: response.fileName, 
-                file: response.data
+                file: response.data,
+                response: response
               });
             }
         });
@@ -136,16 +137,21 @@ export default class AddForm extends React.Component {
     uploadImage = async () => {
         let url_g = await AsyncStorage.getItem('url_g')
         let url = `${url_g}/upload_image`
+        console.log(this.state)
         console.log(url)
         const data = new FormData(); 
-        data.append("file", this.state.file); 
+        data.append("file", this.state.response); 
         data.append("imageName", this.state.imageName);
         data.append("id", this.state.id);
         this.setState({ isUploaded: false, isUploading: true })
-        
+        console.log('data: ', data)
         fetch(url, { 
-            method: 'post', 
-            body: data 
+            method: 'POST', 
+            body: null,
+            headers : { 
+                'Content-Type': 'application/json/multipart/form-data',
+                'Accept': 'application/json'
+               }
         }).then(response => { alert(response); return response.json(); }) 
             .then(json => { 
                 this.setState({ isUploading: false, jsonResponse: json, isUploaded: true })                     
