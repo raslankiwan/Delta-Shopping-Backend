@@ -3,11 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var firebase = require('firebase');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var authRouters = require('./routes/auth');
 
 var app = express();
+
+var config = {
+  apiKey: 'AIzaSyBnm1Qn1S_JjbdnluH2hwnF34hRbuyuLwo',
+  authDomain: 'shopping-bfcfb.firebaseapp.com',
+  databaseURL: 'https://shopping-bfcfb.firebaseio.com',
+  projectId: 'shopping-bfcfb',
+  storageBucket: 'shopping-bfcfb.appspot.com',
+  messagingSenderId: '581074187585'
+};
+
+const db = firebase.initializeApp(config);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouters);
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
@@ -48,9 +60,10 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+
 var server = app.listen(8082, function () {
  // var host = server.address().address
   var port = 8082  //server.address().port
 
-  console.log("Server listening at port :%s", port)
+  console.log("hey Server listening at port :%s", port)
 })
