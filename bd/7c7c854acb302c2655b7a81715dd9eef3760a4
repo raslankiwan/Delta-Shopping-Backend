@@ -1,0 +1,227 @@
+.env.example
+  s_88f0e4c73046ae::t_e952902d963fc0 1-3
+.github/workflows/ci.yml
+  s_88f0e4c73046ae::t_40c04af2bcddfa 1-18
+.gitignore
+  s_88f0e4c73046ae::t_689c748ab5b74b 1-6,8-9,11-13
+README.md
+  s_88f0e4c73046ae::t_9700ca0466c2da 1-61
+apps/web/AGENTS.md
+  s_88f0e4c73046ae::t_eba0f2045bd647 1-9
+apps/web/app/admin/page.tsx
+  s_88f0e4c73046ae::t_260a8b3f70e341 1-4
+apps/web/app/api/[...path]/route.ts
+  s_88f0e4c73046ae::t_2014a9ecf28ad3 1-7
+apps/web/app/globals.css
+  s_88f0e4c73046ae::t_acf0e7ce5843dc 1-1515
+apps/web/app/layout.tsx
+  s_88f0e4c73046ae::t_0e0a5dc36c1cec 1-14
+apps/web/app/marketplace.tsx
+  s_88f0e4c73046ae::t_05b516e58b3eaa 1-1463
+apps/web/app/page.tsx
+  s_88f0e4c73046ae::t_2f06237b719295 1-4
+apps/web/next-env.d.ts
+  s_88f0e4c73046ae::t_6f3f5f1bc620d8 1-7
+apps/web/next.config.ts
+  s_88f0e4c73046ae::t_5d53fc5e86e7c9 1-27
+apps/web/package.json
+  s_88f0e4c73046ae::t_6df016e6f3d46c 1-19
+apps/web/tsconfig.json
+  s_88f0e4c73046ae::t_ce6ddbc8b765fb 1-19
+docs/api.md
+  s_88f0e4c73046ae::t_2038c94b093877 1-31
+docs/migration.md
+  s_88f0e4c73046ae::t_9abaf66037b85f 1-33
+docs/operations.md
+  s_88f0e4c73046ae::t_5f1c65fb95d0f7 1-35
+docs/source-history.json
+  s_88f0e4c73046ae::t_7a623ef91e08af 1-17
+legacy/DeltaShoppingServer/.gitignore
+  s_88f0e4c73046ae::t_67e324a3586da6 1-104
+legacy/DeltaShoppingServer/app.js
+  s_88f0e4c73046ae::t_11d88f5ef1679c 1-69
+legacy/DeltaShoppingServer/bin/www
+  s_88f0e4c73046ae::t_96a4683c220285 1-90
+legacy/DeltaShoppingServer/package.json
+  s_88f0e4c73046ae::t_95b979187e7041 1-20
+legacy/DeltaShoppingServer/public/stylesheets/style.css
+  s_88f0e4c73046ae::t_a5667b4ed4a038 1-8
+legacy/DeltaShoppingServer/routes/auth.js
+  s_88f0e4c73046ae::t_2e51519ffacae1 1-39
+legacy/DeltaShoppingServer/routes/index.js
+  s_88f0e4c73046ae::t_39b4640c633520 1-9
+legacy/DeltaShoppingServer/views/error.jade
+  s_88f0e4c73046ae::t_aa0832a397cf6a 1-6
+legacy/DeltaShoppingServer/views/index.jade
+  s_88f0e4c73046ae::t_154b752fd103f8 1-5
+legacy/DeltaShoppingServer/views/layout.jade
+  s_88f0e4c73046ae::t_34d59f297876db 1-7
+legacy/Shopping/.gitignore
+  s_88f0e4c73046ae::t_1a5c15a0b3de1b 1-18
+legacy/Shopping/.watchmanconfig
+  s_88f0e4c73046ae::t_ed64b0624054ff 1
+legacy/Shopping/App.js
+  s_88f0e4c73046ae::t_300ecf2005c098 1-103
+legacy/Shopping/__tests__/App-test.js
+  s_88f0e4c73046ae::t_65e2e0e1cd8307 1-22
+legacy/Shopping/app.json
+  s_88f0e4c73046ae::t_dad53144dd7eeb 1-32
+legacy/Shopping/babel.config.js
+  s_88f0e4c73046ae::t_a79daa40cd451e 1-6
+legacy/Shopping/package.json
+  s_88f0e4c73046ae::t_ca7cb88a3c95cd 1-46
+legacy/Shopping/src/actions/AuthActions.js
+  s_88f0e4c73046ae::t_0ec0f9963af47b 1-219
+legacy/Shopping/src/actions/NotificationActions.js
+  s_88f0e4c73046ae::t_9bf59b8836381f 1-30
+legacy/Shopping/src/actions/ProductActions.js
+  s_88f0e4c73046ae::t_beecf4fd10babb 1-366
+legacy/Shopping/src/actions/UsersActions.js
+  s_88f0e4c73046ae::t_31ebf2015b87e0 1-55
+legacy/Shopping/src/actions/index.js
+  s_88f0e4c73046ae::t_eaf6656cca9759 1-4
+legacy/Shopping/src/actions/types.js
+  s_88f0e4c73046ae::t_8d1b8b309863f3 1-48
+legacy/Shopping/src/components/ListItem.js
+  s_88f0e4c73046ae::t_7723be8a4b1de4 1-43
+legacy/Shopping/src/components/StyledText.js
+  s_88f0e4c73046ae::t_3bd5613ded8e95 1-8
+legacy/Shopping/src/components/TabBarIcon.js
+  s_88f0e4c73046ae::t_501e57f1add522 1-17
+legacy/Shopping/src/components/__tests__/StyledText-test.js
+  s_88f0e4c73046ae::t_e11d01675345d3 1-10
+legacy/Shopping/src/components/common/Button.js
+  s_88f0e4c73046ae::t_537a622f0ac049 1-35
+legacy/Shopping/src/components/common/Card.js
+  s_88f0e4c73046ae::t_9861208c583025 1-37
+legacy/Shopping/src/components/common/CardSection.js
+  s_88f0e4c73046ae::t_ea22ee58f8b00b 1-26
+legacy/Shopping/src/components/common/Confirm.js
+  s_88f0e4c73046ae::t_0b54dbec10ccc1 1-47
+legacy/Shopping/src/components/common/Header.js
+  s_88f0e4c73046ae::t_10d45fea31ad7f 1-34
+legacy/Shopping/src/components/common/Input.js
+  s_88f0e4c73046ae::t_7954c3e26d757a 1-43
+legacy/Shopping/src/components/common/Spinner.js
+  s_88f0e4c73046ae::t_305ddb6cbd150c 1-20
+legacy/Shopping/src/components/common/index.js
+  s_88f0e4c73046ae::t_7199cc46316e6a 1-7
+legacy/Shopping/src/constants/Colors.js
+  s_88f0e4c73046ae::t_519511c5329744 1-17
+legacy/Shopping/src/constants/Layout.js
+  s_88f0e4c73046ae::t_abe7b916f2eeed 1-12
+legacy/Shopping/src/language/ar.json
+  s_88f0e4c73046ae::t_6217b9ada742fd 1-114
+legacy/Shopping/src/language/en.json
+  s_88f0e4c73046ae::t_163d202f6f0776 1-112
+legacy/Shopping/src/language/i18n.js
+  s_88f0e4c73046ae::t_e87cb3f24019d8 1-21
+legacy/Shopping/src/navigation/AppNavigator.js
+  s_88f0e4c73046ae::t_3b7bc544449e43 1-17
+legacy/Shopping/src/navigation/MainTabNavigator.js
+  s_88f0e4c73046ae::t_b0e77844c4abfd 1-304
+legacy/Shopping/src/reducers/AllProductsReducer.js
+  s_88f0e4c73046ae::t_89620de4c07a93 1-25
+legacy/Shopping/src/reducers/AuthReducer.js
+  s_88f0e4c73046ae::t_42dbbf85d5fc70 1-70
+legacy/Shopping/src/reducers/NotificationReducer.js
+  s_88f0e4c73046ae::t_222d02aecf624c 1-19
+legacy/Shopping/src/reducers/ProductReducers.js
+  s_88f0e4c73046ae::t_ba1ad82021a8bc 1-69
+legacy/Shopping/src/reducers/UsersReducers.js
+  s_88f0e4c73046ae::t_328146fa9cd16e 1-26
+legacy/Shopping/src/reducers/index.js
+  s_88f0e4c73046ae::t_b96f8fbd37eb77 1-24
+legacy/Shopping/src/screens/CartScreen.js
+  s_88f0e4c73046ae::t_df97470e25f179 1-175
+legacy/Shopping/src/screens/Category.js
+  s_88f0e4c73046ae::t_8c37e5e76628c6 1-151
+legacy/Shopping/src/screens/ChangeLanguageScreen.js
+  s_88f0e4c73046ae::t_4f1d788a51ddb1 1-117
+legacy/Shopping/src/screens/ChatScreen.js
+  s_88f0e4c73046ae::t_5911896635c2eb 1-187
+legacy/Shopping/src/screens/HomeScreen.js
+  s_88f0e4c73046ae::t_5183f511884c3e 1-237
+legacy/Shopping/src/screens/LoginScreen.js
+  s_88f0e4c73046ae::t_6f513f2b9dfe55 1-312
+legacy/Shopping/src/screens/MenuScreen.js
+  s_88f0e4c73046ae::t_43501e3ae3fb3c 1-114
+legacy/Shopping/src/screens/NotificationList.js
+  s_88f0e4c73046ae::t_0389ff75560711 1-15
+legacy/Shopping/src/screens/NotificationScreen.js
+  s_88f0e4c73046ae::t_fae62f78edc93c 1-115
+legacy/Shopping/src/screens/PDP.js
+  s_88f0e4c73046ae::t_6978dfc1eaf35e 1-275
+legacy/Shopping/src/screens/ProductScreen.js
+  s_88f0e4c73046ae::t_6c0c36d2600a11 1-236
+legacy/Shopping/src/screens/Register.js
+  s_88f0e4c73046ae::t_059927740092f6 1-425
+legacy/Shopping/src/screens/SearchResultScreen.js
+  s_88f0e4c73046ae::t_52c34c31893df9 1-158
+legacy/Shopping/src/screens/SellScreen.js
+  s_88f0e4c73046ae::t_6d53b97ea6794f 1-134
+legacy/Shopping/src/screens/SellingForm.js
+  s_88f0e4c73046ae::t_e210abe2a4dd12 1-394
+legacy/Shopping/src/screens/SettingsScreen.js
+  s_88f0e4c73046ae::t_6f9a6ce080880a 1-88
+legacy/Shopping/src/screens/UsersScreen.js
+  s_88f0e4c73046ae::t_61f2f512b2778e 1-125
+legacy/Shopping/src/screens/WishlistScreen.js
+  s_88f0e4c73046ae::t_4e0817eda76fe4 1-158
+legacy/Shopping/src/services/push_notifications.js
+  s_88f0e4c73046ae::t_917a6c3fe8c970 1-31
+package-lock.json
+  s_88f0e4c73046ae::t_350ed1f8e77447 1-2385
+package.json
+  s_88f0e4c73046ae::t_f1fb1cd2cf0bd4 1-40
+packages/database/index.ts
+  s_88f0e4c73046ae::t_3bac86195ea9d3 1-56
+packages/database/package.json
+  s_88f0e4c73046ae::t_104e9433611736 1-7
+packages/domain/index.ts
+  s_88f0e4c73046ae::t_49a5b6aca36dda 1-81
+packages/domain/package.json
+  s_88f0e4c73046ae::t_008b1ff2135b89 1-7
+packages/server/auth.ts
+  s_88f0e4c73046ae::t_b3400ab0daaabc 1-62
+packages/server/index.ts
+  s_88f0e4c73046ae::t_617dc62845621c 1-489
+packages/server/package.json
+  s_88f0e4c73046ae::t_a0c3e26902c077 1-7
+packages/ui/index.tsx
+  s_88f0e4c73046ae::t_b29e472acd4f47 1-41
+packages/ui/package.json
+  s_88f0e4c73046ae::t_1dc00dd9c89aa9 1-7
+scripts/create-admin.ts
+  s_88f0e4c73046ae::t_a593654ab6e50d 1-27
+scripts/dev.mjs
+  s_88f0e4c73046ae::t_1ddc0ee50eb01b 1-10
+scripts/seed.ts
+  s_88f0e4c73046ae::t_c8cd949da5ac19 1-120
+scripts/smoke.ts
+  s_88f0e4c73046ae::t_75c830e694e348 1-165
+tests/api.integration.ts
+  s_88f0e4c73046ae::t_1f7cd8dce66233 1-282
+tests/domain.test.ts
+  s_88f0e4c73046ae::t_8cdcaf27f59d90 1-65
+tsconfig.json
+  s_88f0e4c73046ae::t_d8a140f58c4b7f 1-24
+vercel.json
+  s_88f0e4c73046ae::t_9af3f6ec26ef93 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "bd7c7c854acb302c2655b7a81715dd9eef3760a4",
+  "prompts": {},
+  "sessions": {
+    "s_88f0e4c73046ae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a158e7-a9ab-7771-a9cf-4b05caf450c1",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    }
+  }
+}
