@@ -1,0 +1,114 @@
+
+{
+    "Login":"تسجيل الدخول", 
+    "Logout":"تسجيل الخروج", 
+    "SignUp":"تسجيل", 
+    "CreateAccount":"انشاء حساب", 
+    "AccountSettings":"اعدادات الحساب",
+    "Wishlist": "المفضلة",
+    "Profile": "حسابي",
+    "Users": "أشخاص",
+    "Sell": "اعرض سلعة",
+    "ok": "تم",
+    "cancel": "الغاء",
+   
+       
+    "Language":{
+        "Save":"حفظ", 
+        "English":"انجليزي", 
+        "Arabic":"عربي", 
+        "ChangeLanguage":"تغيير اللغة"
+    }, 
+    "Screens":{
+        "Home":"الرئيسية", 
+        "Settings":"الاعدادات", 
+        "Category":"الفئات", 
+        "Cart":"الحقيبة", 
+        "Wishlist": "المفضلة",
+        "Register":"تسجيل", 
+        "Sell":"اعرض للبيع",
+        "SearchResult": "نتائج البحث", 
+        "SellingFrom":"إضافة",
+        "Product": "تفاصيل السلعة",
+        "Language": "اللغة",
+        "Users": "أشخاص",
+        "Product": "السلعة", 
+        "Notification":"الاشعارات", 
+        "Chat":"المحادثة"
+    }, 
+    "Home":{
+        "Categories":"الفئات",
+        "Mobiles": "الهواتف",
+        "Laptops": "حواسيب",
+        "Music": "موسيقى",
+        "Cars": "سيارات",
+        "Search": "ابحث عن سلعة", 
+        "Top":"أهم المنتجات"
+    },
+    "SellScreen":{
+        "add":"عرض سلعة جديدة"
+    }, 
+    "SellingForm":{
+        "Title":"العنوان", 
+        "Amount":"الكمية", 
+        "Price":"السعر", 
+        "Company":"الشركة", 
+        "Info":"المعلومات", 
+        "Image":"الصورة", 
+        "Currency":"العملة" ,
+        "Category":"الفئات",
+        "titleError": "أدخل اسم !!",
+        "catError": "أدخل اسم الفئة !!",
+        "infoError": "أدخل الوصف !!",
+        "companyError": "أدخل اسم الشركة !!",
+        "priceError": "أدخل سعر صحيح !!",
+        "Laptops":"حواسيب",
+        "Mobiles":"هواتف",
+        "Cars":"سيارات",
+        "Clothes":"ملابس",
+        "Other":"أخرى",
+        "USD":"دولار",
+        "JOD":"دينار",
+        "NIS": "شيكل",
+        "AddPhoto": "اختر صورة",
+        "storePhoto": "تخزين الصورة",
+        "Submit": "تخزين",
+        "ProductAdded": "تمت اضافة العنصر",
+        "ProductAddedHeader": "تمت الاضافة"
+    }, 
+    "Category":{
+        "addToCart":"إضافة", 
+        "ViewProduct":"عرض",
+        "removeFromCart":"حذف",
+        "Price": "السعر"
+    },
+    "PDP": {
+        "Views": "مرات العرض",
+        "AddToCart": "أضف للحقيبة",
+        "AddToWishlist": "أضف للمفضلة",
+        "WriteReview": "اكتب تعليق",
+        "Rate":"قيّم",
+        "AddReview": "علّق",
+        "Reviews": "التعليقات",
+        "Title":"الاسم",
+        "Company":"الشركة",
+        "SellerName":"البائع",
+        "Info":"المعلومات",
+        "Sold":"هذا العنصر غير متوفر"
+    },
+    "Product": {
+        "MarkSold": "تم بيع السلعة",
+        "MarkNotSold": "عرض السلعة مرة أخرى",
+        "Delete": "حذف"
+    },
+    "Cart": {
+        "Total":"المجموع",
+        "Seller": "تحدث مع البائع",
+        "Checkout": ""
+    },
+    "WishlistScreen": {
+        "Remove": "حذف",
+        "View": "عرض"
+    }
+
+}
