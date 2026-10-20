@@ -1,16 +1,11 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
 import { reject } from "./shared";
-// Adapter contract for a bank-approved payment connector. This is not a claim
-// that Bank of Palestine exposes these endpoint shapes; its merchant integration
-// must implement this contract after the bank supplies its integration pack.
+import { paymentReadiness } from "./payment-config";
+export { paymentReadiness } from "./payment-config";
+// This validates Delta's connector configuration, not bank certification.
 export function gatewayReady() {
-  return !!(
-    process.env.COMMERCE_GATEWAY_URL &&
-    process.env.COMMERCE_GATEWAY_SECRET &&
-    process.env.COMMERCE_GATEWAY_WEBHOOK_SECRET &&
-    process.env.COMMERCE_PAYMENT_HOSTS
-  );
+  return paymentReadiness().ready;
 }
 const paymentResult = z.object({
   id: z.string().min(1).max(200),
