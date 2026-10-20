@@ -746,13 +746,25 @@ export async function commerceApi(req: Request): Promise<Response> {
             order.returnRequest.status !== "requested")
         )
           reject(409, "Invalid return transition");
-        await db.collection("orders").updateOne(
-          {
-            _id: order._id,
-            "returnRequest.status": order.returnRequest.status,
-          },
-          { $set: { "returnRequest.status": status } },
-        );
+        await transaction(async (db, session) => {
+          const latest = await db
+            .collection("orders")
+            .findOne({ _id: order._id }, { session });
+          if (
+            !latest ||
+            latest.returnRequest?.status !== order.returnRequest.status
+          )
+            reject(409, "Return state changed; refresh the order");
+          await db
+            .collection("orders")
+            .updateOne(
+              { _id: order._id },
+              { $set: { "returnRequest.status": status } },
+              { session },
+            );
+          if (status === "received" && latest.paymentStatus === "refunded")
+            await releaseOrder(db, session, latest, "refunded");
+        });
         return out({ ok: true });
       }
       if (path[2] === "refund" && method === "POST") {
@@ -777,6 +789,11 @@ export async function commerceApi(req: Request): Promise<Response> {
             currency: order.currency,
             idempotencyKey: `refund-${path[1]}`,
           });
+          if (
+            result.amount !== order.total ||
+            result.currency !== order.currency
+          )
+            reject(502, "Refund response did not match the order");
           if (result.status === "refunded")
             await applyPaymentEvent({
               eventId: `refund-${result.id}`,

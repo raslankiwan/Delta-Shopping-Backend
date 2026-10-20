@@ -31,7 +31,7 @@ Store delivery countries, flat shipping, free-shipping thresholds, pickup, tax p
 
 Cash on delivery is supported for physical goods only. It stays unpaid until a store operator confirms collection after delivery. Digital goods/services require an approved online payment connector. Fulfillment follows unfulfilled → processing → shipped → delivered, with processing → delivered supported for pickup/digital/services. Shipped orders cannot be cancelled.
 
-Cancellations and confirmed refunds release reserved stock and coupon usage once. Delivered orders need an approved, received return before a refund can be recorded. Cash refunds explicitly require the operator to confirm cash has already been returned. Card refunds require a provider-confirmed result or signed callback. A return request is operational tracking, not a guarantee that every product is legally returnable; stores supply their own policy.
+Cancellations and confirmed refunds release reserved stock and coupon usage once. Delivered orders need an approved, received return before a refund can be recorded. Cash refunds explicitly require the operator to confirm cash has already been returned. Card refunds require a provider-confirmed result or signed callback. Refunds performed directly at the provider are recorded even when goods have shipped; stock is restored only after a confirmed received return. The return-window policy is snapshotted when an order is placed. A return request is operational tracking, not a guarantee that every product is legally returnable; stores supply their own policy.
 
 ## Payments in Palestine
 
