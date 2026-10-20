@@ -322,6 +322,15 @@ export default function CommerceApp({
           >
             {t("Discover")}
           </a>
+          <button
+            className="nav-link mobile-wishlist"
+            onClick={() => {
+              go("wishlist");
+              if (!user) setAuth("login");
+            }}
+          >
+            {t("Wishlist")}
+          </button>
           {user && (
             <>
               <button
