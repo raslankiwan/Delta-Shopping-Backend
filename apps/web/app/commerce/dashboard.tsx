@@ -186,10 +186,12 @@ export function AdminPanel({
       <div className="setup-card">
         <h3>Payments for Palestine</h3>
         <p>
-          Bank of Palestine merchant onboarding and an approved payment
-          connector are required for cards. Cash on delivery is available per
-          store. Configure merchant settlement per store; customer payments are
-          never treated as platform wallet balances.
+          Arab Bank/Cybersource or Bank of Palestine merchant approval and a
+          provider connector are required for cards. Reflect, PalPay and Jawwal
+          Pay require confirmation of their merchant integration before
+          activation. Cash on delivery is available per store. Configure
+          merchant settlement per store; customer payments are never treated as
+          platform wallet balances.
         </p>
         <a
           className="text-button"
@@ -197,10 +199,18 @@ export function AdminPanel({
           rel="noreferrer"
           href="https://www.bankofpalestine.com/en/business/electronic-services/payment-gateway"
         >
-          Merchant onboarding information
+          Bank of Palestine onboarding
           <ArrowUpRight size={16} />
         </a>
       </div>
+      <a
+        className="text-button"
+        target="_blank"
+        rel="noreferrer"
+        href="https://www.arabbank.ps/mainmenu/home/smes-banking/digitalization-and-innovation/payment-gateway"
+      >
+        Arab Bank gateway onboarding <ArrowUpRight size={16} />
+      </a>
       <h3>Platform accounts</h3>
       <div className="table-wrap">
         <table>
@@ -268,6 +278,11 @@ export function AdminPanel({
               });
             }}
           >
+            {paymentConfig.readiness?.issues?.map((issue: string) => (
+              <p className="form-hint" key={issue}>
+                {issue}
+              </p>
+            ))}
             <Field
               label="Bank-approved merchant reference"
               name="merchantRef"

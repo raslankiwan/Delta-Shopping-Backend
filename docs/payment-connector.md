@@ -65,3 +65,16 @@ The connector must retry non-2xx webhooks with backoff and retain delivery/recon
 ## Merchant approval and testing
 
 Before enabling real cards: receive the bank's supported checkout/refund/status/webhook specifications, verify per-store settlement, implement the connector, use merchant sandbox credentials, test success/decline/3DS/abandonment/network uncertainty/duplicate callback/refund, reconcile actual provider reports, then enable the approved merchant reference. The repository integration tests use a simulated connector to verify the platform contract; they do not certify a live bank connection.
+
+## Palestine provider setup
+
+Arab Bank's Palestinian [payment gateway](https://www.arabbank.ps/mainmenu/home/smes-banking/digitalization-and-innovation/payment-gateway) explicitly uses Cybersource. Obtain the merchant account's integration pack before selecting Secure Acceptance, Unified Checkout or another interface; the bank's marketing page does not establish which API is provisioned. Bank of Palestine is an alternative acquirer. Reflect account availability is not evidence of a direct merchant API. PalPay and Jawwal Pay require their own approved merchant documentation. Do not configure a consumer transfer address as an automated gateway.
+
+1. Obtain merchant approval and sandbox credentials; confirm each store's independent settlement and whether a platform/submerchant arrangement is permitted.
+2. Confirm supported presentment and settlement currencies (ILS/USD/JOD), product restrictions, fees, refunds and reconciliation capabilities in the merchant agreement.
+3. Implement the provider connector against the issued documentation, including durable idempotency, status, cancellation and refund support. Use provider sandbox hosts only during sandbox testing.
+4. Store actual provider credentials in the connector's secret store. Set the four `COMMERCE_*` variables in Vercel, using separate random signing keys of at least 32 characters. Configure exact checkout hostnames; no URLs, wildcards or trailing commas.
+5. Run `npm run payments:check` with the target environment loaded. It prints configuration names and validation errors without printing secrets. A successful check validates configuration only; it does not prove merchant approval or a working bank connection.
+6. Complete the acceptance scenarios above and reconciliation against the provider's merchant reports. Then assign each approved store's merchant reference through the platform admin payment settings and enable it. Start with one approved store.
+
+Admin payment settings expose configuration diagnostics only to platform administrators. Invalid/partial connector configuration keeps online checkout disabled. There is no direct Reflect, PalPay, Jawwal Pay or Cybersource bank adapter activated by this checklist.
