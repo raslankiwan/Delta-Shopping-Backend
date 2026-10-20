@@ -1,0 +1,25 @@
+docs/commerce.md
+  s_88f0e4c73046ae::t_2808ace768ada5 34
+packages/server/commerce/index.ts
+  s_88f0e4c73046ae::t_1923ff1ec16616 749-767,792-796
+packages/server/commerce/orders.ts
+  s_88f0e4c73046ae::t_269cada16be09b 203,302-310,312,334,365-366,407-415,480-482,484-502
+tests/commerce.integration.ts
+  s_88f0e4c73046ae::t_fdfaa15efa849f 949-1070,1085-1089
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "3bb976fe86fa92f82c0a2d625efc6e13a32ece2e",
+  "prompts": {},
+  "sessions": {
+    "s_88f0e4c73046ae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a158e7-a9ab-7771-a9cf-4b05caf450c1",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    }
+  }
+}
