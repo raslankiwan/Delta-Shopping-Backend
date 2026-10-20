@@ -33,3 +33,11 @@ Original source histories are retained as `legacy/Shopping`, `legacy/DeltaShoppi
 Repository archival is reversible through GitHub repository settings. MongoDB free tier has no configured paid backup policy: export data regularly with `mongodump` and protect the export. Do not treat Git history as a database backup.
 
 Sample data uses `seedKey` fields. Remove only explicitly selected sample records after reviewing their IDs; never drop a collection to clear examples.
+
+## Commerce operations
+
+The active app is now Delta Commerce. Platform administrators create stores and issue owner invitations; store owners are scoped memberships, not global administrator accounts. See `commerce.md` for roles and workflows, and `payment-connector.md` for bank integration setup.
+
+The production maintenance job is `/api/commerce/maintenance`, protected with CRON_SECRET and scheduled daily at 03:00 UTC on the current Vercel plan. It reconciles expired card sessions with the provider before stock release. Do not remove its bearer authentication. No live payment connector or email provider is configured; their activation requires separate merchant/provider setup.
+
+Run `SMOKE_BASE_URL=https://delta-shopping.vercel.app npm run smoke:commerce` to verify the actual deployment with isolated fixtures. The script removes only its own generated store/accounts/orders. The legacy `npm run smoke` remains a compatibility check for the old API.
