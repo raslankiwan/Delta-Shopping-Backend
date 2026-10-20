@@ -14,7 +14,9 @@
     "test:integration": "tsx --test tests/*.integration.ts",
     "seed": "node --env-file-if-exists=.env.local --import tsx scripts/seed.ts",
     "admin:create": "node --env-file-if-exists=.env.local --import tsx scripts/create-admin.ts",
-    "smoke": "node --env-file-if-exists=.env.local --import tsx scripts/smoke.ts"
+    "smoke": "node --env-file-if-exists=.env.local --import tsx scripts/smoke.ts",
+    "smoke:commerce": "node --env-file-if-exists=.env.local --import tsx scripts/smoke-commerce.ts",
+    "seed:commerce": "node --env-file-if-exists=.env.local --import tsx scripts/seed-commerce.ts"
   },
   "engines": {
     "node": "24.x"

@@ -1,4 +1,4 @@
-import Marketplace from "./marketplace";
+import CommerceApp from "./commerce/app";
 export default function Page() {
-  return <Marketplace />;
+  return <CommerceApp />;
 }

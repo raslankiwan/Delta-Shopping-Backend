@@ -1,3 +1,4 @@
+import { commerceApi } from "./commerce";
 import { ObjectId, type Document } from "mongodb";
 import { z } from "zod";
 import { database } from "@delta/database";
@@ -60,20 +61,20 @@ async function notify(userId: string, text: string, productId?: string) {
 async function rateLimit(key: string, limit: number, windowMs: number) {
   const db = await database();
   const slot = Math.floor(Date.now() / windowMs);
-  const row = await db
-    .collection("rateLimits")
-    .findOneAndUpdate(
-      { _id: digest(`${key}:${slot}`) as any },
-      {
-        $inc: { count: 1 },
-        $setOnInsert: { expiresAt: new Date((slot + 1) * windowMs) },
-      },
-      { upsert: true, returnDocument: "after" },
-    );
+  const row = await db.collection("rateLimits").findOneAndUpdate(
+    { _id: digest(`${key}:${slot}`) as any },
+    {
+      $inc: { count: 1 },
+      $setOnInsert: { expiresAt: new Date((slot + 1) * windowMs) },
+    },
+    { upsert: true, returnDocument: "after" },
+  );
   if (row!.count > limit)
     fail(429, "Too many requests. Please try again later.");
 }
 export async function handleApi(req: Request): Promise<Response> {
+  if (new URL(req.url).pathname.startsWith("/api/commerce/"))
+    return commerceApi(req);
   try {
     const url = new URL(req.url);
     const path = url.pathname
@@ -223,15 +224,13 @@ export async function handleApi(req: Request): Promise<Response> {
         if (product!.sellerId === user._id)
           fail(400, "You cannot review your own listing");
         const input = reviewSchema.parse(await body(req));
-        await db
-          .collection("reviews")
-          .insertOne({
-            ...input,
-            productId: path[1],
-            userId: user._id,
-            userName: user.name,
-            createdAt: new Date(),
-          });
+        await db.collection("reviews").insertOne({
+          ...input,
+          productId: path[1],
+          userId: user._id,
+          userName: user.name,
+          createdAt: new Date(),
+        });
         await notify(
           product!.sellerId,
           `${user.name} reviewed ${product!.title}`,
@@ -328,12 +327,10 @@ export async function handleApi(req: Request): Promise<Response> {
       if (method === "POST") {
         await rateLimit(`message:${user._id}`, 60, 3600000);
         const input = messageSchema.parse(await body(req));
-        const product = await db
-          .collection("products")
-          .findOne({
-            _id: new ObjectId(input.productId),
-            status: { $ne: "hidden" },
-          });
+        const product = await db.collection("products").findOne({
+          _id: new ObjectId(input.productId),
+          status: { $ne: "hidden" },
+        });
         if (!product) fail(404, "Listing not found");
         if (product.sample) fail(400, "Sample listings are not real offers");
         if (input.to === user._id) fail(400, "Choose another recipient");
@@ -341,29 +338,25 @@ export async function handleApi(req: Request): Promise<Response> {
           fail(403, "Messages must include the seller");
         if (
           product.sellerId === user._id &&
-          !(await db
-            .collection("messages")
-            .findOne({
-              productId: input.productId,
-              from: input.to,
-              to: user._id,
-            }))
+          !(await db.collection("messages").findOne({
+            productId: input.productId,
+            from: input.to,
+            to: user._id,
+          }))
         )
           fail(403, "Buyer must start the conversation");
         const recipient = await db
           .collection("users")
           .findOne({ _id: new ObjectId(input.to), disabled: { $ne: true } });
         if (!recipient) fail(404, "Recipient unavailable");
-        await db
-          .collection("messages")
-          .insertOne({
-            ...input,
-            from: user._id,
-            fromName: user.name,
-            toName: recipient.name,
-            productTitle: product.title,
-            createdAt: new Date(),
-          });
+        await db.collection("messages").insertOne({
+          ...input,
+          from: user._id,
+          fromName: user.name,
+          toName: recipient.name,
+          productTitle: product.title,
+          createdAt: new Date(),
+        });
         await notify(
           input.to,
           `${user.name} sent you a message about ${product.title}`,
@@ -429,15 +422,13 @@ export async function handleApi(req: Request): Promise<Response> {
           .collection("products")
           .updateOne({ _id: objectId(path[2]) }, { $set: input });
         if (!result.matchedCount) fail(404, "Listing not found");
-        await db
-          .collection("audit")
-          .insertOne({
-            actor: user._id,
-            action: "moderate-listing",
-            target: path[2],
-            ...input,
-            createdAt: new Date(),
-          });
+        await db.collection("audit").insertOne({
+          actor: user._id,
+          action: "moderate-listing",
+          target: path[2],
+          ...input,
+          createdAt: new Date(),
+        });
         return json({ ok: true });
       }
       if (method === "PATCH" && path[1] === "users") {
@@ -456,15 +447,13 @@ export async function handleApi(req: Request): Promise<Response> {
           .updateOne({ _id: target._id }, { $set: input });
         if (input.disabled)
           await db.collection("sessions").deleteMany({ userId: path[2] });
-        await db
-          .collection("audit")
-          .insertOne({
-            actor: user._id,
-            action: "moderate-user",
-            target: path[2],
-            ...input,
-            createdAt: new Date(),
-          });
+        await db.collection("audit").insertOne({
+          actor: user._id,
+          action: "moderate-user",
+          target: path[2],
+          ...input,
+          createdAt: new Date(),
+        });
         return json({ ok: true });
       }
     }
