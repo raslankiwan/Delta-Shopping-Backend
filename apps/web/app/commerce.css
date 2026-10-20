@@ -1722,3 +1722,11 @@ details p {
     display: none !important;
   }
 }
+.mobile-wishlist {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .nav.open .mobile-wishlist {
+    display: flex;
+  }
+}
