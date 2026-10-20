@@ -200,6 +200,7 @@ export async function createOrder(user: User, raw: unknown) {
       address: input.address,
       delivery: input.delivery,
       paymentMethod: input.paymentMethod,
+      stockReleased: false,
       paymentStatus: input.paymentMethod === "cod" ? "unpaid" : "creating",
       fulfillment: "unfulfilled",
       subtotal: q.subtotal,
@@ -298,8 +299,17 @@ export async function releaseOrder(
   order: any,
   paymentStatus = "cancelled",
 ) {
-  if (order.fulfillment === "cancelled" || order.paymentStatus === "refunded")
+  if (order.stockReleased || order.fulfillment === "cancelled") {
+    if (paymentStatus === "refunded" && order.paymentStatus !== "refunded")
+      await db
+        .collection("orders")
+        .updateOne(
+          { _id: order._id },
+          { $set: { paymentStatus: "refunded" } },
+          { session },
+        );
     return;
+  }
   for (const line of order.lines)
     if (line.trackStock)
       await db.collection("commerceProducts").updateOne(
@@ -321,7 +331,7 @@ export async function releaseOrder(
   await db.collection("orders").updateOne(
     { _id: order._id },
     {
-      $set: { fulfillment: "cancelled", paymentStatus },
+      $set: { fulfillment: "cancelled", paymentStatus, stockReleased: true },
       $push: {
         history: {
           event:
@@ -352,6 +362,8 @@ export async function cancelOrder(user: User, id: string) {
       paymentId: order.paymentId || "",
       idempotencyKey: `cancel-${id}`,
     });
+    if (result.amount !== order.total || result.currency !== order.currency)
+      reject(502, "Payment cancellation did not match the order");
     if (!["expired", "failed"].includes(result.status))
       reject(
         409,
@@ -392,7 +404,15 @@ export async function updateFulfillment(user: User, id: string, raw: unknown) {
       )
     )
       reject(409, "Invalid fulfillment transition");
-    if (order.paymentMethod === "card" && order.paymentStatus !== "paid")
+    if (
+      order.paymentMethod === "card" &&
+      order.paymentStatus !== "paid" &&
+      !(
+        order.paymentStatus === "refunded" &&
+        order.fulfillment === "shipped" &&
+        input.fulfillment === "delivered"
+      )
+    )
       reject(409, "Payment must be verified before fulfillment");
     if (input.fulfillment === "shipped" && !input.tracking)
       reject(400, "Tracking reference required");
@@ -457,15 +477,29 @@ export async function applyPaymentEvent(event: any) {
         { session },
       );
     } else if (event.status === "refunded") {
+      // An authenticated provider refund is financial truth even if its paid
+      // event arrived late, or goods have already shipped. Do not restock goods
+      // that have not physically returned.
       if (
-        order.paymentStatus !== "paid" &&
-        order.paymentStatus !== "refunding" &&
-        order.paymentStatus !== "refunded"
-      )
-        reject(409, "Payment is not refundable");
-      if (order.fulfillment === "shipped")
-        reject(409, "Record the completed return before refund");
-      await releaseOrder(db, session, order, "refunded");
+        order.fulfillment === "shipped" ||
+        (order.fulfillment === "delivered" &&
+          order.returnRequest?.status !== "received")
+      ) {
+        if (order.paymentStatus !== "refunded")
+          await db.collection("orders").updateOne(
+            { _id: order._id },
+            {
+              $set: { paymentStatus: "refunded" },
+              $push: {
+                history: {
+                  event: "Provider refund confirmed; goods not yet returned",
+                  at: new Date(),
+                },
+              },
+            } as any,
+            { session },
+          );
+      } else await releaseOrder(db, session, order, "refunded");
     } else if (["creating", "pending"].includes(order.paymentStatus))
       await releaseOrder(db, session, order, event.status);
     await db
