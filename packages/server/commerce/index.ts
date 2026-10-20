@@ -38,6 +38,7 @@ import {
 } from "./orders";
 import {
   gatewayReady,
+  paymentReadiness,
   gatewayCall,
   verifyWebhook,
   paymentEventSchema,
@@ -900,6 +901,7 @@ export async function commerceApi(req: Request): Promise<Response> {
           merchantRef: store.paymentConfig?.merchantRef || "",
           enabled: !!store.paymentConfig?.enabled,
           gatewayConfigured: gatewayReady(),
+          readiness: paymentReadiness(),
         });
       }
       if (path[2] === "payments" && method === "POST") {

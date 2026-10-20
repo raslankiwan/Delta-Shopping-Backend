@@ -756,7 +756,7 @@ test("commerce lifecycle, financial integrity, and tenant isolation", async (t) 
     },
   );
   await t.test("forged and stale payment events are rejected", async () => {
-    process.env.COMMERCE_GATEWAY_WEBHOOK_SECRET = "test-only-secret";
+    process.env.COMMERCE_GATEWAY_WEBHOOK_SECRET = "test-only-webhook-secret-at-least-32-characters";
     const body = {
       eventId: "event-1",
       orderId,
@@ -776,7 +776,7 @@ test("commerce lifecycle, financial integrity, and tenant isolation", async (t) 
       401,
     );
     const timestamp = String(Math.floor(Date.now() / 1000));
-    const signature = createHmac("sha256", "test-only-secret")
+    const signature = createHmac("sha256", "test-only-webhook-secret-at-least-32-characters")
       .update(`${timestamp}.${JSON.stringify(body)}`)
       .digest("hex");
     assert.doesNotThrow(() =>
@@ -796,7 +796,7 @@ test("commerce lifecycle, financial integrity, and tenant isolation", async (t) 
         for await (const chunk of req) text += chunk;
         const payload = JSON.parse(text);
         const timestamp = String(req.headers["x-commerce-timestamp"]);
-        const sig = createHmac("sha256", "connector-secret")
+        const sig = createHmac("sha256", "test-only-connector-secret-at-least-32-characters")
           .update(`${timestamp}.${text}`)
           .digest("hex");
         assert.equal(req.headers["x-commerce-signature"], sig);
@@ -822,7 +822,7 @@ test("commerce lifecycle, financial integrity, and tenant isolation", async (t) 
       const port = (server.address() as any).port;
       (process.env as Record<string, string | undefined>).NODE_ENV = "test";
       process.env.COMMERCE_GATEWAY_URL = `http://127.0.0.1:${port}/`;
-      process.env.COMMERCE_GATEWAY_SECRET = "connector-secret";
+      process.env.COMMERCE_GATEWAY_SECRET = "test-only-connector-secret-at-least-32-characters";
       process.env.COMMERCE_PAYMENT_HOSTS = "bank-test.invalid";
       try {
         await request(
@@ -898,7 +898,7 @@ test("commerce lifecycle, financial integrity, and tenant isolation", async (t) 
         };
         const send = async (data: any) => {
           const timestamp = String(Math.floor(Date.now() / 1000));
-          const signature = createHmac("sha256", "test-only-secret")
+          const signature = createHmac("sha256", "test-only-webhook-secret-at-least-32-characters")
             .update(`${timestamp}.${JSON.stringify(data)}`)
             .digest("hex");
           return request("payments/webhook", "POST", data, undefined, {
