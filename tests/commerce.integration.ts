@@ -946,6 +946,128 @@ test("commerce lifecycle, financial integrity, and tenant isolation", async (t) 
           (await send({ ...event, eventId: "late-paid-event" })).status,
           409,
         );
+
+        // Refunds performed at the provider must be recorded even while a
+        // shipment is in transit. Inventory returns only after goods arrive.
+        const physical = await request(
+          "orders",
+          "POST",
+          checkout({ paymentMethod: "card" }),
+          buyer.cookie,
+        );
+        assert.equal(physical.status, 201);
+        const physicalId = physical.body.order._id;
+        const physicalEvent = {
+          ...event,
+          eventId: "physical-paid",
+          orderId: physicalId,
+          paymentId: "test-" + physicalId,
+          amount: 13000,
+        };
+        assert.equal((await send(physicalEvent)).status, 200);
+        assert.equal(
+          (
+            await request(
+              `orders/${physicalId}/fulfill`,
+              "POST",
+              { fulfillment: "processing" },
+              owner.cookie,
+            )
+          ).status,
+          200,
+        );
+        assert.equal(
+          (
+            await request(
+              `orders/${physicalId}/fulfill`,
+              "POST",
+              { fulfillment: "shipped", tracking: "external-refund-shipment" },
+              owner.cookie,
+            )
+          ).status,
+          200,
+        );
+        const stockBefore = (
+          await request(
+            `stores/${storeId}/products`,
+            "GET",
+            undefined,
+            owner.cookie,
+          )
+        ).body.products.find((p: any) => p._id === productId).variants[0].stock;
+        const refundedEvent = {
+          ...physicalEvent,
+          eventId: "physical-refund",
+          status: "refunded",
+        };
+        assert.equal((await send(refundedEvent)).status, 200);
+        const afterRefund = await request(
+          `orders/${physicalId}`,
+          "GET",
+          undefined,
+          buyer.cookie,
+        );
+        assert.equal(afterRefund.body.order.paymentStatus, "refunded");
+        assert.equal(afterRefund.body.order.fulfillment, "shipped");
+        assert.equal(
+          (
+            await request(
+              `stores/${storeId}/products`,
+              "GET",
+              undefined,
+              owner.cookie,
+            )
+          ).body.products.find((p: any) => p._id === productId).variants[0]
+            .stock,
+          stockBefore,
+        );
+        assert.equal(
+          (
+            await request(
+              `orders/${physicalId}/fulfill`,
+              "POST",
+              { fulfillment: "delivered" },
+              owner.cookie,
+            )
+          ).status,
+          200,
+        );
+        assert.equal(
+          (
+            await request(
+              `orders/${physicalId}/return`,
+              "POST",
+              { reason: "Goods returned after provider refund" },
+              buyer.cookie,
+            )
+          ).status,
+          200,
+        );
+        for (const status of ["approved", "received"])
+          assert.equal(
+            (
+              await request(
+                `orders/${physicalId}/return-status`,
+                "POST",
+                { status },
+                owner.cookie,
+              )
+            ).status,
+            200,
+          );
+        assert.equal((await send(refundedEvent)).status, 200);
+        assert.equal(
+          (
+            await request(
+              `stores/${storeId}/products`,
+              "GET",
+              undefined,
+              owner.cookie,
+            )
+          ).body.products.find((p: any) => p._id === productId).variants[0]
+            .stock,
+          stockBefore + 1,
+        );
       } finally {
         await new Promise<void>((resolve) => server.close(() => resolve()));
         delete process.env.COMMERCE_GATEWAY_URL;
@@ -960,13 +1082,11 @@ test("password reset tokens are single-use and revoke sessions", async () => {
   const db = await database();
   const { digest } = await import("../packages/server/auth");
   const token = "a".repeat(64);
-  await db
-    .collection("passwordResets")
-    .insertOne({
-      userId: account._id,
-      token: digest(token),
-      expiresAt: new Date(Date.now() + 60000),
-    });
+  await db.collection("passwordResets").insertOne({
+    userId: account._id,
+    token: digest(token),
+    expiresAt: new Date(Date.now() + 60000),
+  });
   assert.equal(
     (await request("account/request-reset", "POST", { email: account.email }))
       .status,
