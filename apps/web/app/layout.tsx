@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./commerce.css";
 export const metadata: Metadata = {
-  title: "Delta — Find your next great thing",
+  title: "Delta — Every store. One place.",
   description:
-    "Discover, sell, and connect. A community marketplace for things with a next chapter.",
+    "Discover independent stores, shop their collections, and manage your business with Delta Commerce.",
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

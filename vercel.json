@@ -2,5 +2,11 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "outputDirectory": "apps/web/.next",
-  "installCommand": "npm ci"
+  "installCommand": "npm ci",
+  "crons": [
+    {
+      "path": "/api/commerce/maintenance",
+      "schedule": "0 3 * * *"
+    }
+  ]
 }

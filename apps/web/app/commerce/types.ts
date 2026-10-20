@@ -1,0 +1,55 @@
+export type Store = {
+  demo?: boolean;
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  country: string;
+  currency: string;
+  logo: string;
+  accent: string;
+  status: string;
+  shippingFee: number;
+  freeShippingAbove: number;
+  taxBps: number;
+  codEnabled: boolean;
+  pickupEnabled: boolean;
+  deliveryCountries: string[];
+  returnsDays: number;
+  shippingPolicy: string;
+  returnPolicy: string;
+  privacyPolicy: string;
+  contactEmail: string;
+  phone: string;
+  address: string;
+  onlinePaymentsReady: boolean;
+};
+export type Variant = {
+  id: string;
+  name: string;
+  sku: string;
+  price: number;
+  stock: number;
+  attributes: Record<string, string>;
+};
+export type Item = {
+  _id: string;
+  storeId: string;
+  name: string;
+  description: string;
+  categoryId: string;
+  type: "physical" | "digital" | "service";
+  status: string;
+  images: string[];
+  variants: Variant[];
+  attributes: Record<string, string>;
+  featured: boolean;
+  trackStock: boolean;
+  deliveryUrl?: string;
+  version: number;
+  store?: Store;
+};
+export type Cart = {
+  storeId: string;
+  lines: { productId: string; variantId: string; quantity: number }[];
+};
