@@ -1,0 +1,17 @@
+[
+  {
+    "repository": "raslankiwan/Shopping",
+    "preservedTag": "legacy/Shopping",
+    "commit": "f3f10c12ca319cbcf33b7f28b12a7af54f244f66"
+  },
+  {
+    "repository": "raslankiwan/DeltaShopping",
+    "preservedTag": "legacy/DeltaShopping",
+    "commit": "19c0df938d5c870ebb7483a953c0440960b64c6b"
+  },
+  {
+    "repository": "raslankiwan/DeltaShoppingServer",
+    "preservedTag": "legacy/DeltaShoppingServer",
+    "commit": "d24a5cb913bc0b2211991bd709a442f80740c65a"
+  }
+]
