@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["vite/client", "node"],
+    /* React 19's default-import interop isn't representable under
+       verbatimModuleSyntax with these packages' current type declarations.
+       Relax it for this app only; esModuleInterop (from the base) still applies. */
+    "verbatimModuleSyntax": false,
+    "noEmit": true
+  },
+  "include": ["src", "vite.config.ts"]
+}

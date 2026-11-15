@@ -1,0 +1,20 @@
+{
+  "name": "@mercato/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./catalogs/ar": "./src/catalogs/ar.json",
+    "./catalogs/en": "./src/catalogs/en.json"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "clean": "rm -rf .turbo"
+  },
+  "devDependencies": {
+    "@mercato/config": "workspace:*",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@mercato/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts"
+  },
+  "scripts": {
+    "migrate": "bun run src/migrate.ts",
+    "seed": "bun run src/seed.ts",
+    "studio": "drizzle-kit studio",
+    "generate": "drizzle-kit generate",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "bun test",
+    "lint": "eslint .",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@mercato/core": "workspace:*",
+    "drizzle-orm": "^0.44.2",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "@mercato/config": "workspace:*",
+    "drizzle-kit": "^0.31.1",
+    "typescript": "^5.8.3"
+  }
+}

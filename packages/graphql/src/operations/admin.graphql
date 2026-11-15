@@ -1,0 +1,385 @@
+fragment PrincipalF on PrincipalType {
+  user_id
+  organization_id
+  store_ids
+  permissions
+}
+
+fragment AuthPayloadF on AuthPayloadType {
+  access_token
+  refresh_token
+  token_type
+  expires_in
+  principal {
+    ...PrincipalF
+  }
+}
+
+mutation StaffLogin($input: LoginInputType!) {
+  staffLogin(input: $input) {
+    ...AuthPayloadF
+  }
+}
+
+mutation StaffRegister($input: SignupInputType!) {
+  staffRegister(input: $input) {
+    ...AuthPayloadF
+  }
+}
+
+mutation RefreshToken($input: RefreshInputType!) {
+  refreshToken(input: $input) {
+    ...AuthPayloadF
+  }
+}
+
+mutation Logout($input: RefreshInputType!) {
+  logout(input: $input)
+}
+
+query Me {
+  me {
+    ...PrincipalF
+  }
+}
+
+query AdminProducts {
+  adminProducts {
+    id
+    slug
+    title
+    status
+  }
+}
+
+query AdminProduct($id: String!) {
+  adminProduct(id: $id) {
+    id
+    slug
+    title
+    subtitle
+    description
+    type
+    requires_shipping
+    service_duration_minutes
+    service_location
+    category {
+      id
+      slug
+      name
+    }
+    vendor
+    tags
+    seo_title
+    seo_description
+    status
+    translations
+    images {
+      id
+      url
+      alt
+      position
+    }
+    options {
+      name
+      values
+    }
+    variants {
+      id
+      sku
+      option_values
+      price {
+        amount_minor
+        currency
+      }
+      compare_at {
+        amount_minor
+        currency
+      }
+    }
+  }
+}
+
+query AdminPriceLists {
+  adminPriceLists {
+    id
+    name
+    currency
+  }
+}
+
+query AdminCategories {
+  adminCategories {
+    id
+    slug
+    name
+    parent_id
+    position
+  }
+}
+
+mutation CreateCategory($input: CreateCategoryInput!) {
+  createCategory(input: $input) {
+    id
+  }
+}
+
+query AdminShippingZones {
+  shippingZones {
+    id
+    governorate
+    name
+    rate {
+      amount_minor
+      currency
+    }
+    cod_available
+    eta_days
+    enabled
+  }
+}
+
+mutation CreateProduct($input: CreateProductInput!) {
+  createProduct(input: $input) {
+    id
+  }
+}
+
+mutation UpdateProduct($id: String!, $input: UpdateProductInput!) {
+  updateProduct(id: $id, input: $input)
+}
+
+mutation DeleteProduct($id: String!) {
+  deleteProduct(id: $id)
+}
+
+mutation AddProductOption($productId: String!, $input: AddOptionInput!) {
+  addProductOption(productId: $productId, input: $input) {
+    id
+  }
+}
+
+mutation GenerateVariants($productId: String!) {
+  generateVariants(productId: $productId) {
+    created
+  }
+}
+
+mutation AddProductImage($productId: String!, $input: AddImageInput!) {
+  addProductImage(productId: $productId, input: $input) {
+    id
+  }
+}
+
+mutation RemoveProductImage($imageId: String!) {
+  removeProductImage(imageId: $imageId)
+}
+
+mutation SetProductTranslations($productId: String!, $input: SetTranslationsInput!) {
+  setProductTranslations(productId: $productId, input: $input)
+}
+
+mutation SetVariantPrice($variantId: String!, $input: SetPriceInput!) {
+  setVariantPrice(variantId: $variantId, input: $input) {
+    id
+  }
+}
+
+mutation MediaUpload($filename: String!, $contentBase64: String!) {
+  mediaUpload(filename: $filename, contentBase64: $contentBase64) {
+    url
+    filename
+    size
+  }
+}
+
+query Inventory {
+  inventory {
+    variant_id
+    sku
+    location_id
+    on_hand
+    reserved
+    reorder_point
+    available
+  }
+}
+
+query InventoryLowStock {
+  inventoryLowStock {
+    variant_id
+    sku
+    on_hand
+    reserved
+    reorder_point
+  }
+}
+
+mutation InventoryAdjust($input: AdjustInventoryInput!) {
+  inventoryAdjust(input: $input) {
+    on_hand
+  }
+}
+
+query Locations {
+  locations {
+    id
+    name
+    is_default
+  }
+}
+
+mutation CreateLocation($input: CreateLocationInputType!) {
+  createLocation(input: $input) {
+    id
+  }
+}
+
+query Orders($status: String, $limit: Int) {
+  orders(status: $status, limit: $limit) {
+    id
+    number
+    email
+    currency
+    status
+    financial_status
+    fulfillment_status
+    total_minor
+    placed_at
+  }
+}
+
+query Order($id: String!) {
+  order(id: $id) {
+    order {
+      id
+      number
+      email
+      currency
+      status
+      financial_status
+      fulfillment_status
+      subtotal_minor
+      tax_minor
+      shipping_minor
+      total_minor
+      placed_at
+    }
+    lines {
+      sku
+      title
+      quantity
+      unit_price_minor
+      total_minor
+    }
+    payments {
+      provider
+      status
+      amount_minor
+    }
+    fulfillments {
+      status
+      tracking_number
+      carrier
+    }
+    refunds {
+      amount_minor
+      reason
+      status
+    }
+  }
+}
+
+mutation CancelOrder($id: String!) {
+  cancelOrder(id: $id)
+}
+
+mutation RefundOrder($id: String!, $input: RefundOrderInput!) {
+  refundOrder(id: $id, input: $input) {
+    id
+  }
+}
+
+mutation FulfillOrder($id: String!, $input: FulfillOrderInput!) {
+  fulfillOrder(id: $id, input: $input) {
+    id
+  }
+}
+
+query DiscountCodes {
+  discountCodes {
+    id
+    code
+    used_count
+    usage_limit
+    status
+    action
+  }
+}
+
+mutation CreateDiscountCode($input: CreateDiscountCodeInputType!) {
+  createDiscountCode(input: $input) {
+    id
+  }
+}
+
+query ReportSales($from: String, $to: String) {
+  reportSales(from: $from, to: $to) {
+    orders_count
+    revenue_minor
+    aov_minor
+  }
+}
+
+query ReportTopProducts($limit: Int) {
+  reportTopProducts(limit: $limit) {
+    sku
+    title
+    units
+    revenue_minor
+  }
+}
+
+query ReportInventory {
+  reportInventory {
+    skus
+    total_on_hand
+    total_reserved
+    low_stock
+  }
+}
+
+query AdminStores {
+  adminStores {
+    id
+    slug
+    name
+    status
+    default_locale
+    default_currency
+  }
+}
+
+mutation CreateStore($input: CreateStoreInputType!) {
+  createStore(input: $input) {
+    id
+  }
+}
+
+mutation UpdateStore($id: String!, $input: UpdateStoreInputType!) {
+  updateStore(id: $id, input: $input)
+}
+
+query Organizations {
+  organizations {
+    id
+    name
+    slug
+    plan
+    billing_status
+  }
+}
+
+mutation OperatorSetStoreStatus($storeId: String!, $status: String!) {
+  operatorSetStoreStatus(storeId: $storeId, status: $status)
+}

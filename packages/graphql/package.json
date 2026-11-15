@@ -1,0 +1,29 @@
+{
+  "name": "@mercato/graphql",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./generated": "./src/generated/graphql.ts"
+  },
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "clean": "rm -rf .turbo"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.11.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typed-document-node": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.1.0",
+    "@graphql-codegen/typescript-operations": "^4.3.0",
+    "@mercato/config": "workspace:*",
+    "typescript": "^5.8.3"
+  }
+}

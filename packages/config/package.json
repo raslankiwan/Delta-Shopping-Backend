@@ -1,0 +1,18 @@
+{
+  "name": "@mercato/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./eslint": "./eslint.config.js",
+    "./prettier": "./prettier.config.js",
+    "./tsconfig.base.json": "./tsconfig.base.json"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.30.0",
+    "eslint": "^9.30.0",
+    "eslint-config-prettier": "^10.1.5",
+    "typescript-eslint": "^8.35.0",
+    "prettier": "^3.6.0"
+  }
+}

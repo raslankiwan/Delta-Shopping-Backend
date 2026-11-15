@@ -1,0 +1,45 @@
+name: mercato
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: mercato-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mercato
+    ports:
+      # Postgres on the default host port 5432. NOTE: nothing else (a native
+      # Postgres.app or another project's DB container) may occupy 5432 at the
+      # same time — stop it first, or change this mapping.
+      - "5432:5432"
+    volumes:
+      # Postgres 18+ stores data in a major-version subdir, so the persistent
+      # mount must be /var/lib/postgresql (NOT /var/lib/postgresql/data).
+      - mercato-pg-data:/var/lib/postgresql
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mercato"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: mercato-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "9003:6379"
+    volumes:
+      - mercato-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mercato-pg-data:
+  mercato-redis-data:

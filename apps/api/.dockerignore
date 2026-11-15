@@ -1,0 +1,51 @@
+# Applies to the build context used by apps/api/Dockerfile, which must be
+# the MONOREPO ROOT (docker build -f apps/api/Dockerfile . from repo root),
+# since the API is built inside the Bun workspace alongside every other app
+# and package. Keep this in sync with the root .gitignore.
+
+# --- VCS / editor ---
+.git/
+.github/
+.vscode/
+.idea/
+.DS_Store
+
+# --- deps (reinstalled inside the image) ---
+node_modules/
+**/node_modules/
+
+# --- build output (rebuilt inside the image) ---
+dist/
+**/dist/
+build/
+**/build/
+.next/
+**/.next/
+*.tsbuildinfo
+
+# --- turbo / test / coverage ---
+.turbo/
+**/.turbo/
+coverage/
+**/coverage/
+
+# --- env & secrets: never bake these into an image layer ---
+.env
+.env.*
+!.env.example
+
+# --- logs ---
+*.log
+npm-debug.log*
+bun-debug.log*
+
+# --- docs (not needed at build or runtime) ---
+docs/
+README.md
+**/README.md
+
+# --- other apps' dev-only artifacts (their package.json is still needed
+# for `bun install` to resolve the workspace graph, so apps/ and packages/
+# themselves are NOT excluded here) ---
+apps/admin/dist/
+apps/storefront/.next/
