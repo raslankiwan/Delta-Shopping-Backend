@@ -1,0 +1,19 @@
+apps/api/src/auth/auth.service.ts
+  s_0fe044944ab9f4::t_2b23b53b794564 1-3,5-65,67-76,79-95,99-134,137-149,152-195,197,199-207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "75c5c797181f0951113ed011cebfdc48c928d4d3",
+  "prompts": {},
+  "sessions": {
+    "s_0fe044944ab9f4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1df62-17fb-7f30-b35e-2defe4db2ebe",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    }
+  }
+}
