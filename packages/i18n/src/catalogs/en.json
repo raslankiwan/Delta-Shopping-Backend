@@ -1,0 +1,113 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "empty": "Nothing here yet.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "create": "Create",
+    "search": "Search",
+    "retry": "Try again",
+    "currency": "Currency",
+    "language": "Language"
+  },
+  "nav": {
+    "home": "Home",
+    "cart": "Cart",
+    "account": "Account",
+    "catalog": "Catalog"
+  },
+  "home": {
+    "eyebrow": "Catalog",
+    "title": "Everything on the stalls today.",
+    "empty": "No products available right now. Please check back shortly."
+  },
+  "product": {
+    "addToCart": "Add to cart",
+    "quantity": "Quantity",
+    "sku": "SKU",
+    "added": "Added ✓",
+    "viewCart": "View cart →",
+    "outOfStock": "Out of stock",
+    "unavailable": "This combination isn't available",
+    "from": "From",
+    "was": "Was"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty. Browse the catalog →",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "checkout": "Checkout →",
+    "discountCode": "Discount code",
+    "apply": "Apply",
+    "remove": "Remove",
+    "items": "{count} items"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contact": "Contact",
+    "email": "Email",
+    "shippingAddress": "Shipping address",
+    "line1": "Address line 1",
+    "line2": "Address line 2",
+    "city": "City",
+    "region": "Region",
+    "postalCode": "Postal code",
+    "country": "Country (ISO-2)",
+    "phone": "Phone",
+    "placeOrder": "Place order",
+    "orderPlaced": "Thank you! Your order is confirmed.",
+    "orderNumber": "Order number"
+  },
+  "account": {
+    "title": "Your account",
+    "login": "Sign in",
+    "register": "Create account",
+    "logout": "Sign out",
+    "profile": "Profile",
+    "addresses": "Addresses",
+    "password": "Password",
+    "name": "Name"
+  },
+  "admin": {
+    "appName": "Mercato Admin",
+    "signInHint": "Sign in to manage your store",
+    "signIn": "Sign in",
+    "logout": "Log out",
+    "store": "Store",
+    "staff": "Staff",
+    "nav": {
+      "catalog": "Catalog",
+      "orders": "Orders",
+      "inventory": "Inventory",
+      "promotions": "Promotions",
+      "reports": "Reports",
+      "settings": "Settings"
+    },
+    "catalog": {
+      "title": "Catalog",
+      "subtitle": "Products available in the active store.",
+      "newProduct": "New product",
+      "productTitle": "Title",
+      "slug": "Slug",
+      "status": "Status",
+      "createProduct": "Create product",
+      "actions": "Actions"
+    },
+    "orders": { "title": "Orders" },
+    "inventory": { "title": "Inventory" },
+    "promotions": { "title": "Promotions" },
+    "reports": {
+      "title": "Reports",
+      "subtitle": "Sales, inventory, and top-performing products.",
+      "orders": "Orders",
+      "revenue": "Revenue",
+      "aov": "Average order value",
+      "topProducts": "Top products"
+    },
+    "settings": { "title": "Settings" }
+  }
+}
