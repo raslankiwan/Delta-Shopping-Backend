@@ -1,0 +1,35 @@
+apps/web/app/commerce/dashboard.tsx
+  s_88f0e4c73046ae::t_744991d2b93b84 189-194,202,206-213,281-285
+docs/payment-connector.md
+  s_88f0e4c73046ae::t_f006bb7f64cd04 68-80
+package.json
+  s_88f0e4c73046ae::t_c5268ec169567d 19-20
+packages/server/commerce/index.ts
+  s_88f0e4c73046ae::t_27b461855e2e81 41,904
+packages/server/commerce/payment-config.ts
+  s_88f0e4c73046ae::t_c37beac790aa4b 1-73
+packages/server/commerce/payments.ts
+  s_88f0e4c73046ae::t_ed8b9f988a7cc7 4-6,8
+scripts/payment-doctor.ts
+  s_88f0e4c73046ae::t_19674b461639fb 1-10
+tests/commerce.integration.ts
+  s_88f0e4c73046ae::t_1c3598f9569aed 759,779,799,825,901
+tests/payment-config.test.ts
+  s_88f0e4c73046ae::t_f53ec3679f0a60 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "ed4aa6765ce04439326900d2b249db916bed63ab",
+  "prompts": {},
+  "sessions": {
+    "s_88f0e4c73046ae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a158e7-a9ab-7771-a9cf-4b05caf450c1",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    }
+  }
+}

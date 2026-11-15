@@ -1,0 +1,95 @@
+.env.example
+  s_88f0e4c73046ae::t_86687a6f5fa7e8 4-16
+README.md
+  s_88f0e4c73046ae::t_4158183975a7cc 1,3,57,62-78
+apps/web/app/admin/page.tsx
+  s_88f0e4c73046ae::t_01ce59e6da2e71 1,3
+apps/web/app/api/[...path]/route.ts
+  s_88f0e4c73046ae::t_e4df671d414cf8 3
+apps/web/app/commerce.css
+  s_88f0e4c73046ae::t_298f153af28aa5 1-1724
+apps/web/app/commerce/api.ts
+  s_88f0e4c73046ae::t_d795b85c31df8c 1-16
+apps/web/app/commerce/app.tsx
+  s_88f0e4c73046ae::t_241861cc7effcd 1-1413
+apps/web/app/commerce/checkout.tsx
+  s_88f0e4c73046ae::t_1cd7d961619919 1-289
+apps/web/app/commerce/components.tsx
+  s_88f0e4c73046ae::t_e061aab6bcfef0 1-170
+apps/web/app/commerce/dashboard.tsx
+  s_88f0e4c73046ae::t_48cfdb64b943b6 1-1447
+apps/web/app/commerce/order-view.tsx
+  s_88f0e4c73046ae::t_a7926ffe1d7346 1-357
+apps/web/app/commerce/reset.tsx
+  s_88f0e4c73046ae::t_37931bd1032ca5 1-76
+apps/web/app/commerce/types.ts
+  s_88f0e4c73046ae::t_c1c41ed69b2e59 1-55
+apps/web/app/dashboard/page.tsx
+  s_88f0e4c73046ae::t_01ab1084dd7616 1-4
+apps/web/app/invite/page.tsx
+  s_88f0e4c73046ae::t_92c969e720b137 1-4
+apps/web/app/layout.tsx
+  s_88f0e4c73046ae::t_d6d98d762b7fc8 3,5,7
+apps/web/app/orders/page.tsx
+  s_88f0e4c73046ae::t_7a02ba399007fa 1-4
+apps/web/app/page.tsx
+  s_88f0e4c73046ae::t_131fad478f41d6 1,3
+apps/web/app/reset-password/page.tsx
+  s_88f0e4c73046ae::t_df613816723e67 1-4
+apps/web/app/robots.ts
+  s_88f0e4c73046ae::t_a2a22c6f537cac 1-11
+apps/web/app/s/[slug]/page.tsx
+  s_88f0e4c73046ae::t_bbf18931eb2b53 1-34
+apps/web/app/sitemap.ts
+  s_88f0e4c73046ae::t_5fba4ba4e038ad 1-23
+docs/commerce.md
+  s_88f0e4c73046ae::t_669baa14497ed0 1-74
+docs/operations.md
+  s_88f0e4c73046ae::t_5f72822719c17c 36-43
+docs/payment-connector.md
+  s_88f0e4c73046ae::t_443056911357c2 1-67
+package.json
+  s_88f0e4c73046ae::t_29799ca450c5c1 17-19
+packages/database/index.ts
+  s_88f0e4c73046ae::t_979f4f20aa8daa 1,25-68,101-110
+packages/domain/commerce.ts
+  s_88f0e4c73046ae::t_1a02d3af244ae3 1-189
+packages/domain/package.json
+  s_88f0e4c73046ae::t_3421b8e1a91e87 6-9
+packages/server/commerce/email.ts
+  s_88f0e4c73046ae::t_607949e66cfb60 1-29
+packages/server/commerce/index.ts
+  s_88f0e4c73046ae::t_c4824e43717337 1-1342
+packages/server/commerce/orders.ts
+  s_88f0e4c73046ae::t_983f5206565167 1-500
+packages/server/commerce/payments.ts
+  s_88f0e4c73046ae::t_90b5ef018778f7 1-101
+packages/server/commerce/shared.ts
+  s_88f0e4c73046ae::t_d3d844812943ba 1-88
+packages/server/index.ts
+  s_88f0e4c73046ae::t_760aeb7f329611 1,64-71,76-77,227-233,330-333,341-345,352-359,425-431,450-456
+scripts/seed-commerce.ts
+  s_88f0e4c73046ae::t_27e6fb662dd62e 1-172
+scripts/smoke-commerce.ts
+  s_88f0e4c73046ae::t_5e837f64ad62d3 1-220
+tests/commerce.integration.ts
+  s_88f0e4c73046ae::t_6a839c23619149 1-1020
+vercel.json
+  s_88f0e4c73046ae::t_6f9f62aaa2b34d 5-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "acfb6e6bdac797fa16d66f40ba9b628f4db9f874",
+  "prompts": {},
+  "sessions": {
+    "s_88f0e4c73046ae": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a158e7-a9ab-7771-a9cf-4b05caf450c1",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    }
+  }
+}
