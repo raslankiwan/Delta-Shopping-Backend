@@ -1,0 +1,959 @@
+packages/db/tsconfig.json
+  s_4fa030f3c5c486::t_b58f0be8435f96 1-8
+apps/api/src/auth/graphql/auth.resolver.ts
+  s_4fa030f3c5c486::t_23c3183c9933e6 1-63
+infra/postgres/init/00-roles.sql
+  s_4fa030f3c5c486::t_143cd37ab9df90 1-30
+apps/api/src/checkout/checkout.service.ts
+  s_4fa030f3c5c486::t_794c58b0f6e589 32
+  s_4fa030f3c5c486::t_aeb83d5f84e188 191
+  s_4fa030f3c5c486::t_d62d93eac956cb 235,252
+  s_4fa030f3c5c486::t_a97b0472e307c1 299
+  s_4fa030f3c5c486::t_7489765d5da15d 33
+  s_4fa030f3c5c486::t_47185e56124106 17
+  s_4fa030f3c5c486::t_33aa744f678749 86,97-98,100-110
+  s_4fa030f3c5c486::t_e37e06322e689e 130-133
+  s_4fa030f3c5c486::t_72c3fcfdbc1b8d 313,326
+  s_4fa030f3c5c486::t_c5894dc2470c45 1-2,5-16,18-31,34-56,58-85,111-120,134,137-147,149-150,152-173,175-177,180-181,188-190,192-209,211,219-225,227-234,236-251,253-298,300-312,314-325,327-341
+  s_4fa030f3c5c486::t_973a7aeb39058a 182-187
+  s_4fa030f3c5c486::t_6d1b5f766dfc02 3-4
+  s_4fa030f3c5c486::t_d7fa18d68efdd3 151
+  s_4fa030f3c5c486::t_9a46f851038023 174,178-179
+  s_4fa030f3c5c486::t_c0cb6e07eb8079 57
+  s_4fa030f3c5c486::t_777a5a720d1df6 148
+  s_4fa030f3c5c486::t_b71cef435370bf 87-96,99
+  s_4fa030f3c5c486::t_c2bf50a1d4c3fe 121-129,135-136
+  s_4fa030f3c5c486::t_9bf28c2868926d 210,212-218,226
+apps/storefront/lib/locale.ts
+  s_4fa030f3c5c486::t_0ed2ca56e95c7b 1-11
+apps/api/src/health/health.controller.ts
+  s_4fa030f3c5c486::t_15f8aa34b3d7b5 1-9
+apps/api/src/stores/graphql/stores.types.ts
+  s_4fa030f3c5c486::t_d77f247405dd2a 1-76
+packages/db/src/schema/commerce.ts
+  s_4fa030f3c5c486::t_1c7d62e4d86df6 2
+  s_4fa030f3c5c486::t_64fcb8165d47f0 19
+  s_4fa030f3c5c486::t_07def8d5a5ae95 3-18,20-173,198,200-205
+  s_4fa030f3c5c486::t_e6b19d9bbd3998 1
+  s_4fa030f3c5c486::t_33e3dc4526ff30 174-197,199
+apps/storefront/app/[locale]/cart/page.tsx
+  s_4fa030f3c5c486::t_d378be64f41bc6 5-13,18-19,23,50,59-63,74-77,79,85,101-104,109,121-124,127,138-139,141
+  s_4fa030f3c5c486::t_b6b530373658fe 14,17,25-44,46,48,88,151,164,173,175,183,197,200,205-207,214,220,226,237,242,253
+  s_4fa030f3c5c486::t_ec49183d4b4095 1-4,15-16,20-22,24,45,47,49,51-58,64-73,78,80-84,86-87,89-100,105-108,110-120,125-126,128-137,140,142-150,152-163,165-172,174,176-182,184-196,198-199,201-204,208-213,215-219,221-225,227-236,238-241,243-252,254-259
+apps/admin/src/lib/apolloHooks.ts
+  s_4fa030f3c5c486::t_40d21be7d49a4e 1-55
+apps/api/src/customers/customers.service.ts
+  s_4fa030f3c5c486::t_19e7873b41ec39 1-99,115-145
+  s_4fa030f3c5c486::t_7be56e325bba21 100-114
+apps/api/src/payments/payment.service.ts
+  s_4fa030f3c5c486::t_62265dc4c60176 1-2,7-15,18,30-31,33-34,68-69,72-73,76-77,80-81
+  s_4fa030f3c5c486::t_7512cfb80470e7 3-6,16-17,19-29,32,35-67,70-71,74-75,78-79
+apps/api/src/reports/reports.service.ts
+  s_4fa030f3c5c486::t_43019d3b33d8ee 1-71
+packages/testing/package.json
+  s_4fa030f3c5c486::t_d18f2d478524ef 1-17,19-25
+  s_4fa030f3c5c486::t_ab6111cd4e956e 18
+packages/graphql/src/operations/admin.graphql
+  s_4fa030f3c5c486::t_90eeda94f03467 1-61,71-110,142-385
+  s_4fa030f3c5c486::t_e9b6771a465907 62-70
+  s_4fa030f3c5c486::t_7b6b93661e1b15 111-141
+packages/core/src/ids.ts
+  s_4fa030f3c5c486::t_1a2d8f4d969c5a 1-49
+apps/admin/src/pages/SettingsPage.tsx
+  s_4fa030f3c5c486::t_6bb5eed3739247 45-52,60-64,78-86,93-94,116,122-124,129-130
+  s_4fa030f3c5c486::t_9a92b68a4f5ddf 90,101,104,117,194,201-202,208,213,217-218,221,225-226,230,234,250,255,261
+  s_4fa030f3c5c486::t_9a3f6d995df7d5 2-9,12-35
+  s_4fa030f3c5c486::t_e4904deaef2131 138-171,173-191
+  s_4fa030f3c5c486::t_728c9a857e18ef 172
+  s_4fa030f3c5c486::t_72cc797a65aaaa 246-249
+  s_4fa030f3c5c486::t_6dd566dd4589f8 1,10-11,36-44,53,55-59,65-77,87-89,91-92,95-100,102-103,105-115,118-121,125-128,131-137,192-193,195-200,203-207,209-212,214-216,219-220,222-224,227-229,231-233,235-245,251-254,256-260,262-282
+  s_4fa030f3c5c486::t_034b7d52c8f951 54
+apps/api/src/db/database.module.ts
+  s_4fa030f3c5c486::t_f15a58d67e302f 1,3,5-6,14-15,21-22,27-28,30-31
+  s_4fa030f3c5c486::t_b17a5d87c63ec8 2,4,7-13,16-20,23-26,29
+apps/storefront/app/globals.css
+  s_4fa030f3c5c486::t_28d7511e6b91f1 762-767
+  s_4fa030f3c5c486::t_9839b6e3e5e268 154-162
+  s_4fa030f3c5c486::t_452fa44f448192 362-387
+  s_4fa030f3c5c486::t_a8bd880df201d9 426
+  s_4fa030f3c5c486::t_ecd4272b0f8682 574-582
+  s_4fa030f3c5c486::t_eafe05c520b497 863
+  s_4fa030f3c5c486::t_eeea7309778269 720
+  s_4fa030f3c5c486::t_c02d2b6e8e87f0 461-463
+  s_4fa030f3c5c486::t_4f1d73dcab9ea9 583-602
+  s_4fa030f3c5c486::t_2f74a970b426a7 748-753
+  s_4fa030f3c5c486::t_15d2840d1d3701 497-527,532-536,541,543-548,551-558
+  s_4fa030f3c5c486::t_b3b64989f1dfa9 653-654,658,666-667
+  s_4fa030f3c5c486::t_57c92396d205d1 201-239
+  s_4fa030f3c5c486::t_bb7798dbac3020 1-153,163-200,240-361,388-425,427-460,464-496,528-531,537-540,542,559-573,603-652,655-657,659-665,668-716,721-747,754-761,768-862,864-865
+  s_4fa030f3c5c486::t_57914e6ea2e63b 549-550
+  s_4fa030f3c5c486::t_90aae44793b2fe 717-719
+apps/api/src/checkout/cart.service.ts
+  s_4fa030f3c5c486::t_1f486b2732160e 1-20,22-38,42-45,68-154,163-164,166-198,210-215,219-226
+  s_4fa030f3c5c486::t_d16d1f305ab5ce 155-162,165,199-209,216-218
+  s_4fa030f3c5c486::t_114093e4602a07 21,39-41,46-67
+apps/api/src/promotions/promotions.module.ts
+  s_4fa030f3c5c486::t_8c0170512af0cb 1,9
+  s_4fa030f3c5c486::t_9fc68864d9e7f0 3,6
+  s_4fa030f3c5c486::t_00aea283d033d1 2,4-5,7-8
+apps/storefront/components/Header.tsx
+  s_4fa030f3c5c486::t_96e1d8d6920bb6 4-5,7,9-19,21-23,25-27,36,39,41,47-56
+  s_4fa030f3c5c486::t_457573355b2cbc 1-3,6,8,20,24,28-35,37-38,40,42-46,57-62
+packages/i18n/src/catalogs/en.json
+  s_4fa030f3c5c486::t_97a0d2ff29e8c0 1-113
+apps/storefront/app/[locale]/page.tsx
+  s_4fa030f3c5c486::t_9652aeab8b3ed8 8,16-17,19-20,22,40,52,71,75
+  s_4fa030f3c5c486::t_b1ab26d98de83a 1,7,18,21,24-25,31-39,48-51
+  s_4fa030f3c5c486::t_95567d2ee9d739 3,6,28-30,41-43,46,53-54,56-69,72-74
+  s_4fa030f3c5c486::t_c5eb45889e0c9e 2,4,9-15,23,26-27,44-45,47,55
+  s_4fa030f3c5c486::t_cb3a62de15c14b 5,70
+packages/db/drizzle/0001_rls.sql
+  s_4fa030f3c5c486::t_a8eb8a64b9ee85 1-94
+packages/db/drizzle/0010_taxonomy.sql
+  s_4fa030f3c5c486::t_4db5c5cf49d55b 1-32
+packages/db/drizzle/0000_schema.sql
+  s_4fa030f3c5c486::t_86a10ebaf21115 4-7,51,62,78,94-95,104-105,114-115,134,143-145,161
+  s_4fa030f3c5c486::t_3c1e3daa12676d 1-3,8-50,52-61,63-77,79-93,96-103,106-113,116-133,135-142,146-160,162-170
+.github/workflows/ci.yml
+  s_4fa030f3c5c486::t_d238fc19bc2628 22,25-26,42,45,55,99,107
+  s_4fa030f3c5c486::t_631a6ae1cffdf7 1-21,23-24,27-41,43-44,46-54,56-98,100-106,108-120
+docs/06-revised-plan.md
+  s_4fa030f3c5c486::t_69977baa1a3f5d 119-121,123,140-141
+  s_4fa030f3c5c486::t_b9dc6b3b16c068 1-103,143-152
+  s_4fa030f3c5c486::t_19d9ceaa69dc34 114-118,124,137-139
+  s_4fa030f3c5c486::t_f18bb76c31c31a 104-113,122,142
+  s_4fa030f3c5c486::t_8e8db06e7589e0 125-136
+apps/api/src/main.ts
+  s_4fa030f3c5c486::t_d238fc19bc2628 34
+  s_4fa030f3c5c486::t_d205952d6b257d 1-3,5-7,9-10,12-14,18-33,35-44
+  s_4fa030f3c5c486::t_90b45f080b39d6 4,11,17
+  s_4fa030f3c5c486::t_32564b00420cb2 8,15-16
+apps/api/src/platform/operator.guard.ts
+  s_4fa030f3c5c486::t_c7c04f5cc2bcf3 12
+  s_4fa030f3c5c486::t_974ef26f4df2e2 2
+  s_4fa030f3c5c486::t_eea7e901b87629 1,3-11,13-22
+apps/api/src/orders/orders.module.ts
+  s_4fa030f3c5c486::t_72f6f3fac1630c 4,9
+  s_4fa030f3c5c486::t_8273b410f1d9c6 2-3,5-8,10
+  s_4fa030f3c5c486::t_600694f8707976 1,11
+apps/admin/src/styles/global.css
+  s_4fa030f3c5c486::t_144ce3729243ed 1-219,221-475,483-590,592-622,625,628-634,637-772,774-776,778-793,807-891,901-927
+  s_4fa030f3c5c486::t_5c04d9ab8b1d9f 591
+  s_4fa030f3c5c486::t_cdd9d9a50055fe 623-624,626-627,635-636
+  s_4fa030f3c5c486::t_1cfc89fdcc9882 476-482
+  s_4fa030f3c5c486::t_4dfcfd2e5b118b 773,777,794-806
+  s_4fa030f3c5c486::t_0330c9f6e89f35 892-900
+  s_4fa030f3c5c486::t_891fcadf959d3f 220
+apps/admin/tsconfig.json
+  s_4fa030f3c5c486::t_53c228591df2df 1-7,10,12,14,16
+  s_4fa030f3c5c486::t_6990f28894e996 8-9,11,13,15
+apps/storefront/components/Footer.tsx
+  s_4fa030f3c5c486::t_adf1f3017f4dc3 19,22-25,35-38
+  s_4fa030f3c5c486::t_66ea15586c22f7 13-16,18,20-21,29-33
+  s_4fa030f3c5c486::t_cdda401b372bd2 1-12,17,26-28,34
+scripts/stop.sh
+  s_4fa030f3c5c486::t_2281a2c4a68647 1-24
+apps/api/src/inventory/dto.ts
+  s_4fa030f3c5c486::t_76031861ba55af 1-14
+apps/storefront/components/ProductGallery.tsx
+  s_4fa030f3c5c486::t_5545d9874065d2 1-3,5-18,20-21,25-37,43-63
+  s_4fa030f3c5c486::t_e91f3a761e96de 19,22-24,38-42
+  s_4fa030f3c5c486::t_6f0a32f4fb7a32 4
+apps/storefront/lib/client.ts
+  s_4fa030f3c5c486::t_b111dd3e9198ca 2,9,15-16,21,37
+  s_4fa030f3c5c486::t_d238fc19bc2628 6
+  s_4fa030f3c5c486::t_cce5a3a7d1b202 1,3-5,7-8,10-14,17-20,22-36
+apps/api/src/stores/graphql/stores.resolver.ts
+  s_4fa030f3c5c486::t_9c954a982368d9 1-2
+  s_4fa030f3c5c486::t_4c4ae56ad77048 20,22
+  s_4fa030f3c5c486::t_8285bbbb63ec55 3-19,21,23-53
+apps/api/src/app.module.ts
+  s_4fa030f3c5c486::t_c09e54dc68e672 43
+  s_4fa030f3c5c486::t_146bb9d31adfb8 1,5,8,18-20,45-47
+  s_4fa030f3c5c486::t_a7225d1214f814 12-13,38,40
+  s_4fa030f3c5c486::t_75b3d85fba9d84 6
+  s_4fa030f3c5c486::t_4e3da9a94ad47f 22-30
+  s_4fa030f3c5c486::t_532ddcb3c70de5 14,41
+  s_4fa030f3c5c486::t_c8d457acd826ec 7
+  s_4fa030f3c5c486::t_b6dde7b6a5c20c 9
+  s_4fa030f3c5c486::t_33db97fedf2eae 11,21,31-34,36-37,44
+  s_4fa030f3c5c486::t_244c23f1dc37aa 15,39
+  s_4fa030f3c5c486::t_11d7bc7e85e3fd 16,42
+  s_4fa030f3c5c486::t_a28a20168ad10f 35
+  s_4fa030f3c5c486::t_95db170e4a96eb 2-4
+  s_4fa030f3c5c486::t_4eef3c5e85c8f2 17
+  s_4fa030f3c5c486::t_c6c293e3fae763 10
+apps/admin/src/lib/base64.ts
+  s_4fa030f3c5c486::t_f3c4474a945dba 1-13
+apps/api/.dockerignore
+  s_4fa030f3c5c486::t_93f12404124493 1-51
+packages/db/src/schema/pricing.ts
+  s_4fa030f3c5c486::t_351503429142db 37
+  s_4fa030f3c5c486::t_3c7d0b03f74cd5 29-35
+  s_4fa030f3c5c486::t_3dbf18abab2088 3-4,6-7,13
+  s_4fa030f3c5c486::t_2d3dad0c7ec710 1-2,5,8-12,14-28,36,38-50
+apps/admin/src/vite-env.d.ts
+  s_4fa030f3c5c486::t_76c54e0ad39bae 1-9
+apps/api/src/platform/graphql/platform.types.ts
+  s_4fa030f3c5c486::t_707d2dc82759b0 1-25
+packages/db/src/index.ts
+  s_4fa030f3c5c486::t_1b57f9b07458c1 1-4
+apps/api/src/promotions/discount.ts
+  s_4fa030f3c5c486::t_12585b446b56f4 1-23
+apps/api/src/customers/graphql/customers.resolver.ts
+  s_4fa030f3c5c486::t_940f8236dbbdc9 1-81
+packages/db/src/schema/promotions.ts
+  s_4fa030f3c5c486::t_4c2883fec10332 1-51
+apps/api/src/media/graphql/media.resolver.ts
+  s_4fa030f3c5c486::t_b8636c5bf24576 1-55
+packages/db/src/client.ts
+  s_4fa030f3c5c486::t_b0d734fea44cda 1-45
+apps/admin/.env.example
+  s_4fa030f3c5c486::t_d238fc19bc2628 2
+  s_4fa030f3c5c486::t_57cccb423c6e54 1
+apps/api/src/promotions/promotions.service.ts
+  s_4fa030f3c5c486::t_611daf16cf5e00 8
+  s_4fa030f3c5c486::t_f78a0965ba1e74 1-7,9-154
+.claude/launch.json
+  s_4fa030f3c5c486::t_749f418e2e7cb2 1-3,6-7
+  s_4fa030f3c5c486::t_bc11b56a9f78ea 4-5
+apps/storefront/app/[locale]/account/page.tsx
+  s_4fa030f3c5c486::t_0d739c1a9d308a 16,18,25-49,51-52,172,180,190,199,206,213,219,227,234,246,257,259,262,270,272,283,287,297,310,322,327,341,344,350
+  s_4fa030f3c5c486::t_0e15fff177b92a 1-2,5,20-21,24,50,53-63,66-68,70-71,77-78,80-92,94,97-98,101-102,104-108,110-117,127-128,130-135,137-146,150-152,154-161,163-164,166-171,173-179,181-189,191-198,200-205,207-212,214-218,220-226,228-233,235-245,247-256,258,260-261,263-269,271,273-282,284-286,288-296,298-309,311-321,323-326,328-340,342-343,345-349,351-356
+  s_4fa030f3c5c486::t_8764ce80e3110e 3-4,6-15,17,19,22-23,64-65,69,72-76,79,93,95-96,99-100,103,109,118-126,129,136,147-149,153,162,165
+apps/api/src/checkout/graphql/checkout.resolver.ts
+  s_4fa030f3c5c486::t_123c78085212ea 29-30,36,50,59,69,78,87,92,101
+  s_4fa030f3c5c486::t_6d1cb5c7c82c77 31,37-42
+  s_4fa030f3c5c486::t_f656bb7b434b14 35
+  s_4fa030f3c5c486::t_cf634e759fb8be 5,15
+  s_4fa030f3c5c486::t_a16aee9ca24463 1-4,6-14,16-28,32-34,43-49,51-58,60-68,70-77,79-86,88-91,93-100,102-103
+apps/api/src/shipping/shipping.module.ts
+  s_4fa030f3c5c486::t_871697d8ba0ca7 1-9
+apps/api/src/catalog/catalog.service.ts
+  s_4fa030f3c5c486::t_90750f2c83625b 76-80
+  s_4fa030f3c5c486::t_4f322fda28a4a4 1,3,5,7,11-12,15-20,29,36-39,41-42,48-54,56-57,70-73,75,83-85,90-108,140-141,143-147,160-162,164-178,180-184,218-230,232,234,237-246,248-251,254-260,262,270-272,277-279,317-350,352-363,365-370,372,383-386,549-551,562-621,623-687
+  s_4fa030f3c5c486::t_56fa2f44cfdcbe 30-35,40,43-47
+  s_4fa030f3c5c486::t_bfb3b407e945ff 622
+  s_4fa030f3c5c486::t_44d75518d3d78a 113-118,132-133
+  s_4fa030f3c5c486::t_a87d59f0f4a795 263-267,280-289
+  s_4fa030f3c5c486::t_3125af2b1aa8e5 2
+  s_4fa030f3c5c486::t_c8784d39fb77a4 351
+  s_4fa030f3c5c486::t_645333222810d9 109-112,119-131,134-139
+  s_4fa030f3c5c486::t_e6fa165d4b7a51 142,148-159,163,179,185-217
+  s_4fa030f3c5c486::t_dd0840e6a44572 6
+  s_4fa030f3c5c486::t_290eb1840e18c8 8-10,21
+  s_4fa030f3c5c486::t_7736ceb31fccd6 371,379-382,387-428,434-548
+  s_4fa030f3c5c486::t_b9bafb9cbaaab4 13-14
+  s_4fa030f3c5c486::t_f3963a3a44c204 231,233,235-236,247,252-253,261,268-269,273-276,290-316
+  s_4fa030f3c5c486::t_5ec892cbe28f35 4,22-28
+  s_4fa030f3c5c486::t_391370fc97feb5 429-433
+  s_4fa030f3c5c486::t_f36b51ec9aa50c 552-561
+  s_4fa030f3c5c486::t_5a8f1449481dc6 55,58-69,74,81-82,86-89
+  s_4fa030f3c5c486::t_e1662470bd2cfb 364,373-378
+apps/admin/src/components/ui/States.tsx
+  s_4fa030f3c5c486::t_317a42ad9deaef 1-59
+apps/admin/src/lib/client.ts
+  s_4fa030f3c5c486::t_d238fc19bc2628 4
+  s_4fa030f3c5c486::t_9528160d47737f 1-2,6-12,14-18,20-30
+  s_4fa030f3c5c486::t_53cd3353fa62ee 3,5,13,19,31-32
+apps/admin/src/pages/PromotionsPage.tsx
+  s_4fa030f3c5c486::t_455398ee7806a1 11
+  s_4fa030f3c5c486::t_4c3cb153272a9a 1,8-10,12-16,18-20,22-26,30-39,47-51,53-97,100-108,110,113-114,117-120,123-126,128-129,133,136-139,141-146,148-150,170-177
+  s_4fa030f3c5c486::t_2c3d396a29c664 2-7,21,27-29,40-46,52,98-99,111-112,115-116,127,130,132,134,151-169
+  s_4fa030f3c5c486::t_a191ab16434191 17
+  s_4fa030f3c5c486::t_244c00e35174f9 109,121-122,131,135,140,147
+apps/storefront/lib/server-client.ts
+  s_4fa030f3c5c486::t_d238fc19bc2628 6
+  s_4fa030f3c5c486::t_7af57eb29b4d91 1-2,5,9-10,22
+  s_4fa030f3c5c486::t_5eb300234fd4a2 3-4,7-8,11-21
+apps/api/src/inventory/graphql/inventory.resolver.ts
+  s_4fa030f3c5c486::t_6a0fbef8dec80f 1-25,27,29-55
+  s_4fa030f3c5c486::t_34c99a81e15a82 26,28
+apps/api/src/provisioning.module.ts
+  s_4fa030f3c5c486::t_09d296e2fb57fe 1-3,5,7-10,12-13
+  s_4fa030f3c5c486::t_a6f034733ba8ea 4,6,11
+apps/storefront/app/manifest.ts
+  s_4fa030f3c5c486::t_2b788ca6b71ce9 11-12
+  s_4fa030f3c5c486::t_c35a917a1ddfed 2,9
+  s_4fa030f3c5c486::t_f6794b12857c89 1,3-8,10,13-26
+apps/api/src/auth/auth.service.ts
+  s_4fa030f3c5c486::t_e9aff1fb85f5dd 1-2,4-16,18-87,90-207
+  s_4fa030f3c5c486::t_799b4f6c1eb778 17
+  s_4fa030f3c5c486::t_b50ddb693032db 3
+  s_4fa030f3c5c486::t_9a058b85e1331f 88-89
+apps/admin/src/lib/money.ts
+  s_4fa030f3c5c486::t_d3e593d088af0e 1-13
+packages/db/package.json
+  s_4fa030f3c5c486::t_82359f28f7d746 1-12,15-30
+  s_4fa030f3c5c486::t_a0bb80ade2c55f 13-14
+apps/api/tsconfig.json
+  s_4fa030f3c5c486::t_baabbc54022622 1-15
+apps/admin/package.json
+  s_4fa030f3c5c486::t_42021780aa321a 8
+  s_4fa030f3c5c486::t_2fff75c3d1d48c 1-7,9-15,21-22,24-25,27-28,31,33-35
+  s_4fa030f3c5c486::t_06b94b02b55e83 17-20
+  s_4fa030f3c5c486::t_3345ee64382077 16
+  s_4fa030f3c5c486::t_de1923a6396c17 23
+  s_4fa030f3c5c486::t_57e288af035207 26,29-30,32
+packages/db/drizzle/0007_promotions.sql
+  s_4fa030f3c5c486::t_28816006e86562 1-46
+apps/api/src/promotions/graphql/promotions.resolver.ts
+  s_4fa030f3c5c486::t_5048b4ade97434 3-34
+  s_4fa030f3c5c486::t_7d3c2b24a32e0f 1-2
+packages/graphql/codegen.ts
+  s_4fa030f3c5c486::t_73bb7f3aae63ab 14-16
+  s_4fa030f3c5c486::t_25f254fdded3ed 1-13,17-21
+apps/admin/src/pages/NotFoundPage.tsx
+  s_4fa030f3c5c486::t_d70b8a1745ded2 1-2,4-9,11-14
+  s_4fa030f3c5c486::t_44bfd0c85ac215 3,10
+apps/api/src/auth/auth.guard.ts
+  s_4fa030f3c5c486::t_7d4e2bce9715fa 30-31
+  s_4fa030f3c5c486::t_fa36df5b6ccc28 8
+  s_4fa030f3c5c486::t_06ebd981778e8b 14
+  s_4fa030f3c5c486::t_b88d3e4ab60a6a 1-7,9-13,15-19,21-29,32-39
+  s_4fa030f3c5c486::t_3a342997f13e08 20
+apps/admin/src/auth/authStore.ts
+  s_4fa030f3c5c486::t_dbf2460a39c6c1 16,19,21,26-28,30,35-36,38-39,43-51,56-57,77-78,112,128
+  s_4fa030f3c5c486::t_42e67ad0a5b0c9 1-15,22,59,62-65,71,87-88,98-106,114
+  s_4fa030f3c5c486::t_c088ed4d9c8b82 17-18,20,23-25,29,31-34,37,40-42,52-55,58,60-61,66-70,72-76,79-86,89-97,107-111,113,115-127
+packages/db/drizzle/0008_outbox.sql
+  s_4fa030f3c5c486::t_19d5ba809cca71 1-21
+apps/admin/src/pages/OrdersPage.tsx
+  s_4fa030f3c5c486::t_fcbebadcad578c 2-4,10-11,46-48,50-51,63,65,67,85
+  s_4fa030f3c5c486::t_f00fcf16ce60a6 8
+  s_4fa030f3c5c486::t_3a799836f2f924 30
+  s_4fa030f3c5c486::t_3eae91814f206e 44,57-58,64,68,74,77-78
+  s_4fa030f3c5c486::t_bc62e03edc85db 1,5-7,9,12-29,31-43,45,49,52-56,59-62,66,69-73,75-76,79-84,86-96
+apps/api/src/pricing/price-resolver.ts
+  s_4fa030f3c5c486::t_20d7f9ae1fbede 1-14,24-25,27-39,45-71
+  s_4fa030f3c5c486::t_b3e7c5ae658667 15-23,26,40-44
+apps/api/src/auth/password.ts
+  s_4fa030f3c5c486::t_bf7b4e818b0972 1-11
+packages/db/src/schema/platform.ts
+  s_4fa030f3c5c486::t_1b2c4daa325744 47-48,54
+  s_4fa030f3c5c486::t_6eeeab3678d566 1
+  s_4fa030f3c5c486::t_863c46fe61eccf 35-36
+  s_4fa030f3c5c486::t_c2a451e45a5d0d 2-34,37-46,49-53,55-67,69-84
+  s_4fa030f3c5c486::t_3adaa1bef30dbc 68
+packages/core/src/i18n.ts
+  s_4fa030f3c5c486::t_5c7edefefbab62 1-35
+packages/i18n/src/catalogs/ar.json
+  s_4fa030f3c5c486::t_79daec86384014 1-53,55-113
+  s_4fa030f3c5c486::t_fb693aa8ce1061 54
+apps/admin/src/components/ui/Badge.tsx
+  s_4fa030f3c5c486::t_1f55b67bddcb80 1-43
+apps/admin/src/components/LeftNav.tsx
+  s_4fa030f3c5c486::t_afa181b10f122b 1,4,67-69,72,75-76,80-86
+  s_4fa030f3c5c486::t_48c178976f4dac 2,6-7,9-19,21-29,31-40,42-49,51-58,60-66,73-74,77-78
+  s_4fa030f3c5c486::t_ac8942e17b7fcf 3,5,8,20,30,41,50,59,70-71,79
+packages/db/src/schema/catalog.ts
+  s_4fa030f3c5c486::t_196eea7895b96b 136
+  s_4fa030f3c5c486::t_83d56921491f8a 33,43-46,55-72
+  s_4fa030f3c5c486::t_5141d48de7446c 3,5-6,30
+  s_4fa030f3c5c486::t_efc1d3d430a4e0 80-83
+  s_4fa030f3c5c486::t_ee84995c6eba20 1
+  s_4fa030f3c5c486::t_5a2daad388636a 7-24,35-42,53
+  s_4fa030f3c5c486::t_78018ce573c7d8 2,4,25-29,31-32,34,47-52,54,73-79,84-95,100-111,116-130,132-135
+  s_4fa030f3c5c486::t_3197137755cd2e 131
+  s_4fa030f3c5c486::t_b4043a3e9559d5 96-99
+  s_4fa030f3c5c486::t_5c12529a6ab7d4 112-115
+apps/storefront/components/CartLineRow.tsx
+  s_4fa030f3c5c486::t_8ed5a87163c0ec 1-2,4-5,10-24,34-36,41-43,51,63
+  s_4fa030f3c5c486::t_e738ab351c9b8d 3,6-8
+  s_4fa030f3c5c486::t_6242ab3c298176 9,25-33,37-40,44-50,52-62,64-67,71-73
+  s_4fa030f3c5c486::t_b39a0f8956883e 68-70
+packages/db/drizzle/0002_identity.sql
+  s_4fa030f3c5c486::t_5638f9c44009bd 1-123,135-183
+  s_4fa030f3c5c486::t_2aa8e6adf9e2da 124-134
+apps/admin/src/pages/InventoryPage.tsx
+  s_4fa030f3c5c486::t_6462bef98b94a2 2-3,10,15-17,26-31,37,69-70,82-83,86,99,102,104
+  s_4fa030f3c5c486::t_2cd3b14c4b1d32 1,4-6,8,11-14,18-25,32-36,38-68,71-79,81,84-85,87-92,95-98,100-101,105-106,108-112,114,116-119,121-147
+  s_4fa030f3c5c486::t_b2e71038884a6a 7,9
+  s_4fa030f3c5c486::t_7316b3af76aa55 80,93-94,103,107,113,115,120
+packages/db/drizzle/0011_palestine.sql
+  s_4fa030f3c5c486::t_5d1b9a4779b96d 1-27
+apps/api/src/catalog/graphql/storefront.resolver.ts
+  s_4fa030f3c5c486::t_24ac48f97d6a8b 25-29,36-37,39
+  s_4fa030f3c5c486::t_6dff26f415ed31 1-4,6-24,30-35,38,40-61
+  s_4fa030f3c5c486::t_14930b25d668f8 5
+packages/db/src/migrate.ts
+  s_4fa030f3c5c486::t_6d0de6b675dbca 1-61
+packages/config/eslint.config.js
+  s_4fa030f3c5c486::t_7e0130f515c4fe 1-29
+turbo.json
+  s_4fa030f3c5c486::t_b358194491a745 1-34
+infra/docker-compose.yml
+  s_4fa030f3c5c486::t_60a1f4f3ec85d1 1-12,17,21-33,35-45
+  s_4fa030f3c5c486::t_162bbc7992d51a 13-15
+  s_4fa030f3c5c486::t_875faa6e057db2 18-20
+  s_4fa030f3c5c486::t_d238fc19bc2628 16,34
+packages/db/src/schema/i18n.ts
+  s_4fa030f3c5c486::t_e826a5edffdcb0 1-2,4-13,15-28
+  s_4fa030f3c5c486::t_48492ed502d8ff 3
+  s_4fa030f3c5c486::t_c8ab479c2c5c4d 14
+apps/api/src/common/request-context.ts
+  s_4fa030f3c5c486::t_3602227f72cc3b 1-15
+apps/api/src/orders/dto.ts
+  s_4fa030f3c5c486::t_16df577359545b 1-13
+apps/storefront/tsconfig.json
+  s_4fa030f3c5c486::t_a2414c9a02237f 1-32
+packages/config/prettier.config.js
+  s_4fa030f3c5c486::t_66d3f15c5770f4 1-8
+apps/api/src/catalog/catalog.module.ts
+  s_4fa030f3c5c486::t_eb9c1ff4de200f 1,9
+  s_4fa030f3c5c486::t_ccfc4747746679 3
+  s_4fa030f3c5c486::t_5bed552094e9fa 4,7
+  s_4fa030f3c5c486::t_6e28052a020ecf 2,5-6,8
+apps/api/src/orders/graphql/orders.types.ts
+  s_4fa030f3c5c486::t_496c2c96804723 1-178
+packages/db/drizzle/0004_customers.sql
+  s_4fa030f3c5c486::t_c6bcf4275b7b3e 1-48
+apps/api/package.json
+  s_4fa030f3c5c486::t_9797cf6620e156 39
+  s_4fa030f3c5c486::t_ed89971ec5d740 16,20,23,26
+  s_4fa030f3c5c486::t_a91e9eb689b4f3 28
+  s_4fa030f3c5c486::t_b9ad36267cc00e 27
+  s_4fa030f3c5c486::t_4d104fc4faeb51 1-15,18-19,21-22,24-25,30-37,40-42
+  s_4fa030f3c5c486::t_aef479ac08cc94 29
+  s_4fa030f3c5c486::t_ab6642239a1a95 38
+  s_4fa030f3c5c486::t_efa1c651bd8c28 17
+tsconfig.base.json
+  s_4fa030f3c5c486::t_22068975e7b58c 1-28
+apps/api/src/reports/reports.module.ts
+  s_4fa030f3c5c486::t_2ce20186de75d0 2,4-5,7
+  s_4fa030f3c5c486::t_ebacaa7c068b38 1,8
+  s_4fa030f3c5c486::t_707d1ab621afb5 3,6
+apps/storefront/lib/locale-context.tsx
+  s_4fa030f3c5c486::t_105b4dbffccacf 1-38
+packages/testing/src/org-isolation.test.ts
+  s_4fa030f3c5c486::t_4b84dcb8825183 1-81
+apps/admin/src/main.tsx
+  s_4fa030f3c5c486::t_bdfe5a039045dd 1-3,5,10,13-20,28-29
+  s_4fa030f3c5c486::t_651beff6a77f4f 9,11-12
+  s_4fa030f3c5c486::t_bcf1aefe7de3dc 4,6-7,22,26
+  s_4fa030f3c5c486::t_45431dcf29c240 8
+  s_4fa030f3c5c486::t_440f1c03baacab 21,23-25,27
+apps/api/src/reports/graphql/reports.resolver.ts
+  s_4fa030f3c5c486::t_7393e54446455a 1-2
+  s_4fa030f3c5c486::t_0d6f1702b8071b 3-41
+apps/api/src/payments/payment-provider.ts
+  s_4fa030f3c5c486::t_96333ec9610f8f 10-15,24-25,45-48,50-51,53,56-98
+  s_4fa030f3c5c486::t_330b80ecff3c9b 1-9,16-23,26-44,49,52,54-55,99-100
+packages/core/tsconfig.json
+  s_4fa030f3c5c486::t_e8ae0e3de20471 1-7
+packages/config/package.json
+  s_4fa030f3c5c486::t_bdd31673165b06 1-18
+apps/admin/src/App.tsx
+  s_4fa030f3c5c486::t_aeede279594a21 3-4,7-13,17-23,25-35
+  s_4fa030f3c5c486::t_d4f43d611b749d 1-2,5,14-16,36-37
+  s_4fa030f3c5c486::t_ff5b37c530338b 6
+  s_4fa030f3c5c486::t_3794e9691e82a7 24
+apps/admin/src/pages/ReportsPage.tsx
+  s_4fa030f3c5c486::t_6bed24d68e93ce 46-47,52,63,69,73-74,76,79-80,82,89-90,92,118,120,124,129,132-133,135,144
+  s_4fa030f3c5c486::t_bb3b93e3294ebc 1,5-7,9-17,19-23,27-28,31-32,36-37,42-45,48-51,53-61,65,67-68,71-72,77-78,83-88,94,96-98,100-102,104-106,108-110,112-117,122,125-128,130-131,134,136-138,140-143,145-154
+  s_4fa030f3c5c486::t_397b31b5639a0a 18
+  s_4fa030f3c5c486::t_f759099763cb22 2-4,24-26,29-30,33-35,38-41,62,64,66,70,75,81,91,93,95,99,103,107,111,119,121,123,139
+  s_4fa030f3c5c486::t_c46a6e31671282 8
+apps/api/src/catalog/dto.ts
+  s_4fa030f3c5c486::t_5949edc2be90f6 1,3-10,12,22-27,40-52,54-58
+  s_4fa030f3c5c486::t_9cd599acd64ce3 11,18-21,53,59-82
+  s_4fa030f3c5c486::t_ed08ae95378590 2,13-17,28-39
+README.md
+  s_4fa030f3c5c486::t_e5f2caa873dd50 1-34,38,55-58,60,62-70
+  s_4fa030f3c5c486::t_d238fc19bc2628 44-46
+  s_4fa030f3c5c486::t_8a34f38abab04f 35-37,39-43,47-54,59,61
+apps/storefront/next-env.d.ts
+  s_4fa030f3c5c486::t_b6bfabcc104e02 3
+  s_4fa030f3c5c486::t_7ae6a39d8f11c9 1-2,4-6
+apps/storefront/next.config.ts
+  s_4fa030f3c5c486::t_7dd5d6cf351fa4 1-17
+.gitignore
+  s_4fa030f3c5c486::t_e0e577c9c48579 1-35
+  s_4fa030f3c5c486::t_66271f9b097808 36-39
+apps/api/src/inventory/inventory.service.ts
+  s_4fa030f3c5c486::t_ca64fecc3d7af5 159-176
+  s_4fa030f3c5c486::t_ab8fde600eaa7f 1-158,177-224
+apps/api/src/catalog/graphql/admin-catalog.resolver.ts
+  s_4fa030f3c5c486::t_ae7ca6220c135f 60-71
+  s_4fa030f3c5c486::t_c64469f4e8d9a0 1-7,9-13,15-20,22-59,72-163
+  s_4fa030f3c5c486::t_dd6621491f6a0f 8,14,21
+scripts/dev.sh
+  s_4fa030f3c5c486::t_0ed48919d3f184 49-55
+  s_4fa030f3c5c486::t_d238fc19bc2628 68,74,82-84
+  s_4fa030f3c5c486::t_f812d9ac322733 1-48,56-67,69-73,75-78,80-81,85-91
+  s_4fa030f3c5c486::t_ae99b0fdc4cf5c 79
+CLAUDE.md
+  s_4fa030f3c5c486::t_0f9e005f85abfb 117-120,122-125,128-149
+  s_4fa030f3c5c486::t_9afafbb89c21c9 63
+  s_4fa030f3c5c486::t_cbd25eb145c748 17-24
+  s_4fa030f3c5c486::t_9598874e02c592 77-78,85,100
+  s_4fa030f3c5c486::t_fe4305e44e0110 79-84,86-99
+  s_4fa030f3c5c486::t_80caa344a73a7b 68
+  s_4fa030f3c5c486::t_9ac9923725c036 31-33,36,39-44
+  s_4fa030f3c5c486::t_06091952fc707d 1-16,25-30,34-35,37-38,45-49,54-55,57-59,61-62,101-116,121,126-127
+  s_4fa030f3c5c486::t_24cf3fd7ac4ab5 50-53,56,60
+  s_4fa030f3c5c486::t_d238fc19bc2628 67,69-71
+  s_4fa030f3c5c486::t_9b3c39cd5d1c8d 64-66,72-76
+packages/db/src/schema/index.ts
+  s_4fa030f3c5c486::t_e99bfb1444edbb 10
+  s_4fa030f3c5c486::t_f600b5c7d040e1 99
+  s_4fa030f3c5c486::t_348b891069d67a 63-64
+  s_4fa030f3c5c486::t_5c9ba1ac2c8839 114-115
+  s_4fa030f3c5c486::t_0ce58f19fe6954 116-118
+  s_4fa030f3c5c486::t_b902b9e0cbf5ff 65-67
+  s_4fa030f3c5c486::t_669fb5d21339aa 119-127
+  s_4fa030f3c5c486::t_0ba92a548a08b3 128
+  s_4fa030f3c5c486::t_f7e427bec20f1c 29
+  s_4fa030f3c5c486::t_30ab3d46efd13a 5,16,61-62,83-93,108-113
+  s_4fa030f3c5c486::t_e7da76d0595761 52
+  s_4fa030f3c5c486::t_5fc8fdeb530fbb 78-79
+  s_4fa030f3c5c486::t_dd5493b294fa0d 129-130
+  s_4fa030f3c5c486::t_9c7c001f08870b 80
+  s_4fa030f3c5c486::t_3d0b485b840db7 6,17
+  s_4fa030f3c5c486::t_ab6274ae7edfd9 131
+  s_4fa030f3c5c486::t_a87081081d9267 31
+  s_4fa030f3c5c486::t_216ebf59d1586c 12
+  s_4fa030f3c5c486::t_d301eb6107e3b7 32
+  s_4fa030f3c5c486::t_c28828c89c47b8 57
+  s_4fa030f3c5c486::t_240004830dd6a8 7,18
+  s_4fa030f3c5c486::t_bfba7df64af346 68-76
+  s_4fa030f3c5c486::t_f956568c8ea5df 9
+  s_4fa030f3c5c486::t_4986fffe225618 77
+  s_4fa030f3c5c486::t_cd5107375fe4ee 8,19-28,30
+  s_4fa030f3c5c486::t_058fb526356e2c 1-4,11,13-15,33-51,53-56,58-60,81-82,94-98,100-103,105-107,132
+  s_4fa030f3c5c486::t_2014eba1acca37 104
+packages/db/drizzle/0000_compat.sql
+  s_4fa030f3c5c486::t_a042c5c15ba092 1-19
+packages/core/src/palestine.ts
+  s_4fa030f3c5c486::t_d2c95af525a1eb 1-71
+packages/i18n/tsconfig.json
+  s_4fa030f3c5c486::t_9ecb44a1a61630 1-8
+apps/api/src/common/store-id.decorator.ts
+  s_4fa030f3c5c486::t_f35b5410399e75 4-5,9-10,20
+  s_4fa030f3c5c486::t_db73c53b8577eb 6-8
+  s_4fa030f3c5c486::t_018f964e4030c9 1-3,11,13-19
+  s_4fa030f3c5c486::t_626b6a007a87f4 12
+apps/api/Dockerfile
+  s_4fa030f3c5c486::t_ad25bf9dab74bd 24-33,39-40,53
+  s_4fa030f3c5c486::t_65c7ebac04a195 1-23,34-38,41-52,54-78
+HANDOFF.md
+  s_0fe044944ab9f4::t_30785daa9336a3 1-36
+apps/api/src/stores/stores.service.ts
+  s_4fa030f3c5c486::t_2b1b542dd7027f 1-87
+packages/testing/src/rls-isolation.test.ts
+  s_4fa030f3c5c486::t_a5e01bb7c9cd88 64-65,67-72,77,79,81-82
+  s_4fa030f3c5c486::t_e25bb5e59cb1dd 87,89-90,94-97
+  s_4fa030f3c5c486::t_94994804e28592 1-54,58,63,73-76,80,83-86,88,91-93,98-110
+  s_4fa030f3c5c486::t_de88c570c8fbee 59-62,66,78
+  s_4fa030f3c5c486::t_edab312c80954b 55-57
+apps/api/src/orders/orders.service.ts
+  s_4fa030f3c5c486::t_dc5e3eb5dd96eb 1-51,53,80,101-202
+  s_4fa030f3c5c486::t_1e356627076d65 52,54-79,81-100
+apps/admin/src/pages/LoginPage.tsx
+  s_4fa030f3c5c486::t_cbed411651d695 1-6,8-16,18-50,52,54-64,66-75,77-87,89-99
+  s_4fa030f3c5c486::t_af6bc6665f36b8 7
+  s_4fa030f3c5c486::t_a494cbb5349023 51,53,65,76,88
+  s_4fa030f3c5c486::t_7e0f6ea56231a0 17
+apps/admin/index.html
+  s_4fa030f3c5c486::t_6ea921fa5b055c 1-12
+apps/api/src/payments/payment.module.ts
+  s_4fa030f3c5c486::t_884c692e5172e4 1-8
+apps/storefront/lib/product-types.ts
+  s_4fa030f3c5c486::t_17595e896b5bf1 3-11
+  s_4fa030f3c5c486::t_4291b7bb5ea7b7 1-2,12-26
+apps/storefront/lib/money.ts
+  s_4fa030f3c5c486::t_fbbabaf7b5e3b4 1-13
+apps/storefront/components/CategoryNav.tsx
+  s_4fa030f3c5c486::t_e1606fc8fc4d19 1-40
+packages/db/drizzle/0003_provisioning.sql
+  s_4fa030f3c5c486::t_92ebc42ec5b61c 1-13
+apps/api/src/auth/permissions.ts
+  s_4fa030f3c5c486::t_7e89609c9a6697 31
+  s_4fa030f3c5c486::t_752fcf28984119 1-9,11-30,32-44
+  s_4fa030f3c5c486::t_0a6f04dbaf4a3a 10
+apps/api/src/customers/graphql/customers.types.ts
+  s_4fa030f3c5c486::t_27e5231a0d778a 1-154
+apps/admin/src/components/ProductTypeFields.tsx
+  s_4fa030f3c5c486::t_5557159b37e6ca 1-29,31-135
+  s_4fa030f3c5c486::t_cb101fae8bec40 30
+apps/api/src/media/media.module.ts
+  s_4fa030f3c5c486::t_4cb73ced57c013 1,3,5,7-8
+  s_4fa030f3c5c486::t_3d3a036a28a8fa 2,4,6
+apps/storefront/app/[locale]/products/[slug]/page.tsx
+  s_4fa030f3c5c486::t_5ecd3b601a0780 10
+  s_4fa030f3c5c486::t_98a848653d408c 3-4,8,26-28,48-56,58-60,69-70,72-90,95-110
+  s_4fa030f3c5c486::t_561645d02e425c 71
+  s_4fa030f3c5c486::t_9700bde7790da2 5,7,43-45,64
+  s_4fa030f3c5c486::t_65079ba1268849 1,12,14-25,29-37,41
+  s_4fa030f3c5c486::t_b0be9b4377f532 93
+  s_4fa030f3c5c486::t_68f41a0b8d4c1a 91-92,94
+  s_4fa030f3c5c486::t_8bbfd1c036da4b 2,6,9,11,13,38-40,42,46-47,57,61-63,65-68,111
+apps/storefront/eslint.config.mjs
+  s_4fa030f3c5c486::t_9c7ffae9accf3b 1-11
+apps/storefront/components/ProductCard.tsx
+  s_4fa030f3c5c486::t_35387041ec5ee0 1,5-6,15-19,21-25,27-34,36-44
+  s_4fa030f3c5c486::t_f3bc385b462bb5 4,12
+  s_4fa030f3c5c486::t_9119ac728ef9af 26
+  s_4fa030f3c5c486::t_f2cf428dc9669f 3,13-14
+  s_4fa030f3c5c486::t_a85a89e2d2852b 2,7-11,20,35
+apps/admin/eslint.config.js
+  s_4fa030f3c5c486::t_ff508661dba880 1-25
+apps/api/src/customers/dto.ts
+  s_4fa030f3c5c486::t_b4573d168dadd5 1-37
+packages/testing/src/fixture.ts
+  s_4fa030f3c5c486::t_6dfceb4864c98c 5,11
+  s_4fa030f3c5c486::t_391cd7c99e8c50 12
+  s_4fa030f3c5c486::t_922eadea9c7798 10,35
+  s_4fa030f3c5c486::t_974f0cfbacbf5b 168-208
+  s_4fa030f3c5c486::t_a2a199eeaddd2f 2,6-7,32,34,36-37
+  s_4fa030f3c5c486::t_49b6c88e9b099d 15-17
+  s_4fa030f3c5c486::t_a52af848acf094 84-88,91-97
+  s_4fa030f3c5c486::t_b9191e49dd93c8 31
+  s_4fa030f3c5c486::t_b4d0f504eedc7d 8-9,13-14,18-20,23,33
+  s_4fa030f3c5c486::t_7a3aea4eafd7bd 140-151
+  s_4fa030f3c5c486::t_1d0566b82244fd 3-4,21,24-26,28-30,38-83,89-90,98-107,109-118,219-230
+  s_4fa030f3c5c486::t_4733f73f82fcec 152-167
+  s_4fa030f3c5c486::t_3578e325578636 216-218
+  s_4fa030f3c5c486::t_621f4a3cd658ae 108
+  s_4fa030f3c5c486::t_d3bfe89b2d2a9e 22
+  s_4fa030f3c5c486::t_0964f57ab7948b 209-215
+  s_4fa030f3c5c486::t_f68ca0e27ad55c 1
+  s_4fa030f3c5c486::t_6c1a5d228d5728 119-139
+  s_4fa030f3c5c486::t_2e7d63ee78adc3 27
+apps/storefront/lib/hash-color.ts
+  s_4fa030f3c5c486::t_603130e808f695 1-33
+apps/storefront/lib/media.ts
+  s_4fa030f3c5c486::t_49d14c9dfb1cf4 1-14
+packages/db/src/schema/inventory.ts
+  s_4fa030f3c5c486::t_ce9f906556bb8a 1-63
+apps/storefront/app/[locale]/checkout/page.tsx
+  s_4fa030f3c5c486::t_7877db7b33bcb2 337-370,406-426,428-430
+  s_4fa030f3c5c486::t_6e084e8b4e2fa7 446,448,481-486,490
+  s_4fa030f3c5c486::t_2be0af8f90ce9c 67-69
+  s_4fa030f3c5c486::t_cbcc14f783e570 5,7-8,11-13,16,21-22,47-48,113,118,125-126,136,138-139,197,199,210,215-217,220,433,435
+  s_4fa030f3c5c486::t_c87c71b9b05670 164-166
+  s_4fa030f3c5c486::t_85cc2c343cf359 254
+  s_4fa030f3c5c486::t_9e6f85b961de6d 1-4,6,18-19,23-28,30-39,41-46,51,108,110,112,114-117,119-120,127-135,137,140-148,188-196,198,200-202,204-205,207-209,218-219,221-226,232-234,236,238,240-241,243,255-256,258-266,268,270-276,278-280,282-283,285-289,291-298,300-301,303-313,315-325,327-336,371,373-382,384-386,388-395,397-400,402-405,427,431-432,434,436-443,453-457,459-471,473-476,478-480,487-488,491-497
+  s_4fa030f3c5c486::t_3d25daf872471d 9-10,14-15,29,40,49-50,52-53,62-66,76-105
+  s_4fa030f3c5c486::t_30754c4c020340 17,20,54-61,70-75,106-107,109,111,227,235,237,239,242,245-246,250-253,257,267,269,277,281,284,290,299,302,314,326,372,383,387,396,401,444-445,447,449-452,458,472,477,489
+  s_4fa030f3c5c486::t_e20e6ab7d51535 121-124,149-163,167-179,203,206,211-214
+  s_4fa030f3c5c486::t_dda71f3d55f0e5 180-187
+  s_4fa030f3c5c486::t_9cfef8d63189b4 228-231,244,247-249
+apps/api/src/media/uploads-dir.ts
+  s_4fa030f3c5c486::t_c3ece2dfc30616 1-18
+apps/admin/src/components/ui/index.ts
+  s_4fa030f3c5c486::t_129af4d6a21825 1-4
+packages/graphql/src/client.ts
+  s_4fa030f3c5c486::t_4b275b44478d4f 1-41
+apps/api/src/inventory/inventory.module.ts
+  s_4fa030f3c5c486::t_f59718b91add26 1,9
+  s_4fa030f3c5c486::t_f00d0a34380b4e 2,6
+  s_4fa030f3c5c486::t_500eae475a40d6 3-5,7-8
+apps/api/src/platform/graphql/platform.resolver.ts
+  s_4fa030f3c5c486::t_549de86b567197 1-2
+  s_4fa030f3c5c486::t_88caf0b425730c 3-30
+.env.example
+  s_4fa030f3c5c486::t_408c1ac4bda5ec 19-21
+  s_4fa030f3c5c486::t_424fefe54bd6a4 22
+  s_4fa030f3c5c486::t_9e18d9a2bdee96 1-2,4,6-7,9-10,12-14,16-17
+  s_4fa030f3c5c486::t_d238fc19bc2628 3,5,8,11,15,18
+apps/api/src/catalog/graphql/catalog.types.ts
+  s_4fa030f3c5c486::t_69f4c807d278cc 2,7
+  s_4fa030f3c5c486::t_1d119af53f269b 125
+  s_4fa030f3c5c486::t_83675fa2881251 30-33,39-68,81-84
+  s_4fa030f3c5c486::t_c7e1af9438d90c 1,3-6,8-29,34-38,69-80,85-124,126-151,168-197
+  s_4fa030f3c5c486::t_05b121ea71c5bf 152-167
+apps/storefront/lib/graphql-error.ts
+  s_4fa030f3c5c486::t_3f2cf214777d0e 1-28
+packages/core/src/index.ts
+  s_4fa030f3c5c486::t_0835e6a2050590 6
+  s_4fa030f3c5c486::t_c8d14c9a333ab8 1-5
+apps/api/src/shipping/graphql/shipping.resolver.ts
+  s_4fa030f3c5c486::t_ac8d566d64d358 1-19
+apps/api/src/stores/dto.ts
+  s_4fa030f3c5c486::t_777da4f8517203 1-28
+apps/admin/src/components/ui/Button.tsx
+  s_4fa030f3c5c486::t_2460500d8aa7b6 1-24
+apps/admin/src/components/ProtectedRoute.tsx
+  s_4fa030f3c5c486::t_38ca8145276e9c 1-18
+packages/db/src/tenant.ts
+  s_4fa030f3c5c486::t_38d22385440ca7 5-6,8-17,20-24,29,31-32,34-38,41-46,49-58
+  s_4fa030f3c5c486::t_f7e4898c1a2dd7 1-4,7,18-19,25-28,30,33,39-40,47-48,59
+packages/db/src/schema/identity.ts
+  s_4fa030f3c5c486::t_a8ad43b47f1cd7 1-115
+apps/api/src/inventory/graphql/inventory.types.ts
+  s_4fa030f3c5c486::t_dc495836ea08a0 1-94
+packages/core/src/result.ts
+  s_4fa030f3c5c486::t_5c152fc054c940 1-32
+apps/api/src/customers/customer.principal.ts
+  s_4fa030f3c5c486::t_fdf4df9ef8e0f3 17
+  s_4fa030f3c5c486::t_8251bd94ecf83e 1,3-16,18-19
+  s_4fa030f3c5c486::t_c0270fdd97ffdf 2
+apps/storefront/package.json
+  s_4fa030f3c5c486::t_64dcaffd7b215e 1-4,6,8-17,23-29,32-33
+  s_4fa030f3c5c486::t_06b94b02b55e83 19-22
+  s_4fa030f3c5c486::t_3345ee64382077 5,18
+  s_4fa030f3c5c486::t_d238fc19bc2628 7
+  s_4fa030f3c5c486::t_80170196cb5263 30-31
+apps/admin/src/pages/OrderDetailDrawer.tsx
+  s_4fa030f3c5c486::t_f56ff4b10133d1 123
+  s_4fa030f3c5c486::t_e2d018e3969e17 63
+  s_4fa030f3c5c486::t_585849e44e258d 1-2,14-16,18-19,21-22,25-27,31-37,43-46,48-61,65-70,73-75,79-85,89-92,94-110,113-122,124-137,141-142,146-148,150,152-154,156-162,166-167,169-174,178-187,189-191,194-196,198-200,202-203,206-210,212-216,219,221-238,240-246,248-256,258-261,263-273,275-281,283-290,292,294-296,298,300-302,304,308-316
+  s_4fa030f3c5c486::t_536e027c10d0fe 24
+  s_4fa030f3c5c486::t_724bcc5b4a5fc5 3-13,23,28-30,38-42,47,62,64,71,76-78,86-88,93,111-112,138-140,143-145,151,155,175,177,293,299,305-307
+  s_4fa030f3c5c486::t_a4cf2b85c2edfa 149,163-165,168,176,188,192-193,197,201,204-205,211,217-218,220,239,247,257,262,274,282,291,297,303
+  s_4fa030f3c5c486::t_e1b143f017f50b 72
+  s_4fa030f3c5c486::t_b955e9b5478eff 17,20
+apps/api/src/orders/graphql/orders.resolver.ts
+  s_4fa030f3c5c486::t_b5187a241d420f 25,27
+  s_4fa030f3c5c486::t_38cc6f732a4624 1-24,26,28-67
+apps/admin/src/pages/ProductDetailPage.tsx
+  s_4fa030f3c5c486::t_2d4421af368b5e 3-5,7-16,18-22,24-25,28,51-54,127-128,144-153,160-161,167,219-220,228,233,235-238,246-251,263,296-297,328-329,339-340,346-351,355,368,403-404,420,427,429-431,437,442-449,472,486-487,502-503,505,508,527,548-549,555-557,562-570,576,603-604,611,617,631-633,636-637,644-645,663,665,672-674
+  s_4fa030f3c5c486::t_c6822b6121a9e0 640-643,646
+  s_4fa030f3c5c486::t_ed43d8d23c194e 1,23,26-27,29-41,47-50,56-100,110-117,126,129-130,141-143,162-166,168-196,218,221-227,229-232,234,239-245,252-262,264-295,298-327,330-338,341-345,352-354,356-367,369-402,405-419,421-426,428,432-436,438-441,450-471,473-485,488-501,504,506-507,509-526,528-547,550-554,558-561,571-575,577-602,605-610,612-616,618-624,627-630,634-635,638-639,647-662,664,666-670,675-679
+  s_4fa030f3c5c486::t_cb613594b05452 2
+  s_4fa030f3c5c486::t_38f30d8d47f4c9 197-217
+  s_4fa030f3c5c486::t_80eb8ec29232f1 55
+  s_4fa030f3c5c486::t_203700c93c26ba 6,17,42-46
+  s_4fa030f3c5c486::t_253edc2e34d591 101-109,118-125,131-140,154-159
+  s_4fa030f3c5c486::t_1665c638463390 671
+  s_4fa030f3c5c486::t_3f3f98cb213a72 625-626
+apps/admin/vite.config.ts
+  s_4fa030f3c5c486::t_d238fc19bc2628 13,16
+  s_4fa030f3c5c486::t_3906c7dc195a21 1-12,14-15,17-19
+apps/api/src/reports/graphql/reports.types.ts
+  s_4fa030f3c5c486::t_39909e3b79a5ff 1-49
+apps/api/src/platform/platform.service.ts
+  s_4fa030f3c5c486::t_e4255ebda69fd8 1-36
+packages/db/src/schema/_shared.ts
+  s_4fa030f3c5c486::t_3ef4e584efc700 1-26
+packages/core/src/enums.ts
+  s_4fa030f3c5c486::t_e796bdb830fa3f 1-11,23-25
+  s_4fa030f3c5c486::t_f3745d71d34ff8 12-22
+apps/api/src/customers/customer-auth.guard.ts
+  s_4fa030f3c5c486::t_8426120c60be33 18
+  s_4fa030f3c5c486::t_269f88c8db5c2f 29-30
+  s_4fa030f3c5c486::t_fbbba439c97833 1-7,9-17,19-28,31-36
+  s_4fa030f3c5c486::t_8321b8152bdf52 8
+apps/storefront/.gitignore
+  s_4fa030f3c5c486::t_c4bc01b3ff4f5c 1-21
+apps/admin/src/components/StoreSwitcher.tsx
+  s_4fa030f3c5c486::t_d447f1af911c3d 4,8,15-19,27,29
+  s_4fa030f3c5c486::t_765ca9f259c2f8 1-3,7,9-14,20-25,28,30-32
+  s_4fa030f3c5c486::t_c1a269361d36b0 5-6,26,33-40
+apps/admin/src/i18n/LocaleContext.tsx
+  s_4fa030f3c5c486::t_01c186dd5edc57 1-63
+packages/db/drizzle.config.ts
+  s_4fa030f3c5c486::t_4408cd98f596ce 1-12,14-15
+  s_4fa030f3c5c486::t_d238fc19bc2628 13
+apps/api/src/auth/jwt.ts
+  s_4fa030f3c5c486::t_e930f8145cc180 1-43,68-76
+  s_4fa030f3c5c486::t_ee070c243055cf 44-67
+apps/api/src/common/pg-errors.ts
+  s_4fa030f3c5c486::t_e4d9e905fe4e96 1-14
+apps/admin/src/components/AppShell.tsx
+  s_4fa030f3c5c486::t_bb7c89943913ea 4,7-8,14
+  s_4fa030f3c5c486::t_260f1f25352633 1,6,10-13,15,17-21
+  s_4fa030f3c5c486::t_e46e7ca4667d00 2-3,5,9,16,22-24
+packages/db/drizzle/0009_product_details.sql
+  s_4fa030f3c5c486::t_68a23132d248b6 1-31
+apps/api/src/common/problem-json.filter.ts
+  s_4fa030f3c5c486::t_39adfd10910f9e 1-78
+apps/api/src/customers/customers.module.ts
+  s_4fa030f3c5c486::t_60e468168754e9 2-3,5-6,8
+  s_4fa030f3c5c486::t_e552034cc1f852 1,9
+  s_4fa030f3c5c486::t_9a788b4c5dbe0b 4,7
+packages/db/drizzle/0005_inventory.sql
+  s_4fa030f3c5c486::t_67722591501c5a 1-54
+apps/api/src/checkout/dto.ts
+  s_4fa030f3c5c486::t_a9398f3d6d194e 1,3-26,29,31-38,41-42
+  s_4fa030f3c5c486::t_d97d43a7cbd578 2
+  s_4fa030f3c5c486::t_8c4de7c8451048 27-28,30,39-40
+apps/admin/src/auth/useAuth.ts
+  s_4fa030f3c5c486::t_d84444ccdf63f9 1-6
+packages/testing/src/index.ts
+  s_4fa030f3c5c486::t_2da30605476341 1
+apps/api/src/auth/auth.module.ts
+  s_4fa030f3c5c486::t_3674a395a27212 5,8
+  s_4fa030f3c5c486::t_396177549d49e6 1-4,6-7,9-11
+packages/db/src/schema/outbox.ts
+  s_4fa030f3c5c486::t_4dd3efeea5c3f4 1-19
+apps/admin/src/lib/errors.ts
+  s_4fa030f3c5c486::t_85c6f27baa1c26 1,3-21,24-33,40-41,45-51
+  s_4fa030f3c5c486::t_a154194bafdeb1 2,22-23,34-39,42-44,52
+apps/api/src/catalog/graphql/admin-catalog.types.ts
+  s_4fa030f3c5c486::t_4208a085273ad4 132-147
+  s_4fa030f3c5c486::t_e65b5516d63445 1-2,4-52,116-131,148-179,195-274,290-308
+  s_4fa030f3c5c486::t_23659d494a1457 71-86
+  s_4fa030f3c5c486::t_94f6620f0e0bad 180-194
+  s_4fa030f3c5c486::t_560bb82edf5963 275-289
+  s_4fa030f3c5c486::t_9c83b25ff3611f 3
+  s_4fa030f3c5c486::t_3bf2733284c39a 53-70,87-115
+packages/core/src/money.ts
+  s_4fa030f3c5c486::t_29344168da5a3e 129
+  s_4fa030f3c5c486::t_58140c6e5924f3 1-128,130-141
+apps/api/src/auth/principal.ts
+  s_4fa030f3c5c486::t_9b109902c9d54e 25
+  s_4fa030f3c5c486::t_9ee0b55027a0e0 1-2,4-24,26-31
+  s_4fa030f3c5c486::t_53bbfde89e6673 3
+apps/api/src/auth/dto.ts
+  s_4fa030f3c5c486::t_7c812a190a4a57 1-20
+apps/api/src/promotions/dto.ts
+  s_4fa030f3c5c486::t_ca45b0823a766d 1-21
+packages/graphql/tsconfig.json
+  s_4fa030f3c5c486::t_4258d389a90ff9 1-8
+packages/db/drizzle/0006_commerce.sql
+  s_4fa030f3c5c486::t_c04f5c1f6496c4 1-144
+apps/api/src/shipping/shipping-carrier.ts
+  s_4fa030f3c5c486::t_5de628682e68b7 1-43
+apps/api/src/checkout/checkout.module.ts
+  s_4fa030f3c5c486::t_27d052a79b2ecd 10
+  s_4fa030f3c5c486::t_16c494899cb983 1,14
+  s_4fa030f3c5c486::t_6e57408d12a05c 2-3,5-6,8-9,12-13
+  s_4fa030f3c5c486::t_d12a4712dc127c 4
+  s_4fa030f3c5c486::t_f4cf3f57bf1687 7,11
+apps/storefront/lib/apollo-provider.tsx
+  s_4fa030f3c5c486::t_47588fd5e66e00 1-10
+apps/admin/src/lib/storageKeys.ts
+  s_4fa030f3c5c486::t_1f2e9f26b9d8e8 1-8
+packages/testing/tsconfig.json
+  s_4fa030f3c5c486::t_3e6f1051a67393 1-8
+packages/db/src/schema/customers.ts
+  s_4fa030f3c5c486::t_a5f23d52d6a3b0 1-36,39,41-49
+  s_4fa030f3c5c486::t_2f844f3123cf32 37-38,40
+apps/api/src/promotions/graphql/promotions.types.ts
+  s_4fa030f3c5c486::t_9b3c3c4903095c 1-63
+packages/graphql/package.json
+  s_4fa030f3c5c486::t_26b4e959073627 1-17,19-22,26-29
+  s_4fa030f3c5c486::t_32948609cead63 18,23-25
+apps/storefront/app/[locale]/layout.tsx
+  s_4fa030f3c5c486::t_c490461a7a9c4d 3,5,7,20,32-34,47
+  s_4fa030f3c5c486::t_fa45b006a09c33 4,9
+  s_4fa030f3c5c486::t_a0912bce611ab4 6,10-12,48,58
+  s_4fa030f3c5c486::t_27ac339698d651 1-2,13-19,21-31,35,46,59-61
+  s_4fa030f3c5c486::t_7a79f6a53d2fa1 8
+  s_4fa030f3c5c486::t_095a83d8b6e38a 49-53,55-57
+  s_4fa030f3c5c486::t_8da5191134daaa 36-45,54
+packages/graphql/src/operations/storefront.graphql
+  s_4fa030f3c5c486::t_78ca8526fd7264 40,46-47,50-80,82,95,109-117
+  s_4fa030f3c5c486::t_90c2d3bfe49198 217-218,229-230
+  s_4fa030f3c5c486::t_3bae12c2eb78dc 1-39,41-45,48-49,81,83-94,96-108,118-216,219-228,231-276
+apps/api/src/shipping/graphql/shipping.types.ts
+  s_4fa030f3c5c486::t_9caa3676a40dae 1-32
+apps/api/src/shipping/shipping.service.ts
+  s_4fa030f3c5c486::t_880ef0fd68dcf2 33
+  s_4fa030f3c5c486::t_981978c5a34ef1 1-32,34-68
+apps/admin/src/components/TopBar.tsx
+  s_4fa030f3c5c486::t_e5741a1eb60da8 3-4,8,38,41-42,45,68,73-76
+  s_4fa030f3c5c486::t_885c58d6738db5 5-6,9-12,39,43-44,46,48-65,67,69-70,72
+  s_4fa030f3c5c486::t_dd8eb22903d4fc 1-2,7,13-37,40,47,66,71
+apps/api/src/checkout/graphql/checkout.types.ts
+  s_4fa030f3c5c486::t_d24b1faa4d5bf2 83,135-136
+  s_4fa030f3c5c486::t_bd655a1f0bce1b 1-71,84-134,137-187,189,193-194,197-214,219
+  s_4fa030f3c5c486::t_0e9d6962d42be2 72-82
+  s_4fa030f3c5c486::t_d2b804ae8100ad 188,190-192,195-196,215-218
+packages/i18n/src/index.ts
+  s_4fa030f3c5c486::t_1061fbab7c335d 1-28,32-33,35-45,52,54-55
+  s_4fa030f3c5c486::t_654a1c87380ab9 29-31,34,46-51,53
+apps/api/src/auth/graphql/auth.types.ts
+  s_4fa030f3c5c486::t_3daff267cb12b0 1-72
+packages/db/src/seed.ts
+  s_4fa030f3c5c486::t_193fecde086a9f 216-220,226-229,231-242,244-245,247-268,270
+  s_4fa030f3c5c486::t_1dfc1c8597e46a 319-340
+  s_4fa030f3c5c486::t_19eb6ee6954844 271-275
+  s_4fa030f3c5c486::t_8d11ddc0ab4343 16-17
+  s_4fa030f3c5c486::t_9237f3f07def7a 202-210,269
+  s_4fa030f3c5c486::t_38a7ea5eaa0dd4 197-198,200-201
+  s_4fa030f3c5c486::t_8652061184bf78 63
+  s_4fa030f3c5c486::t_a3e0be1457f38b 282-291,302-303
+  s_4fa030f3c5c486::t_e904c6d29dc9f5 64-65,68-70,77-78,103,108
+  s_4fa030f3c5c486::t_160fdd89d71429 2-5,7-10,15,26,35-55,62,71-76,81-87,89-102,104-107,109-128,132-133,139-149,160-161,172-195,199,213,221-225,243,246,292-301,316,341,344,347-348,350-351,359-360,362,366-368
+  s_4fa030f3c5c486::t_a29787edb0c9eb 66-67
+  s_4fa030f3c5c486::t_35729c7baa3835 25,27-28
+  s_4fa030f3c5c486::t_6d55e634aba792 1,6,11-14,18-20,24,29-34,56-61,79-80,88,129-131,134-138,150-159,162-171,196,211-212,214-215,230,276-281,304-309,314-315,317-318,342-343,345,349,352-357,361,363-365,370-381
+  s_4fa030f3c5c486::t_2dd1fc0c9aa19f 369
+  s_4fa030f3c5c486::t_7594e46fc2ff0b 310-313
+  s_4fa030f3c5c486::t_2076fb3b1dff5f 21-23
+  s_4fa030f3c5c486::t_f4e4267b9176b5 346,358
+packages/graphql/src/generated/graphql.ts
+  s_4fa030f3c5c486::t_f41690afd92637 16,1195,1202
+  s_4fa030f3c5c486::t_b8016c1e84b8a7 56-57,81,86,89-90,97,152-167,181,190-196,224,226,229-230,236,409,514-518,729-734,745,752,755-756,762,785,791,800,807,842,846,911-921,948,958,974,976,979-980,986,1060,1066-1079,1081-1083,1297-1311,1314,1320-1321,1325,1334,1343,1462,1464-1466,1497-1503
+  s_4fa030f3c5c486::t_966985908759af 1-15,17-55,58-80,82-85,87-88,91-96,98-151,168-180,182-189,197-223,225,227-228,231-235,237-408,410-513,519-728,735-744,746-751,753-754,757-761,763-784,786-790,792-799,801-806,808-841,843-845,847-910,922-947,949-957,959-973,975,977-978,981-985,987-1059,1061-1065,1080,1084-1194,1196-1201,1203-1296,1312-1313,1315-1319,1322-1324,1326-1333,1335-1342,1344-1461,1463,1467-1496,1504-1518
+docs/07-orchestration-plan.md
+  s_4fa030f3c5c486::t_17e04983db4217 1-88
+packages/core/package.json
+  s_4fa030f3c5c486::t_3361ab2a54c9c7 1-6,8-12,14-22
+  s_4fa030f3c5c486::t_179ce596ee5689 7,13
+apps/storefront/components/ProductPurchasePanel.tsx
+  s_4fa030f3c5c486::t_2e082db914eaba 126-140
+  s_4fa030f3c5c486::t_3296b86b26c85b 159-181
+  s_4fa030f3c5c486::t_c064ad3a2d6b95 6,11,15-29,31,56-57,59,123,143-145,155-157,207,214,222,231,264-268
+  s_4fa030f3c5c486::t_16625a6db1e5e5 150-151
+  s_4fa030f3c5c486::t_b3981d80ab858f 1-3,10,12-14,58,61,64,76-79,81-85,87-88,92-96,99,101-110,115-117,119-122,124-125,141-142,158,182-206,208-213,215-221,223-230,232-243,245-248,256-263,269-271
+  s_4fa030f3c5c486::t_6109840b72a642 244,249-255
+  s_4fa030f3c5c486::t_cff9bc7825e6c6 32-55
+  s_4fa030f3c5c486::t_6cd8a1f8527a5f 146-149,152-154
+  s_4fa030f3c5c486::t_98902f3bd75f91 62-63,65-67,75
+  s_4fa030f3c5c486::t_0d33631b6733da 97-98
+  s_4fa030f3c5c486::t_35c0057126b1b8 4-5,7-9,60,68-74,80,86,89-91,100,111-114,118
+  s_4fa030f3c5c486::t_1706c469af8bf4 30
+packages/core/src/money.test.ts
+  s_4fa030f3c5c486::t_570efb64269e03 2
+  s_4fa030f3c5c486::t_67c9f58cb186e2 1,3-55
+apps/admin/src/components/ui/Field.tsx
+  s_4fa030f3c5c486::t_0884f4833068dd 1-36
+apps/storefront/lib/cart-context.tsx
+  s_4fa030f3c5c486::t_e61383087cc04c 12,18-19,28,31,38,54,68-69,112-118
+  s_4fa030f3c5c486::t_fd57e6f1cc0e36 1-11,13,15-17,20-27,29-30,32-37,39-42,44-53,55-67,70-111,120-138
+  s_4fa030f3c5c486::t_559c9ead0e0a6d 43
+  s_4fa030f3c5c486::t_d171911150b9f3 119
+  s_4fa030f3c5c486::t_54b9f0aa82c0b1 14
+packages/i18n/package.json
+  s_4fa030f3c5c486::t_cd35f92fd36fc6 1-20
+apps/storefront/middleware.ts
+  s_4fa030f3c5c486::t_eba51f387eefaa 3-9,11-15,18-20,24-26
+  s_4fa030f3c5c486::t_0cb50d4ea67a5b 1-2,10,16-17,21-23,27
+packages/graphql/src/index.ts
+  s_4fa030f3c5c486::t_85aecc91bcb82d 1
+  s_4fa030f3c5c486::t_c683ea7775269c 2-5
+package.json
+  s_4fa030f3c5c486::t_68fd02e76ce3c1 20-22
+  s_4fa030f3c5c486::t_ce7f47d93541e6 1-19,23-33
+  s_4fa030f3c5c486::t_51714e23b61049 34-35
+apps/admin/src/pages/CatalogPage.tsx
+  s_4fa030f3c5c486::t_59c323803d0b4f 119,123,132-133,145,187,197,337,349-350,360,364,371-374
+  s_4fa030f3c5c486::t_c95a6f3f4ae80b 1-2
+  s_4fa030f3c5c486::t_02e718c751d220 15-17,25,42,45-52,56-59,66,73-76,83-88,99-103,116-118,120,122,124-131,134-144,146-154,176,179-185,193-194,198,200-203,205-210,213-218,336,338,341,344,347-348,351-354,356-358,362,365-370,375-377,380-385
+  s_4fa030f3c5c486::t_748d08707dfd6a 54
+  s_4fa030f3c5c486::t_37a5702011dc85 55,60-65,67-69,77-82,89-98,104-114,155-175
+  s_4fa030f3c5c486::t_7d3939f6833841 219-334
+  s_4fa030f3c5c486::t_54c1c6d1cab96e 24,335,345-346,388-390
+  s_4fa030f3c5c486::t_fadc277ce1f6be 188,195-196,204
+  s_4fa030f3c5c486::t_eea5132c29dea2 386-387
+  s_4fa030f3c5c486::t_3ca0e3a363a13d 3,5,7-9,11-12,14,43-44,53,70-72,115,121,177-178,186,189-192,199,211-212,339-340,342-343,355,359,361,363,378-379
+  s_4fa030f3c5c486::t_fdef2537f51083 4,6,10,13,18-23,26-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "522da2b5859f8adb63bab025a869d881d2fc6f45",
+  "prompts": {},
+  "sessions": {
+    "s_0fe044944ab9f4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1df62-17fb-7f30-b35e-2defe4db2ebe",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    },
+    "s_4fa030f3c5c486": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0a59e177-e6c4-456b-b856-e19fca75b2d1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "raslan <raslankiwan@gmail.com>"
+    }
+  }
+}
