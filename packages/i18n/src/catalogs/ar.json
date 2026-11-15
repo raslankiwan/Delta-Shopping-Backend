@@ -1,0 +1,113 @@
+{
+  "common": {
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ ما.",
+    "empty": "لا يوجد شيء هنا بعد.",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "create": "إنشاء",
+    "search": "بحث",
+    "retry": "إعادة المحاولة",
+    "currency": "العملة",
+    "language": "اللغة"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "cart": "السلة",
+    "account": "حسابي",
+    "catalog": "المتجر"
+  },
+  "home": {
+    "eyebrow": "المتجر",
+    "title": "كل ما هو معروض اليوم.",
+    "empty": "لا توجد منتجات متاحة حاليًا. يُرجى العودة لاحقًا."
+  },
+  "product": {
+    "addToCart": "أضِف إلى السلة",
+    "quantity": "الكمية",
+    "sku": "رمز المنتج",
+    "added": "تمت الإضافة ✓",
+    "viewCart": "عرض السلة ←",
+    "outOfStock": "غير متوفر",
+    "unavailable": "هذا الخيار غير متاح",
+    "from": "يبدأ من",
+    "was": "بدلاً من"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة. تصفّح المتجر ←",
+    "subtotal": "المجموع الفرعي",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء ←",
+    "discountCode": "رمز الخصم",
+    "apply": "تطبيق",
+    "remove": "إزالة",
+    "items": "{count} عناصر"
+  },
+  "checkout": {
+    "title": "إتمام الشراء",
+    "contact": "معلومات التواصل",
+    "email": "البريد الإلكتروني",
+    "shippingAddress": "عنوان الشحن",
+    "line1": "العنوان 1",
+    "line2": "العنوان 2",
+    "city": "المدينة",
+    "region": "المنطقة",
+    "postalCode": "الرمز البريدي",
+    "country": "الدولة (رمز من حرفين)",
+    "phone": "الهاتف",
+    "placeOrder": "تأكيد الطلب",
+    "orderPlaced": "شكرًا لك! تم تأكيد طلبك.",
+    "orderNumber": "رقم الطلب"
+  },
+  "account": {
+    "title": "حسابي",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "addresses": "العناوين",
+    "password": "كلمة المرور",
+    "name": "الاسم"
+  },
+  "admin": {
+    "appName": "لوحة تحكم Mercato",
+    "signInHint": "سجّل الدخول لإدارة متجرك",
+    "signIn": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "store": "المتجر",
+    "staff": "الموظفون",
+    "nav": {
+      "catalog": "الكتالوج",
+      "orders": "الطلبات",
+      "inventory": "المخزون",
+      "promotions": "العروض",
+      "reports": "التقارير",
+      "settings": "الإعدادات"
+    },
+    "catalog": {
+      "title": "الكتالوج",
+      "subtitle": "المنتجات المتوفرة في المتجر الحالي.",
+      "newProduct": "منتج جديد",
+      "productTitle": "الاسم",
+      "slug": "المُعرّف",
+      "status": "الحالة",
+      "createProduct": "إنشاء المنتج",
+      "actions": "إجراءات"
+    },
+    "orders": { "title": "الطلبات" },
+    "inventory": { "title": "المخزون" },
+    "promotions": { "title": "العروض" },
+    "reports": {
+      "title": "التقارير",
+      "subtitle": "المبيعات والمخزون والمنتجات الأكثر مبيعًا.",
+      "orders": "الطلبات",
+      "revenue": "الإيرادات",
+      "aov": "متوسط قيمة الطلب",
+      "topProducts": "المنتجات الأكثر مبيعًا"
+    },
+    "settings": { "title": "الإعدادات" }
+  }
+}

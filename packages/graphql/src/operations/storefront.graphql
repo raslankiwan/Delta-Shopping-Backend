@@ -1,0 +1,276 @@
+fragment MoneyF on MoneyType {
+  amount_minor
+  currency
+}
+
+fragment CartF on CartType {
+  id
+  currency
+  status
+  discount_code
+  subtotal {
+    ...MoneyF
+  }
+  discount {
+    ...MoneyF
+  }
+  total {
+    ...MoneyF
+  }
+  lines {
+    id
+    variant_id
+    sku
+    title
+    quantity
+    unit_price {
+      ...MoneyF
+    }
+    line_total {
+      ...MoneyF
+    }
+  }
+}
+
+query StoreConfig {
+  storeConfig {
+    name
+    default_locale
+    default_currency
+    tax_bps
+    locales
+    currencies
+  }
+}
+
+query Categories {
+  categories {
+    id
+    slug
+    name
+    parent_id
+    position
+  }
+}
+
+query ShippingZones {
+  shippingZones {
+    id
+    governorate
+    name
+    rate {
+      ...MoneyF
+    }
+    cod_available
+    eta_days
+    enabled
+  }
+}
+
+query PaymentMethods {
+  paymentMethods {
+    method
+    capture
+  }
+}
+
+query Products($locale: String, $currency: String, $limit: Int, $categorySlug: String, $type: String) {
+  products(locale: $locale, currency: $currency, limit: $limit, categorySlug: $categorySlug, type: $type) {
+    id
+    slug
+    title
+    type
+    status
+    from_price {
+      ...MoneyF
+    }
+  }
+}
+
+query SearchProducts($q: String!, $locale: String, $currency: String) {
+  searchProducts(q: $q, locale: $locale, currency: $currency) {
+    id
+    slug
+    title
+    type
+    from_price {
+      ...MoneyF
+    }
+  }
+}
+
+query Product($slug: String!, $locale: String, $currency: String) {
+  product(slug: $slug, locale: $locale, currency: $currency) {
+    id
+    slug
+    title
+    subtitle
+    description
+    type
+    requires_shipping
+    service_duration_minutes
+    service_location
+    category {
+      id
+      slug
+      name
+    }
+    vendor
+    tags
+    status
+    currency
+    locale
+    seo_title
+    seo_description
+    images {
+      id
+      url
+      alt
+      position
+    }
+    options {
+      name
+      values
+    }
+    variants {
+      id
+      sku
+      option_values
+      price {
+        ...MoneyF
+      }
+      compare_at {
+        ...MoneyF
+      }
+    }
+  }
+}
+
+query Cart($id: String!) {
+  cart(id: $id) {
+    ...CartF
+  }
+}
+
+mutation CreateCart($input: CreateCartInputType) {
+  createCart(input: $input) {
+    id
+    currency
+  }
+}
+
+mutation CartAddLine($cartId: String!, $input: AddLineInputType!) {
+  cartAddLine(cartId: $cartId, input: $input) {
+    ...CartF
+  }
+}
+
+mutation CartUpdateLine($cartId: String!, $lineId: String!, $input: UpdateLineInputType!) {
+  cartUpdateLine(cartId: $cartId, lineId: $lineId, input: $input) {
+    ...CartF
+  }
+}
+
+mutation CartRemoveLine($cartId: String!, $lineId: String!) {
+  cartRemoveLine(cartId: $cartId, lineId: $lineId) {
+    ...CartF
+  }
+}
+
+mutation CartApplyDiscount($cartId: String!, $input: ApplyDiscountInputType!) {
+  cartApplyDiscount(cartId: $cartId, input: $input) {
+    ...CartF
+  }
+}
+
+mutation CartRemoveDiscount($cartId: String!) {
+  cartRemoveDiscount(cartId: $cartId) {
+    ...CartF
+  }
+}
+
+mutation CheckoutComplete($input: CompleteCheckoutInputType!, $idempotencyKey: String) {
+  checkoutComplete(input: $input, idempotencyKey: $idempotencyKey) {
+    id
+    number
+    email
+    currency
+    status
+    financial_status
+    fulfillment_status
+    subtotal
+    tax
+    shipping
+    total
+    lines {
+      sku
+      title
+      quantity
+      unit_price_minor
+      total_minor
+    }
+  }
+}
+
+mutation CustomerRegister($input: RegisterGqlInput!) {
+  customerRegister(input: $input) {
+    access
+    expiresIn
+    customer {
+      id
+      email
+      name
+    }
+  }
+}
+
+mutation CustomerLogin($input: CustomerLoginGqlInput!) {
+  customerLogin(input: $input) {
+    access
+    expiresIn
+    customer {
+      id
+      email
+      name
+    }
+  }
+}
+
+query AccountProfile {
+  accountProfile {
+    id
+    email
+    name
+    locale
+    accepts_marketing
+  }
+}
+
+mutation AccountUpdateProfile($input: UpdateProfileGqlInput!) {
+  accountUpdateProfile(input: $input)
+}
+
+query AccountAddresses {
+  accountAddresses {
+    id
+    name
+    line1
+    line2
+    city
+    region
+    postal_code
+    country
+    phone
+    is_default
+  }
+}
+
+mutation AccountAddAddress($input: AddressGqlInput!) {
+  accountAddAddress(input: $input) {
+    id
+  }
+}
+
+mutation AccountRemoveAddress($id: String!) {
+  accountRemoveAddress(id: $id)
+}

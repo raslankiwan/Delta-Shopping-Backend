@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "storefront", "runtimeExecutable": "bun", "runtimeArgs": ["run", "--cwd", "apps/storefront", "dev"], "port": 9001 },
+    { "name": "admin", "runtimeExecutable": "bun", "runtimeArgs": ["run", "--cwd", "apps/admin", "dev"], "port": 9002 }
+  ]
+}

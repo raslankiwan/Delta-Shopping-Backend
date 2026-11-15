@@ -1,0 +1,25 @@
+{
+  "name": "@mercato/testing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "clean": "rm -rf .turbo"
+  },
+  "dependencies": {
+    "@mercato/core": "workspace:*",
+    "@mercato/db": "workspace:*",
+    "drizzle-orm": "^0.44.2",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "@mercato/config": "workspace:*",
+    "typescript": "^5.8.3"
+  }
+}
