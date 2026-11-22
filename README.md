@@ -1,17 +1,20 @@
 # Mercato — Multi-Tenant Commerce Platform
 
+[![CI](https://github.com/raslankiwan/mercato/actions/workflows/ci.yml/badge.svg)](https://github.com/raslankiwan/mercato/actions/workflows/ci.yml)
+
 One backend and one database serve many independent stores. Tenant isolation is
 enforced in PostgreSQL with Row-Level Security, not just in application code.
 
 - **Full spec:** [`docs/`](docs/) — PRD, architecture, data model, API, backlog.
 - **Revised plan & this build:** [`docs/06-revised-plan.md`](docs/06-revised-plan.md)
 - **Orchestration strategy:** [`docs/07-orchestration-plan.md`](docs/07-orchestration-plan.md)
+- **History since 2019:** [`docs/history.md`](docs/history.md)
 
 ## Stack
 
 TypeScript · Bun workspaces + Turborepo · NestJS API (modular monolith) ·
-PostgreSQL 18 + Drizzle ORM (RLS) · Redis 7 + BullMQ · Next.js storefront/PWA ·
-React + Vite admin · i18next.
+GraphQL (code-first Apollo) · PostgreSQL 18 + Drizzle ORM (RLS) · Redis 7 ·
+Next.js storefront/PWA · React + Vite admin · i18next (Arabic first, RTL).
 
 ## Layout
 
@@ -24,10 +27,13 @@ mercato/
 ├─ packages/
 │  ├─ core/         # Money, ids, Result, shared domain types + zod primitives
 │  ├─ db/           # Drizzle schema, RLS policies, migrations, tenant context
-│  ├─ testing/      # RLS isolation harness, factories, testcontainers
-│  └─ config/       # tsconfig / eslint / prettier presets
-├─ infra/           # docker-compose (Postgres 18 + Redis 7), Terraform (later)
-└─ docs/            # spec set + revised plan
+│  ├─ graphql/      # Apollo Client factory + codegen'd typed operations
+│  ├─ i18n/         # Arabic / English catalogs
+│  ├─ testing/      # RLS isolation harness + fixtures
+│  └─ config/       # shared eslint / prettier presets
+├─ infra/           # docker-compose (Postgres 18 + Redis 7), role bootstrap
+├─ scripts/         # dev.sh / stop.sh (one-command local stack)
+└─ docs/            # spec set, revised plan, orchestration plan, history
 ```
 
 ## Quick start
@@ -57,6 +63,7 @@ cp .env.example .env
 bun run infra:up        # Postgres 18 + Redis 7 (docker)
 bun run db:migrate      # apply schema + RLS policies
 bun run db:seed         # demo org + two isolated stores + demo owner
+bun run typecheck && bun run lint
 bun run test            # includes the RLS cross-tenant isolation test
 bun run dev             # api + storefront + admin (Turborepo)
 ```
@@ -68,3 +75,9 @@ SECURITY` and a `tenant_isolation` policy keyed to `current_store_id()`. The API
 connects as `app_user`, which **cannot** bypass RLS. A missing `WHERE` clause,
 or even SQL injection, still cannot cross a tenant boundary. This is proven on
 every CI run by the isolation test in `packages/testing`.
+
+## History
+
+Mercato started as a 2019 Expo shopping app and grew through several projects
+before becoming this platform. Their full history, from April 2019, is part of
+this repository; see [`docs/history.md`](docs/history.md).
