@@ -106,15 +106,20 @@ jobs:
           PGPASSWORD: postgres
         run: psql -h localhost -p 5432 -U postgres -d mercato -v ON_ERROR_STOP=1 -f infra/postgres/init/00-roles.sql
 
+      # The isolation tests expect a migrated schema; they do not migrate
+      # themselves. migrate.ts connects with DATABASE_ADMIN_URL (app_owner).
+      - name: Migrate
+        run: bun run --cwd packages/db migrate
+
       - name: Typecheck
         run: bun run typecheck
 
       - name: Lint
         run: bun run lint
 
-      # Includes the RLS cross-tenant isolation test, which runs migrations
-      # via DATABASE_ADMIN_URL (app_owner, BYPASSRLS) and then exercises
-      # queries via DATABASE_URL (app_user, RLS-enforced) to assert tenants
-      # can never see each other's rows.
+      # Includes the RLS and organization isolation tests, which set up
+      # tenants via DATABASE_ADMIN_URL (app_owner, BYPASSRLS) on the migrated
+      # schema and then query via DATABASE_URL (app_user, RLS-enforced) to
+      # assert tenants can never see each other's rows.
       - name: Test
         run: bun run test
