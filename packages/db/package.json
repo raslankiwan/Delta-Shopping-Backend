@@ -13,7 +13,6 @@
     "studio": "drizzle-kit studio",
     "generate": "drizzle-kit generate",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "bun test",
     "lint": "eslint .",
     "clean": "rm -rf dist .turbo"
   },
