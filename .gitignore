@@ -37,3 +37,6 @@ packages/db/drizzle/meta/_journal_local.json
 # uploaded media (local dev)
 uploads/
 apps/api/uploads/
+
+# keys
+*.pem
