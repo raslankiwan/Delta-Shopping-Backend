@@ -1,4 +1,4 @@
-import { boolean, index, integer, jsonb, pgTable, text, timestamp, unique, uuid } from 'drizzle-orm/pg-core';
+import { boolean, index, integer, jsonb, pgTable, text, unique, uuid } from 'drizzle-orm/pg-core';
 import { createdAt, primaryId, storeIdColumn, updatedAt } from './_shared';
 import { store } from './platform';
 import { productVariant } from './catalog';

@@ -24,7 +24,7 @@ commit, so it works even where the tag is missing.
 
 ```bash
 git log --oneline legacy/Shopping          # the 2019 shopping app's commits
-git checkout legacy/Shopping -- .          # or browse it in a scratch worktree:
+# browse a project in a scratch worktree:
 git worktree add ../shopping-2019 legacy/Shopping
 ```
 

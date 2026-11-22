@@ -362,7 +362,6 @@ async function main(): Promise<void> {
       shippingZones: true,
     });
 
-    /* eslint-disable no-console */
     console.log('Seeded demo Palestine organization with two isolated stores:\n');
     console.log(`  Store A (سوق فلسطين) ${storeAId}   ${STORE_A_PRODUCTS.length} products, ILS/JOD/USD, ar/en (ar default), 16% VAT`);
     console.log(`  Store B (Borealis)   ${storeBId}   ${STORE_B_PRODUCTS.length} products, ILS, ar/en (ar default)`);
@@ -375,7 +374,6 @@ async function main(): Promise<void> {
 }
 
 main().catch((err) => {
-  // eslint-disable-next-line no-console
   console.error(err);
   process.exit(1);
 });
