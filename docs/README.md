@@ -17,6 +17,8 @@ An end-to-end design specification and build plan for a multi-tenant online-comm
 | **API** | REST + OpenAPI 3.1, typed SDKs generated for all clients. |
 | **Payments** | Stripe first, behind a provider-agnostic adapter (PCI SAQ-A). |
 
+> **Since this draft:** the build moved the API from REST to GraphQL and made Palestine the primary market; [`06-revised-plan.md`](06-revised-plan.md) records what changed.
+>
 > These reflect the choices made at kickoff. The architecture doc records the rationale and the conditions under which each should be revisited (see ADR table in `02`).
 
 ---

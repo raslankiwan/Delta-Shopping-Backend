@@ -34,7 +34,7 @@ packages/  core (Money/ids/Result/enums/palestine) · db (Drizzle schema + RLS +
            testing (RLS isolation harness) · config (eslint/prettier presets)
 infra/     docker-compose (Postgres 18 + Redis 7) · postgres/init (two-role bootstrap)
 scripts/   dev.sh (one-command e2e: infra → migrate → seed → run all) · stop.sh
-docs/      spec set (01–05) + revised plan (06) + orchestration (07)
+docs/      spec set (01–05) + revised plan (06) + orchestration (07) + history.md
 ```
 
 `@mercato/graphql` is the single home for client GraphQL: `.graphql` operation
@@ -55,6 +55,7 @@ bun run infra:up          # Postgres 18 + Redis 7 (needs Docker Hub access)
 bun run db:migrate        # apply drizzle/*.sql (DDL + RLS) as app_owner
 bun run db:seed           # demo Palestine org + two isolated stores (idempotent)
 bun run typecheck         # turbo, all packages
+bun run lint              # turbo, all packages (shared preset: @mercato/config/eslint)
 bun test packages/core                                  # unit tests
 bun --env-file=.env test packages/testing/src/rls-isolation.test.ts   # RLS proof
 bun run --cwd packages/graphql codegen                  # regen typed ops (API must be up)
@@ -141,9 +142,23 @@ The primary market is the West Bank; sane defaults + reference data live in
   `financial_status='pending'` until collected). PalPay/JawwalPay/BankOfPalestine are
   gateway skeletons that activate when their API key env var is set (like Stripe).
 
-## Session note (2026-07-18)
+## Lint
 
-Real `postgres:18` is now used (host :5432, containerized via `infra/docker-compose.yml`).
-The `uuidv7()` shim in `drizzle/0000_compat.sql` stays (native on PG18). The full stack
-runs via `./scripts/dev.sh`; the demo seed is the Palestine org (`owner@demo.test` /
-`password123`). REST was fully removed in favor of GraphQL this session.
+Every TypeScript workspace has an `eslint.config.js` that re-exports the shared preset
+from `@mercato/config/eslint` and lists `eslint` as its own devDependency (Bun only links
+binaries of a workspace's direct dependencies). The API uses the `nest` variant, which
+keeps injected classes as value imports so decorator metadata (and DI) keeps working.
+The storefront lints with ESLint on `eslint-config-next`'s flat configs (Next 16 removed
+`next lint`); the admin keeps its own React config. Generated GraphQL code is ignored.
+
+## Local stack notes
+
+Real `postgres:18` runs on host :5432 via `infra/docker-compose.yml`. The `uuidv7()` shim
+in `drizzle/0000_compat.sql` stays (native on PG18). The demo seed is the Palestine org
+(`owner@demo.test` / `password123`, local only).
+
+## History
+
+This repo holds the whole line of work from 2019: the earlier shopping projects were
+joined in as history and are reachable through `legacy/*` tags. None of that code is in
+the current tree; see `docs/history.md` before reaching for it.
