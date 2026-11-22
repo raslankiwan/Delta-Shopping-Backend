@@ -15,6 +15,7 @@ import {
 } from "@mercato/graphql";
 import type { Locale } from "@mercato/i18n";
 import { CUSTOMER_TOKEN_KEY, getBrowserClient } from "@/lib/client";
+import { useStoredValue, writeStoredValue } from "@/lib/stored-value";
 import { useT } from "@/lib/locale-context";
 import { errorMessage } from "@/lib/graphql-error";
 
@@ -51,8 +52,9 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
   const { locale } = use(params) as { locale: Locale };
   const t = useT();
 
-  const [token, setToken] = useState<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
+  const storedToken = useStoredValue(CUSTOMER_TOKEN_KEY);
+  const hydrated = storedToken !== undefined;
+  const token = storedToken ?? null;
 
   const [mode, setMode] = useState<Mode>("login");
   const [email, setEmail] = useState("");
@@ -61,9 +63,20 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
   const [authBusy, setAuthBusy] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [addresses, setAddresses] = useState<AddressRow[]>([]);
-  const [profileError, setProfileError] = useState<string | null>(null);
+  // Account data is remembered with the token it was loaded for, so signing
+  // out (or in as someone else) never shows the previous account's details.
+  const [account, setAccount] = useState<{
+    token: string;
+    profile: Profile | null;
+    addresses: AddressRow[];
+    error: string | null;
+  } | null>(null);
+  const current = token && account?.token === token ? account : null;
+  const profile = current?.profile ?? null;
+  const addresses = current?.addresses ?? [];
+  const profileError = current?.error ?? null;
+  const setAddresses = (update: (prev: AddressRow[]) => AddressRow[]) =>
+    setAccount((prev) => (prev ? { ...prev, addresses: update(prev.addresses) } : prev));
 
   const [addingAddress, setAddingAddress] = useState(false);
   const [addressForm, setAddressForm] = useState<AddressGqlInput>({ line1: "", city: "", country: "" });
@@ -76,17 +89,7 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
   const [removeAddressMutation] = useMutation(AccountRemoveAddressDocument);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(CUSTOMER_TOKEN_KEY);
-    setToken(stored);
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!token) {
-      setProfile(null);
-      setAddresses([]);
-      return;
-    }
+    if (!token) return;
     let cancelled = false;
     (async () => {
       try {
@@ -96,11 +99,20 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
           client.query({ query: AccountAddressesDocument }),
         ]);
         if (cancelled) return;
-        setProfile(profileRes.data.accountProfile);
-        setAddresses(addressRes.data.accountAddresses);
+        setAccount({
+          token,
+          profile: profileRes.data.accountProfile,
+          addresses: addressRes.data.accountAddresses,
+          error: null,
+        });
       } catch (err) {
         if (cancelled) return;
-        setProfileError(errorMessage(err, PROFILE_ERROR_FALLBACK[locale]));
+        setAccount({
+          token,
+          profile: null,
+          addresses: [],
+          error: errorMessage(err, PROFILE_ERROR_FALLBACK[locale]),
+        });
       }
     })();
     return () => {
@@ -122,8 +134,7 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
               })
             ).data?.customerRegister;
       if (!session) throw new Error("Missing session in auth response");
-      window.localStorage.setItem(CUSTOMER_TOKEN_KEY, session.access);
-      setToken(session.access);
+      writeStoredValue(CUSTOMER_TOKEN_KEY, session.access);
       setPassword("");
     } catch (err) {
       setAuthError(errorMessage(err, SIGN_IN_ERROR_FALLBACK[locale]));
@@ -133,8 +144,7 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
   }
 
   function handleLogout() {
-    window.localStorage.removeItem(CUSTOMER_TOKEN_KEY);
-    setToken(null);
+    writeStoredValue(CUSTOMER_TOKEN_KEY, null);
     setEmail("");
     setPassword("");
   }
@@ -146,7 +156,7 @@ export default function AccountPage({ params }: { params: Promise<{ locale: stri
     try {
       await addAddressMutation({ variables: { input: addressForm } });
       const { data } = await getBrowserClient().query({ query: AccountAddressesDocument });
-      setAddresses(data.accountAddresses);
+      setAddresses(() => data.accountAddresses);
       setAddressForm({ line1: "", city: "", country: "" });
       setAddingAddress(false);
     } catch (err) {
