@@ -18,7 +18,7 @@ import {
 } from '@mercato/db';
 import { type MoneyLike } from '@mercato/core';
 import { DB_HANDLE } from '../db/database.module';
-import { resolveProductFromPrice, resolveVariantPrice, resolveVariantPricing } from '../pricing/price-resolver';
+import { resolveProductFromPrice, resolveVariantPricing } from '../pricing/price-resolver';
 import type {
   CreateCategoryInput,
   CreateProductInput,

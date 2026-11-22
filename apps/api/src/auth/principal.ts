@@ -1,5 +1,4 @@
 import { createParamDecorator, type ExecutionContext } from '@nestjs/common';
-import type { Request } from 'express';
 import { getRequest } from '../common/request-context';
 
 /** The authenticated actor, derived from a verified access token. */
