@@ -4,13 +4,14 @@ import prettier from 'eslint-config-prettier';
 
 /**
  * Shared flat ESLint config for all Mercato workspaces.
- * Consume from a package's eslint.config.js:
+ * Every TypeScript workspace re-exports it from its own eslint.config.js:
  *
- *   import mercato from '@mercato/config/eslint';
- *   export default mercato;
+ *   export { default } from '@mercato/config/eslint';
+ *
+ * The NestJS API uses `nest` instead (see below).
  */
-export default tseslint.config(
-  { ignores: ['dist/**', '.next/**', 'build/**', 'node_modules/**', 'drizzle/**'] },
+const base = tseslint.config(
+  { ignores: ['dist/**', '.next/**', 'build/**', 'node_modules/**', 'drizzle/**', '**/generated/**', '.turbo/**'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -27,3 +28,16 @@ export default tseslint.config(
   },
   prettier,
 );
+
+/**
+ * NestJS variant. Nest resolves constructor injection from emitted decorator
+ * metadata, so an injected class must stay a value import: converting it to
+ * `import type` (what consistent-type-imports asks for) silently breaks DI.
+ * `verbatimModuleSyntax` in tsconfig already enforces correct type imports.
+ */
+export const nest = [
+  ...base,
+  { rules: { '@typescript-eslint/consistent-type-imports': 'off' } },
+];
+
+export default base;
