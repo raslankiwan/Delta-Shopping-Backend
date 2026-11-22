@@ -33,12 +33,10 @@ async function bootstrap(): Promise<void> {
 
   const port = Number(process.env.API_PORT ?? 9000);
   await app.listen(port);
-  // eslint-disable-next-line no-console
   console.log(`Mercato API listening on http://localhost:${port}/v1`);
 }
 
 bootstrap().catch((err) => {
-  // eslint-disable-next-line no-console
   console.error('Failed to start Mercato API', err);
   process.exit(1);
 });

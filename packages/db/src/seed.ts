@@ -367,7 +367,6 @@ async function main(): Promise<void> {
     console.log(`  Store B (Borealis)   ${storeBId}   ${STORE_B_PRODUCTS.length} products, ILS, ar/en (ar default)`);
     console.log('\n  Staff owner login: owner@demo.test / password123 (org-wide, all permissions)');
     console.log('\nUse a store id as X-Store-Id (or NEXT_PUBLIC_DEMO_STORE_ID / VITE_DEMO_STORE_ID).');
-    /* eslint-enable no-console */
   } finally {
     await close();
   }
