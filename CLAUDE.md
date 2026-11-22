@@ -159,6 +159,6 @@ in `drizzle/0000_compat.sql` stays (native on PG18). The demo seed is the Palest
 
 ## History
 
-This repo holds the whole line of work from 2019: the earlier shopping projects were
-joined in as history and are reachable through `legacy/*` tags. None of that code is in
-the current tree; see `docs/history.md` before reaching for it.
+This repo holds the line of work from 2019: the earlier projects were joined in as
+history. None of that code is in the current tree; `docs/history.md` lists each project's
+last commit if you need to read it.
