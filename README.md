@@ -78,6 +78,6 @@ every CI run by the isolation test in `packages/testing`.
 
 ## History
 
-Mercato started as a 2019 Expo shopping app and grew through several projects
-before becoming this platform. Their full history, from April 2019, is part of
-this repository; see [`docs/history.md`](docs/history.md).
+Mercato grew out of a line of 2019–2021 catalog and shopping projects. Their
+history, from July 2019, is part of this repository; see
+[`docs/history.md`](docs/history.md).
