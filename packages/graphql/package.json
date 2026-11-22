@@ -24,6 +24,7 @@
     "@graphql-codegen/typescript": "^4.1.0",
     "@graphql-codegen/typescript-operations": "^4.3.0",
     "@mercato/config": "workspace:*",
+    "eslint": "^9.30.0",
     "typescript": "^5.8.3"
   }
 }
