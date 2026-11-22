@@ -56,7 +56,7 @@ bun run db:migrate        # apply drizzle/*.sql (DDL + RLS) as app_owner
 bun run db:seed           # demo Palestine org + two isolated stores (idempotent)
 bun run typecheck         # turbo, all packages
 bun run lint              # turbo, all packages (shared preset: @mercato/config/eslint)
-bun test packages/core                                  # unit tests
+bun test packages/core apps/api                         # unit tests
 bun --env-file=.env test packages/testing/src/rls-isolation.test.ts   # RLS proof
 bun run --cwd packages/graphql codegen                  # regen typed ops (API must be up)
 ```
