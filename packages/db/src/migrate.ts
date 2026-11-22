@@ -42,12 +42,10 @@ async function main(): Promise<void> {
         await tx.unsafe(content);
         await tx`INSERT INTO _migrations (name) VALUES (${file})`;
       });
-      // eslint-disable-next-line no-console
       console.log(`✓ applied ${file}`);
       ran++;
     }
 
-    // eslint-disable-next-line no-console
     console.log(ran === 0 ? 'Up to date — no migrations to apply.' : `Applied ${ran} migration(s).`);
   } finally {
     await sql.end({ timeout: 5 });
@@ -55,7 +53,6 @@ async function main(): Promise<void> {
 }
 
 main().catch((err) => {
-  // eslint-disable-next-line no-console
   console.error(err);
   process.exit(1);
 });
