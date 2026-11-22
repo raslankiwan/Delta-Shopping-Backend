@@ -8,7 +8,6 @@
     "start": "bun --env-file=../../.env run src/main.ts",
     "build": "tsc --noEmit -p tsconfig.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "bun test",
     "lint": "eslint .",
     "clean": "rm -rf dist .turbo"
   },
