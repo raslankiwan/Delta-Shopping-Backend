@@ -1,4 +1,9 @@
-import { CategoriesDocument, ProductsDocument } from "@mercato/graphql";
+import {
+  CategoriesDocument,
+  ProductsDocument,
+  type CategoriesQuery,
+  type ProductsQuery,
+} from "@mercato/graphql";
 import { createT, type Locale } from "@mercato/i18n";
 import { getServerClient } from "@/lib/server-client";
 import { resolveLocale } from "@/lib/locale";
@@ -27,6 +32,9 @@ export default async function HomePage({
   const t = createT(locale);
   const client = getServerClient();
 
+  // Fetch inside try/catch, render outside it: a try block only catches the
+  // query failing, never an error thrown while React renders the JSX.
+  let data: { products: ProductsQuery["products"]; categories: CategoriesQuery["categories"] };
   try {
     const [{ data: productsData }, { data: categoriesData }] = await Promise.all([
       client.query({
@@ -35,34 +43,7 @@ export default async function HomePage({
       }),
       client.query({ query: CategoriesDocument }),
     ]);
-    const products = productsData.products;
-    const categories = categoriesData.categories;
-
-    return (
-      <div className="page">
-        <div className="page__eyebrow-row">
-          <p className="eyebrow">{t("home.eyebrow")}</p>
-          <p className="eyebrow eyebrow--muted">{ITEM_COUNT[locale](products.length)}</p>
-        </div>
-        <h1 className="page__title">{t("home.title")}</h1>
-
-        {categories.length > 0 && (
-          <CategoryNav categories={categories} selectedSlug={categorySlug} locale={locale} />
-        )}
-
-        {products.length === 0 ? (
-          <p className="alert alert--muted" role="status">
-            {t("home.empty")}
-          </p>
-        ) : (
-          <ul className="ticket-grid">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} locale={locale} />
-            ))}
-          </ul>
-        )}
-      </div>
-    );
+    data = { products: productsData.products, categories: categoriesData.categories };
   } catch (err) {
     return (
       <div className="page">
@@ -72,4 +53,31 @@ export default async function HomePage({
       </div>
     );
   }
+  const { products, categories } = data;
+
+  return (
+    <div className="page">
+      <div className="page__eyebrow-row">
+        <p className="eyebrow">{t("home.eyebrow")}</p>
+        <p className="eyebrow eyebrow--muted">{ITEM_COUNT[locale](products.length)}</p>
+      </div>
+      <h1 className="page__title">{t("home.title")}</h1>
+
+      {categories.length > 0 && (
+        <CategoryNav categories={categories} selectedSlug={categorySlug} locale={locale} />
+      )}
+
+      {products.length === 0 ? (
+        <p className="alert alert--muted" role="status">
+          {t("home.empty")}
+        </p>
+      ) : (
+        <ul className="ticket-grid">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} locale={locale} />
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }
