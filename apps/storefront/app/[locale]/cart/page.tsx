@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useCallback, useEffect, useState, type FormEvent } from "react";
+import { use, useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useMutation } from "@apollo/client";
 import {
@@ -61,35 +61,49 @@ export default function CartPage({ params }: { params: Promise<{ locale: string 
   const [applyDiscountMutation] = useMutation(CartApplyDiscountDocument);
   const [removeDiscountMutation] = useMutation(CartRemoveDiscountDocument);
 
-  const load = useCallback(async () => {
-    if (!cartId) {
-      setCart(null);
-      setState("empty");
-      return;
-    }
-    setState("loading");
-    setError(null);
-    try {
-      const client = getBrowserClient();
-      const { data } = await client.query({ query: CartDocument, variables: { id: cartId } });
-      setCart(data.cart);
-      setState(data.cart.lines.length === 0 ? "empty" : "ready");
-      void refreshCount(data.cart);
-    } catch (err) {
-      if (errorCode(err) === "cart_not_found") {
-        clearCart();
-        setCart(null);
-        setState("empty");
-        return;
-      }
-      setError(errorMessage(err, LOAD_ERROR_FALLBACK[locale]));
-      setState("error");
-    }
-  }, [cartId, refreshCount, clearCart, locale]);
+  // Results are tagged with the cart they were loaded for; "loading" and
+  // "empty" are derived during render instead of being set from the effect.
+  const [loadedFor, setLoadedFor] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
-    void load();
-  }, [load]);
+    if (!cartId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const client = getBrowserClient();
+        const { data } = await client.query({ query: CartDocument, variables: { id: cartId } });
+        if (cancelled) return;
+        setCart(data.cart);
+        setState(data.cart.lines.length === 0 ? "empty" : "ready");
+        setError(null);
+        setLoadedFor(cartId);
+        void refreshCount(data.cart);
+      } catch (err) {
+        if (cancelled) return;
+        if (errorCode(err) === "cart_not_found") {
+          clearCart();
+          setCart(null);
+          setState("empty");
+          setLoadedFor(cartId);
+          return;
+        }
+        setError(errorMessage(err, LOAD_ERROR_FALLBACK[locale]));
+        setState("error");
+        setLoadedFor(cartId);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [cartId, reloadKey, refreshCount, clearCart, locale]);
+
+  const viewState: LoadState = !cartId ? "empty" : loadedFor === cartId ? state : "loading";
+
+  function retry() {
+    setLoadedFor(null);
+    setReloadKey((key) => key + 1);
+  }
 
   async function updateQuantity(lineId: string, quantity: number) {
     if (!cartId) return;
@@ -144,7 +158,7 @@ export default function CartPage({ params }: { params: Promise<{ locale: string 
     }
   }
 
-  if (state === "loading") {
+  if (viewState === "loading") {
     return (
       <div className="page">
         <p className="alert alert--muted" role="status">
@@ -154,20 +168,20 @@ export default function CartPage({ params }: { params: Promise<{ locale: string 
     );
   }
 
-  if (state === "error") {
+  if (viewState === "error") {
     return (
       <div className="page">
         <p className="alert alert--error" role="alert">
           {error}
         </p>
-        <button type="button" className="button button--secondary" style={{ marginTop: "1rem" }} onClick={load}>
+        <button type="button" className="button button--secondary" style={{ marginTop: "1rem" }} onClick={retry}>
           {t("common.retry")}
         </button>
       </div>
     );
   }
 
-  if (state === "empty" || !cart) {
+  if (viewState === "empty" || !cart) {
     return (
       <div className="page">
         <h1 className="page__title">{t("cart.title")}</h1>
